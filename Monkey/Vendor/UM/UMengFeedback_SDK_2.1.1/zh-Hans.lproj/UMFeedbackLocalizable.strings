@@ -1,0 +1,53 @@
+/* 
+  Localizable.strings
+  UMFeedback
+
+  Created by amoblin on 14/9/26.
+
+*/
+
+"Feedback" = "用户反馈";
+"Close" = "关闭";
+"OK" = "好";
+"Send again?" = "重新发送？";
+"Resend" = "重发";
+
+"Just now" = "刚刚";
+"%d minutes ago" = "%d分钟前";
+"%d hours ago" = "%d小时前";
+"Yesterday" = "昨天";
+"The day before yesterday" = "前天";
+
+"Update info" = "完善联系信息";
+"Save" = "保存";
+
+"Phone" = "电话";
+"Email" = "邮箱";
+"Other" = "其他";
+
+"QQ: %@ Phone: %@ \nEmail: %@ Other: %@" = "QQ: %@ 电话: %@ \n邮箱: %@ 其他: %@";
+
+"Cancel" = "取消";
+"Send" = "发送";
+
+"for QQ number" = "请输入QQ号";
+"for phone number" = "请输入手机号";
+"for email address" = "请输入邮箱";
+"anything else?" = "随便写点啥吧";
+
+"new feedback" = "新的回复";
+"View" = "查看";
+
+"Swipe up to cancel" = "向上滑动，取消发送";
+"Release to cancel" = "松开手指，取消发送";
+
+"Hold to speak" = "按住 说话";
+"Release to stop" = "松开 结束";
+
+"Too short!" = "录音时间太短了~";
+"Hold on record button and speak, at least 1 second." = "按住录音按钮别松手，至少录1秒钟。";
+
+
+"Permission denied" = "没有录音权限";
+
+"Setting Permission for recording in Settings -> Privacy -> Microphone" = "请在 “设置->隐私->麦克风” 选项中，允许应用访问你的手机麦克风";
