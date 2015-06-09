@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>2BE2C85B-BF89-4F62-AB1F-7D054631A256</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Monkey</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>DA50A2817A0C7BE5B961E4AB554BBF965872173E</key>
+		<string>https://github.com/coderyi/Monkey.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Monkey.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>DA50A2817A0C7BE5B961E4AB554BBF965872173E</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/coderyi/Monkey.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>DA50A2817A0C7BE5B961E4AB554BBF965872173E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DA50A2817A0C7BE5B961E4AB554BBF965872173E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Monkey</string>
+		</dict>
+	</array>
+</dict>
+</plist>
