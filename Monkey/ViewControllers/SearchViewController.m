@@ -7,7 +7,7 @@
 //
 
 #import "SearchViewController.h"
-#import "TwoSegment.h"
+#import "SearchSegmentControl.h"
 #import "UserModel.h"
 #import "RepositoryModel.h"
 #import "UserDetailViewController.h"
@@ -22,7 +22,7 @@
     YiRefreshHeader *refreshHeader2;
     YiRefreshFooter *refreshFooter2;
     UISearchBar *searchBar;
-    TwoSegment *twoSegment;
+    SearchSegmentControl *searchSegment;
     UILabel *titleText;
 }
 @property (strong, nonatomic) MKNetworkOperation *apiOperation;
@@ -76,8 +76,8 @@
     
     self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets=NO;
-    twoSegment=[[TwoSegment alloc] initWithFrame:CGRectMake(0, 0, WScreen, 30)];
-    [self.view addSubview:twoSegment];
+    searchSegment=[[SearchSegmentControl alloc] initWithFrame:CGRectMake(0, 0, WScreen, 30)];
+    [self.view addSubview:searchSegment];
     currentIndex=1;
     
     tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 30, WScreen, HScreen-64-30) style:UITableViewStylePlain];
@@ -87,7 +87,7 @@
     [self addHeader:1];
     [self addFooter:1];
     tableView1.tag=11;
-    twoSegment.ButtonActionBlock=^(int buttonTag){
+    searchSegment.ButtonActionBlock=^(int buttonTag){
         currentIndex=buttonTag-100;
         
         

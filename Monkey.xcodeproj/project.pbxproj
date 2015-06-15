@@ -23,9 +23,8 @@
 		A1FC338E1B25D92200FCBCE7 /* APIEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC32DC1B25D92200FCBCE7 /* APIEngine.m */; };
 		A1FC338F1B25D92200FCBCE7 /* MKNetworkEngine+DefaultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC32DE1B25D92200FCBCE7 /* MKNetworkEngine+DefaultSet.m */; };
 		A1FC33911B25D92200FCBCE7 /* DataSourceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC32E31B25D92200FCBCE7 /* DataSourceModel.m */; };
-		A1FC33921B25D92200FCBCE7 /* NSObject+isNull.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC32E51B25D92200FCBCE7 /* NSObject+isNull.m */; };
+		A1FC33921B25D92200FCBCE7 /* NSObject+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC32E51B25D92200FCBCE7 /* NSObject+Extend.m */; };
 		A1FC33931B25D92200FCBCE7 /* RepositoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC32E71B25D92200FCBCE7 /* RepositoryModel.m */; };
-		A1FC33941B25D92200FCBCE7 /* UIViewController+YiProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC32E91B25D92200FCBCE7 /* UIViewController+YiProgressHUD.m */; };
 		A1FC33951B25D92200FCBCE7 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC32EB1B25D92200FCBCE7 /* UserModel.m */; };
 		A1FC339B1B25D92200FCBCE7 /* MJPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC32FB1B25D92200FCBCE7 /* MJPhoto.m */; };
 		A1FC339C1B25D92200FCBCE7 /* MJPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A1FC32FC1B25D92200FCBCE7 /* MJPhotoBrowser.bundle */; };
@@ -97,9 +96,9 @@
 		A1FC33DE1B25D92200FCBCE7 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC33821B25D92200FCBCE7 /* WebViewController.m */; };
 		A1FC33DF1B25D92200FCBCE7 /* RankTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC33851B25D92200FCBCE7 /* RankTableViewCell.m */; };
 		A1FC33E01B25D92200FCBCE7 /* RepositoriesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC33871B25D92200FCBCE7 /* RepositoriesTableViewCell.m */; };
-		A1FC33E11B25D92200FCBCE7 /* SegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC33891B25D92200FCBCE7 /* SegmentControl.m */; };
-		A1FC33E21B25D92200FCBCE7 /* SwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC338B1B25D92200FCBCE7 /* SwitchView.m */; };
-		A1FC33E31B25D92200FCBCE7 /* TwoSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC338D1B25D92200FCBCE7 /* TwoSegment.m */; };
+		A1FC33E11B25D92200FCBCE7 /* DetailSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC33891B25D92200FCBCE7 /* DetailSegmentControl.m */; };
+		A1FC33E21B25D92200FCBCE7 /* HeaderSegmentControl.h.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC338B1B25D92200FCBCE7 /* HeaderSegmentControl.h.m */; };
+		A1FC33E31B25D92200FCBCE7 /* SearchSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC338D1B25D92200FCBCE7 /* SearchSegmentControl.m */; };
 		A1FC33E51B25D96000FCBCE7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC33E41B25D96000FCBCE7 /* libsqlite3.dylib */; };
 		A1FC33E71B25D96700FCBCE7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC33E61B25D96700FCBCE7 /* AVFoundation.framework */; };
 		A1FC33E91B25D97000FCBCE7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC33E81B25D97000FCBCE7 /* libz.dylib */; };
@@ -139,12 +138,10 @@
 		A1FC32DE1B25D92200FCBCE7 /* MKNetworkEngine+DefaultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKNetworkEngine+DefaultSet.m"; sourceTree = "<group>"; };
 		A1FC32E21B25D92200FCBCE7 /* DataSourceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSourceModel.h; sourceTree = "<group>"; };
 		A1FC32E31B25D92200FCBCE7 /* DataSourceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSourceModel.m; sourceTree = "<group>"; };
-		A1FC32E41B25D92200FCBCE7 /* NSObject+isNull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+isNull.h"; sourceTree = "<group>"; };
-		A1FC32E51B25D92200FCBCE7 /* NSObject+isNull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+isNull.m"; sourceTree = "<group>"; };
+		A1FC32E41B25D92200FCBCE7 /* NSObject+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Extend.h"; sourceTree = "<group>"; };
+		A1FC32E51B25D92200FCBCE7 /* NSObject+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Extend.m"; sourceTree = "<group>"; };
 		A1FC32E61B25D92200FCBCE7 /* RepositoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepositoryModel.h; sourceTree = "<group>"; };
 		A1FC32E71B25D92200FCBCE7 /* RepositoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepositoryModel.m; sourceTree = "<group>"; };
-		A1FC32E81B25D92200FCBCE7 /* UIViewController+YiProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+YiProgressHUD.h"; sourceTree = "<group>"; };
-		A1FC32E91B25D92200FCBCE7 /* UIViewController+YiProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+YiProgressHUD.m"; sourceTree = "<group>"; };
 		A1FC32EA1B25D92200FCBCE7 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		A1FC32EB1B25D92200FCBCE7 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		A1FC32FA1B25D92200FCBCE7 /* MJPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPhoto.h; sourceTree = "<group>"; };
@@ -275,12 +272,12 @@
 		A1FC33851B25D92200FCBCE7 /* RankTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankTableViewCell.m; sourceTree = "<group>"; };
 		A1FC33861B25D92200FCBCE7 /* RepositoriesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepositoriesTableViewCell.h; sourceTree = "<group>"; };
 		A1FC33871B25D92200FCBCE7 /* RepositoriesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepositoriesTableViewCell.m; sourceTree = "<group>"; };
-		A1FC33881B25D92200FCBCE7 /* SegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentControl.h; sourceTree = "<group>"; };
-		A1FC33891B25D92200FCBCE7 /* SegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentControl.m; sourceTree = "<group>"; };
-		A1FC338A1B25D92200FCBCE7 /* SwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchView.h; sourceTree = "<group>"; };
-		A1FC338B1B25D92200FCBCE7 /* SwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchView.m; sourceTree = "<group>"; };
-		A1FC338C1B25D92200FCBCE7 /* TwoSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoSegment.h; sourceTree = "<group>"; };
-		A1FC338D1B25D92200FCBCE7 /* TwoSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoSegment.m; sourceTree = "<group>"; };
+		A1FC33881B25D92200FCBCE7 /* DetailSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailSegmentControl.h; sourceTree = "<group>"; };
+		A1FC33891B25D92200FCBCE7 /* DetailSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailSegmentControl.m; sourceTree = "<group>"; };
+		A1FC338A1B25D92200FCBCE7 /* HeaderSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderSegmentControl.h; sourceTree = "<group>"; };
+		A1FC338B1B25D92200FCBCE7 /* HeaderSegmentControl.h.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderSegmentControl.h.m; sourceTree = "<group>"; };
+		A1FC338C1B25D92200FCBCE7 /* SearchSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSegmentControl.h; sourceTree = "<group>"; };
+		A1FC338D1B25D92200FCBCE7 /* SearchSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSegmentControl.m; sourceTree = "<group>"; };
 		A1FC33E41B25D96000FCBCE7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		A1FC33E61B25D96700FCBCE7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A1FC33E81B25D97000FCBCE7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -401,12 +398,10 @@
 				A1FC32DA1B25D92200FCBCE7 /* API */,
 				A1FC32E21B25D92200FCBCE7 /* DataSourceModel.h */,
 				A1FC32E31B25D92200FCBCE7 /* DataSourceModel.m */,
-				A1FC32E41B25D92200FCBCE7 /* NSObject+isNull.h */,
-				A1FC32E51B25D92200FCBCE7 /* NSObject+isNull.m */,
+				A1FC32E41B25D92200FCBCE7 /* NSObject+Extend.h */,
+				A1FC32E51B25D92200FCBCE7 /* NSObject+Extend.m */,
 				A1FC32E61B25D92200FCBCE7 /* RepositoryModel.h */,
 				A1FC32E71B25D92200FCBCE7 /* RepositoryModel.m */,
-				A1FC32E81B25D92200FCBCE7 /* UIViewController+YiProgressHUD.h */,
-				A1FC32E91B25D92200FCBCE7 /* UIViewController+YiProgressHUD.m */,
 				A1FC32EA1B25D92200FCBCE7 /* UserModel.h */,
 				A1FC32EB1B25D92200FCBCE7 /* UserModel.m */,
 			);
@@ -664,12 +659,12 @@
 				A1FC33851B25D92200FCBCE7 /* RankTableViewCell.m */,
 				A1FC33861B25D92200FCBCE7 /* RepositoriesTableViewCell.h */,
 				A1FC33871B25D92200FCBCE7 /* RepositoriesTableViewCell.m */,
-				A1FC33881B25D92200FCBCE7 /* SegmentControl.h */,
-				A1FC33891B25D92200FCBCE7 /* SegmentControl.m */,
-				A1FC338A1B25D92200FCBCE7 /* SwitchView.h */,
-				A1FC338B1B25D92200FCBCE7 /* SwitchView.m */,
-				A1FC338C1B25D92200FCBCE7 /* TwoSegment.h */,
-				A1FC338D1B25D92200FCBCE7 /* TwoSegment.m */,
+				A1FC33881B25D92200FCBCE7 /* DetailSegmentControl.h */,
+				A1FC33891B25D92200FCBCE7 /* DetailSegmentControl.m */,
+				A1FC338A1B25D92200FCBCE7 /* HeaderSegmentControl.h */,
+				A1FC338B1B25D92200FCBCE7 /* HeaderSegmentControl.h.m */,
+				A1FC338C1B25D92200FCBCE7 /* SearchSegmentControl.h */,
+				A1FC338D1B25D92200FCBCE7 /* SearchSegmentControl.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -799,11 +794,11 @@
 				A1FC338E1B25D92200FCBCE7 /* APIEngine.m in Sources */,
 				A1FC33DA1B25D92200FCBCE7 /* RepositoriesViewController.m in Sources */,
 				A1FC33DC1B25D92200FCBCE7 /* SearchViewController.m in Sources */,
-				A1FC33E11B25D92200FCBCE7 /* SegmentControl.m in Sources */,
+				A1FC33E11B25D92200FCBCE7 /* DetailSegmentControl.m in Sources */,
 				A1FC339E1B25D92200FCBCE7 /* MJPhotoLoadingView.m in Sources */,
 				A1FC339D1B25D92200FCBCE7 /* MJPhotoBrowser.m in Sources */,
 				A1FC33BD1B25D92200FCBCE7 /* UIView+WebCacheOperation.m in Sources */,
-				A1FC33E31B25D92200FCBCE7 /* TwoSegment.m in Sources */,
+				A1FC33E31B25D92200FCBCE7 /* SearchSegmentControl.m in Sources */,
 				A1FC33D81B25D92200FCBCE7 /* MoreViewController.m in Sources */,
 				A1FC33951B25D92200FCBCE7 /* UserModel.m in Sources */,
 				A1FC33B21B25D92200FCBCE7 /* SDWebImageDecoder.m in Sources */,
@@ -840,15 +835,14 @@
 				A1FC33B61B25D92200FCBCE7 /* SDWebImagePrefetcher.m in Sources */,
 				A1FC33B91B25D92200FCBCE7 /* UIImage+MultiFormat.m in Sources */,
 				A1FC33B11B25D92200FCBCE7 /* SDWebImageCompat.m in Sources */,
-				A1FC33941B25D92200FCBCE7 /* UIViewController+YiProgressHUD.m in Sources */,
 				A1FC33A51B25D92200FCBCE7 /* NSData+MKBase64.m in Sources */,
 				A1FC33AC1B25D92200FCBCE7 /* MKNetworkOperation.m in Sources */,
 				A1FC33AA1B25D92200FCBCE7 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				A1FC33911B25D92200FCBCE7 /* DataSourceModel.m in Sources */,
-				A1FC33E21B25D92200FCBCE7 /* SwitchView.m in Sources */,
+				A1FC33E21B25D92200FCBCE7 /* HeaderSegmentControl.h.m in Sources */,
 				A1FC33BC1B25D92200FCBCE7 /* UIImageView+WebCache.m in Sources */,
 				A1FC33DF1B25D92200FCBCE7 /* RankTableViewCell.m in Sources */,
-				A1FC33921B25D92200FCBCE7 /* NSObject+isNull.m in Sources */,
+				A1FC33921B25D92200FCBCE7 /* NSObject+Extend.m in Sources */,
 				A1FC32B11B25D90B00FCBCE7 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

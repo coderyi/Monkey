@@ -1,5 +1,5 @@
 //
-//  NSObject+isNull.h
+//  NSObject+Extend.h
 //  GitHubYi
 //
 //  Created by coderyi on 15/3/24.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSObject (isNull)
+@interface NSObject (Extend)
 -(BOOL)isNull;
 - (void)showYiProgressHUD:(NSString *)title  afterDelay:(NSTimeInterval)delay;
 - (void)showYiProgressHUD:(NSString *)title;

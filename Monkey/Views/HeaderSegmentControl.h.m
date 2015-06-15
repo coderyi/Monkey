@@ -1,14 +1,14 @@
 //
-//  SwitchView.m
-//  NewsDemo
+//  HeaderSegmentControl.m
+
 //
 //  Created by apple on 15/2/10.
 //  Copyright (c) 2015年 coderyi. All rights reserved.
 //
 
-#import "SwitchView.h"
+#import "HeaderSegmentControl.h"
 
-@implementation SwitchView
+@implementation HeaderSegmentControl
 int currentTag;
 UIColor *black;
 UIColor *light;

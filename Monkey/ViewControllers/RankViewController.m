@@ -9,7 +9,7 @@
 #import "RankViewController.h"
 #import "UserModel.h"
 #import "RankTableViewCell.h"
-#import "SwitchView.h"
+#import "HeaderSegmentControl.h"
 #import "CityViewController.h"
 @interface RankViewController ()<UITableViewDataSource,UITableViewDelegate>{
     UIScrollView *scrollView;
@@ -18,7 +18,7 @@
     UITableView *tableView2;
     float titleHeight;
     float bgViewHeight;
-    SwitchView *switchView;
+    HeaderSegmentControl *segmentControl;
     YiRefreshHeader *refreshHeader1;
     YiRefreshFooter *refreshFooter1;
     
@@ -45,7 +45,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     NSString *cityAppear=[[NSUserDefaults standardUserDefaults] objectForKey:@"cityAppear"];
     if ([cityAppear isEqualToString:@"2"]) {
-        [switchView swipeAction:102];
+        [segmentControl swipeAction:102];
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"cityAppear"];
         [refreshHeader2 beginRefreshing];
         NSString *city=[[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
@@ -53,7 +53,7 @@
             city=@"北京";
         }
         
-        [switchView.button2 setTitle:city forState:UIControlStateNormal];
+        [segmentControl.button2 setTitle:city forState:UIControlStateNormal];
         
     }
 
@@ -79,9 +79,9 @@
    
   
     
-    switchView=[[SwitchView alloc] initWithFrame:CGRectMake(0, 0, WScreen, titleHeight)];
-    [self.view addSubview:switchView];
-    switchView.buttonCount=2;
+    segmentControl=[[HeaderSegmentControl alloc] initWithFrame:CGRectMake(0, 0, WScreen, titleHeight)];
+    [self.view addSubview:segmentControl];
+    segmentControl.buttonCount=2;
    currentIndex=1;
     
      [self initTable];
@@ -135,7 +135,7 @@
 
     
     
-    switchView.ButtonActionBlock=^(int buttonTag){
+    segmentControl.ButtonActionBlock=^(int buttonTag){
         
         currentIndex=buttonTag-100;
         [scrollView scrollRectToVisible:CGRectMake(WScreen * (currentIndex-1),0,WScreen,bgViewHeight) animated:NO];
@@ -194,7 +194,7 @@
     
     currentIndex=currentPage+1;
     NSLog(@"cccc %d",currentIndex);
-    [switchView swipeAction:(100+currentPage+1)];
+    [segmentControl swipeAction:(100+currentPage+1)];
     
 }
 

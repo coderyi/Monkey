@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SegmentControl : UIView
+@interface DetailSegmentControl : UIView
 @property UILabel *label1;
 @property UILabel *label2;
 @property UILabel *label3;

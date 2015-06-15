@@ -11,7 +11,7 @@
 #import "RankTableViewCell.h"
 #import "RepositoryModel.h"
 #import "RepositoriesTableViewCell.h"
-#import "SegmentControl.h"
+#import "DetailSegmentControl.h"
 #import "WebViewController.h"
 
 
@@ -37,7 +37,7 @@
     UILabel *locationLabel;
     UIButton *emailBt;
     UIButton *blogBt;
-    SegmentControl *segmentControl;
+    DetailSegmentControl *segmentControl;
 }
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
@@ -177,7 +177,7 @@
     line1.backgroundColor=YiGray;
     
     
-    segmentControl=[[SegmentControl alloc] initWithFrame:CGRectMake(0, 150+34, WScreen, 60)];
+    segmentControl=[[DetailSegmentControl alloc] initWithFrame:CGRectMake(0, 150+34, WScreen, 60)];
     [titleView addSubview:segmentControl];
     tableView.tableHeaderView=titleView;
     segmentControl.ButtonActionBlock=^(int buttonTag){

@@ -1,5 +1,5 @@
 //
-//  TwoSegment.h
+//  SearchSegmentControl.h
 //  GitHubYi
 //
 //  Created by coderyi on 15/4/4.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TwoSegment : UIView
+@interface SearchSegmentControl : UIView
 {
     UILabel *label1;
     UILabel *label2;

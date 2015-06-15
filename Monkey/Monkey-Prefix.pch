@@ -26,8 +26,8 @@
 #import "MKNetworkEngine+DefaultSet.h"
 #import "APIEngine.h"
 #import "UIImageView+WebCache.h"
-#import "NSObject+isNull.h"
-#import "UIViewController+YiProgressHUD.h"
+#import "NSObject+Extend.h"
+
 /**
  *   define
  */

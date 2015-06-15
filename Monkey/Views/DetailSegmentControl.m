@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 www.coderyi.com. All rights reserved.
 //
 
-#import "SegmentControl.h"
+#import "DetailSegmentControl.h"
 
-@implementation SegmentControl
+@implementation DetailSegmentControl
 int currentTag;
 
 @synthesize label1,label2,label3,bt1Label,bt2Label,bt3Label,bt1Label1,bt2Label1,bt3Label1;

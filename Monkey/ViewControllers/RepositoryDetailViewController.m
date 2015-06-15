@@ -9,7 +9,7 @@
 #import "RepositoryDetailViewController.h"
 #import "RankTableViewCell.h"
 #import "UserModel.h"
-#import "SegmentControl.h"
+#import "DetailSegmentControl.h"
 #import "RepositoriesTableViewCell.h"
 #import "WebViewController.h"
 
@@ -21,7 +21,7 @@
     UILabel *titleText;
     int currentIndex;
 
-    SegmentControl *segmentControl;
+    DetailSegmentControl *segmentControl;
     UIButton *nameBt;
     UIButton *ownerBt;
     UIButton *parentBt;
@@ -171,7 +171,7 @@
     descLabel.numberOfLines=0;
     descLabel.lineBreakMode=NSLineBreakByWordWrapping;
     
-    segmentControl=[[SegmentControl alloc] initWithFrame:CGRectMake(0, 130+5, WScreen, 60)];
+    segmentControl=[[DetailSegmentControl alloc] initWithFrame:CGRectMake(0, 130+5, WScreen, 60)];
     [titleView addSubview:segmentControl];
     segmentControl.bt1Label1.text=@"Contributors";
     segmentControl.bt2Label1.text=@"Forks";

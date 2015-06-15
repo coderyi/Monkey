@@ -9,7 +9,7 @@
 #import "LanguageRankViewController.h"
 #import "UserModel.h"
 #import "RankTableViewCell.h"
-#import "SwitchView.h"
+#import "HeaderSegmentControl.h"
 #import "CityViewController.h"
 #import "LanguageViewController.h"
 #import "UserDetailViewController.h"
@@ -23,7 +23,7 @@
     
     float titleHeight;
     float bgViewHeight;
-    SwitchView *switchView;
+    HeaderSegmentControl *segmentControl;
     YiRefreshHeader *refreshHeader1;
     YiRefreshFooter *refreshFooter1;
     
@@ -63,7 +63,7 @@
     NSString *cityAppear=[[NSUserDefaults standardUserDefaults] objectForKey:@"cityAppear"];
     if ([cityAppear isEqualToString:@"2"]) {
         currentIndex=1;
-        [switchView swipeAction:101];
+        [segmentControl swipeAction:101];
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"cityAppear"];
         [refreshHeader1 beginRefreshing];
         NSString *city=[[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
@@ -71,7 +71,7 @@
             city=@"北京";
         }
         
-        [switchView.button1 setTitle:city forState:UIControlStateNormal];
+        [segmentControl.button1 setTitle:city forState:UIControlStateNormal];
         
     }
     NSString *languageAppear=[[NSUserDefaults standardUserDefaults] objectForKey:@"languageAppear"];
@@ -84,11 +84,11 @@
             
         }
         if ([language isEqualToString:@"所有语言"]) {
-            switchView.buttonCount=2;
-            switchView.button3.hidden=YES;
+            segmentControl.buttonCount=2;
+            segmentControl.button3.hidden=YES;
         }else{
-            switchView.buttonCount=3;
-            switchView.button3.hidden=NO;
+            segmentControl.buttonCount=3;
+            segmentControl.button3.hidden=NO;
 
 
         }
@@ -104,7 +104,7 @@
         }else if (currentIndex==3){
             if ([language isEqualToString:@"所有语言"]) {
                 currentIndex=2;
-                [switchView swipeAction:102];
+                [segmentControl swipeAction:102];
                  [refreshHeader2 beginRefreshing];
             }else{
                 [refreshHeader3 beginRefreshing];
@@ -171,14 +171,14 @@
     
     
     
-    switchView=[[SwitchView alloc] initWithFrame:CGRectMake(0, 0, WScreen, titleHeight)];
-    [self.view addSubview:switchView];
+    segmentControl=[[HeaderSegmentControl alloc] initWithFrame:CGRectMake(0, 0, WScreen, titleHeight)];
+    [self.view addSubview:segmentControl];
     if ([language isEqualToString:@"所有语言"]) {
-        switchView.buttonCount=2;
-        switchView.button3.hidden=YES;
+        segmentControl.buttonCount=2;
+        segmentControl.button3.hidden=YES;
     }else{
-        switchView.buttonCount=3;
-        switchView.button3.hidden=NO;
+        segmentControl.buttonCount=3;
+        segmentControl.button3.hidden=NO;
         
         
     }
@@ -190,7 +190,7 @@
         city=@"北京";
     }
     
-    [switchView.button1 setTitle:city forState:UIControlStateNormal];
+    [segmentControl.button1 setTitle:city forState:UIControlStateNormal];
     [self initTable];
     
     UIBarButtonItem *left=[[UIBarButtonItem alloc] initWithTitle:@"城市" style:UIBarButtonItemStylePlain target:self action:@selector(leftAction)];
@@ -252,7 +252,7 @@
     [self addHeader:1];
     [self addFooter:1];
     
-    switchView.ButtonActionBlock=^(int buttonTag){
+    segmentControl.ButtonActionBlock=^(int buttonTag){
         
         currentIndex=buttonTag-100;
         [scrollView scrollRectToVisible:CGRectMake(WScreen * (currentIndex-1),0,WScreen,bgViewHeight) animated:NO];
@@ -265,7 +265,7 @@
             if (self.DsOfPageListObject1.totalCount>0) {
                 
            
-              [switchView.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject1.totalCount] forState:UIControlStateNormal]; }
+              [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject1.totalCount] forState:UIControlStateNormal]; }
         }else if (currentIndex==2){
             if (tableView2==nil) {
                 tableView2=[[UITableView alloc] initWithFrame:CGRectMake(WScreen, 0, WScreen, bgViewHeight) style:UITableViewStylePlain];
@@ -284,7 +284,7 @@
             if (![titleText.text isEqualToString:tableView2Language]) {
                 [refreshHeader2 beginRefreshing];
             }   if (self.DsOfPageListObject2.totalCount>0) {
-                [switchView.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject2.totalCount] forState:UIControlStateNormal];}
+                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject2.totalCount] forState:UIControlStateNormal];}
         }else if (currentIndex==3){
             if (tableView3==nil) {
                 tableView3=[[UITableView alloc] initWithFrame:CGRectMake(WScreen*2, 0, WScreen, bgViewHeight) style:UITableViewStylePlain];
@@ -303,7 +303,7 @@
             if (![titleText.text isEqualToString:tableView3Language]) {
                 [refreshHeader3 beginRefreshing];
             }   if (self.DsOfPageListObject3.totalCount>0) {
-                [switchView.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject3.totalCount] forState:UIControlStateNormal];}
+                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject3.totalCount] forState:UIControlStateNormal];}
         }else if (currentIndex==4){
             
         }
@@ -317,7 +317,7 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView1
 {
-    if (switchView.buttonCount==2) {
+    if (segmentControl.buttonCount==2) {
         
     
     CGFloat pagewidth = scrollView.frame.size.width;
@@ -338,7 +338,7 @@
     
     currentIndex=currentPage+1;
     NSLog(@"cccc %d",currentIndex);
-        [switchView swipeAction:(100+currentPage+1)];}else if (switchView.buttonCount==3){
+        [segmentControl swipeAction:(100+currentPage+1)];}else if (segmentControl.buttonCount==3){
             
             
             CGFloat pagewidth = scrollView.frame.size.width;
@@ -359,7 +359,7 @@
             
             currentIndex=currentPage+1;
             NSLog(@"cccc %d",currentIndex);
-            [switchView swipeAction:(100+currentPage+1)];
+            [segmentControl swipeAction:(100+currentPage+1)];
         }
     
 }
@@ -581,7 +581,7 @@
         
         [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:q sort:@"followers" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
             self.DsOfPageListObject2.totalCount=totalCount;
-            [switchView.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
+            [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
 
             if (page<=1) {
                 [self.DsOfPageListObject2.dsArray removeAllObjects];
@@ -651,7 +651,7 @@
                 q=[NSString stringWithFormat:@"location:%@",city];
             }
             [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:q sort:@"followers" categoryLocation:city categoryLanguage:language completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-                [switchView.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
+                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
                 self.DsOfPageListObject1.totalCount=totalCount;
 
                 if (page<=1) {
@@ -716,7 +716,7 @@
             
             tableView3Language=language;
             [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:[NSString stringWithFormat:@"language:%@",language] sort:@"followers" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-                [switchView.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
+                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
                 self.DsOfPageListObject3.totalCount=totalCount;
 
                 if (page<=1) {

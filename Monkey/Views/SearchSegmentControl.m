@@ -1,14 +1,14 @@
 //
-//  TwoSegment.m
+//  SearchSegmentControl.m
 //  GitHubYi
 //
 //  Created by coderyi on 15/4/4.
 //  Copyright (c) 2015年 www.coderyi.com. All rights reserved.
 //
 
-#import "TwoSegment.h"
+#import "SearchSegmentControl.h"
 
-@implementation TwoSegment
+@implementation SearchSegmentControl
 int currentTag;
 /*
 // Only override drawRect: if you perform custom drawing.
