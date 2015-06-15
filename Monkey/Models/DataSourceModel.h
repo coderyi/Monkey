@@ -1,9 +1,9 @@
 //
 //  DataSourceModel.h
-//  shouyoutv
+//  Monkey
 //
-//  Created by apple on 13-12-25.
-//  Copyright (c) 2013年 hm. All rights reserved.
+//  Created by coderyi on 15/3/24.
+//  Copyright (c) 2015年 www.coderyi.com. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
