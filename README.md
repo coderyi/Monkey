@@ -3,11 +3,15 @@ Monkey是一个GitHub第三方客户端，Monkey取名就是表示我们程序�
 
 Monkey for GitHub目前是0.9版本，开源项目，欢迎star&fork。
 
+GitHub开源地址:[https://github.com/coderyi/Monkey](https://github.com/coderyi/Monkey)
+
 App Store:[https://itunes.apple.com/cn/app/monkey-for-github/id1003765407](https://itunes.apple.com/cn/app/monkey-for-github/id1003765407) 
+
 可以使用二维码扫描下载
 
+![YiRefresh](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_monkeycaoliaoerweima.png?imageMogr2/thumbnail/!50p) 
 
-GitHub开源地址:[https://github.com/coderyi/Monkey](https://github.com/coderyi/Monkey)
+
 
 
 ##Monkey for GitHub
