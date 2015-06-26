@@ -12,7 +12,7 @@ App Store:[https://itunes.apple.com/cn/app/monkey-for-github/id1003765407](https
 
 可以使用二维码扫描下载
 
-![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_monkeycaoliaoerweima.png?imageMogr2/thumbnail/!60p) 
+![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_monkeycaoliaoerweima.png?imageMogr2/thumbnail/!65p) 
 
 
 
