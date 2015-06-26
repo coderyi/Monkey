@@ -1,6 +1,6 @@
 # Monkey for GitHub(已上架)
 
-![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_logo180.png!50p) 
+![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_logo180.png?imageMogr2/thumbnail/!50p) 
 
 Monkey是一个GitHub第三方客户端，Monkey取名就是表示我们程序猿的意思。
 
