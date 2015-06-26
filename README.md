@@ -86,21 +86,21 @@ email:coderyi@foxmail.com
 
 不分语言的国内程序员排名示例
 
-![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s1.png?imageMogr2/thumbnail/!50p) 
+![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s1.png?imageMogr2/thumbnail/!40p) 
 
 Objective-C的国内程序员排名示例
 
-![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s2.png?imageMogr2/thumbnail/!50p) 
+![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s2.png?imageMogr2/thumbnail/!40p) 
 
 Objective-C的世界范围哪程序员排名示例
 
-![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s3.png?imageMogr2/thumbnail/!50p) 
+![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s3.png?imageMogr2/thumbnail/!40p) 
 
 JavaScript的世界范围内仓库排名示例
 
-![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s4.png?imageMogr2/thumbnail/!50p) 
+![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s4.png?imageMogr2/thumbnail/!40p) 
 
 Objective-C的世界范围内仓库排名示例
 
-![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s5.png?imageMogr2/thumbnail/!50p) 
+![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s5.png?imageMogr2/thumbnail/!40p) 
 
