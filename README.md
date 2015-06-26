@@ -33,9 +33,9 @@ Monkey主要是用来展示GitHub上的开发者的排名，以及仓库的排�
 
 
 ##关于开源
-###运行
+####运行
 支持iOS7.1+，支持iPhone的各个尺寸，支持竖屏；目前我使用的是Xcode6.3
-###项目中使用的开源组件
+####项目中使用的开源组件
 
 [YiRefresh](https://github.com/coderyi/YiRefresh)
 
