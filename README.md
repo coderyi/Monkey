@@ -1,18 +1,14 @@
 # Monkey for GitHub(已上架)
 
-![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_logo180.png?imageMogr2/thumbnail/!18p) 
+![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_liantuerweima.png?imageMogr2/thumbnail/!18p) 
 
-Monkey是一个GitHub第三方客户端，Monkey取名就是表示我们程序猿的意思。
+Monkey是一个GitHub第三方客户端，Monkey取名就是表示我们程序猿的意思。Monkey for GitHub目前是0.9版本，这是我的第一个上线App，开源项目，希望多多指教。欢迎使用上面的二维码扫描下载。
 
-Monkey for GitHub目前是0.9版本，开源项目，欢迎star&fork。
+ 
 
 GitHub开源地址:[https://github.com/coderyi/Monkey](https://github.com/coderyi/Monkey)
 
-App Store:[https://itunes.apple.com/cn/app/monkey-for-github/id1003765407](https://itunes.apple.com/cn/app/monkey-for-github/id1003765407) 
-
-可以使用二维码扫描下载
-
-![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_monkeycaoliaoerweima.png?imageMogr2/thumbnail/!65p) 
+App Store地址:[https://itunes.apple.com/cn/app/monkey-for-github/id1003765407](https://itunes.apple.com/cn/app/monkey-for-github/id1003765407)
 
 
 
@@ -77,7 +73,7 @@ Asynchronous image downloader with cache support with an UIImageView category
 
 blog:[http://www.coderyi.com/](http://www.coderyi.com/)
 
-GitHub:[https://github.com/](https://github.com/)
+GitHub:[https://github.com/coderyi](https://github.com/coderyi)
 
 email:coderyi@foxmail.com
 
