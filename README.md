@@ -1,4 +1,7 @@
 # Monkey for GitHub(已上架)
+
+![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_logo180.png!50p) 
+
 Monkey是一个GitHub第三方客户端，Monkey取名就是表示我们程序猿的意思。
 
 Monkey for GitHub目前是0.9版本，开源项目，欢迎star&fork。
@@ -9,7 +12,7 @@ App Store:[https://itunes.apple.com/cn/app/monkey-for-github/id1003765407](https
 
 可以使用二维码扫描下载
 
-![YiRefresh](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_monkeycaoliaoerweima.png?imageMogr2/thumbnail/!50p) 
+![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_monkeycaoliaoerweima.png?imageMogr2/thumbnail/!50p) 
 
 
 
@@ -64,7 +67,7 @@ Asynchronous image downloader with cache support with an UIImageView category
 
 
 
-##App预览
+
 ##To do
 1.增加登录功能
 2.增加关注人动态功能
@@ -79,5 +82,10 @@ GitHub:[https://github.com/](https://github.com/)
 email:coderyi@foxmail.com
 
 
-
+##App预览
+![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s1.png?imageMogr2/thumbnail/!50p) 
+![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s2.png?imageMogr2/thumbnail/!50p) 
+![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s3.png?imageMogr2/thumbnail/!50p) 
+![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s4.png?imageMogr2/thumbnail/!50p) 
+![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s5.png?imageMogr2/thumbnail/!50p) 
 
