@@ -66,7 +66,9 @@ Asynchronous image downloader with cache support with an UIImageView category
 
 ##To do
 1.增加登录功能
+
 2.增加关注人动态功能
+
 3.数据持久化
 ##联系我
 对于Monkey，你可以随意提交；如果想加入更多的开发，欢迎联系我！
