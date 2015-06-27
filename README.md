@@ -1,6 +1,6 @@
 # Monkey for GitHub(已上架)
 
-![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_liantuerweima.png?imageMogr2/thumbnail/!18p) 
+![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_liantuerweima.png?imageMogr2/thumbnail/!60p) 
 
 Monkey是一个GitHub第三方客户端，Monkey取名就是表示我们程序猿的意思。Monkey for GitHub目前是0.9版本，这是我的第一个上线App，开源项目，希望多多指教。欢迎使用上面的二维码扫描下载。
 
