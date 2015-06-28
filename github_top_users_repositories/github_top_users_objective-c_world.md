@@ -1,4 +1,8 @@
 ## GitHub Top Users Objective-C World
+
+这是GitHub在世界范围内排名前50的Objective-C程序员，并且列出相关信息，从而可以走近他们的程序世界。数据来自GitHub的API以及自己整理的相关内容，这个列表是我做[Monkey for GitHub](https://github.com/coderyi/Monkey)这个开源的GitHub第三方客户端的衍生品，欢迎交流一件。
+
+
 Rank |Users | 基本信息|简介
 --------- |--------- | ---------------|------------
 1|**Wei Wang**<br>[onevcat](https://github.com/onevcat) <br>![onevcat](https://avatars0.githubusercontent.com/u/1019875?v=3&s=100) | name: "Wei Wang"<br>company: "LINE Corp."<br>blog: "http://onev.cat"<br>location: "Kawasaki, Japan"<br>email: "onev@onevcat.com"| 
