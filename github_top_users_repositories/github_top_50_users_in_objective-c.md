@@ -26,83 +26,31 @@ blog: "http://JeffVerkoeyen.com/"<br>location: "New York, NY"<br>email: "jverkoe
 [atebits](https://github.com/atebits) <br>![atebits](https://avatars0.githubusercontent.com/u/40109?v=3&s=100) | name: "Loren Brichter"<br>company: "atebits"<br>blog: "http://www.atebits.com/news/"<br>location: "Philly"<br>email: "loren.brichter@atebits.com"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
 [joshaber](https://github.com/joshaber) <br>![joshaber](https://avatars0.githubusercontent.com/u/13760?v=3&s=100) | name: "Josh Abernathy"<br>company: "GitHub"<br>blog: "http://twitter.com/joshaber"<br>location: "The Gem City"<br>email: "joshaber@gmail.com"| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
 [orta](https://github.com/orta) <br>![orta](https://avatars0.githubusercontent.com/u/49038?v=3&s=100) | name: "Orta"<br>company: "Artsy.net && CocoaPods"<br>blog: "http://orta.github.io"<br>location: "Manchester / NYC"<br>email: "orta.therox@gmail.com"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [Cocoanetics](https://github.com/Cocoanetics) <br>![Cocoanetics](https://avatars0.githubusercontent.com/u/333270?v=3&s=100) | name: "Oliver Drobnik"<br>company: "Drobnik KG"<br>blog: "http://www.cocoanetics.com"<br>location: "Vienna, Austria"<br>email: "oliver@cocoanetics.com"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [rentzsch](https://github.com/rentzsch) <br>![rentzsch](https://avatars0.githubusercontent.com/u/2971?v=3&s=100) | name: "Jonathan 'Wolf' Rentzsch"<br>company: ""<br>blog: "http://rentzsch.com"<br>location: "Chicagoland+WI"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [rnystrom](https://github.com/rnystrom) <br>![rnystrom](https://avatars0.githubusercontent.com/u/739696?v=3&s=100) | name: "Ryan Nystrom"<br>company: "Facebook"<br>blog: "whoisryannystrom.com"<br>location: "San Francisco, CA"<br>email: "rnystrom@whoisryannystrom.com"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [rs](https://github.com/rs) <br>![rs](https://avatars0.githubusercontent.com/u/68232?v=3&s=100) | name: "Olivier Poitrey"<br>company: "Dailymotion"<br>blog: "http://www.dailymotion.com"<br>location: "Silicon Valley, California, USA"| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
 [honcheng](https://github.com/honcheng) <br>![honcheng](https://avatars0.githubusercontent.com/u/208827?v=3&s=100) | name: "honcheng"<br>company: "buUuk Pte Ltd"<br>blog: "http://honcheng.com"<br>location: "Singapore"<br>email: "honcheng@gmail.com"| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [supermarin](https://github.com/supermarin) <br>![supermarin](https://avatars0.githubusercontent.com/u/627285?v=3&s=100) | name: "Marin Usalj"<br>company: "Lyft"<br>blog: "supermar.in"<br>location: "San Francisco, CA"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [shu223](https://github.com/shu223) <br>![shu223](https://avatars0.githubusercontent.com/u/587614?v=3&s=100) | name: "shu223"<br>company: "Freelancer"<br>blog: "http://d.hatena.ne.jp/shu223/"<br>location: "Tokyo, Japan"<br>email: "shuichi0526@gmail.com"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [krzysztofzablocki](https://github.com/krzysztofzablocki) <br>![krzysztofzablocki](https://avatars0.githubusercontent.com/u/1468993?v=3&s=100) | name: "Krzysztof Zabłocki"<br>company: ""<br>blog: "http://merowing.info"<br>location: "Warsaw, Poland"<br>email: "krzysztof.zablocki@me.com"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [andymatuschak](https://github.com/andymatuschak) <br>![andymatuschak](https://avatars0.githubusercontent.com/u/2771?v=3&s=100) | name: "Andy Matuschak"<br>company: "Khan Academy"<br>blog: "http://andymatuschak.org"<br>location: "San Francisco, CA"<br>email: "andy@andymatuschak.org"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [BradLarson](https://github.com/BradLarson) <br>![BradLarson](https://avatars0.githubusercontent.com/u/954279?v=3&s=100) | name: "Brad Larson"<br>company: "Sunset Lake Software LLC"<br>blog: "http://www.sunsetlakesoftware.com"<br>location: "Madison, WI USA"<br>email: "contact@sunsetlakesoftware.com"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [jamztang](https://github.com/jamztang) <br>![jamztang](https://avatars0.githubusercontent.com/u/852375?v=3&s=100) | name: "James Tang"<br>company: "",blog: "http://jamztang.com"<br>location: "Hong Kong"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [kishikawakatsumi](https://github.com/kishikawakatsumi) <br>![kishikawakatsumi](https://avatars0.githubusercontent.com/u/40610?v=3&s=100) | name: "kishikawa katsumi"<br>company: "Realm"<br>blog: "http://kishikawakatsumi.com"<br>location: "Tokyo"<br>email: "kishikawakatsumi@mac.com"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [MengTo](https://github.com/MengTo) <br>![MengTo](https://avatars0.githubusercontent.com/u/1065452?v=3&s=100) | name: "Meng To"<br>company: null,blog: "mengto.com"<br>location: null,email: "shadownessguy@gmail.com"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [indragiek](https://github.com/indragiek) <br>![indragiek](https://avatars0.githubusercontent.com/u/353158?v=3&s=100) | name: "Indragie Karunaratne"<br>blog: "http://indragie.com"<br>location: "Edmonton, AB"<br>email: "i@indragie.com"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
-
 [0xced](https://github.com/0xced) <br>![0xced](https://avatars0.githubusercontent.com/u/51363?v=3&s=100) | name: "Cédric Luthi"<br>blog: "http://0xced.blogspot.com"<br>location: "Geneva, Switzerland"<br>email: "cedric.luthi@gmail.com"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [levey](https://github.com/levey) <br>![levey](https://avatars0.githubusercontent.com/u/629136?v=3&s=100) | name: "Jiangang Zhu"<br>company: "Bindo Labs"<br>blog: "http://www.golevey.com"<br>location: "New York"<br>email: "levey.zhu@gmail.com"| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [omz](https://github.com/omz) <br>![omz](https://avatars0.githubusercontent.com/u/82469?v=3&s=100) | name: "Ole Zorn"<br>company: "omz:software"<br>blog: "http://omz-software.com"<br>location: "Berlin, Germany"| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [gaearon](https://github.com/gaearon) <br>![gaearon](https://avatars.githubusercontent.com/u/810438?v=3&s=100) | name: "Dan Abramov"<br>company: ""<br>blog: "http://twitter.com/dan_abramov"<br>location: "St. Pete"<br>email: "dan.abramov@me.com"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [equus12](https://github.com/equus12) <br> | name: "Choi"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [schwa](https://github.com/schwa) <br>![schwa](https://avatars0.githubusercontent.com/u/20267?v=3&s=100) | name: "Jonathan Wight"<br>blog: "http://toxicsoftware.com/"<br>location: "Berkeley CA"<br>email: "schwa@toxicsoftware.com"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [DHowett](https://github.com/DHowett) <br>![DHowett](https://avatars0.githubusercontent.com/u/189190?v=3&s=100) | name: "Dustin L. Howett"<br>company: "HowettNET"<br>blog: "http://howett.net"<br>location: "Berkeley, CA"<br>email: "dustin@howett.net"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [MartianZ](https://github.com/MartianZ) <br>![MartianZ](https://avatars0.githubusercontent.com/u/979135?v=3&s=100) | name: "Zheng Zhu"<br>company: ""<br>blog: "http://MartianZ.cn"<br>location: "UESTC"<br>email: "fzyadmin@gmail.com"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [modocache](https://github.com/modocache) <br>![modocache](https://avatars0.githubusercontent.com/u/552921?v=3&s=100) | name: "Brian Gesiak"<br>company: "Facebook"<br>blog: "http://modocache.io"<br>location: "Brooklyn, NY"<br>email: "modocache@gmail.com"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [davedelong](https://github.com/davedelong) <br>![davedelong](https://avatars0.githubusercontent.com/u/112699?v=3&s=100) | name: "Dave DeLong"<br>blog: "davedelong.com"<br>
 location: "Santa Clara, CA"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [KittenYang](https://github.com/KittenYang) <br>![KittenYang](https://avatars0.githubusercontent.com/u/5517281?v=3&s=100) | name: "Qitao Yang"<br>company: "Smartisan Software Co., Ltd."<br>blog: "http://kittenyang.com"<br>location: "Beijing,China"<br>email: "kittenyang@icloud.com"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
-
-
 [jessesquires](https://github.com/jessesquires) <br>![jessesquires](https://avatars0.githubusercontent.com/u/2301114?v=3&s=100) | name: "Jesse Squires"<br>company: "Hexed Bits"<br>blog: "www.jessesquires.com"<br>location: "San Francisco, CA"<br>| blog: "http://onev.cat"<br>email: "onev@onevcat.com"
 
