@@ -4,7 +4,7 @@
 
 数据来自GitHub的API以及自己整理的相关内容。
 
-这个列表是我做[Monkey for GitHub](https://github.com/coderyi/Monkey)这个开源的GitHub第三方客户端的衍生品，欢迎交流一件。
+这个列表是我做[Monkey for GitHub](https://github.com/coderyi/Monkey)这个开源的GitHub第三方客户端的衍生品，欢迎交流意见。
 
 
 Rank |Users | 基本信息|简介
