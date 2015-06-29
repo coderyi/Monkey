@@ -155,6 +155,8 @@
     login.font=[UIFont boldSystemFontOfSize:16];
     name.font=[UIFont systemFontOfSize:14];
     company.font=[UIFont systemFontOfSize:14];
+    emailBt.titleLabel.font=[UIFont systemFontOfSize:15];
+    blogBt.titleLabel.font=[UIFont systemFontOfSize:15];
 //    company.backgroundColor =[UIColor redColor];
 //    locationLabel.backgroundColor=[UIColor greenColor];
 //    login.backgroundColor=[UIColor redColor];

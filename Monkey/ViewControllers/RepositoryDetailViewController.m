@@ -103,14 +103,14 @@
     nameBt=[UIButton buttonWithType:UIButtonTypeCustom];
     nameBt.frame=CGRectMake(orginX, 0, (WScreen-2*orginX)/2, 40);
     [nameBt setTitleColor:YiBlue forState:UIControlStateNormal];
-    [nameBt setFont:[UIFont boldSystemFontOfSize:19]];
+    [nameBt setFont:[UIFont boldSystemFontOfSize:17]];
     [titleView addSubview:nameBt];
     
     
     ownerBt=[UIButton buttonWithType:UIButtonTypeCustom];
     ownerBt.frame=CGRectMake(orginX+(WScreen-2*orginX)/2, 0, (WScreen-2*orginX)/2, 40);
     [ownerBt setTitleColor:YiBlue forState:UIControlStateNormal];
-    [ownerBt setFont:[UIFont boldSystemFontOfSize:19]];
+    [ownerBt setFont:[UIFont boldSystemFontOfSize:17]];
     [titleView addSubview:ownerBt];
     ownerBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 
@@ -163,7 +163,7 @@
     [titleView addSubview:homePageBt];
 //    homePageBt.backgroundColor=[UIColor redColor];
     homePageBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    
+    homePageBt.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     [homePageBt addTarget:self action:@selector(homePageAction) forControlEvents:UIControlEventTouchUpInside];
     descLabel=[[UILabel alloc] initWithFrame:CGRectMake(orginX, 130, (WScreen-2*orginX), 30)];
     [titleView addSubview:descLabel];
