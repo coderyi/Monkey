@@ -31,6 +31,13 @@ Monkey主要是用来展示GitHub上的开发者的排名，以及仓库的排�
 ##关于开源
 ####运行
 支持iOS7.1+，支持iPhone的各个尺寸，支持竖屏；目前我使用的是Xcode6.3
+
+####Monkey API
+我整理Monkey for GitHub的所有API，并做了一些说明和示例，希望能够帮助到您。
+
+地址是：https://github.com/coderyi/Monkey/blob/master/Monkey_API.md
+
+
 ####项目中使用的开源组件
 
 [YiRefresh](https://github.com/coderyi/YiRefresh)
@@ -55,10 +62,6 @@ Asynchronous image downloader with cache support with an UIImageView category
 
 另外项目中使用了友盟的相关服务。
 
-####Monkey API
-我整理Monkey for GitHub的所有API，并做了一些说明和示例，希望能够帮助到您。
-
-地址是：https://github.com/coderyi/Monkey/blob/master/Monkey_API.md
 
 ##LICENSE
 此开源项目可以用来做任何事情除了原封不动的分发到App Store。
