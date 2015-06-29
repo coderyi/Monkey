@@ -6,7 +6,7 @@
 
 这个列表是我做[Monkey for GitHub](https://github.com/coderyi/Monkey)这个开源的GitHub第三方客户端的衍生品，欢迎交流意见。
 
-转载请带上本文链接:https://github.com/coderyi/Monkey/edit/master/github_top_users_repositories/github_top_users_objective-c_world.md
+
 
 Rank |Users | 基本信息|简介
 --------- |--------- | ---------------|------------
@@ -60,3 +60,8 @@ Rank |Users | 基本信息|简介
 48|**Dave DeLong**<br>[davedelong](https://github.com/davedelong) <br>![davedelong](https://avatars0.githubusercontent.com/u/112699?v=3&s=100) | name: "Dave DeLong"<br>blog: "http://davedelong.com/"<br>location: "Santa Clara, CA"<br>| Linkedin:https://www.linkedin.com/in/davedelong<br>twitter:https://twitter.com/davedelong<br>stackoverflow:[dave-delong](http://stackoverflow.com/users/115730/dave-delong)
 49|**Qitao Yang**<br>[KittenYang](https://github.com/KittenYang) <br>![KittenYang](https://avatars0.githubusercontent.com/u/5517281?v=3&s=100) | name: "Qitao Yang"<br>company: "Smartisan Software Co., Ltd."<br>blog: "http://kittenyang.com"<br>location: "Beijing,China"<br>email: "kittenyang@icloud.com"<br>| Linkedin:[杨骑滔 (KittenYang)](https://www.linkedin.com/pub/%E9%AA%91%E6%BB%94-%E6%9D%A8/a2/781/15)
 50|**Jesse Squires**<br>[jessesquires](https://github.com/jessesquires) <br>![jessesquires](https://avatars0.githubusercontent.com/u/2301114?v=3&s=100) | name: "Jesse Squires"<br>company: "Hexed Bits"<br>blog: "www.jessesquires.com"<br>location: "San Francisco, CA"<br>| 作品:<br>[JSQMessagesViewController](https://github.com/jessesquires/JSQMessagesViewController):An elegant messages UI library for iOS<br><br>twitter:https://twitter.com/jesse_squires
+
+
+转载请带上本文链接:
+
+https://github.com/coderyi/Monkey/edit/master/github_top_users_repositories/github_top_users_objective-c_world.md
