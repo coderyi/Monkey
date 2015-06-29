@@ -55,6 +55,11 @@ Asynchronous image downloader with cache support with an UIImageView category
 
 另外项目中使用了友盟的相关服务。
 
+####Monkey API
+我整理Monkey for GitHub的所有API，并做了一些说明和示例，希望能够帮助到您。
+
+地址是：https://github.com/coderyi/Monkey/blob/master/Monkey_API.md
+
 ##LICENSE
 此开源项目可以用来做任何事情除了原封不动的分发到App Store。
 
