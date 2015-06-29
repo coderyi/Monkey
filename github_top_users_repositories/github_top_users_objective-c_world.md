@@ -6,6 +6,7 @@
 
 这个列表是我做[Monkey for GitHub](https://github.com/coderyi/Monkey)这个开源的GitHub第三方客户端的衍生品，欢迎交流意见。
 
+转载请带上本文链接:https://github.com/coderyi/Monkey/edit/master/github_top_users_repositories/github_top_users_objective-c_world.md
 
 Rank |Users | 基本信息|简介
 --------- |--------- | ---------------|------------
