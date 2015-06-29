@@ -64,4 +64,4 @@ Rank |Users | 基本信息|简介
 
 转载请带上本文链接:
 
-https://github.com/coderyi/Monkey/edit/master/github_top_users_repositories/github_top_users_objective-c_world.md
+https://github.com/coderyi/Monkey/blob/master/github_top_users_repositories/github_top_users_objective-c_world.md
