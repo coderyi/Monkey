@@ -46,30 +46,35 @@
 #import "UMOpus.h"
 #import "UMessage.h"
 
+#import "BaseNavigationController.h"
 
 @implementation AppDelegate
+
+- (BaseNavigationController *)initlizerNavigationControllerWithRootViewController:(UIViewController *)rootViewController {
+    return [[BaseNavigationController alloc] initWithRootViewController:rootViewController];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     
     RankViewController *rank=[[RankViewController alloc] init];
-    UINavigationController *navRank=[[UINavigationController alloc] initWithRootViewController:rank];
+    BaseNavigationController *navRank = [self initlizerNavigationControllerWithRootViewController:rank];
     
     LanguageRankViewController *languageRank=[[LanguageRankViewController alloc] init];
-    UINavigationController *navLanguageRank=[[UINavigationController alloc] initWithRootViewController:languageRank];
+    BaseNavigationController *navLanguageRank=[self initlizerNavigationControllerWithRootViewController:languageRank];
     navLanguageRank.navigationBar.barTintColor=YiBlue;
     navLanguageRank.navigationBar.tintColor=[UIColor whiteColor];
     navLanguageRank.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:UITextAttributeTextColor];
     
     RepositoriesViewController *repositories=[[RepositoriesViewController alloc] init];
-    UINavigationController *navRepositories=[[UINavigationController alloc] initWithRootViewController:repositories];
+    BaseNavigationController *navRepositories = [self initlizerNavigationControllerWithRootViewController:repositories];
     navRepositories.navigationBar.barTintColor=YiBlue;
     navRepositories.navigationBar.tintColor=[UIColor whiteColor];
     navRepositories.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:UITextAttributeTextColor];
     
     MoreViewController *more=[[MoreViewController alloc] init];
-    UINavigationController *navMore=[[UINavigationController alloc] initWithRootViewController:more];
+    BaseNavigationController *navMore = [self initlizerNavigationControllerWithRootViewController:more];
     navMore.navigationBar.barTintColor=YiBlue;
     navMore.navigationBar.tintColor=[UIColor whiteColor];
     navMore.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:UITextAttributeTextColor];
