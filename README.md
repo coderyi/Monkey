@@ -31,6 +31,9 @@ Monkey主要是用来展示GitHub上的开发者的排名，以及仓库的排�
 
 这是GitHub在世界范围内排名前50的Objective-C程序员，并且列出相关信息，从而可以走近他们的程序世界。
 
+数据来自GitHub的API以及自己整理的相关内容。
+
+这个列表是我做[Monkey for GitHub](https://github.com/coderyi/Monkey)这个开源的GitHub第三方客户端的衍生品，欢迎交流意见。
 ##关于开源
 ####运行
 支持iOS7.1+，支持iPhone的各个尺寸，支持竖屏；目前我使用的是Xcode6.3
