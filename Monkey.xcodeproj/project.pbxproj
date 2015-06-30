@@ -102,6 +102,7 @@
 		A1FC33E51B25D96000FCBCE7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC33E41B25D96000FCBCE7 /* libsqlite3.dylib */; };
 		A1FC33E71B25D96700FCBCE7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC33E61B25D96700FCBCE7 /* AVFoundation.framework */; };
 		A1FC33E91B25D97000FCBCE7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC33E81B25D97000FCBCE7 /* libz.dylib */; };
+		E466FA4B1B428E8C00EE02A6 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E466FA4A1B428E8C00EE02A6 /* BaseNavigationController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -281,6 +282,8 @@
 		A1FC33E41B25D96000FCBCE7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		A1FC33E61B25D96700FCBCE7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A1FC33E81B25D97000FCBCE7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		E466FA491B428E8C00EE02A6 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
+		E466FA4A1B428E8C00EE02A6 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -648,6 +651,8 @@
 				A1FC33801B25D92200FCBCE7 /* UserDetailViewController.m */,
 				A1FC33811B25D92200FCBCE7 /* WebViewController.h */,
 				A1FC33821B25D92200FCBCE7 /* WebViewController.m */,
+				E466FA491B428E8C00EE02A6 /* BaseNavigationController.h */,
+				E466FA4A1B428E8C00EE02A6 /* BaseNavigationController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -794,6 +799,7 @@
 				A1FC338E1B25D92200FCBCE7 /* APIEngine.m in Sources */,
 				A1FC33DA1B25D92200FCBCE7 /* RepositoriesViewController.m in Sources */,
 				A1FC33DC1B25D92200FCBCE7 /* SearchViewController.m in Sources */,
+				E466FA4B1B428E8C00EE02A6 /* BaseNavigationController.m in Sources */,
 				A1FC33E11B25D92200FCBCE7 /* DetailSegmentControl.m in Sources */,
 				A1FC339E1B25D92200FCBCE7 /* MJPhotoLoadingView.m in Sources */,
 				A1FC339D1B25D92200FCBCE7 /* MJPhotoBrowser.m in Sources */,
