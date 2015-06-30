@@ -26,7 +26,10 @@ Monkey主要是用来展示GitHub上的开发者的排名，以及仓库的排�
 
 这些数据是从GitHub提供的接口来的，地址是https://developer.github.com/v3/
 
+##GitHub Top Users Repositories
+**[GitHub排名前50的Objective-C开发者(Objective-C top 50 GitHub developers)](https://github.com/coderyi/Monkey/edit/master/github_top_users_repositories/github_top_users_objective-c_world.md)**
 
+这是GitHub在世界范围内排名前50的Objective-C程序员，并且列出相关信息，从而可以走近他们的程序世界。
 
 ##关于开源
 ####运行
