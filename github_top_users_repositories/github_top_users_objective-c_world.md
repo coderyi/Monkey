@@ -4,7 +4,7 @@
 
 这是GitHub在世界范围内排名前50的Objective-C程序员，并且列出相关信息，从而可以走近他们的程序世界。
 
-数据来自GitHub的API以及自己整理的相关内容，开发者的排名是根据开发者的followers由高到低进行排名。
+数据来自GitHub的API以及自己整理的相关内容，开发者的排名是根据开发者的followers由高到低进行排名，很多大神诸并没有排进去，所以数据仅供参考。
 
 这个列表是我做[Monkey for GitHub](https://github.com/coderyi/Monkey)这个开源的GitHub第三方客户端的衍生品，欢迎交流意见。
 
