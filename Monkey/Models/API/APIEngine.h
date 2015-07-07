@@ -21,29 +21,29 @@ typedef void (^RepositoryModelResponseBlock)(RepositoryModel* model);
 
 @interface APIEngine : MKNetworkEngine
 
-- (MKNetworkOperation *)searchUsersWithPage:(NSInteger)page  q:(NSString *)q sort:(NSString *)sort categoryLocation:(NSString *)categoryLocation categoryLanguage:(NSString *)categoryLanguage completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)searchUsersWithPage:(NSInteger)page q:(NSString *)q sort:(NSString *)sort categoryLocation:(NSString *)categoryLocation categoryLanguage:(NSString *)categoryLanguage completoinHandler:(PageListInfoResponseBlock)completionBlock
                                 errorHandel:(MKNKErrorBlock)errorBlock;
-- (MKNetworkOperation *)searchUsersWithPage:(NSInteger)page  q:(NSString *)q sort:(NSString *)sort completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)searchUsersWithPage:(NSInteger)page q:(NSString *)q sort:(NSString *)sort completoinHandler:(PageListInfoResponseBlock)completionBlock
                                 errorHandel:(MKNKErrorBlock)errorBlock;
 
-- (MKNetworkOperation *)searchRepositoriesWithPage:(NSInteger)page  q:(NSString *)q sort:(NSString *)sort completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)searchRepositoriesWithPage:(NSInteger)page q:(NSString *)q sort:(NSString *)sort completoinHandler:(PageListInfoResponseBlock)completionBlock
                                        errorHandel:(MKNKErrorBlock)errorBlock;
 - (MKNetworkOperation *)userDetailWithUserName:(NSString *)userName
                              completoinHandler:
 (UserModelResponseBlock)completionBlock
                                    errorHandel:(MKNKErrorBlock)errorBlock;
-- (MKNetworkOperation *)userRepositoriesWithPage:(NSInteger)page  userName:(NSString *)userName completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)userRepositoriesWithPage:(NSInteger)page userName:(NSString *)userName completoinHandler:(PageListInfoResponseBlock)completionBlock
                                      errorHandel:(MKNKErrorBlock)errorBlock;
-- (MKNetworkOperation *)userFollowingWithPage:(NSInteger)page  userName:(NSString *)userName completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)userFollowingWithPage:(NSInteger)page userName:(NSString *)userName completoinHandler:(PageListInfoResponseBlock)completionBlock
                                   errorHandel:(MKNKErrorBlock)errorBlock;
-- (MKNetworkOperation *)userFollowersWithPage:(NSInteger)page  userName:(NSString *)userName completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)userFollowersWithPage:(NSInteger)page userName:(NSString *)userName completoinHandler:(PageListInfoResponseBlock)completionBlock
                                   errorHandel:(MKNKErrorBlock)errorBlock;
 - (MKNetworkOperation *)repositoryDetailWithUserName:(NSString *)userName repositoryName:(NSString *)repositoryName
                                    completoinHandler:
 (RepositoryModelResponseBlock)completionBlock
                                          errorHandel:(MKNKErrorBlock)errorBlock;
 
-- (MKNetworkOperation *)reposDetailCategoryWithPage:(NSInteger)page  userName:(NSString *)userName repositoryName:(NSString *)repositoryName category:(NSString *)category completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)reposDetailCategoryWithPage:(NSInteger)page userName:(NSString *)userName repositoryName:(NSString *)repositoryName category:(NSString *)category completoinHandler:(PageListInfoResponseBlock)completionBlock
                                         errorHandel:(MKNKErrorBlock)errorBlock;
 
 @end

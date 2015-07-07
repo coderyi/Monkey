@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NSObject (Extend)
--(BOOL)isNull;
+- (BOOL)isNull;
 - (void)showYiProgressHUD:(NSString *)title  afterDelay:(NSTimeInterval)delay;
 - (void)showYiProgressHUD:(NSString *)title;
 - (void)hideYiProgressHUD;

@@ -21,7 +21,7 @@ int currentTag;
         UIColor *black=[UIColor blackColor];
         //   float fontSize=15;
         UIFont *myFont=[UIFont boldSystemFontOfSize:16];
-        float w=WScreen-10;
+        float w=ScreenWidth-10;
         //        self.backgroundColor=[UIColor colorWithHexString:BackgroudViewStyleColor];
         _button1=[UIButton buttonWithType:UIButtonTypeCustom];
         [self addSubview:_button1];

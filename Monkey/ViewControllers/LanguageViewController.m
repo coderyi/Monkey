@@ -16,6 +16,7 @@
 @end
 
 @implementation LanguageViewController
+#pragma mark - Lifecycle
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -24,7 +25,7 @@
     //    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"cityAppear"];
     
 }
--(void)viewWillDisappear:(BOOL)animated{
+- (void)viewWillDisappear:(BOOL)animated{
     self.tabBarController.tabBar.hidden = NO;
     
 }
@@ -38,7 +39,7 @@
     }
     self.automaticallyAdjustsScrollViewInsets=NO;
     self.view.backgroundColor=[UIColor whiteColor];
-    tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, WScreen, HScreen-64) style:UITableViewStylePlain];
+    tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain];
     [self.view addSubview:tableView1];
     //    tableView1.showsVerticalScrollIndicator = NO;
     
@@ -56,6 +57,12 @@
     }
     
 }
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UITableViewDataSource  &UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -99,10 +106,6 @@
     
     
     
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*

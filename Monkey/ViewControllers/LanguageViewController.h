@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface LanguageViewController : UIViewController
-@property BOOL isRepositories;
+@property(nonatomic,assign) BOOL isRepositories;
 @end

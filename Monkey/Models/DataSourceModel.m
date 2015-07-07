@@ -24,7 +24,7 @@
     return self;
 }
 
--(void)reset
+- (void)reset
 {
     self.page=0;
     [self.dsArray removeAllObjects];

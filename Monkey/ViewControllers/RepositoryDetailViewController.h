@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "RepositoryModel.h"
 @interface RepositoryDetailViewController : UIViewController
-@property RepositoryModel *model;
+@property(nonatomic,strong) RepositoryModel *model;
 @end

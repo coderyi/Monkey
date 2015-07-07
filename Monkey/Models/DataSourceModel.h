@@ -13,14 +13,10 @@
 @interface DataSourceModel : NSObject
 
 @property(nonatomic,strong)NSMutableArray *dsArray;
-@property(nonatomic)NSInteger page;
-@property(nonatomic)NSInteger totalCount;
+@property(nonatomic,assign)NSInteger page;
+@property(nonatomic,assign)NSInteger totalCount;
 
--(void)reset;
-
-
-
-
+- (void)reset;
 
 
 @end

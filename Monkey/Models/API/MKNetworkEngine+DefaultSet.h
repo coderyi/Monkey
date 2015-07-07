@@ -9,5 +9,5 @@
 #import "MKNetworkEngine.h"
 
 @interface MKNetworkEngine (DefaultSet)
--(id)initWithDefaultSet;
+- (id)initWithDefaultSet;
 @end

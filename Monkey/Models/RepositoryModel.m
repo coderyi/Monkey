@@ -10,7 +10,7 @@
 #import "UserModel.h"
 @implementation RepositoryModel
 
-+(RepositoryModel *)modelWithDict:(NSDictionary *)dict
++ (RepositoryModel *)modelWithDict:(NSDictionary *)dict
 {
     if (!dict) {
         return Nil;

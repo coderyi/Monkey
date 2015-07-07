@@ -11,7 +11,7 @@
 @implementation UserModel
 
 
-+(UserModel *)modelWithDict:(NSDictionary *)dict
++ (UserModel *)modelWithDict:(NSDictionary *)dict
 {
     if (!dict) {
         return Nil;

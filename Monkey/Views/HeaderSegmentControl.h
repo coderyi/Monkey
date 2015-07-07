@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface HeaderSegmentControl : UIView
-@property UIButton *button1;
-@property UIButton *button2;
-@property UIButton *button3;
-@property UIButton *button4;
-@property ( strong) void (^ButtonActionBlock)(int buttonTag);
-@property int buttonCount;
+@property(nonatomic,strong) UIButton *button1;
+@property(nonatomic,strong) UIButton *button2;
+@property(nonatomic,strong) UIButton *button3;
+@property(nonatomic,strong) UIButton *button4;
+@property(nonatomic,copy) void (^ButtonActionBlock)(int buttonTag);
+@property(nonatomic,assign) int buttonCount;
 -(void)swipeAction:(int)tag;
 @end

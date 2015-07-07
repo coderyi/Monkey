@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface RepositoriesTableViewCell : UITableViewCell
-@property UILabel *rankLabel;
-@property UILabel *repositoryLabel;
-@property UILabel *userLabel;
-@property UILabel *descriptionLabel;
-@property UILabel *starLabel;
-@property UILabel *forkLabel;
-@property UIImageView *titleImageView;
-@property UIButton *homePageBt;
+@property(nonatomic,strong) UILabel *rankLabel;
+@property(nonatomic,strong) UILabel *repositoryLabel;
+@property(nonatomic,strong) UILabel *userLabel;
+@property(nonatomic,strong) UILabel *descriptionLabel;
+@property(nonatomic,strong) UILabel *starLabel;
+@property(nonatomic,strong) UILabel *forkLabel;
+@property(nonatomic,strong) UIImageView *titleImageView;
+@property(nonatomic,strong) UIButton *homePageBt;
 @end

@@ -17,7 +17,7 @@
         // Initialization code
         float h=90;
         float orginX=0;
-        float w=WScreen-orginX*2;
+        float w=ScreenWidth-orginX*2;
         float preWidth=15;
         float rankWidth=45;
         float sufRankWidth=10;
@@ -49,7 +49,7 @@
         _detailLabel.textColor=YiGray;
 //        _rankLabel.backgroundColor=YiBlue;
         _rankLabel.textAlignment=NSTextAlignmentCenter;
-        _mainLabel.font=[UIFont systemFontOfSize:20];
+        _mainLabel.font=[UIFont systemFontOfSize:18];
         _detailLabel.font=[UIFont systemFontOfSize:13];
         
         _mainLabel.textAlignment=NSTextAlignmentLeft;

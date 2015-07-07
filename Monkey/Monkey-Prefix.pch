@@ -32,8 +32,8 @@
  *   define
  */
 
-#define HScreen [[UIScreen mainScreen] bounds].size.height
-#define WScreen [[UIScreen mainScreen] bounds].size.width
+#define ScreenHeight [[UIScreen mainScreen] bounds].size.height
+#define ScreenWidth [[UIScreen mainScreen] bounds].size.width
 #define iOS7 [[[UIDevice currentDevice]systemVersion] floatValue] >= 7.0
 #define ApplicationDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
@@ -46,4 +46,9 @@
 //UM的宏
 #define IOS_7_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 #define IOS_8_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+
+
+
+
+
 

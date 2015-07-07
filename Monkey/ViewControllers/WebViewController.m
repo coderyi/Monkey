@@ -19,6 +19,9 @@
 @end
 
 @implementation WebViewController
+
+#pragma mark - Lifecycle
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -26,7 +29,7 @@
     //    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"cityAppear"];
     
 }
--(void)viewWillDisappear:(BOOL)animated{
+- (void)viewWillDisappear:(BOOL)animated{
     self.tabBarController.tabBar.hidden = NO;
     
 }
@@ -38,7 +41,7 @@
         
     }
     
-    titleText = [[UILabel alloc] initWithFrame: CGRectMake((WScreen-120)/2, 0, 120, 44)];
+    titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
     [titleText setFont:[UIFont systemFontOfSize:19.0]];
@@ -51,15 +54,23 @@
     self.automaticallyAdjustsScrollViewInsets=NO;
     
     
-    UIWebView *webView=[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, WScreen, HScreen-64)];
+    UIWebView *webView=[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64)];
     [self.view addSubview:webView];
     webView.delegate=self;
     [webView loadRequest:[[NSURLRequest alloc]initWithURL:[NSURL URLWithString:_urlString]] ];
     
-    activityIndicator=[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake((WScreen-60)/2, 100, 60, 60)];
+    activityIndicator=[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake((ScreenWidth-60)/2, 100, 60, 60)];
     [self.view addSubview:activityIndicator];
     activityIndicator.activityIndicatorViewStyle=UIActivityIndicatorViewStyleGray;
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UIWebViewDelegate
+
 - (void)webViewDidStartLoad:(UIWebView *)webView{
     [activityIndicator startAnimating];
     
@@ -73,10 +84,7 @@
 
 
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 /*
 #pragma mark - Navigation

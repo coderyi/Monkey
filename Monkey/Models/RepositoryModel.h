@@ -26,10 +26,10 @@
 //@property(nonatomic,strong)NSString *pushed_at;
 @property(nonatomic,strong)NSString *homepage;
 //@property int size;
-@property int stargazers_count;
+@property(nonatomic,assign) int stargazers_count;
 //@property int watchers_count;
 @property(nonatomic,strong)NSString *language;
-@property int forks_count;
+@property(nonatomic,assign) int forks_count;
 //@property int open_issues_count;
 //@property int forks;
 //@property int open_issues;
@@ -39,5 +39,5 @@
 //detail
 @property(nonatomic,strong) NSString *parentOwnerName;
 
-+(RepositoryModel *)modelWithDict:(NSDictionary *)dict;
++ (RepositoryModel *)modelWithDict:(NSDictionary *)dict;
 @end

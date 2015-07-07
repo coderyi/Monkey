@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "UserModel.h"
 @interface UserDetailViewController : UIViewController
-@property UserModel *userModel;
+@property(nonatomic,strong) UserModel *userModel;
 @end

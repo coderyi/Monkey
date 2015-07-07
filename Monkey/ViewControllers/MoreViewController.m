@@ -21,12 +21,13 @@
 @end
 
 @implementation MoreViewController
+#pragma mark - Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor=[UIColor whiteColor];
-    titleText = [[UILabel alloc] initWithFrame: CGRectMake((WScreen-120)/2, 0, 120, 44)];
+    titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
     [titleText setFont:[UIFont systemFontOfSize:19.0]];
@@ -44,14 +45,20 @@
     self.automaticallyAdjustsScrollViewInsets=NO;
     
     
-    tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, WScreen, HScreen-64) style:UITableViewStyleGrouped ];
+    tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStyleGrouped ];
     [self.view addSubview:tableView];
     tableView.delegate=self;
     tableView.dataSource=self;
 //    tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
 
 }
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+#pragma mark - UITableViewDataSource  &UITableViewDelegate
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 3;
 
 }
@@ -65,17 +72,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
+    UITableViewCell *cell;
         
-        
-        UITableViewCell *cell;
-        
-        NSString *cellId=@"CellId";
-        cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-        if (cell==nil) {
-            cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-            cell.selectionStyle=UITableViewCellSelectionStyleNone;
-            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-        }
+    NSString *cellId=@"CellId";
+    cell=[tableView dequeueReusableCellWithIdentifier:cellId];
+    if (cell==nil) {
+        cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+    }
     if (indexPath.section==0) {
         cell.textLabel.text=@"搜索";
 
@@ -88,7 +93,7 @@
         
         
     }
-        return cell;
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -114,10 +119,7 @@
     
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 /*
 #pragma mark - Navigation

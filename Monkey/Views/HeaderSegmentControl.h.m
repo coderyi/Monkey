@@ -22,7 +22,7 @@ UIFont *lightFont;
         self.backgroundColor=[UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
         float h=35;
         float space=5;
-        float width=(WScreen)/4-5;
+        float width=(ScreenWidth)/4-5;
         float height=h;
         float w=space+width;
          black=[UIColor colorWithRed:0.35 green:0.35 blue:0.35 alpha:1];

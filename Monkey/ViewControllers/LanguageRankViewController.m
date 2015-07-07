@@ -48,6 +48,8 @@
 @end
 
 @implementation LanguageRankViewController
+#pragma mark - Lifecycle
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -59,7 +61,8 @@
     }
     return self;
 }
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     NSString *cityAppear=[[NSUserDefaults standardUserDefaults] objectForKey:@"cityAppear"];
     if ([cityAppear isEqualToString:@"2"]) {
         currentIndex=1;
@@ -118,9 +121,9 @@
         titleText.text=language;
     }
     if ([language isEqualToString:@"所有语言"]) {
-        [scrollView setContentSize:CGSizeMake(WScreen * (2), bgViewHeight)];
+        [scrollView setContentSize:CGSizeMake(ScreenWidth * (2), bgViewHeight)];
     }else{
-        [scrollView setContentSize:CGSizeMake(WScreen * (3), bgViewHeight)];
+        [scrollView setContentSize:CGSizeMake(ScreenWidth * (3), bgViewHeight)];
         
     }
 
@@ -136,7 +139,7 @@
         
     }
    
-    titleText = [[UILabel alloc] initWithFrame: CGRectMake((WScreen-120)/2, 0, 120, 44)];
+    titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
     [titleText setFont:[UIFont systemFontOfSize:19.0]];
@@ -160,7 +163,7 @@
     titleText.text=language;
     self.view.backgroundColor=[UIColor whiteColor];
     titleHeight=35;
-    bgViewHeight=HScreen-64-titleHeight-49;
+    bgViewHeight=ScreenHeight-64-titleHeight-49;
     [self initScroll];
     self.automaticallyAdjustsScrollViewInsets=NO;
     //    tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, WScreen, bgViewHeight) style:UITableViewStylePlain ];
@@ -171,7 +174,7 @@
     
     
     
-    segmentControl=[[HeaderSegmentControl alloc] initWithFrame:CGRectMake(0, 0, WScreen, titleHeight)];
+    segmentControl=[[HeaderSegmentControl alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, titleHeight)];
     [self.view addSubview:segmentControl];
     if ([language isEqualToString:@"所有语言"]) {
         segmentControl.buttonCount=2;
@@ -199,23 +202,34 @@
     UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"语言" style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
     self.navigationItem.rightBarButtonItem=right;
 }
--(void)leftAction{
+#pragma mark - Actions
+
+- (void)leftAction{
     CityViewController *city=[[CityViewController alloc] init];
     [self.navigationController pushViewController:city animated:YES];
     
     
 }
 
--(void)rightAction{
+- (void)rightAction{
     LanguageViewController *city=[[LanguageViewController alloc] init];
     [self.navigationController pushViewController:city animated:YES];
     
     
 }
--(void)initScroll{
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Private
+
+- (void)initScroll{
     
     
-    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, titleHeight, WScreen, bgViewHeight)];
+    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, titleHeight, ScreenWidth, bgViewHeight)];
     scrollView.alwaysBounceHorizontal=YES;
     scrollView.backgroundColor=[UIColor whiteColor];
     scrollView.bounces = YES;
@@ -226,21 +240,21 @@
     scrollView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:scrollView];
     
-    [scrollView setContentSize:CGSizeMake(WScreen * (3), bgViewHeight)];
+    [scrollView setContentSize:CGSizeMake(ScreenWidth * (3), bgViewHeight)];
     [scrollView setContentOffset:CGPointMake(0, 0)];
-    [scrollView scrollRectToVisible:CGRectMake(0,0,WScreen,bgViewHeight) animated:NO];
+    [scrollView scrollRectToVisible:CGRectMake(0,0,ScreenWidth,bgViewHeight) animated:NO];
     if ([language isEqualToString:@"所有语言"]) {
-        [scrollView setContentSize:CGSizeMake(WScreen * (2), bgViewHeight)];
+        [scrollView setContentSize:CGSizeMake(ScreenWidth * (2), bgViewHeight)];
     }else{
-        [scrollView setContentSize:CGSizeMake(WScreen * (3), bgViewHeight)];
+        [scrollView setContentSize:CGSizeMake(ScreenWidth * (3), bgViewHeight)];
         
     }
 }
 
--(void)initTable{
+- (void)initTable{
     
     
-    tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, WScreen, bgViewHeight) style:UITableViewStylePlain];
+    tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
     [scrollView addSubview:tableView1];
     //    tableView1.showsVerticalScrollIndicator = NO;
     
@@ -255,8 +269,8 @@
     segmentControl.ButtonActionBlock=^(int buttonTag){
         
         currentIndex=buttonTag-100;
-        [scrollView scrollRectToVisible:CGRectMake(WScreen * (currentIndex-1),0,WScreen,bgViewHeight) animated:NO];
-        [scrollView setContentOffset:CGPointMake(WScreen* (currentIndex-1),0)];
+        [scrollView scrollRectToVisible:CGRectMake(ScreenWidth * (currentIndex-1),0,ScreenWidth,bgViewHeight) animated:NO];
+        [scrollView setContentOffset:CGPointMake(ScreenWidth* (currentIndex-1),0)];
         
         if (currentIndex==1) {
             if (![titleText.text isEqualToString:tableView1Language]) {
@@ -265,10 +279,11 @@
             if (self.DsOfPageListObject1.totalCount>0) {
                 
            
-              [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject1.totalCount] forState:UIControlStateNormal]; }
+              [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject1.totalCount] forState:UIControlStateNormal];
+            }
         }else if (currentIndex==2){
             if (tableView2==nil) {
-                tableView2=[[UITableView alloc] initWithFrame:CGRectMake(WScreen, 0, WScreen, bgViewHeight) style:UITableViewStylePlain];
+                tableView2=[[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
                 [scrollView addSubview:tableView2];
                 tableView2.showsVerticalScrollIndicator = NO;
                 
@@ -284,10 +299,11 @@
             if (![titleText.text isEqualToString:tableView2Language]) {
                 [refreshHeader2 beginRefreshing];
             }   if (self.DsOfPageListObject2.totalCount>0) {
-                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject2.totalCount] forState:UIControlStateNormal];}
+                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject2.totalCount] forState:UIControlStateNormal];
+            }
         }else if (currentIndex==3){
             if (tableView3==nil) {
-                tableView3=[[UITableView alloc] initWithFrame:CGRectMake(WScreen*2, 0, WScreen, bgViewHeight) style:UITableViewStylePlain];
+                tableView3=[[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth*2, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
                 [scrollView addSubview:tableView3];
                 tableView3.showsVerticalScrollIndicator = NO;
                 
@@ -303,7 +319,8 @@
             if (![titleText.text isEqualToString:tableView3Language]) {
                 [refreshHeader3 beginRefreshing];
             }   if (self.DsOfPageListObject3.totalCount>0) {
-                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject3.totalCount] forState:UIControlStateNormal];}
+                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject3.totalCount] forState:UIControlStateNormal];
+            }
         }else if (currentIndex==4){
             
         }
@@ -313,7 +330,325 @@
     
     
 }
-#pragma mark scrollView
+
+- (void)addHeader:(int)type
+{
+    if (type==1) {
+        
+        
+        //    YiRefreshHeader  头部刷新按钮的使用
+        refreshHeader1=[[YiRefreshHeader alloc] init];
+        refreshHeader1.scrollView=tableView1;
+        [refreshHeader1 header];
+        __weak typeof(self) weakSelf = self;
+        refreshHeader1.beginRefreshingBlock=^(){
+            [weakSelf loadDataFromApiWithIsFirst:YES];
+            
+            
+            
+        };
+        
+        //    是否在进入该界面的时候就开始进入刷新状态
+        
+        [refreshHeader1 beginRefreshing];
+    }else if (type==2){
+        //    YiRefreshHeader  头部刷新按钮的使用
+        refreshHeader2=[[YiRefreshHeader alloc] init];
+        refreshHeader2.scrollView=tableView2;
+        [refreshHeader2 header];
+        __weak typeof(self) weakSelf = self;
+        refreshHeader2.beginRefreshingBlock=^(){
+            [weakSelf loadDataFromApiWithIsFirst:YES];
+            
+            
+            
+        };
+        
+        //    是否在进入该界面的时候就开始进入刷新状态
+        
+        [refreshHeader2 beginRefreshing];
+        
+    }else if (type==3){
+        //    YiRefreshHeader  头部刷新按钮的使用
+        refreshHeader3=[[YiRefreshHeader alloc] init];
+        refreshHeader3.scrollView=tableView3;
+        [refreshHeader3 header];
+        __weak typeof(self) weakSelf = self;
+        refreshHeader3.beginRefreshingBlock=^(){
+            [weakSelf loadDataFromApiWithIsFirst:YES];
+            
+            
+            
+        };
+        
+        //    是否在进入该界面的时候就开始进入刷新状态
+        
+        [refreshHeader3 beginRefreshing];
+        
+    }
+}
+
+- (void)addFooter:(int)type
+{
+    __weak typeof(self) weakSelf = self;
+    if (type==1) {
+        
+        
+        //    YiRefreshFooter  底部刷新按钮的使用
+        refreshFooter1=[[YiRefreshFooter alloc] init];
+        refreshFooter1.scrollView=tableView1;
+        [refreshFooter1 footer];
+        refreshFooter1.beginRefreshingBlock=^(){
+            
+            [weakSelf loadDataFromApiWithIsFirst:NO];
+        };
+    }else if (type==2){
+            
+            //    YiRefreshFooter  底部刷新按钮的使用
+            refreshFooter2=[[YiRefreshFooter alloc] init];
+            refreshFooter2.scrollView=tableView2;
+            [refreshFooter2 footer];
+            refreshFooter2.beginRefreshingBlock=^(){
+                
+                [weakSelf loadDataFromApiWithIsFirst:NO];
+            };
+            
+    }else if (type==3){
+            
+            //    YiRefreshFooter  底部刷新按钮的使用
+            refreshFooter3=[[YiRefreshFooter alloc] init];
+            refreshFooter3.scrollView=tableView3;
+            [refreshFooter3 footer];
+            refreshFooter3.beginRefreshingBlock=^(){
+                
+                [weakSelf loadDataFromApiWithIsFirst:NO];
+            };
+            
+    }
+}
+
+
+- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
+{
+    if (currentIndex==2) {
+        
+        NSInteger page = 0;
+        
+        if (isFirst) {
+            page = 1;
+            
+        }else{
+            
+            page = self.DsOfPageListObject2.page+1;
+        }
+        language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
+        
+        NSString *q=[NSString stringWithFormat:@"location:china+language:%@",language];
+        
+        if (language==nil || language.length<1) {
+            language=@"所有语言";
+            
+        }
+        tableView2Language=language;
+        
+        if ([language isEqualToString:@"所有语言"]) {
+            q=[NSString stringWithFormat:@"location:china"];
+        }
+        
+        [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:q sort:@"followers" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
+            self.DsOfPageListObject2.totalCount=totalCount;
+            [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
+            
+            if (page<=1) {
+                [self.DsOfPageListObject2.dsArray removeAllObjects];
+            }
+            
+            
+            //        [self hideHUD];
+            
+            [self.DsOfPageListObject2.dsArray addObjectsFromArray:modelArray];
+            self.DsOfPageListObject2.page=page;
+            [refreshHeader2 endRefreshing];
+            
+            if (page>1) {
+                
+                [refreshFooter2 endRefreshing];
+                
+                
+            }else
+            {
+                [refreshHeader2 endRefreshing];
+            }
+            [tableView2 reloadData];
+        }
+                                               errorHandel:^(NSError* error){
+                                                   if (isFirst) {
+                                                       
+                                                       [refreshHeader2 endRefreshing];
+                                                       
+                                                       
+                                                       
+                                                       
+                                                   }else{
+                                                       [refreshFooter2 endRefreshing];
+                                                       
+                                                   }
+                                                   
+                                               }];
+        
+        
+        
+        
+        return YES;
+    }else if (currentIndex==1){
+            
+            NSInteger page = 0;
+            
+            if (isFirst) {
+                page = 1;
+                
+            }else{
+                
+                page = self.DsOfPageListObject1.page+1;
+            }
+            NSString *city=[[NSUserDefaults standardUserDefaults] objectForKey:@"pinyinCity"];
+            if (city==nil || city.length<1) {
+                city=@"beijing";
+            }
+            language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
+            NSString *q=[NSString stringWithFormat:@"location:%@+language:%@",city,language];
+            
+            if (language==nil || language.length<1) {
+                language=@"所有语言";
+                
+            }
+            tableView1Language=language;
+            
+            if ([language isEqualToString:@"所有语言"]) {
+                q=[NSString stringWithFormat:@"location:%@",city];
+            }
+            [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:q sort:@"followers" categoryLocation:city categoryLanguage:language completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
+                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
+                self.DsOfPageListObject1.totalCount=totalCount;
+                
+                if (page<=1) {
+                    [self.DsOfPageListObject1.dsArray removeAllObjects];
+                }
+                
+                
+                //        [self hideHUD];
+                
+                [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
+                self.DsOfPageListObject1.page=page;
+                [refreshHeader1 endRefreshing];
+                
+                if (page>1) {
+                    
+                    [refreshFooter1 endRefreshing];
+                    
+                    
+                }else
+                {
+                    [refreshHeader1 endRefreshing];
+                }
+                [tableView1 reloadData];
+            }
+                                                   errorHandel:^(NSError* error){
+                                                       if (isFirst) {
+                                                           
+                                                           [refreshHeader1 endRefreshing];
+                                                           
+                                                           
+                                                           
+                                                           
+                                                       }else{
+                                                           [refreshFooter1 endRefreshing];
+                                                           
+                                                       }
+                                                       
+                                                   }];
+            
+            
+            
+            
+            return YES;
+            
+        }else if (currentIndex==3){
+            
+            NSInteger page = 0;
+            
+            if (isFirst) {
+                page = 1;
+                
+            }else{
+                
+                page = self.DsOfPageListObject3.page+1;
+            }
+            language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
+            if (language==nil || language.length<1) {
+                language=@"所有语言";
+                
+            }
+            
+            
+            tableView3Language=language;
+            [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:[NSString stringWithFormat:@"language:%@",language] sort:@"followers" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
+                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
+                self.DsOfPageListObject3.totalCount=totalCount;
+                
+                if (page<=1) {
+                    [self.DsOfPageListObject3.dsArray removeAllObjects];
+                }
+                
+                
+                //        [self hideHUD];
+                
+                [self.DsOfPageListObject3.dsArray addObjectsFromArray:modelArray];
+                self.DsOfPageListObject3.page=page;
+                [refreshHeader3 endRefreshing];
+                
+                if (page>1) {
+                    
+                    [refreshFooter3 endRefreshing];
+                    
+                    
+                }else
+                {
+                    [refreshHeader3 endRefreshing];
+                }
+                [tableView3 reloadData];
+            }
+                                                   errorHandel:^(NSError* error){
+                                                       if (isFirst) {
+                                                           
+                                                           [refreshHeader3 endRefreshing];
+                                                           
+                                                           
+                                                           
+                                                           
+                                                       }else{
+                                                           [refreshFooter3 endRefreshing];
+                                                           
+                                                       }
+                                                       
+                                                   }];
+            
+            
+            
+            
+            return YES;
+            
+        }
+    return YES;
+    
+}
+
+
+
+
+
+
+#pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView1
 {
@@ -326,19 +661,20 @@
     if (currentPage==0)
     {
         
-        [scrollView scrollRectToVisible:CGRectMake(0,0,WScreen,bgViewHeight) animated:NO];
+        [scrollView scrollRectToVisible:CGRectMake(0,0,ScreenWidth,bgViewHeight) animated:NO];
         [scrollView setContentOffset:CGPointMake(0,0)];
     }
     else if (currentPage>=(1))
     {
         currentPage=1;
-        [scrollView scrollRectToVisible:CGRectMake(WScreen * 1,0,WScreen,bgViewHeight) animated:NO];
-        [scrollView setContentOffset:CGPointMake(WScreen* 1,0)];
+        [scrollView scrollRectToVisible:CGRectMake(ScreenWidth * 1,0,ScreenWidth,bgViewHeight) animated:NO];
+        [scrollView setContentOffset:CGPointMake(ScreenWidth* 1,0)];
     }
     
-    currentIndex=currentPage+1;
-    NSLog(@"cccc %d",currentIndex);
-        [segmentControl swipeAction:(100+currentPage+1)];}else if (segmentControl.buttonCount==3){
+        currentIndex=currentPage+1;
+        NSLog(@"cccc %d",currentIndex);
+        [segmentControl swipeAction:(100+currentPage+1)];
+    }else if (segmentControl.buttonCount==3){
             
             
             CGFloat pagewidth = scrollView.frame.size.width;
@@ -347,14 +683,14 @@
             if (currentPage==0)
             {
                 
-                [scrollView scrollRectToVisible:CGRectMake(0,0,WScreen,bgViewHeight) animated:NO];
+                [scrollView scrollRectToVisible:CGRectMake(0,0,ScreenWidth,bgViewHeight) animated:NO];
                 [scrollView setContentOffset:CGPointMake(0,0)];
             }
             else if (currentPage>=(2))
             {
                 currentPage=2;
-                [scrollView scrollRectToVisible:CGRectMake(WScreen * 2,0,WScreen,bgViewHeight) animated:NO];
-                [scrollView setContentOffset:CGPointMake(WScreen* 2,0)];
+                [scrollView scrollRectToVisible:CGRectMake(ScreenWidth * 2,0,ScreenWidth,bgViewHeight) animated:NO];
+                [scrollView setContentOffset:CGPointMake(ScreenWidth* 2,0)];
             }
             
             currentIndex=currentPage+1;
@@ -364,6 +700,7 @@
     
 }
 
+#pragma mark - UITableViewDataSource  &UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView.tag==11) {
@@ -441,338 +778,25 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UserDetailViewController *detail=[[UserDetailViewController alloc] init];
-  if (currentIndex==1) {
-      UserModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
+    if (currentIndex==1) {
+        UserModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
 
-      detail.userModel=model;
-  }else  if (currentIndex==2) {
-      UserModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
+        detail.userModel=model;
+    }else  if (currentIndex==2) {
+        UserModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
 
-      detail.userModel=model;
+        detail.userModel=model;
 
       
-      }else if (currentIndex==3){
-          UserModel  *model = [(self.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
+    }else if (currentIndex==3){
+        UserModel  *model = [(self.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
 
-          detail.userModel=model;
+        detail.userModel=model;
 
-      }
+    }
     [self.navigationController pushViewController:detail animated:YES];
     
 
-}
-- (void)addHeader:(int)type
-{
-    if (type==1) {
-        
-        
-        //    YiRefreshHeader  头部刷新按钮的使用
-        refreshHeader1=[[YiRefreshHeader alloc] init];
-        refreshHeader1.scrollView=tableView1;
-        [refreshHeader1 header];
-        refreshHeader1.beginRefreshingBlock=^(){
-            [self loadDataFromApiWithIsFirst:YES];
-            
-            
-            
-        };
-        
-        //    是否在进入该界面的时候就开始进入刷新状态
-        
-        [refreshHeader1 beginRefreshing];
-    }else if (type==2){
-        //    YiRefreshHeader  头部刷新按钮的使用
-        refreshHeader2=[[YiRefreshHeader alloc] init];
-        refreshHeader2.scrollView=tableView2;
-        [refreshHeader2 header];
-        refreshHeader2.beginRefreshingBlock=^(){
-            [self loadDataFromApiWithIsFirst:YES];
-            
-            
-            
-        };
-        
-        //    是否在进入该界面的时候就开始进入刷新状态
-        
-        [refreshHeader2 beginRefreshing];
-        
-    }else if (type==3){
-        //    YiRefreshHeader  头部刷新按钮的使用
-        refreshHeader3=[[YiRefreshHeader alloc] init];
-        refreshHeader3.scrollView=tableView3;
-        [refreshHeader3 header];
-        refreshHeader3.beginRefreshingBlock=^(){
-            [self loadDataFromApiWithIsFirst:YES];
-            
-            
-            
-        };
-        
-        //    是否在进入该界面的时候就开始进入刷新状态
-        
-        [refreshHeader3 beginRefreshing];
-        
-    }
-}
-
-- (void)addFooter:(int)type
-{
-    if (type==1) {
-        
-        
-        //    YiRefreshFooter  底部刷新按钮的使用
-        refreshFooter1=[[YiRefreshFooter alloc] init];
-        refreshFooter1.scrollView=tableView1;
-        [refreshFooter1 footer];
-        refreshFooter1.beginRefreshingBlock=^(){
-            
-            [self loadDataFromApiWithIsFirst:NO];
-        };}else if (type==2){
-            
-            //    YiRefreshFooter  底部刷新按钮的使用
-            refreshFooter2=[[YiRefreshFooter alloc] init];
-            refreshFooter2.scrollView=tableView2;
-            [refreshFooter2 footer];
-            refreshFooter2.beginRefreshingBlock=^(){
-                
-                [self loadDataFromApiWithIsFirst:NO];
-            };
-            
-        }else if (type==3){
-            
-            //    YiRefreshFooter  底部刷新按钮的使用
-            refreshFooter3=[[YiRefreshFooter alloc] init];
-            refreshFooter3.scrollView=tableView3;
-            [refreshFooter3 footer];
-            refreshFooter3.beginRefreshingBlock=^(){
-                
-                [self loadDataFromApiWithIsFirst:NO];
-            };
-            
-        }}
-
-
-- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
-{
-    if (currentIndex==2) {
-        
-        NSInteger page = 0;
-        
-        if (isFirst) {
-            page = 1;
-            
-        }else{
-            
-            page = self.DsOfPageListObject2.page+1;
-        }
-        language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
-      
-        NSString *q=[NSString stringWithFormat:@"location:china+language:%@",language];
-        
-        if (language==nil || language.length<1) {
-            language=@"所有语言";
-            
-        }
-        tableView2Language=language;
-        
-        if ([language isEqualToString:@"所有语言"]) {
-            q=[NSString stringWithFormat:@"location:china"];
-        }
-        
-        [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:q sort:@"followers" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-            self.DsOfPageListObject2.totalCount=totalCount;
-            [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
-
-            if (page<=1) {
-                [self.DsOfPageListObject2.dsArray removeAllObjects];
-            }
-            
-            
-            //        [self hideHUD];
-            
-            [self.DsOfPageListObject2.dsArray addObjectsFromArray:modelArray];
-            self.DsOfPageListObject2.page=page;
-            [refreshHeader2 endRefreshing];
-            
-            if (page>1) {
-                
-                [refreshFooter2 endRefreshing];
-                
-                
-            }else
-            {
-                [refreshHeader2 endRefreshing];
-            }
-            [tableView2 reloadData];
-        }
-                                               errorHandel:^(NSError* error){
-                                                   if (isFirst) {
-                                                       
-                                                       [refreshHeader2 endRefreshing];
-                                                       
-                                                       
-                                                       
-                                                       
-                                                   }else{
-                                                       [refreshFooter2 endRefreshing];
-                                                       
-                                                   }
-                                                   
-                                               }];
-        
-        
-        
-        
-        return YES;}else if (currentIndex==1){
-            
-            NSInteger page = 0;
-            
-            if (isFirst) {
-                page = 1;
-                
-            }else{
-                
-                page = self.DsOfPageListObject1.page+1;
-            }
-            NSString *city=[[NSUserDefaults standardUserDefaults] objectForKey:@"pinyinCity"];
-            if (city==nil || city.length<1) {
-                city=@"beijing";
-            }
-            language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
-            NSString *q=[NSString stringWithFormat:@"location:%@+language:%@",city,language];
-
-            if (language==nil || language.length<1) {
-                language=@"所有语言";
-                
-            }
-            tableView1Language=language;
-            
-            if ([language isEqualToString:@"所有语言"]) {
-                q=[NSString stringWithFormat:@"location:%@",city];
-            }
-            [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:q sort:@"followers" categoryLocation:city categoryLanguage:language completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
-                self.DsOfPageListObject1.totalCount=totalCount;
-
-                if (page<=1) {
-                    [self.DsOfPageListObject1.dsArray removeAllObjects];
-                }
-                
-                
-                //        [self hideHUD];
-                
-                [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
-                self.DsOfPageListObject1.page=page;
-                [refreshHeader1 endRefreshing];
-                
-                if (page>1) {
-                    
-                    [refreshFooter1 endRefreshing];
-                    
-                    
-                }else
-                {
-                    [refreshHeader1 endRefreshing];
-                }
-                [tableView1 reloadData];
-            }
-                                                   errorHandel:^(NSError* error){
-                                                       if (isFirst) {
-                                                           
-                                                           [refreshHeader1 endRefreshing];
-                                                           
-                                                           
-                                                           
-                                                           
-                                                       }else{
-                                                           [refreshFooter1 endRefreshing];
-                                                           
-                                                       }
-                                                       
-                                                   }];
-            
-            
-            
-            
-            return YES;
-            
-        }else if (currentIndex==3){
-            
-            NSInteger page = 0;
-            
-            if (isFirst) {
-                page = 1;
-                
-            }else{
-                
-                page = self.DsOfPageListObject3.page+1;
-            }
-            language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
-            if (language==nil || language.length<1) {
-                language=@"所有语言";
-                
-            }
-           
-            
-            tableView3Language=language;
-            [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:[NSString stringWithFormat:@"language:%@",language] sort:@"followers" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
-                self.DsOfPageListObject3.totalCount=totalCount;
-
-                if (page<=1) {
-                    [self.DsOfPageListObject3.dsArray removeAllObjects];
-                }
-                
-                
-                //        [self hideHUD];
-                
-                [self.DsOfPageListObject3.dsArray addObjectsFromArray:modelArray];
-                self.DsOfPageListObject3.page=page;
-                [refreshHeader3 endRefreshing];
-                
-                if (page>1) {
-                    
-                    [refreshFooter3 endRefreshing];
-                    
-                    
-                }else
-                {
-                    [refreshHeader3 endRefreshing];
-                }
-                [tableView3 reloadData];
-            }
-                                                   errorHandel:^(NSError* error){
-                                                       if (isFirst) {
-                                                           
-                                                           [refreshHeader3 endRefreshing];
-                                                           
-                                                           
-                                                           
-                                                           
-                                                       }else{
-                                                           [refreshFooter3 endRefreshing];
-                                                           
-                                                       }
-                                                       
-                                                   }];
-            
-            
-            
-            
-            return YES;
-            
-        }
-    return YES;
-    
-}
-
-
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*

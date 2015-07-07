@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface RankTableViewCell : UITableViewCell
-@property UILabel *rankLabel;
-@property UIImageView *titleImageView;
-@property UILabel *mainLabel;
-@property UILabel *detailLabel;
+@property(nonatomic,strong) UILabel *rankLabel;
+@property(nonatomic,strong) UIImageView *titleImageView;
+@property(nonatomic,strong) UILabel *mainLabel;
+@property(nonatomic,strong) UILabel *detailLabel;
 @end

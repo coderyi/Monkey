@@ -47,6 +47,8 @@
 @end
 
 @implementation UserDetailViewController
+#pragma mark - Lifecycle
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -78,7 +80,7 @@
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
-    titleText = [[UILabel alloc] initWithFrame: CGRectMake((WScreen-120)/2, 0, 120, 44)];
+    titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
     [titleText setFont:[UIFont systemFontOfSize:19.0]];
@@ -88,7 +90,7 @@
     
     self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets=NO;
-    tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, WScreen, HScreen-64) style:UITableViewStylePlain ];
+    tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain ];
     [self.view addSubview:tableView];
     
     tableView.delegate=self;
@@ -101,8 +103,8 @@
 //    self.navigationItem.rightBarButtonItem=right;
 
     
-    UIView *titleView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, WScreen, 210+35)];
-    UIView *titleBg1=[[UIView alloc] initWithFrame:CGRectMake(0, 0, WScreen, 150+35)];
+    UIView *titleView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 210+35)];
+    UIView *titleBg1=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 150+35)];
     [titleView addSubview:titleBg1];
     
     titleImageView=[[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 80, 80)];
@@ -125,7 +127,7 @@
     login=[[UILabel alloc] initWithFrame:CGRectMake(100, 10, 135, 30)];
     [titleBg1 addSubview:login];
     
-    name=[[UILabel alloc] initWithFrame:CGRectMake(235, 10, 75+WScreen-320, 30)];
+    name=[[UILabel alloc] initWithFrame:CGRectMake(235, 10, 75+ScreenWidth-320, 30)];
     [titleBg1 addSubview:name];
     createLabel=[[UILabel alloc] initWithFrame:CGRectMake(100, 45, 210, 30)];
     [titleBg1 addSubview:createLabel];
@@ -136,17 +138,17 @@
     company=[[UILabel alloc] initWithFrame:CGRectMake(100, 45+35, 95, 30)];
     [titleBg1 addSubview:company];
     
-    locationLabel=[[UILabel alloc] initWithFrame:CGRectMake(200, 45+35, 110+WScreen-320, 30)];
+    locationLabel=[[UILabel alloc] initWithFrame:CGRectMake(200, 45+35, 110+ScreenWidth-320, 30)];
     [titleBg1 addSubview:locationLabel];
     
     emailBt=[UIButton buttonWithType:UIButtonTypeCustom];
     [titleBg1 addSubview:emailBt];
-    emailBt.frame=CGRectMake(100, 80+35, 210+WScreen-320, 30);
+    emailBt.frame=CGRectMake(100, 80+35, 210+ScreenWidth-320, 30);
     
     
     blogBt=[UIButton buttonWithType:UIButtonTypeCustom];
     [titleBg1 addSubview:blogBt];
-    blogBt.frame=CGRectMake(100, 115+35, 210+WScreen-320, 30);
+    blogBt.frame=CGRectMake(100, 115+35, 210+ScreenWidth-320, 30);
     [blogBt addTarget:self action:@selector(blogAction) forControlEvents:UIControlEventTouchUpInside];
     
     [blogBt setTitleColor:YiBlue forState:UIControlStateNormal];
@@ -169,17 +171,17 @@
     emailBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     emailBt.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     
-    UILabel *line=[[UILabel alloc] initWithFrame:CGRectMake(0, 182, WScreen, 1)];
+    UILabel *line=[[UILabel alloc] initWithFrame:CGRectMake(0, 182, ScreenWidth, 1)];
 //    [titleBg1 addSubview:line];
     line.backgroundColor=YiBlue;
     [self refreshTitleView];
     
-    UILabel *line1=[[UILabel alloc] initWithFrame:CGRectMake(0, 244, WScreen, 1)];
+    UILabel *line1=[[UILabel alloc] initWithFrame:CGRectMake(0, 244, ScreenWidth, 1)];
     [titleBg1 addSubview:line1];
     line1.backgroundColor=YiGray;
     
     
-    segmentControl=[[DetailSegmentControl alloc] initWithFrame:CGRectMake(0, 150+34, WScreen, 60)];
+    segmentControl=[[DetailSegmentControl alloc] initWithFrame:CGRectMake(0, 150+34, ScreenWidth, 60)];
     [titleView addSubview:segmentControl];
     tableView.tableHeaderView=titleView;
     segmentControl.ButtonActionBlock=^(int buttonTag){
@@ -201,6 +203,14 @@
         [tableView reloadData];
     };
 }
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Actions
 
 //详细见mj的code4app
 //http://code4app.com/ios/%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90%E5%9B%BE%E7%89%87%E6%B5%8F%E8%A7%88%E5%99%A8/525e06116803fa7b0a000001
@@ -226,7 +236,7 @@
 }
 
 
--(void)blogAction{
+- (void)blogAction{
     if (_userModel.blog.length>0  ) {
         WebViewController *web=[[WebViewController alloc] init];
         web.urlString=_userModel.blog;
@@ -234,7 +244,10 @@
         
     }
 }
--(void)refreshTitleView{
+
+#pragma mark - Private
+
+- (void)refreshTitleView{
     [titleImageView setImageWithURL:[NSURL URLWithString:_userModel.avatar_url]];
 
  
@@ -272,131 +285,31 @@
     
     
 }
--(void)rightAction{
-  
-    
-    
-}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (currentIndex==1) {
-        return 135.7;
-    }else if (currentIndex==2){
-    return 90.7;
-    }else if (currentIndex==3){
-        return 90.7;
-    }
-    return 1;
-
-}
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (currentIndex==1) {
-        return self.DsOfPageListObject1.dsArray.count;
-
-    }else if (currentIndex==2){
-    
-        return self.DsOfPageListObject2.dsArray.count;
-
-    }else if (currentIndex==3){
-    
-        return self.DsOfPageListObject3.dsArray.count;
-
-    
-    }
-    
-    return 1;
-}
-
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (currentIndex==1) {
-        
-  
-    NSString *cellId=@"CellId";
-    RepositoriesTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-    if (cell==nil) {
-        cell=[[RepositoriesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-        cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        cell.userLabel.hidden=YES;
-        cell.titleImageView.hidden=YES;
-    
-    }
-    RepositoryModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
-    cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-    cell.repositoryLabel.text=[NSString stringWithFormat:@"%@",model.name];
-//    cell.userLabel.text=[NSString stringWithFormat:@"Owner:%@",model.user.login];
-//    [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url] placeholderImage:nil];
-    cell.descriptionLabel.text=[NSString stringWithFormat:@"%@",model.repositoryDescription];
-    
-    [cell.homePageBt setTitle:model.homepage forState:UIControlStateNormal];
-      
-    if (model.homepage.length<1) {
-        cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 85, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
-        cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 85, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
-    }else{
-        cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 105, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
-        cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 105, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
-    }
-    cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
-    cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
-        return cell;  }else if (currentIndex==2){
-            
-              RankTableViewCell *cell;
-            
-            NSString *cellId=@"CellId1";
-            cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-            if (cell==nil) {
-                cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-                cell.selectionStyle=UITableViewCellSelectionStyleNone;
-            }
-            UserModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
-            cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-            cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
-            cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
-            [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
-            return cell;}else if (currentIndex==3){ RankTableViewCell *cell;
-                
-                NSString *cellId=@"CellId2";
-                cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-                if (cell==nil) {
-                    cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-                    cell.selectionStyle=UITableViewCellSelectionStyleNone;
-                }
-                UserModel  *model = [(self.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
-                cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-                cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
-                cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
-                [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
-                return cell;}
-    return nil;
-    
-    
-}
 
 - (void)addHeader
 {  //    YiRefreshHeader  头部刷新按钮的使用
     refreshHeader=[[YiRefreshHeader alloc] init];
     refreshHeader.scrollView=tableView;
     [refreshHeader header];
+    
     refreshHeader.beginRefreshingBlock=^(){
         [ApplicationDelegate.apiEngine userDetailWithUserName:_userModel.login completoinHandler:^(UserModel *model){
             _userModel=model;
             [self refreshTitleView];
             [self loadDataFromApiWithIsFirst:YES];
-
-        
+            
+            
         } errorHandel:^(NSError* error){
-
+            
             [self loadDataFromApiWithIsFirst:YES];
-
+            
             
             
         }];
         
         
-
+        
         
         
         
@@ -412,9 +325,10 @@
     refreshFooter=[[YiRefreshFooter alloc] init];
     refreshFooter.scrollView=tableView;
     [refreshFooter footer];
+    __weak typeof(self) weakSelf = self;
     refreshFooter.beginRefreshingBlock=^(){
         
-        [self loadDataFromApiWithIsFirst:NO];
+        [weakSelf loadDataFromApiWithIsFirst:NO];
     };}
 
 
@@ -423,16 +337,16 @@
     
     if (currentIndex==1) {
         
-   
-    NSInteger page = 0;
-    
-    if (isFirst) {
-        page = 1;
         
-    }else{
+        NSInteger page = 0;
         
-        page = self.DsOfPageListObject1.page+1;
-    }
+        if (isFirst) {
+            page = 1;
+            
+        }else{
+            
+            page = self.DsOfPageListObject1.page+1;
+        }
         [ApplicationDelegate.apiEngine userRepositoriesWithPage:page userName:_userModel.login completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
             
             if (page<=1) {
@@ -470,12 +384,13 @@
             }
             
         }];
-  
-    
-    
-    
-    
-        return YES; }else if (currentIndex==2){
+        
+        
+        
+        
+        
+        return YES;
+    }else if (currentIndex==2){
             NSInteger page = 0;
             
             if (isFirst) {
@@ -527,7 +442,8 @@
             
             
             
-            return YES;}else if (currentIndex==3){
+            return YES;
+    }else if (currentIndex==3){
                 NSInteger page = 0;
                 
                 if (isFirst) {
@@ -579,15 +495,115 @@
                 
                 
                 
-                return YES;}
+                return YES;
+    }
     
     return YES;
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+
+#pragma mark - UITableViewDataSource  &UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (currentIndex==1) {
+        return 135.7;
+    }else if (currentIndex==2){
+    return 90.7;
+    }else if (currentIndex==3){
+        return 90.7;
+    }
+    return 1;
+
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (currentIndex==1) {
+        return self.DsOfPageListObject1.dsArray.count;
+
+    }else if (currentIndex==2){
+    
+        return self.DsOfPageListObject2.dsArray.count;
+
+    }else if (currentIndex==3){
+    
+        return self.DsOfPageListObject3.dsArray.count;
+
+    
+    }
+    
+    return 1;
+}
+
+// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (currentIndex==1) {
+        
+  
+        NSString *cellId=@"CellId";
+        RepositoriesTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellId];
+        if (cell==nil) {
+            cell=[[RepositoriesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            cell.userLabel.hidden=YES;
+            cell.titleImageView.hidden=YES;
+    
+        }
+        RepositoryModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
+        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
+        cell.repositoryLabel.text=[NSString stringWithFormat:@"%@",model.name];
+//    cell.userLabel.text=[NSString stringWithFormat:@"Owner:%@",model.user.login];
+//    [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url] placeholderImage:nil];
+        cell.descriptionLabel.text=[NSString stringWithFormat:@"%@",model.repositoryDescription];
+    
+        [cell.homePageBt setTitle:model.homepage forState:UIControlStateNormal];
+      
+        if (model.homepage.length<1) {
+            cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 85, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
+            cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 85, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
+        }else{
+            cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 105, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
+            cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 105, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
+        }
+        cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
+        cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
+        return cell;
+    }else if (currentIndex==2){
+            
+            RankTableViewCell *cell;
+            
+            NSString *cellId=@"CellId1";
+            cell=[tableView dequeueReusableCellWithIdentifier:cellId];
+            if (cell==nil) {
+                cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+                cell.selectionStyle=UITableViewCellSelectionStyleNone;
+            }
+            UserModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
+            cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
+            cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
+            cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
+            [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
+            return cell;
+    }else if (currentIndex==3){ RankTableViewCell *cell;
+                
+                NSString *cellId=@"CellId2";
+                cell=[tableView dequeueReusableCellWithIdentifier:cellId];
+                if (cell==nil) {
+                    cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+                    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+                }
+                UserModel  *model = [(self.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
+                cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
+                cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
+                cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
+                [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
+                return cell;
+    }
+    return nil;
+    
+    
 }
 
 /*

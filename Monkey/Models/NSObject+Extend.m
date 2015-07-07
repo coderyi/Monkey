@@ -10,7 +10,7 @@
 UIAlertView *alertView;
 @implementation NSObject (Extend)
 //判断对象是否为空
--(BOOL)isNull
+- (BOOL)isNull
 {
     if ([self isEqual:[NSNull null]])
     {

@@ -12,24 +12,18 @@
 @implementation APIEngine
 //https://developer.github.com/v3/search/#search-users
 //Search users
-- (MKNetworkOperation *)searchUsersWithPage:(NSInteger)page  q:(NSString *)q sort:(NSString *)sort categoryLocation:(NSString *)categoryLocation categoryLanguage:(NSString *)categoryLanguage completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)searchUsersWithPage:(NSInteger)page q:(NSString *)q sort:(NSString *)sort categoryLocation:(NSString *)categoryLocation categoryLanguage:(NSString *)categoryLanguage completoinHandler:(PageListInfoResponseBlock)completionBlock
                                 errorHandel:(MKNKErrorBlock)errorBlock
 {
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    
-    
     [dic setValue:q forKey:@"q"];
     [dic setValue:sort forKey:@"sort"];
     [dic setValue:[NSString stringWithFormat:@"%ld", (long)page] forKey:@"page"];
     
     
     
-    //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
     
-    NSString *getString = [NSString stringWithFormat:@"/search/users?q=%@&sort=%@&page=%d",q,sort,page];
-    
-    
-    
+    NSString *getString = [NSString stringWithFormat:@"/search/users?q=%@&sort=%@&page=%ld",q,sort,(long)page];
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
     NSLog(@"url is %@",op.url);
@@ -54,7 +48,7 @@
                         model.rank=(page-1)*30+(i+1);
                         model.categoryLanguage=categoryLanguage;
                         model.categoryLocation=categoryLocation;
-                         model.myID=[[NSDate date] timeIntervalSince1970];
+                        model.myID=[[NSDate date] timeIntervalSince1970];
                         [listNew addObject:model];
 //                        [[UserManager sharedInstance] handleCategoryModel:model];
                         
@@ -79,7 +73,7 @@
 
 //https://developer.github.com/v3/search/#search-users
 //Search users
-- (MKNetworkOperation *)searchUsersWithPage:(NSInteger)page  q:(NSString *)q sort:(NSString *)sort completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)searchUsersWithPage:(NSInteger)page q:(NSString *)q sort:(NSString *)sort completoinHandler:(PageListInfoResponseBlock)completionBlock
                                 errorHandel:(MKNKErrorBlock)errorBlock
 {
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -93,7 +87,7 @@
     
 //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
 
-     NSString *getString = [NSString stringWithFormat:@"/search/users?q=%@&sort=%@&page=%d",q,sort,page];
+     NSString *getString = [NSString stringWithFormat:@"/search/users?q=%@&sort=%@&page=%ld",q,sort,(long)page];
     
     
     
@@ -142,7 +136,7 @@
 
 //https://developer.github.com/v3/search/#search-repositories
 //Search repositories
-- (MKNetworkOperation *)searchRepositoriesWithPage:(NSInteger)page  q:(NSString *)q sort:(NSString *)sort completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)searchRepositoriesWithPage:(NSInteger)page q:(NSString *)q sort:(NSString *)sort completoinHandler:(PageListInfoResponseBlock)completionBlock
                                 errorHandel:(MKNKErrorBlock)errorBlock
 {
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -156,7 +150,7 @@
     
     //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
     
-    NSString *getString = [NSString stringWithFormat:@"/search/repositories?q=%@&sort=%@&page=%d",q,sort,page];
+    NSString *getString = [NSString stringWithFormat:@"/search/repositories?q=%@&sort=%@&page=%ld",q,sort,(long)page];
     
     
     
@@ -249,7 +243,7 @@
 //https://developer.github.com/v3/repos/#list-user-repositories
 //List user repositories
 //GET /users/:username/repos
-- (MKNetworkOperation *)userRepositoriesWithPage:(NSInteger)page  userName:(NSString *)userName completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)userRepositoriesWithPage:(NSInteger)page userName:(NSString *)userName completoinHandler:(PageListInfoResponseBlock)completionBlock
                                        errorHandel:(MKNKErrorBlock)errorBlock
 {
 
@@ -258,7 +252,7 @@
     
     //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
     
-    NSString *getString = [NSString stringWithFormat:@"/users/%@/repos?sort=updated&page=%d",userName,page];
+    NSString *getString = [NSString stringWithFormat:@"/users/%@/repos?sort=updated&page=%ld",userName,(long)page];
     
     
     
@@ -305,7 +299,7 @@
 //List followers of a user
 //https://developer.github.com/v3/users/followers/#list-followers-of-a-user
 //GET /users/:username/followers
-- (MKNetworkOperation *)userFollowersWithPage:(NSInteger)page  userName:(NSString *)userName completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)userFollowersWithPage:(NSInteger)page userName:(NSString *)userName completoinHandler:(PageListInfoResponseBlock)completionBlock
                                      errorHandel:(MKNKErrorBlock)errorBlock
 {
     
@@ -314,7 +308,7 @@
     
     //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
     
-    NSString *getString = [NSString stringWithFormat:@"/users/%@/followers?page=%d",userName,page];
+    NSString *getString = [NSString stringWithFormat:@"/users/%@/followers?page=%ld",userName,(long)page];
     
     
     
@@ -362,7 +356,7 @@
 //List users followed by another user
 //https://developer.github.com/v3/users/followers/#list-users-followed-by-another-user
 //GET /users/:username/following
-- (MKNetworkOperation *)userFollowingWithPage:(NSInteger)page  userName:(NSString *)userName completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)userFollowingWithPage:(NSInteger)page userName:(NSString *)userName completoinHandler:(PageListInfoResponseBlock)completionBlock
                                      errorHandel:(MKNKErrorBlock)errorBlock
 {
     
@@ -371,7 +365,7 @@
     
     //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
     
-    NSString *getString = [NSString stringWithFormat:@"/users/%@/following?page=%d",userName,page];
+    NSString *getString = [NSString stringWithFormat:@"/users/%@/following?page=%ld",userName,(long)page];
     
     
     
@@ -466,7 +460,7 @@
 
 //https://developer.github.com/v3/activity/starring/#list-stargazers
 //List Stargazers ,GET /repos/:owner/:repo/stargazers
-- (MKNetworkOperation *)reposDetailCategoryWithPage:(NSInteger)page  userName:(NSString *)userName repositoryName:(NSString *)repositoryName category:(NSString *)category completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)reposDetailCategoryWithPage:(NSInteger)page userName:(NSString *)userName repositoryName:(NSString *)repositoryName category:(NSString *)category completoinHandler:(PageListInfoResponseBlock)completionBlock
                                   errorHandel:(MKNKErrorBlock)errorBlock
 {
     
@@ -477,7 +471,7 @@
     
     if ([category isEqualToString:@"forks"]) {
         
-        NSString *getString = [NSString stringWithFormat:@"/repos/%@/%@/%@?page=%d",userName,repositoryName,category,page];
+        NSString *getString = [NSString stringWithFormat:@"/repos/%@/%@/%@?page=%ld",userName,repositoryName,category,(long)page];
         
         
         
@@ -523,7 +517,7 @@
     }else{
     
     
-    NSString *getString = [NSString stringWithFormat:@"/repos/%@/%@/%@?page=%d",userName,repositoryName,category,page];
+    NSString *getString = [NSString stringWithFormat:@"/repos/%@/%@/%@?page=%ld",userName,repositoryName,category,(long)page];
     
     
     

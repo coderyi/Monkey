@@ -17,7 +17,7 @@
         // Initialization code
         float h=135;
         float orginX=0;
-        float w=WScreen-orginX*2;
+        float w=ScreenWidth-orginX*2;
         float preWidth=15;
         float rankWidth=45;
         float sufRankWidth=10;
@@ -64,7 +64,7 @@
         [_homePageBt setTitleColor:YiBlue forState:UIControlStateNormal];
         [_homePageBt setFont:[UIFont systemFontOfSize:12]];
         _homePageBt.frame=CGRectMake(preWidth+rankWidth+sufRankWidth, orginY+repositoryLabelHeight*4, labelWidth, repositoryLabelHeight);
-_homePageBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        _homePageBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         _homePageBt.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _descriptionLabel.numberOfLines=0;
         _userLabel.font=[UIFont systemFontOfSize:12];

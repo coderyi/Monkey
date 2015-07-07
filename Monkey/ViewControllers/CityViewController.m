@@ -17,6 +17,8 @@ UITableView *tableView1;
 @end
 
 @implementation CityViewController
+#pragma mark - Lifecycle
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -24,7 +26,7 @@ UITableView *tableView1;
 //    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"cityAppear"];
 
 }
--(void)viewWillDisappear:(BOOL)animated{
+- (void)viewWillDisappear:(BOOL)animated{
     self.tabBarController.tabBar.hidden = NO;
 
 }
@@ -38,7 +40,7 @@ UITableView *tableView1;
     }
     self.automaticallyAdjustsScrollViewInsets=NO;
     self.view.backgroundColor=[UIColor whiteColor];
-    tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, WScreen, HScreen-64) style:UITableViewStylePlain];
+    tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain];
     [self.view addSubview:tableView1];
     //    tableView1.showsVerticalScrollIndicator = NO;
     
@@ -48,8 +50,14 @@ UITableView *tableView1;
 //    tableView1.separatorStyle=UITableViewCellSeparatorStyleNone;
 //    citys=@[@"beijing",@"shanghai",@"guangzhou",@"shenzhen",@"chengdu",@"hangzhou",@"nanjing",@"wuhan武汉",@"suzhou苏州"];
     citys=@[@"北京",@"上海",@"深圳",@"杭州",@"广州",@"成都",@"南京",@"武汉",@"苏州",@"厦门",@"天津",@"重庆",@"长沙"];
-pinyinCitys=@[@"beijing",@"shanghai",@"shenzhen",@"hangzhou",@"guangzhou",@"chengdu",@"nanjing",@"wuhan",@"suzhou",@"xiamen",@"tianjin",@"chongqing",@"changsha"];
+    pinyinCitys=@[@"beijing",@"shanghai",@"shenzhen",@"hangzhou",@"guangzhou",@"chengdu",@"nanjing",@"wuhan",@"suzhou",@"xiamen",@"tianjin",@"chongqing",@"changsha"];
 }
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UITableViewDataSource  &UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
    
@@ -62,7 +70,7 @@ pinyinCitys=@[@"beijing",@"shanghai",@"shenzhen",@"hangzhou",@"guangzhou",@"chen
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell;
+        UITableViewCell *cell;
     
         NSString *cellId=@"CellId1";
         cell=[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -70,7 +78,7 @@ pinyinCitys=@[@"beijing",@"shanghai",@"shenzhen",@"hangzhou",@"guangzhou",@"chen
             cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
 //            cell.selectionStyle=UITableViewCellSelectionStyleNone;
         }
-    cell.textLabel.text=(citys)[indexPath.row];
+        cell.textLabel.text=(citys)[indexPath.row];
         return cell;
         
 
@@ -85,10 +93,6 @@ pinyinCitys=@[@"beijing",@"shanghai",@"shenzhen",@"hangzhou",@"guangzhou",@"chen
     [self.navigationController popViewControllerAnimated:YES];
     
 
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*

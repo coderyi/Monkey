@@ -9,22 +9,22 @@
 #import <UIKit/UIKit.h>
 
 @interface DetailSegmentControl : UIView
-@property UILabel *label1;
-@property UILabel *label2;
-@property UILabel *label3;
+@property(nonatomic,strong) UILabel *label1;
+@property(nonatomic,strong) UILabel *label2;
+@property(nonatomic,strong) UILabel *label3;
 
 
-@property UIButton *button1;
-@property UIButton *button2;
-@property UIButton *button3;
+@property(nonatomic,strong) UIButton *button1;
+@property(nonatomic,strong) UIButton *button2;
+@property(nonatomic,strong) UIButton *button3;
 
-@property UILabel *bt1Label;
-@property UILabel *bt2Label;
-@property UILabel *bt3Label;
+@property(nonatomic,strong) UILabel *bt1Label;
+@property(nonatomic,strong) UILabel *bt2Label;
+@property(nonatomic,strong) UILabel *bt3Label;
 
-@property UILabel *bt1Label1;
-@property UILabel *bt2Label1;
-@property UILabel *bt3Label1;
-@property ( strong) void (^ButtonActionBlock)(int buttonTag);
+@property(nonatomic,strong) UILabel *bt1Label1;
+@property(nonatomic,strong) UILabel *bt2Label1;
+@property(nonatomic,strong) UILabel *bt3Label1;
+@property(nonatomic,copy) void (^ButtonActionBlock)(int buttonTag);
 -(void)swipeAction:(int)tag;
 @end

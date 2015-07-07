@@ -32,6 +32,8 @@
 @end
 
 @implementation RankViewController
+#pragma mark - Lifecycle
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,7 +44,7 @@
     }
     return self;
 }
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     NSString *cityAppear=[[NSUserDefaults standardUserDefaults] objectForKey:@"cityAppear"];
     if ([cityAppear isEqualToString:@"2"]) {
         [segmentControl swipeAction:102];
@@ -68,7 +70,7 @@
     }
     self.view.backgroundColor=[UIColor whiteColor];
     titleHeight=35;
-    bgViewHeight=HScreen-64-titleHeight-49;
+    bgViewHeight=ScreenHeight-64-titleHeight-49;
        [self initScroll];
     self.automaticallyAdjustsScrollViewInsets=NO;
 //    tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, WScreen, bgViewHeight) style:UITableViewStylePlain ];
@@ -79,12 +81,12 @@
    
   
     
-    segmentControl=[[HeaderSegmentControl alloc] initWithFrame:CGRectMake(0, 0, WScreen, titleHeight)];
+    segmentControl=[[HeaderSegmentControl alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, titleHeight)];
     [self.view addSubview:segmentControl];
     segmentControl.buttonCount=2;
-   currentIndex=1;
+    currentIndex=1;
     
-     [self initTable];
+    [self initTable];
     
     UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"城市" style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
     self.navigationItem.rightBarButtonItem=right;
@@ -92,16 +94,25 @@
     
 
 }
--(void)rightAction{
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+#pragma mark - Actions
+
+- (void)rightAction{
     CityViewController *city=[[CityViewController alloc] init];
     [self.navigationController pushViewController:city animated:YES];
     
 
 }
--(void)initScroll{
+#pragma mark - Private
+
+- (void)initScroll{
     
     
-    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, titleHeight, WScreen, bgViewHeight)];
+    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, titleHeight, ScreenWidth, bgViewHeight)];
     scrollView.alwaysBounceHorizontal=YES;
     scrollView.backgroundColor=[UIColor whiteColor];
     scrollView.bounces = YES;
@@ -112,16 +123,16 @@
     scrollView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:scrollView];
     
-    [scrollView setContentSize:CGSizeMake(WScreen * (2), bgViewHeight)];
+    [scrollView setContentSize:CGSizeMake(ScreenWidth * (2), bgViewHeight)];
     [scrollView setContentOffset:CGPointMake(0, 0)];
-    [scrollView scrollRectToVisible:CGRectMake(0,0,WScreen,bgViewHeight) animated:NO];
+    [scrollView scrollRectToVisible:CGRectMake(0,0,ScreenWidth,bgViewHeight) animated:NO];
     
 }
 
--(void)initTable{
+- (void)initTable{
     
     
-    tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, WScreen, bgViewHeight) style:UITableViewStylePlain];
+    tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
     [scrollView addSubview:tableView1];
 //    tableView1.showsVerticalScrollIndicator = NO;
     
@@ -138,15 +149,15 @@
     segmentControl.ButtonActionBlock=^(int buttonTag){
         
         currentIndex=buttonTag-100;
-        [scrollView scrollRectToVisible:CGRectMake(WScreen * (currentIndex-1),0,WScreen,bgViewHeight) animated:NO];
-        [scrollView setContentOffset:CGPointMake(WScreen* (currentIndex-1),0)];
+        [scrollView scrollRectToVisible:CGRectMake(ScreenWidth * (currentIndex-1),0,ScreenWidth,bgViewHeight) animated:NO];
+        [scrollView setContentOffset:CGPointMake(ScreenWidth* (currentIndex-1),0)];
         
         if (currentIndex==1) {
             
             
         }else if (currentIndex==2){
             if (tableView2==nil) {
-                tableView2=[[UITableView alloc] initWithFrame:CGRectMake(WScreen, 0, WScreen, bgViewHeight) style:UITableViewStylePlain];
+                tableView2=[[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
                 [scrollView addSubview:tableView2];
                 tableView2.showsVerticalScrollIndicator = NO;
                 
@@ -172,102 +183,27 @@
     
     
 }
-#pragma mark scrollView
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView1
-{
-    CGFloat pagewidth = scrollView.frame.size.width;
-    int currentPage = floor((scrollView.contentOffset.x - pagewidth/ (2)) / pagewidth) + 1;
-    
-    if (currentPage==0)
-    {
-        
-        [scrollView scrollRectToVisible:CGRectMake(0,0,WScreen,bgViewHeight) animated:NO];
-        [scrollView setContentOffset:CGPointMake(0,0)];
-    }
-    else if (currentPage>=(1))
-    {
-        currentPage=1;
-        [scrollView scrollRectToVisible:CGRectMake(WScreen * 1,0,WScreen,bgViewHeight) animated:NO];
-        [scrollView setContentOffset:CGPointMake(WScreen* 1,0)];
-    }
-    
-    currentIndex=currentPage+1;
-    NSLog(@"cccc %d",currentIndex);
-    [segmentControl swipeAction:(100+currentPage+1)];
-    
-}
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (tableView.tag==11) {
-        return self.DsOfPageListObject1.dsArray.count;
-        
-    }else if (tableView.tag==12){
-        return self.DsOfPageListObject2.dsArray.count;
-    }
-    return self.DsOfPageListObject1.dsArray.count;
-
-}
-
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    RankTableViewCell *cell;
-     if (tableView.tag==11) {
-    NSString *cellId=@"CellId1";
-    cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-    if (cell==nil) {
-        cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-        cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    }
-    UserModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
-    cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-    cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
-    cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
-    [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
-         return cell;
-
-     }else if (tableView.tag==12){
-     
-         NSString *cellId=@"CellId2";
-         cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-         if (cell==nil) {
-             cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-             cell.selectionStyle=UITableViewCellSelectionStyleNone;
-         }
-         UserModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
-         cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-         cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
-         cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
-         [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
-         return cell;
-     
-     }
-    return cell;
-    
-
-}
 
 - (void)addHeader:(int)type
 {
     if (type==1) {
         
-    
-    //    YiRefreshHeader  头部刷新按钮的使用
-    refreshHeader1=[[YiRefreshHeader alloc] init];
-    refreshHeader1.scrollView=tableView1;
-    [refreshHeader1 header];
-    refreshHeader1.beginRefreshingBlock=^(){
-        [self loadDataFromApiWithIsFirst:YES];
-
         
+        //    YiRefreshHeader  头部刷新按钮的使用
+        refreshHeader1=[[YiRefreshHeader alloc] init];
+        refreshHeader1.scrollView=tableView1;
+        [refreshHeader1 header];
+        __weak typeof(self) weakSelf = self;
+        refreshHeader1.beginRefreshingBlock=^(){
+            [weakSelf loadDataFromApiWithIsFirst:YES];
+            
+            
+            
+        };
         
-    };
-    
-    //    是否在进入该界面的时候就开始进入刷新状态
-    
+        //    是否在进入该界面的时候就开始进入刷新状态
+        
         [refreshHeader1 beginRefreshing];
     }else if (type==2){
         //    YiRefreshHeader  头部刷新按钮的使用
@@ -285,93 +221,97 @@
         
         [refreshHeader2 beginRefreshing];
         
-        }
+    }
 }
 
 - (void)addFooter:(int)type
 {
+    __weak typeof(self) weakSelf = self;
     if (type==1) {
         
-    
-    //    YiRefreshFooter  底部刷新按钮的使用
-     refreshFooter1=[[YiRefreshFooter alloc] init];
-    refreshFooter1.scrollView=tableView1;
-    [refreshFooter1 footer];
-    refreshFooter1.beginRefreshingBlock=^(){
-        
-        [self loadDataFromApiWithIsFirst:NO];
-    };}else if (type==2){
         
         //    YiRefreshFooter  底部刷新按钮的使用
-        refreshFooter2=[[YiRefreshFooter alloc] init];
-        refreshFooter2.scrollView=tableView2;
-        [refreshFooter2 footer];
-        refreshFooter2.beginRefreshingBlock=^(){
+        refreshFooter1=[[YiRefreshFooter alloc] init];
+        refreshFooter1.scrollView=tableView1;
+        [refreshFooter1 footer];
+        refreshFooter1.beginRefreshingBlock=^(){
             
-            [self loadDataFromApiWithIsFirst:NO];
+            [weakSelf loadDataFromApiWithIsFirst:NO];
         };
-    
-    }}
+    }else if (type==2){
+            
+            //    YiRefreshFooter  底部刷新按钮的使用
+            refreshFooter2=[[YiRefreshFooter alloc] init];
+            refreshFooter2.scrollView=tableView2;
+            [refreshFooter2 footer];
+            refreshFooter2.beginRefreshingBlock=^(){
+                
+                [weakSelf loadDataFromApiWithIsFirst:NO];
+            };
+            
+    }
+}
 
 
 - (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
 {
     if (currentIndex==1) {
-    
-    NSInteger page = 0;
-    
-    if (isFirst) {
-        page = 1;
         
-    }else{
+        NSInteger page = 0;
         
-        page = self.DsOfPageListObject1.page+1;
-    }
-    
-    [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:@"location:china" sort:@"followers" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-        
-        if (page<=1) {
-            [self.DsOfPageListObject1.dsArray removeAllObjects];
-        }
-        
-        
-        //        [self hideHUD];
-        
-        [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
-        self.DsOfPageListObject1.page=page;
-        [refreshHeader1 endRefreshing];
-        
-        if (page>1) {
+        if (isFirst) {
+            page = 1;
             
-            [refreshFooter1 endRefreshing];
-
+        }else{
             
-        }else
-        {
-          [refreshHeader1 endRefreshing];
+            page = self.DsOfPageListObject1.page+1;
         }
-        [tableView1 reloadData];
-        }
-                                           errorHandel:^(NSError* error){
-                                               if (isFirst) {
-                                                   
-                                                   [refreshHeader1 endRefreshing];
-
-                                                   
-                                                   
-                                                   
-                                               }else{
-                                                   [refreshFooter1 endRefreshing];
-                                                   
-                                               }
-                                               
-                                           }];
- 
-  
-    
-    
-        return YES;}else if (currentIndex==2){
         
+        [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:@"location:china" sort:@"followers" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
+            
+            if (page<=1) {
+                [self.DsOfPageListObject1.dsArray removeAllObjects];
+            }
+            
+            
+            //        [self hideHUD];
+            
+            [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
+            self.DsOfPageListObject1.page=page;
+            [refreshHeader1 endRefreshing];
+            
+            if (page>1) {
+                
+                [refreshFooter1 endRefreshing];
+                
+                
+            }else
+            {
+                [refreshHeader1 endRefreshing];
+            }
+            [tableView1 reloadData];
+        }
+                                               errorHandel:^(NSError* error){
+                                                   if (isFirst) {
+                                                       
+                                                       [refreshHeader1 endRefreshing];
+                                                       
+                                                       
+                                                       
+                                                       
+                                                   }else{
+                                                       [refreshFooter1 endRefreshing];
+                                                       
+                                                   }
+                                                   
+                                               }];
+        
+        
+        
+        
+        return YES;
+    }else if (currentIndex==2){
+            
             NSInteger page = 0;
             
             if (isFirst) {
@@ -428,7 +368,7 @@
             
             
             return YES;
-        
+            
         }
     return YES;
     
@@ -437,8 +377,85 @@
 
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView1
+{
+    CGFloat pagewidth = scrollView.frame.size.width;
+    int currentPage = floor((scrollView.contentOffset.x - pagewidth/ (2)) / pagewidth) + 1;
+    
+    if (currentPage==0)
+    {
+        
+        [scrollView scrollRectToVisible:CGRectMake(0,0,ScreenWidth,bgViewHeight) animated:NO];
+        [scrollView setContentOffset:CGPointMake(0,0)];
+    }
+    else if (currentPage>=(1))
+    {
+        currentPage=1;
+        [scrollView scrollRectToVisible:CGRectMake(ScreenWidth * 1,0,ScreenWidth,bgViewHeight) animated:NO];
+        [scrollView setContentOffset:CGPointMake(ScreenWidth* 1,0)];
+    }
+    
+    currentIndex=currentPage+1;
+    NSLog(@"cccc %d",currentIndex);
+    [segmentControl swipeAction:(100+currentPage+1)];
+    
 }
+
+#pragma mark - UITableViewDataSource  &UITableViewDelegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (tableView.tag==11) {
+        return self.DsOfPageListObject1.dsArray.count;
+        
+    }else if (tableView.tag==12){
+        return self.DsOfPageListObject2.dsArray.count;
+    }
+    return self.DsOfPageListObject1.dsArray.count;
+
+}
+
+// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    RankTableViewCell *cell;
+    if (tableView.tag==11) {
+        NSString *cellId=@"CellId1";
+        cell=[tableView dequeueReusableCellWithIdentifier:cellId];
+        if (cell==nil) {
+            cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        }
+        
+        UserModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
+        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
+        cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
+        cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
+        [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
+         return cell;
+
+     }else if (tableView.tag==12){
+     
+         NSString *cellId=@"CellId2";
+         cell=[tableView dequeueReusableCellWithIdentifier:cellId];
+         if (cell==nil) {
+             cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+             cell.selectionStyle=UITableViewCellSelectionStyleNone;
+         }
+         UserModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
+         cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
+         cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
+         cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
+         [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
+         return cell;
+     
+     }
+    return cell;
+    
+
+}
+
+
 @end

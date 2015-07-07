@@ -13,7 +13,7 @@
     UILabel *label1;
     UILabel *label2;
 }
-@property UIButton *button1;
-@property UIButton *button2;
-@property ( copy) void (^ButtonActionBlock)(int buttonTag);
+@property(nonatomic,strong) UIButton *button1;
+@property(nonatomic,strong) UIButton *button2;
+@property(nonatomic,copy) void (^ButtonActionBlock)(int buttonTag);
 @end
