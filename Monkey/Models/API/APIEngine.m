@@ -23,7 +23,7 @@
     
     
     
-    NSString *getString = [NSString stringWithFormat:@"/search/users?q=%@&sort=%@&page=%ld",q,sort,(long)page];
+    NSString *getString = [NSString stringWithFormat:@"/search/users?q=%@&sort=%@&page=%li",q,sort,(long)page];
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
     NSLog(@"url is %@",op.url);
@@ -45,7 +45,7 @@
                         
                         NSDictionary *dict = [list objectAtIndex:i];
                         UserModel *model = [UserModel modelWithDict:dict];
-                        model.rank=(page-1)*30+(i+1);
+                        model.rank=(int)((page-1)*30+(i+1));
                         model.categoryLanguage=categoryLanguage;
                         model.categoryLocation=categoryLocation;
                         model.myID=[[NSDate date] timeIntervalSince1970];

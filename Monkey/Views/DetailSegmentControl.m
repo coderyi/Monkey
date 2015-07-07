@@ -131,7 +131,7 @@ int currentTag;
     }
     return self;
 }
--(void)swipeAction:(int)tag{
+-(void)swipeAction:(NSInteger)tag{
     UIColor *black=[UIColor blackColor];
     switch (tag) {
         case 101:

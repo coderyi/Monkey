@@ -187,6 +187,7 @@
 
 - (void)addHeader:(int)type
 {
+    __weak typeof(self) weakSelf = self;
     if (type==1) {
         
         
@@ -194,7 +195,7 @@
         refreshHeader1=[[YiRefreshHeader alloc] init];
         refreshHeader1.scrollView=tableView1;
         [refreshHeader1 header];
-        __weak typeof(self) weakSelf = self;
+        
         refreshHeader1.beginRefreshingBlock=^(){
             [weakSelf loadDataFromApiWithIsFirst:YES];
             
@@ -211,7 +212,7 @@
         refreshHeader2.scrollView=tableView2;
         [refreshHeader2 header];
         refreshHeader2.beginRefreshingBlock=^(){
-            [self loadDataFromApiWithIsFirst:YES];
+            [weakSelf loadDataFromApiWithIsFirst:YES];
             
             
             

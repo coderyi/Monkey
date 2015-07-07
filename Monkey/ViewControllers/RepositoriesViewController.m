@@ -219,9 +219,9 @@
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *cellId=@"CellId";
-    RepositoriesTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellId];
+    RepositoriesTableViewCell *cell=[tableView1 dequeueReusableCellWithIdentifier:cellId];
     if (cell==nil) {
         cell=[[RepositoriesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
         cell.selectionStyle=UITableViewCellSelectionStyleNone;

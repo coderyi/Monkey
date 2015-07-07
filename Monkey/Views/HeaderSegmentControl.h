@@ -15,5 +15,5 @@
 @property(nonatomic,strong) UIButton *button4;
 @property(nonatomic,copy) void (^ButtonActionBlock)(int buttonTag);
 @property(nonatomic,assign) int buttonCount;
--(void)swipeAction:(int)tag;
+-(void)swipeAction:(NSInteger)tag;
 @end

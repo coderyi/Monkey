@@ -62,7 +62,8 @@
         [bgView addSubview:_homePageBt];
 //        _homePageBt.backgroundColor=[UIColor colorWithRed:0.90f green:0.90f blue:0.90f alpha:1.00f];
         [_homePageBt setTitleColor:YiBlue forState:UIControlStateNormal];
-        [_homePageBt setFont:[UIFont systemFontOfSize:12]];
+//        [_homePageBt setFont:[UIFont systemFontOfSize:12]];
+        _homePageBt.titleLabel.font=[UIFont systemFontOfSize:12];
         _homePageBt.frame=CGRectMake(preWidth+rankWidth+sufRankWidth, orginY+repositoryLabelHeight*4, labelWidth, repositoryLabelHeight);
         _homePageBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         _homePageBt.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;

@@ -58,9 +58,9 @@
 {
     // Override point for customization after application launch.
     
-    RankViewController *rank=[[RankViewController alloc] init];
+//    RankViewController *rank=[[RankViewController alloc] init];
 
-    BaseNavigationController *navRank = [self initlizerNavigationControllerWithRootViewController:rank];
+//    BaseNavigationController *navRank = [self initlizerNavigationControllerWithRootViewController:rank];
 
 //    UINavigationController *navRank=[[UINavigationController alloc] initWithRootViewController:rank];
 

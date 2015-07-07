@@ -105,14 +105,16 @@
     nameBt=[UIButton buttonWithType:UIButtonTypeCustom];
     nameBt.frame=CGRectMake(orginX, 0, (ScreenWidth-2*orginX)/2, 40);
     [nameBt setTitleColor:YiBlue forState:UIControlStateNormal];
-    [nameBt setFont:[UIFont boldSystemFontOfSize:17]];
+//    [nameBt setFont:[UIFont boldSystemFontOfSize:17]];
+    nameBt.titleLabel.font=[UIFont boldSystemFontOfSize:17];
     [titleView addSubview:nameBt];
     
     
     ownerBt=[UIButton buttonWithType:UIButtonTypeCustom];
     ownerBt.frame=CGRectMake(orginX+(ScreenWidth-2*orginX)/2, 0, (ScreenWidth-2*orginX)/2, 40);
     [ownerBt setTitleColor:YiBlue forState:UIControlStateNormal];
-    [ownerBt setFont:[UIFont boldSystemFontOfSize:17]];
+//    [ownerBt setFont:[UIFont boldSystemFontOfSize:17]];
+    ownerBt.titleLabel.font=[UIFont boldSystemFontOfSize:17];
     [titleView addSubview:ownerBt];
     ownerBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 
@@ -148,7 +150,8 @@
     parentBt=[UIButton buttonWithType:UIButtonTypeCustom];
     parentBt.frame=CGRectMake(orginX+70, 40, (ScreenWidth-2*orginX)/2, 30);
     [parentBt setTitleColor:YiBlue forState:UIControlStateNormal];
-    [parentBt setFont:[UIFont boldSystemFontOfSize:15]];
+//    [parentBt setFont:[UIFont boldSystemFontOfSize:15]];
+    parentBt.titleLabel.font=[UIFont boldSystemFontOfSize:15];
     [titleView addSubview:parentBt];
 //    parentBt.backgroundColor=[UIColor redColor];
 
@@ -161,7 +164,9 @@
     homePageBt=[UIButton buttonWithType:UIButtonTypeCustom];
     homePageBt.frame=CGRectMake(orginX, 100, (ScreenWidth-2*orginX), 30);
     [homePageBt setTitleColor:YiBlue forState:UIControlStateNormal];
-    [homePageBt setFont:[UIFont boldSystemFontOfSize:13]];
+//    [homePageBt setFont:[UIFont boldSystemFontOfSize:13]];
+    homePageBt.titleLabel.font=[UIFont boldSystemFontOfSize:13];
+
     [titleView addSubview:homePageBt];
 //    homePageBt.backgroundColor=[UIColor redColor];
     homePageBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -181,6 +186,7 @@
     segmentControl.bt3Label1.text=@"Stargazers";
 
     tableView.tableHeaderView=titleView;
+    
     segmentControl.ButtonActionBlock=^(int buttonTag){
         
         currentIndex=buttonTag-100;
@@ -515,14 +521,14 @@
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (currentIndex==1) {
         
         
         RankTableViewCell *cell;
         
         NSString *cellId=@"CellId";
-        cell=[tableView dequeueReusableCellWithIdentifier:cellId];
+        cell=[tableView1 dequeueReusableCellWithIdentifier:cellId];
         if (cell==nil) {
             cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
@@ -532,38 +538,39 @@
         cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
         cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
         [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
-        return cell;  }else if (currentIndex==2){
+        return cell;
+    }else if (currentIndex==2){
             
-            RankTableViewCell *cell;
+        RankTableViewCell *cell;
             
-            NSString *cellId=@"CellId1";
-            cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-            if (cell==nil) {
-                cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-                cell.selectionStyle=UITableViewCellSelectionStyleNone;
-            }
-            RepositoryModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
-            cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-            cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.user.login];
-            cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
-            [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url] placeholderImage:nil];
-            return cell;
-        }else if (currentIndex==3){ RankTableViewCell *cell;
+        NSString *cellId=@"CellId1";
+        cell=[tableView dequeueReusableCellWithIdentifier:cellId];
+        if (cell==nil) {
+            cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        }
+        RepositoryModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
+        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
+        cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.user.login];
+        cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
+        [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url] placeholderImage:nil];
+        return cell;
+    }else if (currentIndex==3){ RankTableViewCell *cell;
                 
-                NSString *cellId=@"CellId2";
-                cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-                if (cell==nil) {
-                    cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-                    cell.selectionStyle=UITableViewCellSelectionStyleNone;
-                }
-                UserModel  *model = [(self.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
-                cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-                cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
-                cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
-                [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
+        NSString *cellId=@"CellId2";
+        cell=[tableView dequeueReusableCellWithIdentifier:cellId];
+        if (cell==nil) {
+            cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+            cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        }
+        UserModel  *model = [(self.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
+        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
+        cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
+        cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
+        [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
             
-                return cell;
-            }
+        return cell;
+    }
     return nil;
     
     

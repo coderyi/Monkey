@@ -26,5 +26,5 @@
 @property(nonatomic,strong) UILabel *bt2Label1;
 @property(nonatomic,strong) UILabel *bt3Label1;
 @property(nonatomic,copy) void (^ButtonActionBlock)(int buttonTag);
--(void)swipeAction:(int)tag;
+-(void)swipeAction:(NSInteger)tag;
 @end
