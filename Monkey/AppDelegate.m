@@ -59,15 +59,13 @@
     // Override point for customization after application launch.
     
     RankViewController *rank=[[RankViewController alloc] init];
-<<<<<<< Updated upstream
+
     BaseNavigationController *navRank = [self initlizerNavigationControllerWithRootViewController:rank];
-=======
-<<<<<<< HEAD
+
 //    UINavigationController *navRank=[[UINavigationController alloc] initWithRootViewController:rank];
-=======
-    BaseNavigationController *navRank = [self initlizerNavigationControllerWithRootViewController:rank];
->>>>>>> origin/master
->>>>>>> Stashed changes
+
+
+
     
     LanguageRankViewController *languageRank=[[LanguageRankViewController alloc] init];
     BaseNavigationController *navLanguageRank=[self initlizerNavigationControllerWithRootViewController:languageRank];
