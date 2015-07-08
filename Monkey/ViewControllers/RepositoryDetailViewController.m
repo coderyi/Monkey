@@ -274,20 +274,23 @@
     refreshHeader=[[YiRefreshHeader alloc] init];
     refreshHeader.scrollView=tableView;
     [refreshHeader header];
-    __weak RepositoryDetailViewController *weakSelf=self;
-    
+
+    WEAKSELF    
+
     refreshHeader.beginRefreshingBlock=^(){
         
         
         [ApplicationDelegate.apiEngine repositoryDetailWithUserName:_model.user.login repositoryName:_model.name completoinHandler:^(RepositoryModel *model){
             _model=model;
-            [weakSelf refreshTitleView];
-            [weakSelf loadDataFromApiWithIsFirst:YES];
+            STRONGSELF
+            [strongSelf refreshTitleView];
+            [strongSelf loadDataFromApiWithIsFirst:YES];
             
             
         } errorHandel:^(NSError* error){
-            
-            [weakSelf loadDataFromApiWithIsFirst:YES];
+            STRONGSELF
+            [strongSelf loadDataFromApiWithIsFirst:YES];
+
             
             
             
@@ -310,10 +313,10 @@
     refreshFooter=[[YiRefreshFooter alloc] init];
     refreshFooter.scrollView=tableView;
     [refreshFooter footer];
-    __weak RepositoryDetailViewController *weakSelf=self;
+    WEAKSELF
     refreshFooter.beginRefreshingBlock=^(){
-        
-        [weakSelf loadDataFromApiWithIsFirst:NO];
+        STRONGSELF
+        [strongSelf loadDataFromApiWithIsFirst:NO];
     };}
 
 

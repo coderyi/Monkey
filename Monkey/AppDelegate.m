@@ -58,32 +58,25 @@
 {
     // Override point for customization after application launch.
     
-//    RankViewController *rank=[[RankViewController alloc] init];
-
-//    BaseNavigationController *navRank = [self initlizerNavigationControllerWithRootViewController:rank];
-
-//    UINavigationController *navRank=[[UINavigationController alloc] initWithRootViewController:rank];
-
-
 
     
     LanguageRankViewController *languageRank=[[LanguageRankViewController alloc] init];
     BaseNavigationController *navLanguageRank=[self initlizerNavigationControllerWithRootViewController:languageRank];
     navLanguageRank.navigationBar.barTintColor=YiBlue;
     navLanguageRank.navigationBar.tintColor=[UIColor whiteColor];
-    navLanguageRank.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:UITextAttributeTextColor];
+    navLanguageRank.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     
     RepositoriesViewController *repositories=[[RepositoriesViewController alloc] init];
     BaseNavigationController *navRepositories = [self initlizerNavigationControllerWithRootViewController:repositories];
     navRepositories.navigationBar.barTintColor=YiBlue;
     navRepositories.navigationBar.tintColor=[UIColor whiteColor];
-    navRepositories.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:UITextAttributeTextColor];
+    navRepositories.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     
     MoreViewController *more=[[MoreViewController alloc] init];
     BaseNavigationController *navMore = [self initlizerNavigationControllerWithRootViewController:more];
     navMore.navigationBar.barTintColor=YiBlue;
     navMore.navigationBar.tintColor=[UIColor whiteColor];
-    navMore.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:UITextAttributeTextColor];
+    navMore.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     
     UITabBarController *tab=[[UITabBarController alloc] init];
     tab.viewControllers=@[navLanguageRank,navRepositories,navMore];

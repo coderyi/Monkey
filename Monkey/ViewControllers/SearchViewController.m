@@ -90,6 +90,7 @@
     [self addHeader:1];
     [self addFooter:1];
     tableView1.tag=11;
+    
     searchSegment.ButtonActionBlock=^(int buttonTag){
         currentIndex=buttonTag-100;
         
@@ -152,6 +153,7 @@
 
 - (void)addHeader:(int)type
 {
+    WEAKSELF
     if (type==1) {
         
         
@@ -159,9 +161,12 @@
         refreshHeader1=[[YiRefreshHeader alloc] init];
         refreshHeader1.scrollView=tableView1;
         [refreshHeader1 header];
-        __weak typeof(self) weakSelf = self;
+        
         refreshHeader1.beginRefreshingBlock=^(){
-            [weakSelf loadDataFromApiWithIsFirst:YES];
+
+            STRONGSELF
+            [strongSelf loadDataFromApiWithIsFirst:YES];
+
             
             
             
@@ -175,9 +180,12 @@
         refreshHeader2=[[YiRefreshHeader alloc] init];
         refreshHeader2.scrollView=tableView2;
         [refreshHeader2 header];
-        __weak typeof(self) weakSelf = self;
+        
         refreshHeader2.beginRefreshingBlock=^(){
-            [weakSelf loadDataFromApiWithIsFirst:YES];
+
+            STRONGSELF
+            [strongSelf loadDataFromApiWithIsFirst:YES];
+
             
             
             
@@ -192,7 +200,9 @@
 
 - (void)addFooter:(int)type
 {
-    __weak typeof(self) weakSelf = self;
+
+    WEAKSELF
+
     if (type==1) {
         
         
@@ -201,19 +211,21 @@
         refreshFooter1.scrollView=tableView1;
         [refreshFooter1 footer];
         refreshFooter1.beginRefreshingBlock=^(){
-            
-            [weakSelf loadDataFromApiWithIsFirst:NO];
+
+            STRONGSELF
+            [strongSelf loadDataFromApiWithIsFirst:NO];
         };
-    }else if (type==2){
-            
+        
             //    YiRefreshFooter  底部刷新按钮的使用
             refreshFooter2=[[YiRefreshFooter alloc] init];
             refreshFooter2.scrollView=tableView2;
             [refreshFooter2 footer];
         
             refreshFooter2.beginRefreshingBlock=^(){
-                
-                [weakSelf loadDataFromApiWithIsFirst:NO];
+
+                STRONGSELF
+                [strongSelf loadDataFromApiWithIsFirst:NO];
+
             };
             
     }

@@ -126,12 +126,13 @@
     refreshHeader=[[YiRefreshHeader alloc] init];
     refreshHeader.scrollView=tableView;
     [refreshHeader header];
-    __weak typeof(self) weakSelf = self;
+
+    
+    WEAKSELF
     refreshHeader.beginRefreshingBlock=^(){
-        [weakSelf loadDataFromApiWithIsFirst:YES];
-        
-        
-        
+        STRONGSELF
+        [strongSelf loadDataFromApiWithIsFirst:YES];
+
     };
     
     //    是否在进入该界面的时候就开始进入刷新状态
@@ -144,11 +145,15 @@
     refreshFooter=[[YiRefreshFooter alloc] init];
     refreshFooter.scrollView=tableView;
     [refreshFooter footer];
-    __weak typeof(self) weakSelf = self;
+
+    
+    WEAKSELF
     refreshFooter.beginRefreshingBlock=^(){
-        
-        [weakSelf loadDataFromApiWithIsFirst:NO];
-    };}
+        STRONGSELF
+        [strongSelf loadDataFromApiWithIsFirst:NO];
+
+    };
+    }
 
 
 - (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst

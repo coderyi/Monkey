@@ -25,7 +25,6 @@
     UITableView *tableView;
     YiRefreshHeader *refreshHeader;
     YiRefreshFooter *refreshFooter;
-    UILabel *titleText;
     int currentIndex;
 
     
@@ -74,19 +73,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"个人主页";
     currentIndex=1;
 
     if (iOS7) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
-    titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
-    titleText.backgroundColor = [UIColor clearColor];
-    titleText.textColor=[UIColor whiteColor];
-    [titleText setFont:[UIFont systemFontOfSize:19.0]];
-    
-    titleText.textAlignment=NSTextAlignmentCenter;
-    self.navigationItem.titleView=titleText;
+
     
     self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets=NO;
