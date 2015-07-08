@@ -6,6 +6,9 @@
 //  Created by apple on 15/3/6.
 //  Copyright (c) 2015年 coderyi. All rights reserved.
 //
+//YiRefresh is a simple way to use pull-to-refresh.下拉刷新，大道至简，最简单的网络刷新控件
+//项目地址在：https://github.com/coderyi/YiRefresh
+//
 
 #import "YiRefreshFooter.h"
 @interface YiRefreshFooter (){
@@ -15,8 +18,8 @@
     float scrollFrameHeight;
     float footerHeight;
     float scrollWidth;
-    BOOL isAdd;
-    BOOL isRefresh;
+    BOOL isAdd;//是否添加了footer,默认是NO
+    BOOL isRefresh;//是否正在刷新,默认是NO
     
     
     UIView *footerView;
@@ -26,7 +29,7 @@
 @end
 @implementation YiRefreshFooter
 
--(void)footer{
+- (void)footer{
 
     scrollWidth=_scrollView.frame.size.width;
     footerHeight=35;
@@ -68,7 +71,7 @@
     int currentPostion = _scrollView.contentOffset.y;
     
    
-//        进入刷新状态
+    // 进入刷新状态
     if ((currentPostion>(contentHeight-scrollFrameHeight))&&(contentHeight>scrollFrameHeight)) {
         
         [self beginRefreshing];
@@ -79,8 +82,11 @@
     
     
 }
-//开始刷新操作  如果正在刷新则不做操作
--(void)beginRefreshing{
+
+/**
+ *  开始刷新操作  如果正在刷新则不做操作
+ */
+- (void)beginRefreshing{
     if (!isRefresh) {
         isRefresh=YES;
         [activityView startAnimating];
@@ -98,8 +104,11 @@
     }
 
 }
-//关闭刷新操作
--(void)endRefreshing{
+
+/**
+ *  关闭刷新操作  请加在UIScrollView数据刷新后，如[tableView reloadData];
+ */
+- (void)endRefreshing{
      isRefresh=NO;
     
   
@@ -107,14 +116,14 @@
         
         [UIView animateWithDuration:0.3 animations:^{
             [activityView stopAnimating];
-            
-            _scrollView.contentInset=UIEdgeInsetsMake(0, 0, footerHeight, 0);
-            footerView.frame=CGRectMake(0, contentHeight, ScreenWidth, footerHeight);
+           
+            _scrollView.contentInset=UIEdgeInsetsMake(0, 0, 0, 0);
+            footerView.frame=CGRectMake(0, contentHeight, [[UIScreen mainScreen] bounds].size.width, footerHeight);
         }];
     });
 }
 
--(void)dealloc{
+- (void)dealloc{
     [_scrollView removeObserver:self forKeyPath:@"contentOffset"];
     
 }

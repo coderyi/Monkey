@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A857C4D1B4CE4FF00516D23 /* down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A857C481B4CE4FF00516D23 /* down@2x.png */; };
+		0A857C4E1B4CE4FF00516D23 /* YiRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A857C4A1B4CE4FF00516D23 /* YiRefreshFooter.m */; };
+		0A857C4F1B4CE4FF00516D23 /* YiRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A857C4C1B4CE4FF00516D23 /* YiRefreshHeader.m */; };
 		A1FC32A51B25D90B00FCBCE7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC32A41B25D90B00FCBCE7 /* Foundation.framework */; };
 		A1FC32A71B25D90B00FCBCE7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC32A61B25D90B00FCBCE7 /* CoreGraphics.framework */; };
 		A1FC32A91B25D90B00FCBCE7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC32A81B25D90B00FCBCE7 /* UIKit.framework */; };
@@ -80,9 +83,6 @@
 		A1FC33CE1B25D92200FCBCE7 /* umeng_fb_audio_play_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1FC335C1B25D92200FCBCE7 /* umeng_fb_audio_play_default@2x.png */; };
 		A1FC33CF1B25D92200FCBCE7 /* libUMOpus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC335F1B25D92200FCBCE7 /* libUMOpus.a */; };
 		A1FC33D01B25D92200FCBCE7 /* libUMessage_Sdk_1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC33641B25D92200FCBCE7 /* libUMessage_Sdk_1.1.0.a */; };
-		A1FC33D11B25D92200FCBCE7 /* down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1FC33671B25D92200FCBCE7 /* down@2x.png */; };
-		A1FC33D21B25D92200FCBCE7 /* YiRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC33691B25D92200FCBCE7 /* YiRefreshFooter.m */; };
-		A1FC33D31B25D92200FCBCE7 /* YiRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC336B1B25D92200FCBCE7 /* YiRefreshHeader.m */; };
 		A1FC33D41B25D92200FCBCE7 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC336E1B25D92200FCBCE7 /* AboutViewController.m */; };
 		A1FC33D51B25D92200FCBCE7 /* CityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC33701B25D92200FCBCE7 /* CityViewController.m */; };
 		A1FC33D61B25D92200FCBCE7 /* LanguageRankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FC33721B25D92200FCBCE7 /* LanguageRankViewController.m */; };
@@ -116,6 +116,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A857C481B4CE4FF00516D23 /* down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down@2x.png"; sourceTree = "<group>"; };
+		0A857C491B4CE4FF00516D23 /* YiRefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YiRefreshFooter.h; sourceTree = "<group>"; };
+		0A857C4A1B4CE4FF00516D23 /* YiRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YiRefreshFooter.m; sourceTree = "<group>"; };
+		0A857C4B1B4CE4FF00516D23 /* YiRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YiRefreshHeader.h; sourceTree = "<group>"; };
+		0A857C4C1B4CE4FF00516D23 /* YiRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YiRefreshHeader.m; sourceTree = "<group>"; };
 		A1FC32A11B25D90B00FCBCE7 /* Monkey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Monkey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FC32A41B25D90B00FCBCE7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A1FC32A61B25D90B00FCBCE7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -242,11 +247,6 @@
 		A1FC33621B25D92200FCBCE7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UMFeedbackLocalizable.strings"; sourceTree = "<group>"; };
 		A1FC33641B25D92200FCBCE7 /* libUMessage_Sdk_1.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.1.0.a; sourceTree = "<group>"; };
 		A1FC33651B25D92200FCBCE7 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
-		A1FC33671B25D92200FCBCE7 /* down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down@2x.png"; sourceTree = "<group>"; };
-		A1FC33681B25D92200FCBCE7 /* YiRefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YiRefreshFooter.h; sourceTree = "<group>"; };
-		A1FC33691B25D92200FCBCE7 /* YiRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YiRefreshFooter.m; sourceTree = "<group>"; };
-		A1FC336A1B25D92200FCBCE7 /* YiRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YiRefreshHeader.h; sourceTree = "<group>"; };
-		A1FC336B1B25D92200FCBCE7 /* YiRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YiRefreshHeader.m; sourceTree = "<group>"; };
 		A1FC336D1B25D92200FCBCE7 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		A1FC336E1B25D92200FCBCE7 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		A1FC336F1B25D92200FCBCE7 /* CityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityViewController.h; sourceTree = "<group>"; };
@@ -317,6 +317,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A857C471B4CE4FF00516D23 /* YiRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				0A857C481B4CE4FF00516D23 /* down@2x.png */,
+				0A857C491B4CE4FF00516D23 /* YiRefreshFooter.h */,
+				0A857C4A1B4CE4FF00516D23 /* YiRefreshFooter.m */,
+				0A857C4B1B4CE4FF00516D23 /* YiRefreshHeader.h */,
+				0A857C4C1B4CE4FF00516D23 /* YiRefreshHeader.m */,
+			);
+			path = YiRefresh;
+			sourceTree = "<group>";
+		};
 		A1FC32981B25D90B00FCBCE7 = {
 			isa = PBXGroup;
 			children = (
@@ -425,11 +437,11 @@
 		A1FC32EC1B25D92200FCBCE7 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				0A857C471B4CE4FF00516D23 /* YiRefresh */,
 				A1FC32F91B25D92200FCBCE7 /* MJPhotoBrowser */,
 				A1FC330B1B25D92200FCBCE7 /* MKNetworkKit */,
 				A1FC33231B25D92200FCBCE7 /* SDWebImage */,
 				A1FC33451B25D92200FCBCE7 /* UM */,
-				A1FC33661B25D92200FCBCE7 /* YiRefresh */,
 			);
 			path = Vendor;
 			sourceTree = "<group>";
@@ -614,18 +626,6 @@
 			path = UMessage_Sdk_1.1.0;
 			sourceTree = "<group>";
 		};
-		A1FC33661B25D92200FCBCE7 /* YiRefresh */ = {
-			isa = PBXGroup;
-			children = (
-				A1FC33671B25D92200FCBCE7 /* down@2x.png */,
-				A1FC33681B25D92200FCBCE7 /* YiRefreshFooter.h */,
-				A1FC33691B25D92200FCBCE7 /* YiRefreshFooter.m */,
-				A1FC336A1B25D92200FCBCE7 /* YiRefreshHeader.h */,
-				A1FC336B1B25D92200FCBCE7 /* YiRefreshHeader.m */,
-			);
-			path = YiRefresh;
-			sourceTree = "<group>";
-		};
 		A1FC336C1B25D92200FCBCE7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -763,7 +763,7 @@
 				A1FC33C61B25D92200FCBCE7 /* ToolViewInputTextHL@2x.png in Resources */,
 				A1FC33C51B25D92200FCBCE7 /* ToolViewInputText@2x.png in Resources */,
 				A1FC339C1B25D92200FCBCE7 /* MJPhotoBrowser.bundle in Resources */,
-				A1FC33D11B25D92200FCBCE7 /* down@2x.png in Resources */,
+				0A857C4D1B4CE4FF00516D23 /* down@2x.png in Resources */,
 				A1FC32B81B25D90B00FCBCE7 /* Main.storyboard in Resources */,
 				A1FC33CC1B25D92200FCBCE7 /* umeng_fb_audio_play_02@2x.png in Resources */,
 				A1FC33C71B25D92200FCBCE7 /* ToolViewInputVoice@2x.png in Resources */,
@@ -797,6 +797,7 @@
 				A1FC32B51B25D90B00FCBCE7 /* AppDelegate.m in Sources */,
 				A1FC339B1B25D92200FCBCE7 /* MJPhoto.m in Sources */,
 				A1FC338E1B25D92200FCBCE7 /* APIEngine.m in Sources */,
+				0A857C4E1B4CE4FF00516D23 /* YiRefreshFooter.m in Sources */,
 				A1FC33DA1B25D92200FCBCE7 /* RepositoriesViewController.m in Sources */,
 				A1FC33DC1B25D92200FCBCE7 /* SearchViewController.m in Sources */,
 				E466FA4B1B428E8C00EE02A6 /* BaseNavigationController.m in Sources */,
@@ -810,13 +811,13 @@
 				A1FC33B21B25D92200FCBCE7 /* SDWebImageDecoder.m in Sources */,
 				A1FC33B51B25D92200FCBCE7 /* SDWebImageManager.m in Sources */,
 				A1FC33A31B25D92200FCBCE7 /* UIImageView+MJWebCache.m in Sources */,
-				A1FC33D31B25D92200FCBCE7 /* YiRefreshHeader.m in Sources */,
 				A1FC33DE1B25D92200FCBCE7 /* WebViewController.m in Sources */,
 				A1FC33BB1B25D92200FCBCE7 /* UIImageView+HighlightedWebCache.m in Sources */,
 				A1FC33E01B25D92200FCBCE7 /* RepositoriesTableViewCell.m in Sources */,
 				A1FC33B81B25D92200FCBCE7 /* UIImage+GIF.m in Sources */,
 				A1FC33D71B25D92200FCBCE7 /* LanguageViewController.m in Sources */,
 				A1FC33AD1B25D92200FCBCE7 /* Reachability.m in Sources */,
+				0A857C4F1B4CE4FF00516D23 /* YiRefreshHeader.m in Sources */,
 				A1FC33DB1B25D92200FCBCE7 /* RepositoryDetailViewController.m in Sources */,
 				A1FC33D41B25D92200FCBCE7 /* AboutViewController.m in Sources */,
 				A1FC33931B25D92200FCBCE7 /* RepositoryModel.m in Sources */,
@@ -831,7 +832,6 @@
 				A1FC33B31B25D92200FCBCE7 /* SDWebImageDownloader.m in Sources */,
 				A1FC33D51B25D92200FCBCE7 /* CityViewController.m in Sources */,
 				A1FC33AF1B25D92200FCBCE7 /* NSData+ImageContentType.m in Sources */,
-				A1FC33D21B25D92200FCBCE7 /* YiRefreshFooter.m in Sources */,
 				A1FC339F1B25D92200FCBCE7 /* MJPhotoProgressView.m in Sources */,
 				A1FC33D61B25D92200FCBCE7 /* LanguageRankViewController.m in Sources */,
 				A1FC33D91B25D92200FCBCE7 /* RankViewController.m in Sources */,
