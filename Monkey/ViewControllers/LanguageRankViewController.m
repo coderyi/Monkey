@@ -651,7 +651,7 @@
                 q=[NSString stringWithFormat:@"location:%@",city];
             }
             [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:q sort:@"followers" categoryLocation:city categoryLanguage:language completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
+                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)totalCount] forState:UIControlStateNormal];
                 self.DsOfPageListObject1.totalCount=totalCount;
 
                 if (page<=1) {
