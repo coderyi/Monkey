@@ -19,7 +19,7 @@ typedef void (^PageListInfoResponseBlock)(NSArray* modelArray,NSInteger page,NSI
 typedef void (^UserModelResponseBlock)(UserModel* model);
 typedef void (^RepositoryModelResponseBlock)(RepositoryModel* model);
 
-@interface APIEngine : MKNetworkEngine
+@interface YiNetworkEngine : MKNetworkEngine
 
 - (MKNetworkOperation *)searchUsersWithPage:(NSInteger)page q:(NSString *)q sort:(NSString *)sort categoryLocation:(NSString *)categoryLocation categoryLanguage:(NSString *)categoryLanguage completoinHandler:(PageListInfoResponseBlock)completionBlock
                                 errorHandel:(MKNKErrorBlock)errorBlock;

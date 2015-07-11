@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSObject (Extend)
-- (BOOL)isNull;
+@interface NSObject (HUD)
+
 - (void)showYiProgressHUD:(NSString *)title  afterDelay:(NSTimeInterval)delay;
 - (void)showYiProgressHUD:(NSString *)title;
 - (void)hideYiProgressHUD;

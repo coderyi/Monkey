@@ -6,10 +6,10 @@
 //  Copyright (c) 2015年 www.coderyi.com. All rights reserved.
 //
 
-#import "APIEngine.h"
+#import "YiNetworkEngine.h"
 #import "RepositoryModel.h"
 
-@implementation APIEngine
+@implementation YiNetworkEngine
 //https://developer.github.com/v3/search/#search-users
 //Search users
 - (MKNetworkOperation *)searchUsersWithPage:(NSInteger)page q:(NSString *)q sort:(NSString *)sort categoryLocation:(NSString *)categoryLocation categoryLanguage:(NSString *)categoryLanguage completoinHandler:(PageListInfoResponseBlock)completionBlock
