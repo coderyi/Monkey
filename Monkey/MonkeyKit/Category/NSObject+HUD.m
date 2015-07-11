@@ -6,37 +6,9 @@
 //  Copyright (c) 2015年 www.coderyi.com. All rights reserved.
 //
 
-#import "NSObject+Extend.h"
+#import "NSObject+HUD.h"
 UIAlertView *alertView;
-@implementation NSObject (Extend)
-//判断对象是否为空
-- (BOOL)isNull
-{
-    if ([self isEqual:[NSNull null]])
-    {
-        return YES;
-    }
-    else
-    {
-        if ([self isKindOfClass:[NSNull class]])
-        {
-            return YES;
-        }
-        else
-        {
-            if (self==nil)
-            {
-                return YES;
-            }
-        }
-    }
-    if ([self isKindOfClass:[NSString class]]) {
-        if ([((NSString *)self) isEqualToString:@"(null)"]) {
-            return YES;
-        }
-    }
-    return NO;
-}
+@implementation NSObject (HUD)
 - (void)showYiProgressHUD:(NSString *)title  afterDelay:(NSTimeInterval)delay{
     [self showYiProgressHUD:title];
     
