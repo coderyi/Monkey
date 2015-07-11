@@ -47,7 +47,6 @@
 #import "UMessage.h"
 
 #import "BaseNavigationController.h"
-
 @implementation AppDelegate
 
 - (BaseNavigationController *)initlizerNavigationControllerWithRootViewController:(UIViewController *)rootViewController {
@@ -98,7 +97,7 @@
     tabBarItem3.image=[UIImage imageNamed:@"more"];
     
     self.window.rootViewController=tab;
-    self.apiEngine = [[APIEngine alloc] initWithDefaultSet];
+    self.apiEngine = [[YiNetworkEngine alloc] initWithDefaultSet];
     
     
     [MobClick startWithAppkey:@"551ff351fd98c56f12000013"];
