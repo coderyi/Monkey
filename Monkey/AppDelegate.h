@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "APIEngine.h"
+#import "YiNetworkEngine.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 
-@property (nonatomic,strong) APIEngine *apiEngine;
+@property (nonatomic,strong) YiNetworkEngine *apiEngine;
 @end
