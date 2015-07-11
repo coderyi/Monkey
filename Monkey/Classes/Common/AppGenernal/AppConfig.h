@@ -1,32 +1,13 @@
 //
-//  Prefix header
+//  AppConfig.h
+//  Monkey
 //
-//  The contents of this file are implicitly included at the beginning of every source file.
+//  Created by coderyi on 15/7/11.
+//  Copyright (c) 2015年 www.coderyi.com. All rights reserved.
 //
 
-#import <Availability.h>
-
-#ifndef __IPHONE_5_0
-#warning "This project uses features only available in iOS SDK 5.0 and later."
-#endif
-
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
-#endif
-
-/**
- *   header
- */
-#import "AppDelegate.h"
-#import "YiRefreshHeader.h"
-#import "YiRefreshFooter.h"
-#import "DataSourceModel.h"
-#import "MKNetworkKit.h"
-#import "MKNetworkEngine+DefaultSet.h"
-#import "APIEngine.h"
-#import "UIImageView+WebCache.h"
-#import "NSObject+Extend.h"
+#ifndef Monkey_AppConfig_h
+#define Monkey_AppConfig_h
 
 /**
  *   define
@@ -52,3 +33,4 @@
 #define WEAKSELF typeof(self) __weak weakSelf = self;
 #define STRONGSELF typeof(weakSelf) __strong strongSelf = weakSelf;
 
+#endif
