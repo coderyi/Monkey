@@ -1434,6 +1434,7 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
 -(id) responseJSON {
   if([self responseData] == nil) return nil;
   NSError *error = nil;
+  NSLog(@"response to string %@",[self responseString]);
   id returnValue = [NSJSONSerialization JSONObjectWithData:[self responseData] options:0 error:&error];
   if(error) DLog(@"JSON Parsing Error: %@", error);
   return returnValue;

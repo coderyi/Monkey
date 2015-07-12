@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 www.coderyi.com. All rights reserved.
 //
 
-#import "WebViewController.h"
+#import "LoginWebViewController.h"
 
-@interface WebViewController ()<UIWebViewDelegate>{
+@interface LoginWebViewController ()<UIWebViewDelegate>{
     
     
     UILabel *titleText;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation WebViewController
+@implementation LoginWebViewController
 
 #pragma mark - Lifecycle
 
@@ -76,13 +76,21 @@
     
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-
+    NSString *requestUrl = webView.request.URL.absoluteString;
+    NSLog(@"requestUrl   %@",requestUrl);
     [activityIndicator stopAnimating];
+    if ([[requestUrl substringWithRange:NSMakeRange(27, 5)] isEqualToString:@"code="]) {
+        _callback([requestUrl substringWithRange:NSMakeRange(32, 20)]);
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+//    32  20
+
+    
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     [activityIndicator stopAnimating];
-
-
+    
+    
 }
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
     
@@ -91,13 +99,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

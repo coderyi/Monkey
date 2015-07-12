@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1228E91B52022400D5BAD8 /* LoginWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1228E81B52022400D5BAD8 /* LoginWebViewController.m */; };
 		0A857C4D1B4CE4FF00516D23 /* down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A857C481B4CE4FF00516D23 /* down@2x.png */; };
 		0A857C4E1B4CE4FF00516D23 /* YiRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A857C4A1B4CE4FF00516D23 /* YiRefreshFooter.m */; };
 		0A857C4F1B4CE4FF00516D23 /* YiRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A857C4C1B4CE4FF00516D23 /* YiRefreshHeader.m */; };
+		0A86058E1B5252DA00DE3BFF /* LoginHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A86058D1B5252DA00DE3BFF /* LoginHelper.m */; };
+		0A8605941B5255AF00DE3BFF /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8605931B5255AF00DE3BFF /* SearchViewController.m */; };
+		0A8605971B525A5C00DE3BFF /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8605961B525A5C00DE3BFF /* NewsViewController.m */; };
 		0ACEA2A91B51383C009F6B6D /* NSObject+HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA2A31B51383C009F6B6D /* NSObject+HUD.m */; };
 		0ACEA2AA1B51383C009F6B6D /* MKNetworkEngine+DefaultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA2A61B51383C009F6B6D /* MKNetworkEngine+DefaultSet.m */; };
 		0ACEA2AB1B51383C009F6B6D /* YiNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA2A81B51383C009F6B6D /* YiNetworkEngine.m */; };
@@ -30,8 +34,6 @@
 		0ACEA31C1B514298009F6B6D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA31B1B514298009F6B6D /* README.md */; };
 		0ACEA31E1B5142F6009F6B6D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA31D1B5142F6009F6B6D /* README.md */; };
 		0ACEA3211B5145A4009F6B6D /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3201B5145A4009F6B6D /* WebViewController.m */; };
-		0ACEA3251B5145AD009F6B6D /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3241B5145AD009F6B6D /* SearchViewController.m */; };
-		0ACEA3291B5145B4009F6B6D /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3281B5145B4009F6B6D /* AboutViewController.m */; };
 		0ACEA3451B51467A009F6B6D /* RepositoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3341B51467A009F6B6D /* RepositoriesViewController.m */; };
 		0ACEA3461B51467A009F6B6D /* RepositoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3361B51467A009F6B6D /* RepositoryDetailViewController.m */; };
 		0ACEA3471B51467A009F6B6D /* CityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA33A1B51467A009F6B6D /* CityViewController.m */; };
@@ -40,6 +42,8 @@
 		0ACEA34A1B51467A009F6B6D /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3401B51467A009F6B6D /* MoreViewController.m */; };
 		0ACEA34B1B51467A009F6B6D /* RankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3421B51467A009F6B6D /* RankViewController.m */; };
 		0ACEA34C1B51467A009F6B6D /* UserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3441B51467A009F6B6D /* UserDetailViewController.m */; };
+		0ACEA3521B516030009F6B6D /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3501B516030009F6B6D /* AboutViewController.m */; };
+		0ACEA3551B51604A009F6B6D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3541B51604A009F6B6D /* LoginViewController.m */; };
 		A1FC32A51B25D90B00FCBCE7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC32A41B25D90B00FCBCE7 /* Foundation.framework */; };
 		A1FC32A71B25D90B00FCBCE7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC32A61B25D90B00FCBCE7 /* CoreGraphics.framework */; };
 		A1FC32A91B25D90B00FCBCE7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC32A81B25D90B00FCBCE7 /* UIKit.framework */; };
@@ -123,11 +127,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A1228E71B52022400D5BAD8 /* LoginWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginWebViewController.h; sourceTree = "<group>"; };
+		0A1228E81B52022400D5BAD8 /* LoginWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginWebViewController.m; sourceTree = "<group>"; };
 		0A857C481B4CE4FF00516D23 /* down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down@2x.png"; sourceTree = "<group>"; };
 		0A857C491B4CE4FF00516D23 /* YiRefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YiRefreshFooter.h; sourceTree = "<group>"; };
 		0A857C4A1B4CE4FF00516D23 /* YiRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YiRefreshFooter.m; sourceTree = "<group>"; };
 		0A857C4B1B4CE4FF00516D23 /* YiRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YiRefreshHeader.h; sourceTree = "<group>"; };
 		0A857C4C1B4CE4FF00516D23 /* YiRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YiRefreshHeader.m; sourceTree = "<group>"; };
+		0A86058C1B5252DA00DE3BFF /* LoginHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginHelper.h; sourceTree = "<group>"; };
+		0A86058D1B5252DA00DE3BFF /* LoginHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginHelper.m; sourceTree = "<group>"; };
+		0A8605921B5255AF00DE3BFF /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		0A8605931B5255AF00DE3BFF /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		0A8605951B525A5C00DE3BFF /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
+		0A8605961B525A5C00DE3BFF /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
 		0ACEA2A21B51383C009F6B6D /* NSObject+HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+HUD.h"; sourceTree = "<group>"; };
 		0ACEA2A31B51383C009F6B6D /* NSObject+HUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HUD.m"; sourceTree = "<group>"; };
 		0ACEA2A51B51383C009F6B6D /* MKNetworkEngine+DefaultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKNetworkEngine+DefaultSet.h"; sourceTree = "<group>"; };
@@ -164,10 +176,6 @@
 		0ACEA31D1B5142F6009F6B6D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0ACEA31F1B5145A4009F6B6D /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		0ACEA3201B5145A4009F6B6D /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
-		0ACEA3231B5145AD009F6B6D /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
-		0ACEA3241B5145AD009F6B6D /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
-		0ACEA3271B5145B4009F6B6D /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
-		0ACEA3281B5145B4009F6B6D /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		0ACEA3331B51467A009F6B6D /* RepositoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepositoriesViewController.h; sourceTree = "<group>"; };
 		0ACEA3341B51467A009F6B6D /* RepositoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepositoriesViewController.m; sourceTree = "<group>"; };
 		0ACEA3351B51467A009F6B6D /* RepositoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepositoryDetailViewController.h; sourceTree = "<group>"; };
@@ -184,6 +192,10 @@
 		0ACEA3421B51467A009F6B6D /* RankViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankViewController.m; sourceTree = "<group>"; };
 		0ACEA3431B51467A009F6B6D /* UserDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetailViewController.h; sourceTree = "<group>"; };
 		0ACEA3441B51467A009F6B6D /* UserDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetailViewController.m; sourceTree = "<group>"; };
+		0ACEA34F1B516030009F6B6D /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		0ACEA3501B516030009F6B6D /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		0ACEA3531B51604A009F6B6D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		0ACEA3541B51604A009F6B6D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		A1FC32A11B25D90B00FCBCE7 /* Monkey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Monkey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FC32A41B25D90B00FCBCE7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A1FC32A61B25D90B00FCBCE7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -346,6 +358,32 @@
 			path = YiRefresh;
 			sourceTree = "<group>";
 		};
+		0A86058F1B5255AF00DE3BFF /* NewsModule */ = {
+			isa = PBXGroup;
+			children = (
+				0A8605951B525A5C00DE3BFF /* NewsViewController.h */,
+				0A8605961B525A5C00DE3BFF /* NewsViewController.m */,
+			);
+			path = NewsModule;
+			sourceTree = "<group>";
+		};
+		0A8605901B5255AF00DE3BFF /* SearchModule */ = {
+			isa = PBXGroup;
+			children = (
+				0A8605911B5255AF00DE3BFF /* ViewControllers */,
+			);
+			path = SearchModule;
+			sourceTree = "<group>";
+		};
+		0A8605911B5255AF00DE3BFF /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0A8605921B5255AF00DE3BFF /* SearchViewController.h */,
+				0A8605931B5255AF00DE3BFF /* SearchViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		0AC561121B50ED11009708D6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -495,7 +533,8 @@
 		0ACEA2E01B513CB5009F6B6D /* DiscoveryModule */ = {
 			isa = PBXGroup;
 			children = (
-				0ACEA3221B5145AD009F6B6D /* ViewControllers */,
+				0A86058F1B5255AF00DE3BFF /* NewsModule */,
+				0A8605901B5255AF00DE3BFF /* SearchModule */,
 			);
 			path = DiscoveryModule;
 			sourceTree = "<group>";
@@ -503,7 +542,8 @@
 		0ACEA2E11B513CB5009F6B6D /* PersonalModule */ = {
 			isa = PBXGroup;
 			children = (
-				0ACEA3261B5145B4009F6B6D /* ViewControllers */,
+				0ACEA34E1B516030009F6B6D /* AboutModule */,
+				0ACEA3511B516030009F6B6D /* LoginModule */,
 			);
 			path = PersonalModule;
 			sourceTree = "<group>";
@@ -522,24 +562,6 @@
 			children = (
 				0ACEA31F1B5145A4009F6B6D /* WebViewController.h */,
 				0ACEA3201B5145A4009F6B6D /* WebViewController.m */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		0ACEA3221B5145AD009F6B6D /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				0ACEA3231B5145AD009F6B6D /* SearchViewController.h */,
-				0ACEA3241B5145AD009F6B6D /* SearchViewController.m */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		0ACEA3261B5145B4009F6B6D /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				0ACEA3271B5145B4009F6B6D /* AboutViewController.h */,
-				0ACEA3281B5145B4009F6B6D /* AboutViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -588,6 +610,28 @@
 				0ACEA3441B51467A009F6B6D /* UserDetailViewController.m */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		0ACEA34E1B516030009F6B6D /* AboutModule */ = {
+			isa = PBXGroup;
+			children = (
+				0ACEA34F1B516030009F6B6D /* AboutViewController.h */,
+				0ACEA3501B516030009F6B6D /* AboutViewController.m */,
+			);
+			path = AboutModule;
+			sourceTree = "<group>";
+		};
+		0ACEA3511B516030009F6B6D /* LoginModule */ = {
+			isa = PBXGroup;
+			children = (
+				0ACEA3531B51604A009F6B6D /* LoginViewController.h */,
+				0ACEA3541B51604A009F6B6D /* LoginViewController.m */,
+				0A86058C1B5252DA00DE3BFF /* LoginHelper.h */,
+				0A86058D1B5252DA00DE3BFF /* LoginHelper.m */,
+				0A1228E71B52022400D5BAD8 /* LoginWebViewController.h */,
+				0A1228E81B52022400D5BAD8 /* LoginWebViewController.m */,
+			);
+			path = LoginModule;
 			sourceTree = "<group>";
 		};
 		A1FC32981B25D90B00FCBCE7 = {
@@ -979,6 +1023,7 @@
 				0ACEA2AB1B51383C009F6B6D /* YiNetworkEngine.m in Sources */,
 				A1FC33A41B25D92200FCBCE7 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
 				A1FC33A01B25D92200FCBCE7 /* MJPhotoToolbar.m in Sources */,
+				0A8605941B5255AF00DE3BFF /* SearchViewController.m in Sources */,
 				A1FC33A81B25D92200FCBCE7 /* NSString+MKNetworkKitAdditions.m in Sources */,
 				A1FC33AB1B25D92200FCBCE7 /* MKNetworkEngine.m in Sources */,
 				A1FC33A21B25D92200FCBCE7 /* SDWebImageManager+MJ.m in Sources */,
@@ -1001,11 +1046,10 @@
 				A1FC33BB1B25D92200FCBCE7 /* UIImageView+HighlightedWebCache.m in Sources */,
 				0ACEA2DC1B513C17009F6B6D /* RepositoriesTableViewCell.m in Sources */,
 				0ACEA3471B51467A009F6B6D /* CityViewController.m in Sources */,
-				0ACEA3251B5145AD009F6B6D /* SearchViewController.m in Sources */,
+				0ACEA3521B516030009F6B6D /* AboutViewController.m in Sources */,
 				A1FC33B81B25D92200FCBCE7 /* UIImage+GIF.m in Sources */,
 				A1FC33AD1B25D92200FCBCE7 /* Reachability.m in Sources */,
 				0ACEA34B1B51467A009F6B6D /* RankViewController.m in Sources */,
-				0ACEA3291B5145B4009F6B6D /* AboutViewController.m in Sources */,
 				0A857C4F1B4CE4FF00516D23 /* YiRefreshHeader.m in Sources */,
 				A1FC33B01B25D92200FCBCE7 /* SDImageCache.m in Sources */,
 				0ACEA34A1B51467A009F6B6D /* MoreViewController.m in Sources */,
@@ -1023,8 +1067,11 @@
 				A1FC33B71B25D92200FCBCE7 /* UIButton+WebCache.m in Sources */,
 				A1FC33B31B25D92200FCBCE7 /* SDWebImageDownloader.m in Sources */,
 				A1FC33AF1B25D92200FCBCE7 /* NSData+ImageContentType.m in Sources */,
+				0A86058E1B5252DA00DE3BFF /* LoginHelper.m in Sources */,
+				0ACEA3551B51604A009F6B6D /* LoginViewController.m in Sources */,
 				A1FC339F1B25D92200FCBCE7 /* MJPhotoProgressView.m in Sources */,
 				A1FC33BA1B25D92200FCBCE7 /* UIImage+WebP.m in Sources */,
+				0A8605971B525A5C00DE3BFF /* NewsViewController.m in Sources */,
 				A1FC33A61B25D92200FCBCE7 /* NSDate+RFC1123.m in Sources */,
 				0ACEA2AA1B51383C009F6B6D /* MKNetworkEngine+DefaultSet.m in Sources */,
 				A1FC33A91B25D92200FCBCE7 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
@@ -1040,6 +1087,7 @@
 				A1FC33AC1B25D92200FCBCE7 /* MKNetworkOperation.m in Sources */,
 				A1FC33AA1B25D92200FCBCE7 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				A1FC33BC1B25D92200FCBCE7 /* UIImageView+WebCache.m in Sources */,
+				0A1228E91B52022400D5BAD8 /* LoginWebViewController.m in Sources */,
 				A1FC32B11B25D90B00FCBCE7 /* main.m in Sources */,
 				0ACEA31E1B5142F6009F6B6D /* README.md in Sources */,
 				0ACEA31C1B514298009F6B6D /* README.md in Sources */,

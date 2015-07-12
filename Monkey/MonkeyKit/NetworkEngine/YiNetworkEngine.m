@@ -10,6 +10,94 @@
 #import "RepositoryModel.h"
 
 @implementation YiNetworkEngine
+#pragma mark - login module
+//GitHub redirects back to your site
+//https://developer.github.com/v3/oauth/#github-redirects-back-to-your-site
+//POST https://github.com/login/oauth/access_token
+- (MKNetworkOperation *)loginWithCode:(NSString *)code
+                    completoinHandler:(StringResponseBlock)completionBlock
+                          errorHandel:(MKNKErrorBlock)errorBlock {
+    
+    NSString *getString = [NSString stringWithFormat:@"/login/oauth/access_token/"];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setValue:CoderyiClientID forKey:@"client_id"];
+    [dic setValue:CoderyiClientSecret forKey:@"client_secret"];
+    [dic setValue:code forKey:@"code"];
+    [dic setValue:@"1994" forKey:@"state"];
+    [dic setValue:@"https://github.com/coderyi" forKey:@"redirect_uri"];
+
+    MKNetworkOperation *op =
+    [self operationWithPath:getString params:dic httpMethod:@"POST" ssl:YES];
+    
+    NSLog(@"%@", op.url);
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        completionBlock([completedOperation responseString]);
+        if ([[completedOperation responseJSON]
+             isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *resultDictionary = [completedOperation responseJSON];
+            
+            
+            
+            
+            //            completionBlock(model);
+            
+            
+        }
+        
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
+        
+        errorBlock(error);
+        
+    }];
+    
+    [self enqueueOperation:op];
+    
+    return op;
+}
+
+
+
+- (MKNetworkOperation *)getUserInfoWithToken:(NSString *)token
+                           completoinHandler:(UserModelResponseBlock)completionBlock
+                                 errorHandel:(MKNKErrorBlock)errorBlock {
+    
+    NSString *getString = [NSString stringWithFormat:@"/user?access_token=%@",token];
+    
+    MKNetworkOperation *op =
+    [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
+    
+    NSLog(@"%@", op.url);
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        
+        if ([[completedOperation responseJSON]
+             isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *resultDictionary = [completedOperation responseJSON];
+            
+            UserModel *model = [UserModel modelWithDict:resultDictionary];
+            
+            
+            
+            completionBlock(model);
+            
+
+            
+            
+        }
+        
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
+        
+        errorBlock(error);
+        
+    }];
+    
+    [self enqueueOperation:op];
+    
+    return op;
+}
+
+
+#pragma mark - users module
+
 //https://developer.github.com/v3/search/#search-users
 //Search users
 - (MKNetworkOperation *)searchUsersWithPage:(NSInteger)page q:(NSString *)q sort:(NSString *)sort categoryLocation:(NSString *)categoryLocation categoryLanguage:(NSString *)categoryLanguage completoinHandler:(PageListInfoResponseBlock)completionBlock
@@ -133,74 +221,6 @@
     
     return op;
 }
-
-//https://developer.github.com/v3/search/#search-repositories
-//Search repositories
-- (MKNetworkOperation *)searchRepositoriesWithPage:(NSInteger)page q:(NSString *)q sort:(NSString *)sort completoinHandler:(PageListInfoResponseBlock)completionBlock
-                                errorHandel:(MKNKErrorBlock)errorBlock
-{
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    
-    
-    [dic setValue:q forKey:@"q"];
-    [dic setValue:sort forKey:@"sort"];
-    [dic setValue:[NSString stringWithFormat:@"%ld", (long)page] forKey:@"page"];
-    
-    
-    
-    //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
-    
-    NSString *getString = [NSString stringWithFormat:@"/search/repositories?q=%@&sort=%@&page=%ld",q,sort,(long)page];
-    
-    
-    
-    MKNetworkOperation *op =
-    [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
-    NSLog(@"url is %@",op.url);
-    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-        
-        if ([[completedOperation responseJSON]
-             isKindOfClass:[NSDictionary class]]) {
-            NSDictionary *resultDictionary = [completedOperation responseJSON];
-            
-            NSInteger totalCount=[[resultDictionary objectForKey:@"total_count"] intValue];
-            NSArray *list = [resultDictionary objectForKey:@"items"];
-            if ([list isKindOfClass:[NSArray class]]) {
-                if (list.count > 0) {
-                    
-                    NSMutableArray *listNew =
-                    [[NSMutableArray alloc] initWithCapacity:32];
-                    for (NSInteger i = 0; i < list.count; i++) {
-                        
-                        
-                        NSDictionary *dict = [list objectAtIndex:i];
-                        RepositoryModel *model = [RepositoryModel modelWithDict:dict];
-                        
-                        [listNew addObject:model];
-                        
-                    }
-                    completionBlock(listNew, page,totalCount);
-                    
-                }
-            }
-        }
-        
-        
-    } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
-        
-        errorBlock(error);
-        
-    }];
-    
-    [self enqueueOperation:op];
-    
-    return op;
-}
-
-
-
-
-
 //https://developer.github.com/v3/users/#get-a-single-user
 //Get a single user ,GET /users/:username
 - (MKNetworkOperation *)userDetailWithUserName:(NSString *)userName
@@ -409,6 +429,74 @@
     
     return op;
 }
+#pragma mark - repositories module
+
+//https://developer.github.com/v3/search/#search-repositories
+//Search repositories
+- (MKNetworkOperation *)searchRepositoriesWithPage:(NSInteger)page q:(NSString *)q sort:(NSString *)sort completoinHandler:(PageListInfoResponseBlock)completionBlock
+                                       errorHandel:(MKNKErrorBlock)errorBlock
+{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    
+    
+    [dic setValue:q forKey:@"q"];
+    [dic setValue:sort forKey:@"sort"];
+    [dic setValue:[NSString stringWithFormat:@"%ld", (long)page] forKey:@"page"];
+    
+    
+    
+    //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
+    
+    NSString *getString = [NSString stringWithFormat:@"/search/repositories?q=%@&sort=%@&page=%ld",q,sort,(long)page];
+    
+    
+    
+    MKNetworkOperation *op =
+    [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
+    NSLog(@"url is %@",op.url);
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        
+        if ([[completedOperation responseJSON]
+             isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *resultDictionary = [completedOperation responseJSON];
+            
+            NSInteger totalCount=[[resultDictionary objectForKey:@"total_count"] intValue];
+            NSArray *list = [resultDictionary objectForKey:@"items"];
+            if ([list isKindOfClass:[NSArray class]]) {
+                if (list.count > 0) {
+                    
+                    NSMutableArray *listNew =
+                    [[NSMutableArray alloc] initWithCapacity:32];
+                    for (NSInteger i = 0; i < list.count; i++) {
+                        
+                        
+                        NSDictionary *dict = [list objectAtIndex:i];
+                        RepositoryModel *model = [RepositoryModel modelWithDict:dict];
+                        
+                        [listNew addObject:model];
+                        
+                    }
+                    completionBlock(listNew, page,totalCount);
+                    
+                }
+            }
+        }
+        
+        
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
+        
+        errorBlock(error);
+        
+    }];
+    
+    [self enqueueOperation:op];
+    
+    return op;
+}
+
+
+
+
 
 
 
