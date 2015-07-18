@@ -41,6 +41,7 @@
 #import "LanguageRankViewController.h"
 #import "RepositoriesViewController.h"
 #import "MoreViewController.h"
+#import "DiscoveryViewController.h"
 #import "MobClick.h"
 #import "UMFeedback.h"
 #import "UMOpus.h"
@@ -71,6 +72,13 @@
     navRepositories.navigationBar.tintColor=[UIColor whiteColor];
     navRepositories.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     
+    DiscoveryViewController *discovery=[[DiscoveryViewController alloc] init];
+    BaseNavigationController *navDiscovery = [self initlizerNavigationControllerWithRootViewController:discovery];
+    navDiscovery.navigationBar.barTintColor=YiBlue;
+    navDiscovery.navigationBar.tintColor=[UIColor whiteColor];
+    navDiscovery.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+    
+    
     MoreViewController *more=[[MoreViewController alloc] init];
     BaseNavigationController *navMore = [self initlizerNavigationControllerWithRootViewController:more];
     navMore.navigationBar.barTintColor=YiBlue;
@@ -78,7 +86,7 @@
     navMore.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     
     UITabBarController *tab=[[UITabBarController alloc] init];
-    tab.viewControllers=@[navLanguageRank,navRepositories,navMore];
+    tab.viewControllers=@[navLanguageRank,navRepositories,navDiscovery,navMore];
     UITabBar *tabBar = tab.tabBar;
     tab.tabBar.backgroundColor=[UIColor whiteColor];
     tab.tabBar.tintColor=YiBlue;
@@ -87,14 +95,18 @@
     UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
     UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
     UITabBarItem *tabBarItem3 = [tabBar.items objectAtIndex:2];
+    UITabBarItem *tabBarItem4 = [tabBar.items objectAtIndex:3];
     tabBarItem1.title=@"Users";
     tabBarItem1.image=[UIImage imageNamed:@"github60"];
     
     tabBarItem2.title=@"Repositories";
     tabBarItem2.image=[UIImage imageNamed:@"github160"];
     
-    tabBarItem3.title=@"More";
-    tabBarItem3.image=[UIImage imageNamed:@"more"];
+    tabBarItem3.title=@"Discovery";
+    tabBarItem3.image=[UIImage imageNamed:@"github60"];
+    
+    tabBarItem4.title=@"More";
+    tabBarItem4.image=[UIImage imageNamed:@"more"];
     
     self.window.rootViewController=tab;
     self.apiEngine = [[YiNetworkEngine alloc] initWithDefaultSet];

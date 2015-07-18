@@ -84,6 +84,11 @@
     
     self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets=NO;
+    
+    UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(followAction)];
+    self.navigationItem.rightBarButtonItem=right;
+    
+    
     tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain ];
     [self.view addSubview:tableView];
     
@@ -196,6 +201,9 @@
         }
         [tableView reloadData];
     };
+    
+    
+    [self checkFollowStatusAction];
 }
 
 
@@ -205,6 +213,20 @@
 }
 
 #pragma mark - Actions
+- (void)followAction{
+
+}
+- (void)checkFollowStatusAction{
+    [ApplicationDelegate.apiEngine checkFollowStatusWithUsername:@"coderyi" target_user:_userModel.login completoinHandler:^(UserModel *model){
+        
+    } errorHandel:^(NSError* error){
+        
+    }];
+
+
+
+
+}
 
 //详细见mj的code4app
 //http://code4app.com/ios/%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90%E5%9B%BE%E7%89%87%E6%B5%8F%E8%A7%88%E5%99%A8/525e06116803fa7b0a000001

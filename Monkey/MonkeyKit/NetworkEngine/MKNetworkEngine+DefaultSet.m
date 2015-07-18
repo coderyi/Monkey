@@ -11,8 +11,8 @@
 @implementation MKNetworkEngine (DefaultSet)
 - (id)initWithDefaultSet
 {
-
-    self = [self initWithHostName:@"api.github.com" customHeaderFields:nil];
+    NSMutableDictionary *header=[NSMutableDictionary dictionaryWithObject:@"application/vnd.github.v3+json" forKey:@"Accept"];
+    self = [self initWithHostName:@"api.github.com" customHeaderFields:header];
     
     return self;
 }

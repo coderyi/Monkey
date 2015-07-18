@@ -54,7 +54,7 @@
     self.automaticallyAdjustsScrollViewInsets=NO;
     
     
-    tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStyleGrouped ];
+    tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64-49) style:UITableViewStyleGrouped ];
     [self.view addSubview:tableView];
     tableView.delegate=self;
     tableView.dataSource=self;
@@ -70,6 +70,9 @@
 #pragma mark - loginmodule
 
 
+/**
+ *  https://developer.github.com/v3/oauth/#redirect-users-to-request-github-access
+ */
 - (void)loginAction{
     //    YiNetworkEngine *apiEngine=[[YiNetworkEngine alloc] initWithHostName:@"github.com"];
     //    [apiEngine loginWithCompletoinHandler:^(NSString *response){
@@ -105,6 +108,8 @@
         //        13 40
         if ([[response substringWithRange:NSMakeRange(0, 13)] isEqualToString:@"access_token="]) {
             NSString *token=[response substringWithRange:NSMakeRange(13, 40)];
+            [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"access_token"];
+
             [self login2Action:token];
         }
         
@@ -132,9 +137,9 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if (currentLogin) {
-        return 5;
+        return 4;
     }
-    return 4;
+    return 3;
     
 
 }
@@ -166,19 +171,15 @@
         }
         
     }else if (indexPath.section==1){
-        cell.textLabel.text=@"搜索";
-
-    
-    }else if (indexPath.section==2){
         
         cell.textLabel.text=@"关于";
 
         
-    }else if (indexPath.section==3){
+    }else if (indexPath.section==2){
         cell.textLabel.text=@"反馈";
     }
     if (currentLogin) {
-        if (indexPath.section==4){
+        if (indexPath.section==3){
             cell.textLabel.text=@"退出登录";
         }
     }
@@ -203,16 +204,11 @@
         }
         
     }else if (indexPath.section==1){
-        
-        SearchViewController *search=[[SearchViewController alloc] init];
-        
-        [self.navigationController pushViewController:search animated:YES];
-    }else if (indexPath.section==2){
         AboutViewController *about=[[AboutViewController alloc] init];
         
         [self.navigationController pushViewController:about animated:YES];
         
-    }else if (indexPath.section==3){
+    }else if (indexPath.section==2){
         
         
         [self presentModalViewController:[UMFeedback feedbackModalViewController]
@@ -222,7 +218,7 @@
     
     
     if (currentLogin) {
-        if (indexPath.section==4){
+        if (indexPath.section==3){
             
             currentLogin=nil;
             currentAvatarUrl=nil;

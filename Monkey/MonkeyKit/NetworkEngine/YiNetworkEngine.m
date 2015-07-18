@@ -10,6 +10,56 @@
 #import "RepositoryModel.h"
 
 @implementation YiNetworkEngine
+
+
+#pragma mark - followmodule
+
+//Check if one user follows another
+//https://developer.github.com/v3/users/followers/#check-if-one-user-follows-another
+- (MKNetworkOperation *)checkFollowStatusWithUsername:(NSString *)username
+                                          target_user:(NSString *)target_user
+                           completoinHandler:(UserModelResponseBlock)completionBlock
+                                 errorHandel:(MKNKErrorBlock)errorBlock {
+    if (username.length<1) {
+        username=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
+
+    }
+    NSString *access_token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
+    NSString *getString = [NSString stringWithFormat:@"/user/following/%@",target_user];
+    
+    MKNetworkOperation *op =
+    [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
+    [op setUsername:access_token password:@"x-oauth-basic" basicAuth:NO];
+
+    NSLog(@"%@", op.url);
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        NSLog(@"%@",[completedOperation responseString]);
+        
+        if ([[completedOperation responseJSON]
+             isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *resultDictionary = [completedOperation responseJSON];
+            
+            UserModel *model = [UserModel modelWithDict:resultDictionary];
+            
+            
+            
+            completionBlock(model);
+            
+            
+            
+            
+        }
+        
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
+        
+        errorBlock(error);
+        
+    }];
+    
+    [self enqueueOperation:op];
+    
+    return op;
+}
 #pragma mark - login module
 //GitHub redirects back to your site
 //https://developer.github.com/v3/oauth/#github-redirects-back-to-your-site
@@ -56,7 +106,7 @@
 }
 
 
-
+//https://developer.github.com/v3/oauth/#use-the-access-token-to-access-the-api
 - (MKNetworkOperation *)getUserInfoWithToken:(NSString *)token
                            completoinHandler:(UserModelResponseBlock)completionBlock
                                  errorHandel:(MKNKErrorBlock)errorBlock {
