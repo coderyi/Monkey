@@ -14,6 +14,9 @@
 		0A86058E1B5252DA00DE3BFF /* LoginHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A86058D1B5252DA00DE3BFF /* LoginHelper.m */; };
 		0A8605941B5255AF00DE3BFF /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8605931B5255AF00DE3BFF /* SearchViewController.m */; };
 		0A8605971B525A5C00DE3BFF /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8605961B525A5C00DE3BFF /* NewsViewController.m */; };
+		0A91BEA71B5BC4D800A20743 /* DiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A91BEA61B5BC4D800A20743 /* DiscoveryViewController.m */; };
+		0A91BEAA1B5BC4DF00A20743 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A91BEA91B5BC4DF00A20743 /* MoreViewController.m */; };
+		0A91BEAD1B5BC4E700A20743 /* LanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A91BEAC1B5BC4E700A20743 /* LanguageViewController.m */; };
 		0ACEA2A91B51383C009F6B6D /* NSObject+HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA2A31B51383C009F6B6D /* NSObject+HUD.m */; };
 		0ACEA2AA1B51383C009F6B6D /* MKNetworkEngine+DefaultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA2A61B51383C009F6B6D /* MKNetworkEngine+DefaultSet.m */; };
 		0ACEA2AB1B51383C009F6B6D /* YiNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA2A81B51383C009F6B6D /* YiNetworkEngine.m */; };
@@ -141,6 +144,12 @@
 		0A8605931B5255AF00DE3BFF /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		0A8605951B525A5C00DE3BFF /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
 		0A8605961B525A5C00DE3BFF /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
+		0A91BEA51B5BC4D800A20743 /* DiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryViewController.h; sourceTree = "<group>"; };
+		0A91BEA61B5BC4D800A20743 /* DiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryViewController.m; sourceTree = "<group>"; };
+		0A91BEA81B5BC4DF00A20743 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
+		0A91BEA91B5BC4DF00A20743 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
+		0A91BEAB1B5BC4E700A20743 /* LanguageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageViewController.h; sourceTree = "<group>"; };
+		0A91BEAC1B5BC4E700A20743 /* LanguageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageViewController.m; sourceTree = "<group>"; };
 		0ACEA2A21B51383C009F6B6D /* NSObject+HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+HUD.h"; sourceTree = "<group>"; };
 		0ACEA2A31B51383C009F6B6D /* NSObject+HUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HUD.m"; sourceTree = "<group>"; };
 		0ACEA2A51B51383C009F6B6D /* MKNetworkEngine+DefaultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKNetworkEngine+DefaultSet.h"; sourceTree = "<group>"; };
@@ -1075,6 +1084,7 @@
 				0A86058E1B5252DA00DE3BFF /* LoginHelper.m in Sources */,
 				0ACEA3551B51604A009F6B6D /* LoginViewController.m in Sources */,
 				A1FC339F1B25D92200FCBCE7 /* MJPhotoProgressView.m in Sources */,
+				0A91BEAA1B5BC4DF00A20743 /* MoreViewController.m in Sources */,
 				A1FC33BA1B25D92200FCBCE7 /* UIImage+WebP.m in Sources */,
 				0A8605971B525A5C00DE3BFF /* NewsViewController.m in Sources */,
 				25689ADD1B5B452E006E71FB /* DiscoveryViewController.m in Sources */,
@@ -1085,6 +1095,7 @@
 				A1FC33B91B25D92200FCBCE7 /* UIImage+MultiFormat.m in Sources */,
 				0ACEA2DA1B513C17009F6B6D /* HeaderSegmentControl.h.m in Sources */,
 				0ACEA2D71B513C17009F6B6D /* RepositoryModel.m in Sources */,
+				0A91BEA71B5BC4D800A20743 /* DiscoveryViewController.m in Sources */,
 				A1FC33B11B25D92200FCBCE7 /* SDWebImageCompat.m in Sources */,
 				0ACEA3451B51467A009F6B6D /* RepositoriesViewController.m in Sources */,
 				0ACEA3161B5141ED009F6B6D /* README.md in Sources */,
