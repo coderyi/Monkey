@@ -45,9 +45,6 @@
 		0ACEA34C1B51467A009F6B6D /* UserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3441B51467A009F6B6D /* UserDetailViewController.m */; };
 		0ACEA3521B516030009F6B6D /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3501B516030009F6B6D /* AboutViewController.m */; };
 		0ACEA3551B51604A009F6B6D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3541B51604A009F6B6D /* LoginViewController.m */; };
-		25689AD71B5B4400006E71FB /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25689AD61B5B4400006E71FB /* MoreViewController.m */; };
-		25689ADA1B5B444A006E71FB /* LanguageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25689AD91B5B444A006E71FB /* LanguageViewController.m */; };
-		25689ADD1B5B452E006E71FB /* DiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25689ADC1B5B452E006E71FB /* DiscoveryViewController.m */; };
 		A1FC32A51B25D90B00FCBCE7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC32A41B25D90B00FCBCE7 /* Foundation.framework */; };
 		A1FC32A71B25D90B00FCBCE7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC32A61B25D90B00FCBCE7 /* CoreGraphics.framework */; };
 		A1FC32A91B25D90B00FCBCE7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC32A81B25D90B00FCBCE7 /* UIKit.framework */; };
@@ -202,12 +199,6 @@
 		0ACEA3501B516030009F6B6D /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		0ACEA3531B51604A009F6B6D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		0ACEA3541B51604A009F6B6D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		25689AD51B5B4400006E71FB /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
-		25689AD61B5B4400006E71FB /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
-		25689AD81B5B444A006E71FB /* LanguageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageViewController.h; sourceTree = "<group>"; };
-		25689AD91B5B444A006E71FB /* LanguageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageViewController.m; sourceTree = "<group>"; };
-		25689ADB1B5B452E006E71FB /* DiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryViewController.h; sourceTree = "<group>"; };
-		25689ADC1B5B452E006E71FB /* DiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryViewController.m; sourceTree = "<group>"; };
 		A1FC32A11B25D90B00FCBCE7 /* Monkey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Monkey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FC32A41B25D90B00FCBCE7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A1FC32A61B25D90B00FCBCE7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -545,8 +536,8 @@
 		0ACEA2E01B513CB5009F6B6D /* DiscoveryModule */ = {
 			isa = PBXGroup;
 			children = (
-				25689ADB1B5B452E006E71FB /* DiscoveryViewController.h */,
-				25689ADC1B5B452E006E71FB /* DiscoveryViewController.m */,
+				0A91BEA51B5BC4D800A20743 /* DiscoveryViewController.h */,
+				0A91BEA61B5BC4D800A20743 /* DiscoveryViewController.m */,
 				0A86058F1B5255AF00DE3BFF /* NewsModule */,
 				0A8605901B5255AF00DE3BFF /* SearchModule */,
 			);
@@ -556,8 +547,8 @@
 		0ACEA2E11B513CB5009F6B6D /* PersonalModule */ = {
 			isa = PBXGroup;
 			children = (
-				25689AD51B5B4400006E71FB /* MoreViewController.h */,
-				25689AD61B5B4400006E71FB /* MoreViewController.m */,
+				0A91BEA81B5BC4DF00A20743 /* MoreViewController.h */,
+				0A91BEA91B5BC4DF00A20743 /* MoreViewController.m */,
 				0ACEA34E1B516030009F6B6D /* AboutModule */,
 				0ACEA3511B516030009F6B6D /* LoginModule */,
 			);
@@ -576,8 +567,8 @@
 		0ACEA3101B5140E9009F6B6D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				25689AD81B5B444A006E71FB /* LanguageViewController.h */,
-				25689AD91B5B444A006E71FB /* LanguageViewController.m */,
+				0A91BEAB1B5BC4E700A20743 /* LanguageViewController.h */,
+				0A91BEAC1B5BC4E700A20743 /* LanguageViewController.m */,
 				0ACEA31F1B5145A4009F6B6D /* WebViewController.h */,
 				0ACEA3201B5145A4009F6B6D /* WebViewController.m */,
 			);
@@ -1054,7 +1045,7 @@
 				A1FC33B21B25D92200FCBCE7 /* SDWebImageDecoder.m in Sources */,
 				0ACEA3081B513E17009F6B6D /* NSObject+JudgeNull.m in Sources */,
 				0ACEA2D61B513C17009F6B6D /* DataSourceModel.m in Sources */,
-				25689ADA1B5B444A006E71FB /* LanguageViewController.m in Sources */,
+				0A91BEAD1B5BC4E700A20743 /* LanguageViewController.m in Sources */,
 				0ACEA3141B5141D5009F6B6D /* README.md in Sources */,
 				A1FC33B51B25D92200FCBCE7 /* SDWebImageManager.m in Sources */,
 				A1FC33A31B25D92200FCBCE7 /* UIImageView+MJWebCache.m in Sources */,
@@ -1087,7 +1078,6 @@
 				0A91BEAA1B5BC4DF00A20743 /* MoreViewController.m in Sources */,
 				A1FC33BA1B25D92200FCBCE7 /* UIImage+WebP.m in Sources */,
 				0A8605971B525A5C00DE3BFF /* NewsViewController.m in Sources */,
-				25689ADD1B5B452E006E71FB /* DiscoveryViewController.m in Sources */,
 				A1FC33A61B25D92200FCBCE7 /* NSDate+RFC1123.m in Sources */,
 				0ACEA2AA1B51383C009F6B6D /* MKNetworkEngine+DefaultSet.m in Sources */,
 				A1FC33A91B25D92200FCBCE7 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
@@ -1106,7 +1096,6 @@
 				0A1228E91B52022400D5BAD8 /* LoginWebViewController.m in Sources */,
 				A1FC32B11B25D90B00FCBCE7 /* main.m in Sources */,
 				0ACEA31E1B5142F6009F6B6D /* README.md in Sources */,
-				25689AD71B5B4400006E71FB /* MoreViewController.m in Sources */,
 				0ACEA31C1B514298009F6B6D /* README.md in Sources */,
 				0ACEA2A91B51383C009F6B6D /* NSObject+HUD.m in Sources */,
 			);
