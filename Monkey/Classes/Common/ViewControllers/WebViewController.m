@@ -13,6 +13,7 @@
     
     UILabel *titleText;
     UIActivityIndicatorView *activityIndicator;
+    UIWebView *webView;
 }
 
 
@@ -31,12 +32,13 @@
 }
 - (void)viewWillDisappear:(BOOL)animated{
     self.tabBarController.tabBar.hidden = NO;
+    [activityIndicator removeFromSuperview];
     
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    if (iOS7) {
+    if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
@@ -47,23 +49,56 @@
     [titleText setFont:[UIFont systemFontOfSize:19.0]];
     
     titleText.textAlignment=NSTextAlignmentCenter;
-    self.navigationItem.titleView=titleText;
+//    self.navigationItem.titleView=titleText;
     titleText.text=_urlString;
     
     self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets=NO;
     
     
-    UIWebView *webView=[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64)];
+    webView=[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64)];
     [self.view addSubview:webView];
     webView.delegate=self;
     [webView loadRequest:[[NSURLRequest alloc]initWithURL:[NSURL URLWithString:_urlString]] ];
     
-    activityIndicator=[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake((ScreenWidth-60)/2, 100, 60, 60)];
-    [self.view addSubview:activityIndicator];
-    activityIndicator.activityIndicatorViewStyle=UIActivityIndicatorViewStyleGray;
+//    activityIndicator=[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake((ScreenWidth-60)/2, 100, 60, 60)];
+//    [self.view addSubview:activityIndicator];
+    activityIndicator=[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(ScreenWidth-60, 0, 44, 44)];
+    [self.navigationController.navigationBar addSubview:activityIndicator];
+    activityIndicator.activityIndicatorViewStyle=UIActivityIndicatorViewStyleWhite;
+    
+    UIButton *backBt=[UIButton buttonWithType:UIButtonTypeCustom];
+    backBt.frame=CGRectMake(10, 10, 30, 40);
+    [backBt setTitle:@"back" forState:UIControlStateNormal];
+    [backBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [backBt addTarget:self action:@selector(backBtAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self.navigationController.navigationBar addSubview:backBt];
+    UIButton *closeBt=[UIButton buttonWithType:UIButtonTypeCustom];
+    closeBt.frame=CGRectMake(70, 10, 30, 50);
+    closeBt.titleLabel.font=[UIFont systemFontOfSize:12];
+    [closeBt setTitle:@"close" forState:UIControlStateNormal];
+    [closeBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [closeBt addTarget:self action:@selector(closeBtAction) forControlEvents:UIControlEventTouchUpInside];
+
+//    [self.navigationController.navigationBar addSubview:closeBt];
+    
+//    self.navigationItem.leftBarButtonItems=@[[[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(backBtAction)],[[UIBarButtonItem alloc] initWithTitle:@"close" style:UIBarButtonItemStylePlain target:self action:@selector(closeBtAction)]];
+    self.navigationItem.leftBarButtonItems=@[[[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(backBtAction)]];
+}
+- (void)backBtAction{
+    if (webView.canGoBack)
+    {
+        [webView goBack];
+        self.navigationItem.leftBarButtonItems=@[[[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(backBtAction)],[[UIBarButtonItem alloc] initWithTitle:@"close" style:UIBarButtonItemStylePlain target:self action:@selector(closeBtAction)]];
+    }else{
+        [self closeBtAction];
+    }
 }
 
+- (void)closeBtAction{
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

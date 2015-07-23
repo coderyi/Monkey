@@ -8,8 +8,258 @@
 
 #import "YiNetworkEngine.h"
 #import "RepositoryModel.h"
-
+#import "ShowcasesModel.h"
+#import "UserReceivedEventModel.h"
 @implementation YiNetworkEngine
+#pragma mark - event 、news
+- (MKNetworkOperation *)repositoriesTrendingWithPage:(NSInteger)page login:(NSString *)login
+                                    completoinHandler:(PageListInfoResponseBlock)completionBlock
+                                          errorHandel:(MKNKErrorBlock)errorBlock
+{
+    
+    
+    
+    
+    //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
+    
+    NSString *getString = [NSString stringWithFormat:@"/users/%@/received_events?&page=%ld",login,(long)page];
+    
+    
+    
+    MKNetworkOperation *op =
+    [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
+    NSLog(@"url is %@",op.url);
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        
+        if ([[completedOperation responseJSON]
+             isKindOfClass:[NSArray class]]) {
+//            NSArray *resultDictionary = [completedOperation responseJSON];
+            
+//            NSInteger totalCount=[[resultDictionary objectForKey:@"total_count"] intValue];
+            NSArray *list = [completedOperation responseJSON];
+            if ([list isKindOfClass:[NSArray class]]) {
+                if (list.count > 0) {
+                    
+                    NSMutableArray *listNew =
+                    [[NSMutableArray alloc] initWithCapacity:32];
+                    for (NSInteger i = 0; i < list.count; i++) {
+                        
+                        
+                        NSDictionary *dict = [list objectAtIndex:i];
+                        UserReceivedEventModel *model = [UserReceivedEventModel modelWithDict:dict];
+                        
+                        [listNew addObject:model];
+                        
+                    }
+                    completionBlock(listNew, page,1);
+                    
+                }
+            }
+        }
+        
+        
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
+        
+        errorBlock(error);
+        
+    }];
+    
+    [self enqueueOperation:op];
+    
+    return op;
+}
+
+
+#pragma mark - trending
+
+- (MKNetworkOperation *)showcasesDetailListWithShowcase:(NSString *)showcase completoinHandler:(PageListInfoResponseBlock)completionBlock
+                                       errorHandel:(MKNKErrorBlock)errorBlock
+{
+    
+    
+    
+    
+    //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
+    
+    NSString *getString = [NSString stringWithFormat:@"/v2/showcases/%@",showcase];
+    
+    
+    
+    MKNetworkOperation *op =
+    [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:NO];
+    NSLog(@"url is %@",op.url);
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        
+        if ([[completedOperation responseJSON]
+             isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *resultDictionary = [completedOperation responseJSON];
+            
+//            NSInteger totalCount=[[resultDictionary objectForKey:@"total_count"] intValue];
+            NSArray *list = [resultDictionary objectForKey:@"repositories"];
+            if ([list isKindOfClass:[NSArray class]]) {
+                if (list.count > 0) {
+                    
+                    NSMutableArray *listNew =
+                    [[NSMutableArray alloc] initWithCapacity:32];
+                    for (NSInteger i = 0; i < list.count; i++) {
+                        
+                        
+                        NSDictionary *dict = [list objectAtIndex:i];
+                        RepositoryModel *model = [RepositoryModel modelWithDict:dict];
+                        
+                        [listNew addObject:model];
+                        
+                    }
+                    completionBlock(listNew, 1,1);
+                    
+                }
+            }
+        }
+        
+        
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
+        
+        errorBlock(error);
+        
+    }];
+    
+    [self enqueueOperation:op];
+    
+    return op;
+}
+
+
+
+
+
+- (MKNetworkOperation *)repositoriesTrendingWithType:(NSString *)type language:(NSString *)language
+                                 completoinHandler:(PageListInfoResponseBlock)completionBlock
+                                       errorHandel:(MKNKErrorBlock)errorBlock
+{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    
+    
+    [dic setValue:type forKey:@"since"];
+    [dic setValue:language forKey:@"language"];
+  
+    
+    
+    
+    //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
+    
+    NSString *getString ;
+    if (language.length<1 || !language || [language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
+        getString = [NSString stringWithFormat:@"/v2/trending?since=%@",type];
+
+    }else{
+        getString = [NSString stringWithFormat:@"/v2/trending?since=%@&language=%@",type,language];
+    
+    }
+    
+    
+    MKNetworkOperation *op =
+    [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:NO];
+    NSLog(@"url is %@",op.url);
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+//        不是json
+        if ([[completedOperation responseJSON]
+             isKindOfClass:[NSArray class]]) {
+//            NSDictionary *resultDictionary = [completedOperation responseJSON];
+            
+//            NSInteger totalCount=[[resultDictionary objectForKey:@"total_count"] intValue];
+            NSArray *list = [completedOperation responseJSON];
+            if ([list isKindOfClass:[NSArray class]]) {
+                if (list.count > 0) {
+                    
+                    NSMutableArray *listNew =
+                    [[NSMutableArray alloc] initWithCapacity:32];
+                    for (NSInteger i = 0; i < list.count; i++) {
+                        
+                        
+                        NSDictionary *dict = [list objectAtIndex:i];
+                        RepositoryModel *model = [RepositoryModel modelWithDict:dict];
+                        
+                        [listNew addObject:model];
+                        
+                    }
+                    completionBlock(listNew, 0,1);
+                    
+                }
+            }
+        }
+        
+        
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
+        
+        errorBlock(error);
+        
+    }];
+    
+    [self enqueueOperation:op];
+    
+    return op;
+}
+
+- (MKNetworkOperation *)showcasesWithCompletoinHandler:(PageListInfoResponseBlock)completionBlock
+                                         errorHandel:(MKNKErrorBlock)errorBlock
+{
+    
+    
+    
+    
+    //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
+    
+    NSString *getString ;
+    
+        getString = [NSString stringWithFormat:@"/v2/showcases"];
+        
+    
+    
+    
+    MKNetworkOperation *op =
+    [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:NO];
+    NSLog(@"url is %@",op.url);
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        //        不是json
+        if ([[completedOperation responseJSON]
+             isKindOfClass:[NSArray class]]) {
+            //            NSDictionary *resultDictionary = [completedOperation responseJSON];
+            
+            //            NSInteger totalCount=[[resultDictionary objectForKey:@"total_count"] intValue];
+            NSArray *list = [completedOperation responseJSON];
+            if ([list isKindOfClass:[NSArray class]]) {
+                if (list.count > 0) {
+                    
+                    NSMutableArray *listNew =
+                    [[NSMutableArray alloc] initWithCapacity:32];
+                    for (NSInteger i = 0; i < list.count; i++) {
+                        
+                        
+                        NSDictionary *dict = [list objectAtIndex:i];
+                        ShowcasesModel *model = [ShowcasesModel modelWithDict:dict];
+                        
+                        [listNew addObject:model];
+                        
+                    }
+                    completionBlock(listNew, 0,1);
+                    
+                }
+            }
+        }
+        
+        
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
+        
+        errorBlock(error);
+        
+    }];
+    
+    [self enqueueOperation:op];
+    
+    return op;
+}
+
+
 
 
 #pragma mark - followmodule
@@ -162,6 +412,7 @@
     
     
     NSString *getString = [NSString stringWithFormat:@"/search/users?q=%@&sort=%@&page=%li",q,sort,(long)page];
+    
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
     NSLog(@"url is %@",op.url);

@@ -15,7 +15,7 @@
 
 #define ScreenHeight [[UIScreen mainScreen] bounds].size.height
 #define ScreenWidth [[UIScreen mainScreen] bounds].size.width
-#define iOS7 [[[UIDevice currentDevice]systemVersion] floatValue] >= 7.0
+#define iOS7GE [[[UIDevice currentDevice]systemVersion] floatValue] >= 7.0
 #define ApplicationDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
 //我喜欢的蓝色

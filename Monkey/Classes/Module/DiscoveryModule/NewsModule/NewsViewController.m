@@ -2,12 +2,230 @@
 //  NewsViewController.m
 //  Monkey
 //
-//  Created by coderyi on 15/7/12.
+//  Created by coderyi on 15/7/22.
 //  Copyright (c) 2015年 www.coderyi.com. All rights reserved.
 //
 
 #import "NewsViewController.h"
+#import "RepositoryDetailViewController.h"
+#import "UserReceivedEventModel.h"
+@interface NewsViewController ()<UITableViewDataSource,UITableViewDelegate>{
+    UITableView *tableView;
+    YiRefreshHeader *refreshHeader;
+    YiRefreshFooter *refreshFooter;
+    
+    
+}
+@property(nonatomic,strong)DataSourceModel *DsOfPageListObject;
+@property (strong, nonatomic) MKNetworkOperation *apiOperation;
+
+
+@end
 
 @implementation NewsViewController
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+        self.DsOfPageListObject = [[DataSourceModel alloc]init];
+    }
+    return self;
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = YES;
+    //    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"cityAppear"];
+    
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    self.tabBarController.tabBar.hidden = NO;
+    
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    if (iOS7GE) {
+        self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+        
+    }
+    
+    // Do any additional setup after loading the view.
+    //    tableView=[[UITableView alloc] init];
+    tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain ];
+    [self.view addSubview:tableView];
+    //    [self.view addSubview:tableView];
+    //    tableView.translatesAutoresizingMaskIntoConstraints=NO;
+    //    NSArray *constraints1=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[tableView]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(tableView)];
+    //
+    //    NSArray *constraints2=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[tableView]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(tableView)];
+    //
+    //    [self.view addConstraints:constraints1];
+    //    [self.view addConstraints:constraints2];
+    //
+    tableView.dataSource=self;
+    tableView.delegate=self;
+    
+    
+    
+    [self addHeader];
+    [self addFooter];
+    
+    
+}
+
+
+- (void)addHeader
+{  //    YiRefreshHeader  头部刷新按钮的使用
+    refreshHeader=[[YiRefreshHeader alloc] init];
+    refreshHeader.scrollView=tableView;
+    [refreshHeader header];
+    
+    
+    WEAKSELF
+    refreshHeader.beginRefreshingBlock=^(){
+        STRONGSELF
+        [strongSelf loadDataFromApiWithIsFirst:YES];
+        
+    };
+    
+    //    是否在进入该界面的时候就开始进入刷新状态
+    
+    [refreshHeader beginRefreshing];
+}
+
+- (void)addFooter
+{    //    YiRefreshFooter  底部刷新按钮的使用
+    refreshFooter=[[YiRefreshFooter alloc] init];
+    refreshFooter.scrollView=tableView;
+    [refreshFooter footer];
+    
+    
+    WEAKSELF
+    refreshFooter.beginRefreshingBlock=^(){
+        STRONGSELF
+        [strongSelf loadDataFromApiWithIsFirst:NO];
+        
+    };
+}
+
+
+- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
+{
+  
+    
+    NSInteger page = 0;
+    
+    if (isFirst) {
+        page = 1;
+        
+    }else{
+        
+        page = self.DsOfPageListObject.page+1;
+    }
+    
+    [ApplicationDelegate.apiEngine repositoriesTrendingWithPage:page login:@"coderyi" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
+        
+        if (page<=1) {
+            [self.DsOfPageListObject.dsArray removeAllObjects];
+        }
+        
+        
+        //        [self hideHUD];
+        
+        [self.DsOfPageListObject.dsArray addObjectsFromArray:modelArray];
+        self.DsOfPageListObject.page=page;
+        [tableView reloadData];
+        [refreshHeader endRefreshing];
+        
+        if (page>1) {
+            
+            [refreshFooter endRefreshing];
+            
+            
+        }else
+        {
+            [refreshHeader endRefreshing];
+        }
+        
+    }
+                                                    errorHandel:^(NSError* error){
+                                                        if (isFirst) {
+                                                            
+                                                            [refreshHeader endRefreshing];
+                                                            
+                                                            
+                                                            
+                                                            
+                                                        }else{
+                                                            [refreshFooter endRefreshing];
+                                                            
+                                                        }
+                                                        
+                                                    }];
+    
+    
+    
+    
+    return YES;
+    
+}
+
+
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.DsOfPageListObject.dsArray.count;
+}
+
+// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    NSString *CellId = @"autoCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellId];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellId];
+        
+    }
+    UserReceivedEventModel *model=((UserReceivedEventModel *)([self.DsOfPageListObject.dsArray objectAtIndex:indexPath.row]));
+    cell.textLabel.text=model.actor.login;
+    cell.detailTextLabel.text=model.repo.name;
+    
+    return cell;
+    
+    
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    UserReceivedEventModel *model=((UserReceivedEventModel *)([self.DsOfPageListObject.dsArray objectAtIndex:indexPath.row]));
+    
+    RepositoryDetailViewController *viewController=[[RepositoryDetailViewController alloc] init];
+    RepositoryModel *model1=[[RepositoryModel alloc] init];
+    model1.user=[[UserModel alloc] init];
+    
+    NSRange range = [model.repo.name rangeOfString:@"/"]; //现获取要截取的字符串位置
+    NSString * result = [model.repo.name substringFromIndex:(range.location+1)]; //截取字符串
+    
+    model1.user.login=[model.repo.name substringToIndex:(range.location)];
+    model1.name=result;
+    viewController.model=model1;
+    [self.navigationController pushViewController:viewController animated:YES];
+    
+    
+}
+
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

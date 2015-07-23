@@ -12,7 +12,7 @@
 #import "DetailSegmentControl.h"
 #import "RepositoriesTableViewCell.h"
 #import "WebViewController.h"
-
+#import "UserDetailViewController.h"
 @interface RepositoryDetailViewController ()<UITableViewDataSource,UITableViewDelegate>{
     
     UITableView *tableView;
@@ -32,6 +32,9 @@
     UIImageView *ownerIV;
     UILabel *descLabel;
     UIView *titleView;
+    OCTClient *client;
+    BOOL isStaring;
+
 }
 
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
@@ -77,7 +80,7 @@
     titleText.textAlignment=NSTextAlignmentCenter;
     self.navigationItem.titleView=titleText;
     
-    if (iOS7) {
+    if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
@@ -108,6 +111,7 @@
 //    [nameBt setFont:[UIFont boldSystemFontOfSize:17]];
     nameBt.titleLabel.font=[UIFont boldSystemFontOfSize:17];
     [titleView addSubview:nameBt];
+    [nameBt addTarget:self action:@selector(nameBtAction) forControlEvents:UIControlEventTouchUpInside];
     
     
     ownerBt=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -117,6 +121,7 @@
     ownerBt.titleLabel.font=[UIFont boldSystemFontOfSize:17];
     [titleView addSubview:ownerBt];
     ownerBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [ownerBt addTarget:self action:@selector(ownerBtAction) forControlEvents:UIControlEventTouchUpInside];
 
     
     
@@ -205,6 +210,8 @@
         }
         [tableView reloadData];
     };
+    [self checkStarStatusAction];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -213,6 +220,132 @@
 }
 
 #pragma mark - Actions
+- (void)nameBtAction{
+    if (_model.html_url.length>0  ) {
+        WebViewController *web=[[WebViewController alloc] init];
+        web.urlString=_model.html_url;
+        [self.navigationController pushViewController:web animated:YES];
+        
+    }
+}
+
+
+- (void)ownerBtAction{
+    if (_model.user.html_url.length>0  ) {
+        WebViewController *web=[[WebViewController alloc] init];
+        web.urlString=_model.user.html_url;
+        [self.navigationController pushViewController:web animated:YES];
+        
+    }
+}
+
+
+- (void)starAction{
+    
+    OCTRepository *starRep=[[OCTRepository alloc] init];
+    starRep.ownerLogin=_model.user.login;
+    starRep.name=_model.name;
+    
+    
+    if (isStaring) {
+        [self showYiProgressHUD:@"unstaring……"];
+
+        [[client unstarRepository:starRep] subscribeNext:^(id x) {
+            NSLog(@"a");
+        } error:^(NSError *error) {
+            NSLog(@"e %@",error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self hideYiProgressHUD];
+                
+            });
+        } completed:^{
+            NSLog(@"c");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self hideYiProgressHUD];
+                isStaring=!isStaring;
+                self.navigationItem.rightBarButtonItem=nil;
+                UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"star" style:UIBarButtonItemStylePlain target:self action:@selector(starAction)];
+                self.navigationItem.rightBarButtonItem=right;
+            });
+        }];
+        
+        
+    }else{
+        [self showYiProgressHUD:@"staring……"];
+
+        [[client starRepository:starRep]subscribeNext:^(id x) {
+            NSLog(@"a");
+        } error:^(NSError *error) {
+            NSLog(@"e %@",error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self hideYiProgressHUD];
+                
+            });
+        } completed:^{
+            NSLog(@"c");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self hideYiProgressHUD];
+                isStaring=!isStaring;
+                self.navigationItem.rightBarButtonItem=nil;
+                UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"unstar" style:UIBarButtonItemStylePlain target:self action:@selector(starAction)];
+                self.navigationItem.rightBarButtonItem=right;
+            });
+        }];
+        
+    }
+}
+- (void)checkStarStatusAction{
+    /*
+     [ApplicationDelegate.apiEngine checkFollowStatusWithUsername:@"coderyi" target_user:_userModel.login completoinHandler:^(UserModel *model){
+     
+     } errorHandel:^(NSError* error){
+     
+     }];
+     */
+    NSString *savedLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
+    NSString *savedToken=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
+    if (savedLogin.length<1 || !savedLogin) {
+        return;
+    }
+    if (savedToken.length<1 || !savedToken) {
+        return;
+    }
+    OCTUser *user = [OCTUser userWithRawLogin:savedLogin server:OCTServer.dotComServer];
+    client = [OCTClient authenticatedClientWithUser:user token:savedToken];
+    
+    
+    OCTRepository *starRep=[[OCTRepository alloc] init];
+    starRep.ownerLogin=_model.user.login;
+    starRep.name=_model.name;
+    [[client hasUserStarredRepository:starRep] subscribeNext:^(NSNumber *hasStarRep){
+        dispatch_async(dispatch_get_main_queue(), ^{
+        
+            isStaring=hasStarRep.boolValue;
+            NSLog(@"%@",hasStarRep);
+            NSString *rightTitle;
+            if (isStaring) {
+                rightTitle=@"unstar";
+            }else{
+                rightTitle=@"star";
+                
+            }
+            self.navigationItem.rightBarButtonItem=nil;
+            UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:rightTitle style:UIBarButtonItemStylePlain target:self action:@selector(starAction)];
+            self.navigationItem.rightBarButtonItem=right;
+        });
+        
+        
+    }  error:^(NSError *error) {
+        NSLog(@"e %@",error);
+    } completed:^{
+        NSLog(@"c");
+    }];
+    
+    
+    
+    //    client
+    
+}
 
 - (void)homePageAction{
     if (_model.homepage.length>0  ) {
@@ -579,7 +712,32 @@
     
     
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
+
+    if (currentIndex==1) {
+        UserModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
+        UserDetailViewController *detail=[[UserDetailViewController alloc] init];
+        
+        detail.userModel=model;
+        [self.navigationController pushViewController:detail animated:YES];
+       
+        
+    }else if (currentIndex==2){
+        RepositoryModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
+        RepositoryDetailViewController *viewController=[[RepositoryDetailViewController alloc] init];
+        viewController.model=model;
+        [self.navigationController pushViewController:viewController animated:YES];
+    }else if (currentIndex==3){
+        UserModel  *model = [(self.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
+        UserDetailViewController *detail=[[UserDetailViewController alloc] init];
+        
+        detail.userModel=model;
+        [self.navigationController pushViewController:detail animated:YES];
+    }
+
+
+}
 
 /*
 #pragma mark - Navigation

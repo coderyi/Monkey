@@ -33,7 +33,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    if (iOS7) {
+    if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
@@ -49,11 +49,14 @@
     //    tableView1.separatorStyle=UITableViewCellSeparatorStyleNone;
     //    citys=@[@"beijing",@"shanghai",@"guangzhou",@"shenzhen",@"chengdu",@"hangzhou",@"nanjing",@"wuhan武汉",@"suzhou苏州"];
     
-    if (_isRepositories) {
+    if (_languageEntranceType==RepLanguageEntranceType) {
         languages=@[@"JavaScript",@"Java",@"PHP",@"Ruby",@"Python",@"CSS",@"C",@"Objective-C",@"Shell",@"R",@"Perl",@"Lua",@"HTML",@"Scala",@"Go"];
-    }else{
-    languages=@[@"所有语言",@"JavaScript",@"Java",@"PHP",@"Ruby",@"Python",@"CSS",@"C",@"Objective-C",@"Shell",@"R",@"Perl",@"Lua",@"HTML",@"Scala",@"Go"];
+    }else if (_languageEntranceType==UserLanguageEntranceType  ) {
+    languages=@[NSLocalizedString(@"all languages", @""),@"JavaScript",@"Java",@"PHP",@"Ruby",@"Python",@"CSS",@"C",@"Objective-C",@"Shell",@"R",@"Perl",@"Lua",@"HTML",@"Scala",@"Go"];
     
+    }else if (_languageEntranceType==TrendingLanguageEntranceType ) {
+        languages=@[NSLocalizedString(@"all languages", @""),@"javascript",@"java",@"php",@"ruby",@"python",@"css",@"c",@"objective-c",@"shell",@"r",@"perl",@"lua",@"html",@"scala",@"go"];
+        
     }
     
 }
@@ -91,16 +94,22 @@
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (_isRepositories) {
+    if (_languageEntranceType==RepLanguageEntranceType) {
         [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"languageAppear1"];
         
         [[NSUserDefaults standardUserDefaults] setObject:languages[indexPath.row] forKey:@"language1"];
         [self.navigationController popViewControllerAnimated:YES];
-    }else{
+    }else if (_languageEntranceType==UserLanguageEntranceType) {
     
         [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"languageAppear"];
         
         [[NSUserDefaults standardUserDefaults] setObject:languages[indexPath.row] forKey:@"language"];
+        [self.navigationController popViewControllerAnimated:YES];
+    }else if (_languageEntranceType==TrendingLanguageEntranceType) {
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"trendingLanguageAppear"];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:languages[indexPath.row] forKey:@"language2"];
         [self.navigationController popViewControllerAnimated:YES];
     }
     

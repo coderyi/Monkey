@@ -45,7 +45,7 @@
     self.navigationItem.titleView=titleText;
     titleText.text=@"More";
     
-    if (iOS7) {
+    if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
@@ -74,13 +74,9 @@
  *  https://developer.github.com/v3/oauth/#redirect-users-to-request-github-access
  */
 - (void)loginAction{
-    //    YiNetworkEngine *apiEngine=[[YiNetworkEngine alloc] initWithHostName:@"github.com"];
-    //    [apiEngine loginWithCompletoinHandler:^(NSString *response){
-    //
-    //    } errorHandel:^(NSError* error){
-    //
-    //    }];
-    //
+
+    
+    /*
     //    cookie清除
     NSHTTPCookie *cookie;
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
@@ -98,6 +94,60 @@
                 [self login1Action:code];
     };
     [self presentViewController:webViewController animated:YES completion:nil];
+    */
+    
+    LoginViewController *login=[[LoginViewController alloc] init];
+    login.callback=^(NSString *response){
+        if ([response isEqualToString:@"yes"]) {
+            currentLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
+            currentAvatarUrl=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentAvatarUrl"];
+            
+            [tableView reloadData];
+        }else{
+        
+        }
+        
+        
+    };
+    [self.navigationController pushViewController:login animated:YES];
+    
+    
+//    [OCTClient setClientID:CoderyiClientID clientSecret:CoderyiClientSecret];
+//    [[OCTClient
+//      signInToServerUsingWebBrowser:OCTServer.dotComServer scopes:OCTClientAuthorizationScopesUser | OCTClientAuthorizationScopesRepository]
+//     subscribeNext:^(OCTClient *authenticatedClient) {
+//         // Authentication was successful. Do something with the created client.
+//         NSLog(@"%@",authenticatedClient);
+//         
+//         currentLogin=authenticatedClient.user.login;
+//         //         currentAvatarUrl=authenticatedClient.user.avatar_url;
+//         
+//         [[NSUserDefaults standardUserDefaults] setObject:currentLogin forKey:@"currentLogin"];
+//         //         [[NSUserDefaults standardUserDefaults] setObject:currentAvatarUrl forKey:@"currentAvatarUrl"];
+//         [tableView reloadData];
+//     } error:^(NSError *error) {
+//         // Authentication failed.
+//     }];
+    
+    
+//    
+//    OCTUser *user = [OCTUser userWithRawLogin:@"coderyi" server:OCTServer.dotComServer];
+//    [[OCTClient signInAsUser:user password:@"1991812yy" oneTimePassword:nil scopes:OCTClientAuthorizationScopesUser | OCTClientAuthorizationScopesRepository note:nil noteURL:nil fingerprint:nil]
+//subscribeNext:^(OCTClient *authenticatedClient) {
+//    // Authentication was successful. Do something with the created client.
+//    NSLog(@"%@",authenticatedClient);
+//    [[NSUserDefaults standardUserDefaults] setObject:authenticatedClient.token forKey:@"access_token"];
+//    currentLogin=authenticatedClient.user.login;
+//    currentAvatarUrl=[authenticatedClient.user.avatarURL absoluteString];
+//    [[NSUserDefaults standardUserDefaults] setObject:currentLogin forKey:@"currentLogin"];
+//    [[NSUserDefaults standardUserDefaults] setObject:currentAvatarUrl forKey:@"currentAvatarUrl"];
+//    [tableView reloadData];
+//
+//   
+//    
+//} error:^(NSError *error) {
+//    // Authentication failed.
+//}];
     
 }
 
@@ -167,20 +217,20 @@
             cell.textLabel.text=currentLogin;
             [cell.imageView sd_setImageWithURL:[NSURL URLWithString:currentAvatarUrl]];
         }else{
-            cell.textLabel.text=@"登录";
+            cell.textLabel.text=NSLocalizedString(@"login", @"");;
         }
         
     }else if (indexPath.section==1){
         
-        cell.textLabel.text=@"关于";
+        cell.textLabel.text=NSLocalizedString(@"about", @"");;
 
         
     }else if (indexPath.section==2){
-        cell.textLabel.text=@"反馈";
+        cell.textLabel.text=NSLocalizedString(@"feedback", @"");;
     }
     if (currentLogin) {
         if (indexPath.section==3){
-            cell.textLabel.text=@"退出登录";
+            cell.textLabel.text=NSLocalizedString(@"logout", @"");;
         }
     }
     return cell;
@@ -207,6 +257,34 @@
         AboutViewController *about=[[AboutViewController alloc] init];
         
         [self.navigationController pushViewController:about animated:YES];
+//        NSString *savedLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
+//        NSString *savedToken=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
+//
+//        OCTUser *user1 = [OCTUser userWithRawLogin:savedLogin server:OCTServer.dotComServer];
+//        OCTClient *client1 = [OCTClient authenticatedClientWithUser:user1 token:savedToken];
+//            OCTUser *user=[OCTUser userWithRawLogin:@"onlyswan" server:OCTServer.dotComServer];
+////        user.login=@"onlyswan";
+//        OCTClient *client =[OCTClient unauthenticatedClientWithUser:user];
+//        [[client1 hasFollowUser:user] subscribeNext:^(NSNumber *isFollowing){
+//            
+//            NSLog(@"%@",isFollowing);
+//        }];
+//        
+//        [[client1 fetchUserInfoForUser:user] subscribeNext:^(OCTUser *user2){
+//        
+//            [client1 unfollowUser:user2];
+//            [[client1 hasFollowUser:user2] subscribeNext:^(NSNumber *isFollowing){
+//                
+//                NSLog(@"%@",isFollowing);
+//            }];
+//        
+//        } error:^(NSError *error) {
+//            // Authentication failed.
+//        }];
+        
+        
+        
+          
         
     }else if (indexPath.section==2){
         

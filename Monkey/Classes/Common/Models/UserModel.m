@@ -38,11 +38,11 @@
     model.site_admin = [[dict objectForKey:@"site_admin"] boolValue] ;
     model.score = [dict objectForKey:@"score"] ;
 
-    model.name = [dict objectForKey:@"name"] ;
+    model.name = [[dict objectForKey:@"name"] isNull]?@"":[dict objectForKey:@"name"] ;
     model.company = [[dict objectForKey:@"company"] isNull]?@"":[dict objectForKey:@"company"];
     model.blog = [[dict objectForKey:@"blog"] isNull]?@"":[dict objectForKey:@"blog"];
     model.location = [dict objectForKey:@"location"] ;
-    model.email = [dict objectForKey:@"email"] ;
+    model.email = [[dict objectForKey:@"email"] isNull]?@"":[dict objectForKey:@"email"];
     model.public_repos = [[dict objectForKey:@"public_repos"] intValue];
     model.followers = [[dict objectForKey:@"followers"] intValue];
     model.following = [[dict objectForKey:@"following"] intValue];

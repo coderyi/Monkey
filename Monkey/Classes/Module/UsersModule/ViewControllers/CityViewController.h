@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CityViewController : UIViewController
-
+@property(nonatomic,strong) NSArray *pinyinCitys;
 @end

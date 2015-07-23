@@ -9,14 +9,15 @@
 #import "CityViewController.h"
 
 @interface CityViewController ()<UITableViewDataSource,UITableViewDelegate>{
-UITableView *tableView1;
+    UITableView *tableView1;
     NSArray *citys;
-    NSArray *pinyinCitys;
+    
 }
 
 @end
 
 @implementation CityViewController
+@synthesize pinyinCitys;
 #pragma mark - Lifecycle
 
 - (void)viewWillAppear:(BOOL)animated
@@ -34,7 +35,7 @@ UITableView *tableView1;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    if (iOS7) {
+    if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
@@ -49,8 +50,23 @@ UITableView *tableView1;
 
 //    tableView1.separatorStyle=UITableViewCellSeparatorStyleNone;
 //    citys=@[@"beijing",@"shanghai",@"guangzhou",@"shenzhen",@"chengdu",@"hangzhou",@"nanjing",@"wuhan武汉",@"suzhou苏州"];
-    citys=@[@"北京",@"上海",@"深圳",@"杭州",@"广州",@"成都",@"南京",@"武汉",@"苏州",@"厦门",@"天津",@"重庆",@"长沙"];
-    pinyinCitys=@[@"beijing",@"shanghai",@"shenzhen",@"hangzhou",@"guangzhou",@"chengdu",@"nanjing",@"wuhan",@"suzhou",@"xiamen",@"tianjin",@"chongqing",@"changsha"];
+    
+    if (pinyinCitys.count>0) {
+        ;
+        if (![pinyinCitys[0] isEqualToString:@"beijing"]) {
+            
+            citys=pinyinCitys;
+        }else{
+//        citys=@[@"北京",@"上海",@"深圳",@"杭州",@"广州",@"成都",@"南京",@"武汉",@"苏州",@"厦门",@"天津",@"重庆",@"长沙"];
+            NSLocalizedString(@"key", @"");
+        citys=@[NSLocalizedString(@"beijing", @""),NSLocalizedString(@"shanghai", @""),NSLocalizedString(@"shenzhen", @""),
+                NSLocalizedString(@"hangzhou", @""),NSLocalizedString(@"guangzhou", @""),NSLocalizedString(@"chengdu", @""),
+                NSLocalizedString(@"nanjing", @""),NSLocalizedString(@"wuhan", @""),NSLocalizedString(@"suzhou", @""),
+                NSLocalizedString(@"xiamen", @""),NSLocalizedString(@"tianjin", @""),NSLocalizedString(@"chongqing", @""),
+                NSLocalizedString(@"changsha", @"")];
+        }
+    }
+//    pinyinCitys=@[@"beijing",@"shanghai",@"shenzhen",@"hangzhou",@"guangzhou",@"chengdu",@"nanjing",@"wuhan",@"suzhou",@"xiamen",@"tianjin",@"chongqing",@"changsha"];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -87,10 +103,11 @@ UITableView *tableView1;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"cityAppear"];
+    [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"countryAppear"];
 
     [[NSUserDefaults standardUserDefaults] setObject:pinyinCitys[indexPath.row] forKey:@"pinyinCity"];
     [[NSUserDefaults standardUserDefaults] setObject:citys[indexPath.row] forKey:@"city"];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
     
 
 }

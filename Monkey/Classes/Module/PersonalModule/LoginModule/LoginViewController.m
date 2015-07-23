@@ -8,7 +8,11 @@
 
 #import "LoginViewController.h"
 #import "LoginWebViewController.h"
-@interface LoginViewController ()
+@interface LoginViewController (){
+
+    UITextField *usernameTF;
+    UITextField *pwdTF;
+}
 
 @end
 
@@ -29,41 +33,113 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title=@"登录";
-    self.view.backgroundColor=[UIColor whiteColor];
+    self.title=@"GitHub.com login";
+    self.view.backgroundColor=[UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
     self.automaticallyAdjustsScrollViewInsets=NO;
+    UIImageView *titleIV=[[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth-40)/2, 100, 40, 40)];
+    [self.view addSubview:titleIV];
+    titleIV.image=[UIImage imageNamed:@"github60"];
+    usernameTF=[[UITextField alloc] initWithFrame:CGRectMake((ScreenWidth-300)/2, 150, 300, 40)];
+    [self.view addSubview:usernameTF];
+    usernameTF.backgroundColor=[UIColor whiteColor];
+    usernameTF.textAlignment=NSTextAlignmentCenter;
+    usernameTF.layer.borderWidth=0.4;
+    usernameTF.layer.borderColor=YiBlue.CGColor;
+    usernameTF.placeholder=@"Username or email";
+    pwdTF=[[UITextField alloc] initWithFrame:CGRectMake((ScreenWidth-300)/2, 200, 300, 40)];
+    [self.view addSubview:pwdTF];
+    pwdTF.layer.borderWidth=0.4;
+    pwdTF.textAlignment=NSTextAlignmentCenter;
+    pwdTF.placeholder=@"password";
+    pwdTF.layer.borderColor=YiBlue.CGColor;
+    pwdTF.backgroundColor=[UIColor whiteColor];
+    pwdTF.secureTextEntry = YES;
     
     
-    UIButton *test=[UIButton buttonWithType:UIButtonTypeCustom];
-    [self.view addSubview:test];
-    test.frame=CGRectMake(100, 100, 100, 50);
-    [test addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
-    test.titleLabel.text=@"登录";
-    test.titleLabel.textColor=[UIColor whiteColor];
-    test.backgroundColor=[UIColor redColor];
+    UIButton *but=[UIButton buttonWithType:UIButtonTypeCustom];
+    [self.view addSubview:but];
+    but.frame=CGRectMake((ScreenWidth-200)/2, 250, 200, 40);
+    [but setBackgroundColor:YiBlue];
+    but.titleLabel.tintColor=[UIColor whiteColor];
+    [but setTitle:@"Sign in" forState:UIControlStateNormal];
+    [but addTarget:self action:@selector(loginBtAction) forControlEvents:UIControlEventTouchUpInside];
     
-    
-    UIButton *test1=[UIButton buttonWithType:UIButtonTypeCustom];
-    [self.view addSubview:test1];
-    test1.frame=CGRectMake(100, 200, 100, 50);
-    [test1 addTarget:self action:@selector(login1Action) forControlEvents:UIControlEventTouchUpInside];
-    test1.titleLabel.text=@"登录1";
-    test1.titleLabel.textColor=[UIColor whiteColor];
-    test1.backgroundColor=[UIColor redColor];
-    
-    
-    UIButton *test2=[UIButton buttonWithType:UIButtonTypeCustom];
-    [self.view addSubview:test2];
-    test2.frame=CGRectMake(100, 300, 100, 50);
-    [test2 addTarget:self action:@selector(login2Action) forControlEvents:UIControlEventTouchUpInside];
-    test2.titleLabel.text=@"登录2";
-    test2.titleLabel.textColor=[UIColor whiteColor];
-    test2.backgroundColor=[UIColor redColor];
-
+    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+    [self.view addGestureRecognizer:tap];
     
 }
 #pragma mark - Actions
+- (void)tapAction{
+    if ([usernameTF isFirstResponder]) {
+        [usernameTF resignFirstResponder];
+    }else if ([pwdTF isFirstResponder]){
+        [pwdTF resignFirstResponder];
+    }
+}
+- (void)loginBtAction{
+    if (usernameTF.text.length<1 || !usernameTF.text) {
+        return;
+    }
+    
+    if (pwdTF.text.length<1 || !pwdTF.text) {
+        return;
+    }
+    
+    [OCTClient setClientID:CoderyiClientID clientSecret:CoderyiClientSecret];
 
+    OCTUser *user = [OCTUser userWithRawLogin:usernameTF.text server:OCTServer.dotComServer];
+    [self showYiProgressHUD:@"logining"];
+    [[OCTClient signInAsUser:user password:pwdTF.text oneTimePassword:nil scopes:OCTClientAuthorizationScopesUser | OCTClientAuthorizationScopesRepository note:nil noteURL:nil fingerprint:nil]
+     subscribeNext:^(OCTClient *authenticatedClient) {
+         // Authentication was successful. Do something with the created client.
+         NSLog(@"%@",authenticatedClient);
+         [[NSUserDefaults standardUserDefaults] setObject:authenticatedClient.token forKey:@"access_token"];
+         
+         [[NSUserDefaults standardUserDefaults] setObject:authenticatedClient.user.login forKey:@"currentLogin"];
+         [[NSUserDefaults standardUserDefaults] setObject:[authenticatedClient.user.avatarURL absoluteString] forKey:@"currentAvatarUrl"];
+         if ([[NSThread currentThread] isMainThread]) {
+             NSLog(@"yes");
+         }else{
+             NSLog(@"no");
+
+         }
+         dispatch_async(dispatch_get_main_queue(), ^{
+             [self hideYiProgressHUD];
+             if (_callback) {
+                 _callback(@"yes");
+                 _callback = nil;
+                 [self.navigationController popViewControllerAnimated:YES];
+                 
+             }
+
+         });
+
+     } error:^(NSError *error) {
+         // Authentication failed.
+         dispatch_async(dispatch_get_main_queue(), ^{
+             [self hideYiProgressHUD];
+             double delayInSeconds = 0.6;
+             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                 // code to be executed on the main queue after delay
+                 [self showYiProgressHUD:@"login error" afterDelay:1.5];
+
+             });
+         
+         });
+//     dispatch_async(dispatch_get_main_queue(), ^{
+//        if (_callback) {
+//            _callback(@"no");
+//            _callback = nil;
+//            [self.navigationController popViewControllerAnimated:YES];
+//            
+//        }
+//        
+//    });
+     
+     }];
+
+}
 - (void)loginAction{
 //    YiNetworkEngine *apiEngine=[[YiNetworkEngine alloc] initWithHostName:@"github.com"];
 //    [apiEngine loginWithCompletoinHandler:^(NSString *response){

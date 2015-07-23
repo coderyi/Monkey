@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef NS_ENUM(NSInteger, LanguageEntranceType) {
+    UserLanguageEntranceType = 0,
+    RepLanguageEntranceType,
+    TrendingLanguageEntranceType,
+};
 @interface LanguageViewController : UIViewController
-@property(nonatomic,assign) BOOL isRepositories;
+@property(nonatomic,assign) LanguageEntranceType languageEntranceType;
 @end

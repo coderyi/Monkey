@@ -8,6 +8,7 @@
 
 #import "AboutViewController.h"
 #import "UserDetailViewController.h"
+#import "RepositoryDetailViewController.h"
 @interface AboutViewController (){
 
 
@@ -34,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    if (iOS7) {
+    if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
@@ -46,7 +47,7 @@
     
     titleText.textAlignment=NSTextAlignmentCenter;
     self.navigationItem.titleView=titleText;
-    titleText.text=@"关于";
+    titleText.text=NSLocalizedString(@"about", @"");
     
     self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets=NO;
@@ -55,7 +56,7 @@
     UILabel *creator=[[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth-120)/2, 120, 60, 40)];
     [self.view addSubview:creator];
     creator.textColor=YiTextGray;
-    creator.text=@"作者:";
+    creator.text=[NSString stringWithFormat:@"%@:",NSLocalizedString(@"Author", @"")];
     creator.font=[UIFont systemFontOfSize:14];
     
     UIButton *button1=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -70,17 +71,26 @@
     [self.view addSubview:edition];
     edition.textAlignment=NSTextAlignmentCenter;
     edition.textColor=YiTextGray;
+    
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    edition.text=[NSString stringWithFormat:@"版本：Monkey%@",version];
+    edition.text=[NSString stringWithFormat:@"%@：Monkey%@",NSLocalizedString(@"Version", @""),version];
     edition.font=[UIFont systemFontOfSize:14];
     
-    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth-300)/2, 210, 300, 60)];
+    UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth-300)/2, 210, 300, 30)];
     [self.view addSubview:label];
     label.textAlignment=NSTextAlignmentCenter;
     label.textColor=YiTextGray;
     label.numberOfLines=0;
-    label.text=@"Monkey open source:\nhttps://github.com/coderyi/Monkey";
+    label.text=@"Monkey open source:";
     label.font=[UIFont systemFontOfSize:14];
+    
+    UIButton *button2=[UIButton buttonWithType:UIButtonTypeCustom];
+    [self.view addSubview:button2];
+    button2.frame=CGRectMake((ScreenWidth-300)/2, 240, 300, 30);
+    [button2 setTitleColor:YiBlue forState:UIControlStateNormal];
+    [button2 setTitle:@"https://github.com/coderyi/Monkey" forState:UIControlStateNormal];
+    [button2 addTarget:self action:@selector(bt2Action) forControlEvents:UIControlEventTouchUpInside];
+    button2.titleLabel.font=[UIFont systemFontOfSize:14];
     
     
     UILabel *someLabel=[[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth-200)/2, 270, 200, 40)];
@@ -109,6 +119,17 @@
     [self.navigationController pushViewController:detail animated:YES];
 }
 
+- (void)bt2Action{
+    RepositoryDetailViewController *detail=[[RepositoryDetailViewController alloc] init];
+    
+    RepositoryModel  *model = [[RepositoryModel alloc] init];
+    UserModel *userModel=[[UserModel alloc] init];
+    userModel.login=@"coderyi";
+    model.user=userModel;
+    model.name=@"Monkey";
+    detail.model=model;
+    [self.navigationController pushViewController:detail animated:YES];
+}
 
 /*
 #pragma mark - Navigation

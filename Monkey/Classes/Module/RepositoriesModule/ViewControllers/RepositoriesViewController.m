@@ -66,7 +66,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    if (iOS7) {
+    if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
@@ -100,7 +100,7 @@
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self addHeader];
     [self addFooter];
-    UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"语言" style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
+    UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"language", @"") style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
     self.navigationItem.rightBarButtonItem=right;
     
 }
@@ -112,9 +112,9 @@
 #pragma mark - Actions
 
 - (void)rightAction{
-    LanguageViewController *city=[[LanguageViewController alloc] init];
-    city.isRepositories=YES;
-    [self.navigationController pushViewController:city animated:YES];
+    LanguageViewController *viewController=[[LanguageViewController alloc] init];
+    viewController.languageEntranceType=RepLanguageEntranceType;
+    [self.navigationController pushViewController:viewController animated:YES];
     
     
 }

@@ -21,6 +21,18 @@ typedef void (^RepositoryModelResponseBlock)(RepositoryModel* model);
 typedef void (^StringResponseBlock)(NSString* response);
 
 @interface YiNetworkEngine : MKNetworkEngine
+#pragma mark - event 、news
+- (MKNetworkOperation *)repositoriesTrendingWithPage:(NSInteger)page login:(NSString *)login
+                                   completoinHandler:(PageListInfoResponseBlock)completionBlock
+                                         errorHandel:(MKNKErrorBlock)errorBlock;
+#pragma mark - trending
+- (MKNetworkOperation *)showcasesDetailListWithShowcase:(NSString *)showcase completoinHandler:(PageListInfoResponseBlock)completionBlock
+                                            errorHandel:(MKNKErrorBlock)errorBlock;
+- (MKNetworkOperation *)repositoriesTrendingWithType:(NSString *)type language:(NSString *)language
+                                   completoinHandler:(PageListInfoResponseBlock)completionBlock
+                                         errorHandel:(MKNKErrorBlock)errorBlock;
+- (MKNetworkOperation *)showcasesWithCompletoinHandler:(PageListInfoResponseBlock)completionBlock
+                                           errorHandel:(MKNKErrorBlock)errorBlock;
 #pragma mark - followmodule
 
 //Check if one user follows another

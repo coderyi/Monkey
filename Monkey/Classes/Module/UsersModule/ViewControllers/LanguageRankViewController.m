@@ -13,6 +13,8 @@
 #import "CityViewController.h"
 #import "LanguageViewController.h"
 #import "UserDetailViewController.h"
+#import "CountryViewController.h"
+
 @interface LanguageRankViewController ()<UITableViewDataSource,UITableViewDelegate>{
     UIScrollView *scrollView;
     int currentIndex;
@@ -63,6 +65,8 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;
+
     NSString *cityAppear=[[NSUserDefaults standardUserDefaults] objectForKey:@"cityAppear"];
     if ([cityAppear isEqualToString:@"2"]) {
         currentIndex=1;
@@ -71,11 +75,14 @@
         [refreshHeader1 beginRefreshing];
         NSString *city=[[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
         if (city==nil || city.length<1) {
-            city=@"北京";
+            city=NSLocalizedString(@"beijing", @"");
         }
-        
         [segmentControl.button1 setTitle:city forState:UIControlStateNormal];
-        
+        NSString *country=[[NSUserDefaults standardUserDefaults] objectForKey:@"country"];
+        if (country==nil || country.length<1) {
+            country=@"China";
+        }
+        [segmentControl.button2 setTitle:country forState:UIControlStateNormal];
     }
     NSString *languageAppear=[[NSUserDefaults standardUserDefaults] objectForKey:@"languageAppear"];
     if ([languageAppear isEqualToString:@"2"]) {
@@ -83,10 +90,10 @@
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"languageAppear"];
         language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
         if (language==nil || language.length<1) {
-            language=@"所有语言";
+            language=NSLocalizedString(@"all languages", @"");
             
         }
-        if ([language isEqualToString:@"所有语言"]) {
+        if ([language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
             segmentControl.buttonCount=2;
             segmentControl.button3.hidden=YES;
         }else{
@@ -105,7 +112,7 @@
             [refreshHeader2 beginRefreshing];
 
         }else if (currentIndex==3){
-            if ([language isEqualToString:@"所有语言"]) {
+            if ([language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
                 currentIndex=2;
                 [segmentControl swipeAction:102];
                  [refreshHeader2 beginRefreshing];
@@ -120,7 +127,7 @@
        
         titleText.text=language;
     }
-    if ([language isEqualToString:@"所有语言"]) {
+    if ([language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
         [scrollView setContentSize:CGSizeMake(ScreenWidth * (2), bgViewHeight)];
     }else{
         [scrollView setContentSize:CGSizeMake(ScreenWidth * (3), bgViewHeight)];
@@ -134,11 +141,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    if (iOS7) {
+    if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
-   
     titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
@@ -151,7 +157,7 @@
     
     language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
     if (language==nil || language.length<1) {
-        language=@"所有语言";
+        language=NSLocalizedString(@"all languages", @"");
         
     }
     tableView1Language=language;
@@ -176,7 +182,7 @@
     
     segmentControl=[[HeaderSegmentControl alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, titleHeight)];
     [self.view addSubview:segmentControl];
-    if ([language isEqualToString:@"所有语言"]) {
+    if ([language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
         segmentControl.buttonCount=2;
         segmentControl.button3.hidden=YES;
     }else{
@@ -190,30 +196,38 @@
     currentIndex=1;
     NSString *city=[[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
     if (city==nil || city.length<1) {
-        city=@"北京";
+        city=NSLocalizedString(@"beijing", @"");
     }
     
     [segmentControl.button1 setTitle:city forState:UIControlStateNormal];
+    NSString *country=[[NSUserDefaults standardUserDefaults] objectForKey:@"country"];
+    if (country==nil || country.length<1) {
+        country=@"China";
+    }
+    [segmentControl.button2 setTitle:country forState:UIControlStateNormal];
     [self initTable];
     
-    UIBarButtonItem *left=[[UIBarButtonItem alloc] initWithTitle:@"城市" style:UIBarButtonItemStylePlain target:self action:@selector(leftAction)];
+    UIBarButtonItem *left=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"city", @"") style:UIBarButtonItemStylePlain target:self action:@selector(leftAction)];
     self.navigationItem.leftBarButtonItem=left;
 
-    UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"语言" style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
+    UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"language", @"") style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
     self.navigationItem.rightBarButtonItem=right;
+   
 }
 #pragma mark - Actions
 
 - (void)leftAction{
-    CityViewController *city=[[CityViewController alloc] init];
-    [self.navigationController pushViewController:city animated:YES];
+//    CityViewController *city=[[CityViewController alloc] init];
+//    [self.navigationController pushViewController:city animated:YES];
     
-    
+    CountryViewController *viewController=[[CountryViewController alloc] init];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void)rightAction{
-    LanguageViewController *city=[[LanguageViewController alloc] init];
-    [self.navigationController pushViewController:city animated:YES];
+    LanguageViewController *viewController=[[LanguageViewController alloc] init];
+    viewController.languageEntranceType=UserLanguageEntranceType;
+    [self.navigationController pushViewController:viewController animated:YES];
     
     
 }
@@ -243,7 +257,7 @@
     [scrollView setContentSize:CGSizeMake(ScreenWidth * (3), bgViewHeight)];
     [scrollView setContentOffset:CGPointMake(0, 0)];
     [scrollView scrollRectToVisible:CGRectMake(0,0,ScreenWidth,bgViewHeight) animated:NO];
-    if ([language isEqualToString:@"所有语言"]) {
+    if ([language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
         [scrollView setContentSize:CGSizeMake(ScreenWidth * (2), bgViewHeight)];
     }else{
         [scrollView setContentSize:CGSizeMake(ScreenWidth * (3), bgViewHeight)];
@@ -298,9 +312,16 @@
             }
             if (![titleText.text isEqualToString:tableView2Language]) {
                 [refreshHeader2 beginRefreshing];
-            }   if (self.DsOfPageListObject2.totalCount>0) {
+            }
+            
+            if (self.DsOfPageListObject2.totalCount>0) {
                 [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject2.totalCount] forState:UIControlStateNormal];
             }
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"countryAppear"] isEqualToString:@"2"]) {
+                 [refreshHeader2 beginRefreshing];
+                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"countryAppear"];
+            }
+          
         }else if (currentIndex==3){
             if (tableView3==nil) {
                 tableView3=[[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth*2, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
@@ -430,7 +451,84 @@
 
 - (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
 {
-    if (currentIndex==2) {
+    if (currentIndex==1){
+        
+        NSInteger page = 0;
+        
+        if (isFirst) {
+            page = 1;
+            
+        }else{
+            
+            page = self.DsOfPageListObject1.page+1;
+        }
+        NSString *city=[[NSUserDefaults standardUserDefaults] objectForKey:@"pinyinCity"];
+        //            city=AFBase64EncodedStringFromString(city);
+        city=[city stringByReplacingOccurrencesOfString:@" "  withString:@"%2B"];
+        if (city==nil || city.length<1) {
+            city=@"beijing";
+        }
+        language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
+        NSString *q=[NSString stringWithFormat:@"location:%@+language:%@",city,language];
+        
+        if (language==nil || language.length<1) {
+            language=NSLocalizedString(@"all languages", @"");
+            
+        }
+        tableView1Language=language;
+        
+        if ([language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
+            q=[NSString stringWithFormat:@"location:%@",city];
+        }
+        
+        [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:q sort:@"followers" categoryLocation:city categoryLanguage:language completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
+            [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)totalCount] forState:UIControlStateNormal];
+            self.DsOfPageListObject1.totalCount=totalCount;
+            
+            if (page<=1) {
+                [self.DsOfPageListObject1.dsArray removeAllObjects];
+            }
+            
+            
+            //        [self hideHUD];
+            
+            [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
+            self.DsOfPageListObject1.page=page;
+            [tableView1 reloadData];
+            [refreshHeader1 endRefreshing];
+            
+            if (page>1) {
+                
+                [refreshFooter1 endRefreshing];
+                
+                
+            }else
+            {
+                [refreshHeader1 endRefreshing];
+            }
+            
+        }
+                                               errorHandel:^(NSError* error){
+                                                   if (isFirst) {
+                                                       
+                                                       [refreshHeader1 endRefreshing];
+                                                       
+                                                       
+                                                       
+                                                       
+                                                   }else{
+                                                       [refreshFooter1 endRefreshing];
+                                                       
+                                                   }
+                                                   
+                                               }];
+        
+        
+        
+        
+        return YES;
+        
+    }else if (currentIndex==2) {
         
         NSInteger page = 0;
         
@@ -442,17 +540,20 @@
             page = self.DsOfPageListObject2.page+1;
         }
         language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
-        
-        NSString *q=[NSString stringWithFormat:@"location:china+language:%@",language];
+        NSString *country=[[NSUserDefaults standardUserDefaults] objectForKey:@"country"];
+        if (country==nil || country.length<1) {
+            country=@"China";
+        }
+        NSString *q=[NSString stringWithFormat:@"location:%@+language:%@",country,language];
         
         if (language==nil || language.length<1) {
-            language=@"所有语言";
+            language=NSLocalizedString(@"all languages", @"");
             
         }
         tableView2Language=language;
         
-        if ([language isEqualToString:@"所有语言"]) {
-            q=[NSString stringWithFormat:@"location:china"];
+        if ([language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
+            q=[NSString stringWithFormat:@"location:%@",country];
         }
         
         [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:q sort:@"followers" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
@@ -501,81 +602,7 @@
         
         
         return YES;
-    }else if (currentIndex==1){
-            
-            NSInteger page = 0;
-            
-            if (isFirst) {
-                page = 1;
-                
-            }else{
-                
-                page = self.DsOfPageListObject1.page+1;
-            }
-            NSString *city=[[NSUserDefaults standardUserDefaults] objectForKey:@"pinyinCity"];
-            if (city==nil || city.length<1) {
-                city=@"beijing";
-            }
-            language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
-            NSString *q=[NSString stringWithFormat:@"location:%@+language:%@",city,language];
-            
-            if (language==nil || language.length<1) {
-                language=@"所有语言";
-                
-            }
-            tableView1Language=language;
-            
-            if ([language isEqualToString:@"所有语言"]) {
-                q=[NSString stringWithFormat:@"location:%@",city];
-            }
-            [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:q sort:@"followers" categoryLocation:city categoryLanguage:language completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)totalCount] forState:UIControlStateNormal];
-                self.DsOfPageListObject1.totalCount=totalCount;
-                
-                if (page<=1) {
-                    [self.DsOfPageListObject1.dsArray removeAllObjects];
-                }
-                
-                
-                //        [self hideHUD];
-                
-                [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
-                self.DsOfPageListObject1.page=page;
-                [tableView1 reloadData];
-                [refreshHeader1 endRefreshing];
-                
-                if (page>1) {
-                    
-                    [refreshFooter1 endRefreshing];
-                    
-                    
-                }else
-                {
-                    [refreshHeader1 endRefreshing];
-                }
-                
-            }
-                                                   errorHandel:^(NSError* error){
-                                                       if (isFirst) {
-                                                           
-                                                           [refreshHeader1 endRefreshing];
-                                                           
-                                                           
-                                                           
-                                                           
-                                                       }else{
-                                                           [refreshFooter1 endRefreshing];
-                                                           
-                                                       }
-                                                       
-                                                   }];
-            
-            
-            
-            
-            return YES;
-            
-        }else if (currentIndex==3){
+    }else if (currentIndex==3){
             
             NSInteger page = 0;
             
@@ -588,7 +615,7 @@
             }
             language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
             if (language==nil || language.length<1) {
-                language=@"所有语言";
+                language=NSLocalizedString(@"all languages", @"");
                 
             }
             

@@ -18,7 +18,7 @@
 #import "UIImageView+MJWebCache.h"
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
-
+#import "RepositoryDetailViewController.h"
 
 
 @interface UserDetailViewController ()<UITableViewDataSource,UITableViewDelegate>{
@@ -29,7 +29,7 @@
 
     
     UIImageView *titleImageView;
-    UILabel *login;
+    UIButton *loginButton;
     UILabel *name;
     UILabel *createLabel;
     UILabel *company;
@@ -37,6 +37,8 @@
     UIButton *emailBt;
     UIButton *blogBt;
     DetailSegmentControl *segmentControl;
+    BOOL isFollowing;
+    OCTClient *client;
 }
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
@@ -73,10 +75,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"个人主页";
+    self.title = _userModel.login;
     currentIndex=1;
 
-    if (iOS7) {
+    if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
@@ -85,8 +87,7 @@
     self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets=NO;
     
-    UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(followAction)];
-    self.navigationItem.rightBarButtonItem=right;
+   
     
     
     tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain ];
@@ -123,9 +124,16 @@
     titleImageView.contentMode = UIViewContentModeScaleAspectFill;
     
     
-    login=[[UILabel alloc] initWithFrame:CGRectMake(100, 10, 135, 30)];
-    [titleBg1 addSubview:login];
+//    login=[[UILabel alloc] initWithFrame:CGRectMake(100, 10, 135, 30)];
+//    [titleBg1 addSubview:login];
     
+    loginButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    loginButton.frame=CGRectMake(100, 10, 135, 30);
+    
+    [titleBg1 addSubview:loginButton];
+    [loginButton setTitleColor:YiBlue forState:UIControlStateNormal];
+    [loginButton addTarget:self action:@selector(loginButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    loginButton.contentHorizontalAlignment=UIControlContentHorizontalAlignmentLeft;
     name=[[UILabel alloc] initWithFrame:CGRectMake(235, 10, 75+ScreenWidth-320, 30)];
     [titleBg1 addSubview:name];
     createLabel=[[UILabel alloc] initWithFrame:CGRectMake(100, 45, 210, 30)];
@@ -153,7 +161,7 @@
     [blogBt setTitleColor:YiBlue forState:UIControlStateNormal];
     [emailBt setTitleColor:YiBlue forState:UIControlStateNormal];
     
-    login.font=[UIFont boldSystemFontOfSize:16];
+    loginButton.titleLabel.font=[UIFont boldSystemFontOfSize:16];
     name.font=[UIFont systemFontOfSize:14];
     company.font=[UIFont systemFontOfSize:14];
     emailBt.titleLabel.font=[UIFont systemFontOfSize:15];
@@ -213,18 +221,121 @@
 }
 
 #pragma mark - Actions
-- (void)followAction{
+- (void)loginButtonAction{
 
+    if (_userModel.html_url.length>0  ) {
+        WebViewController *web=[[WebViewController alloc] init];
+        web.urlString=_userModel.html_url;
+        [self.navigationController pushViewController:web animated:YES];
+        
+    }
+}
+- (void)followAction{
+    OCTUser *user=[OCTUser userWithRawLogin:_userModel.login server:OCTServer.dotComServer];
+    NSString *login= _userModel.login;
+    user.login=login;
+    
+    
+    if (isFollowing) {
+        [self showYiProgressHUD:@"unfollowing……"];
+        [[client unfollowUser:user] subscribeNext:^(id x) {
+            NSLog(@"a");
+           
+        } error:^(NSError *error) {
+            NSLog(@"e %@",error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self hideYiProgressHUD];
+                
+            });
+        } completed:^{
+            NSLog(@"c");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self hideYiProgressHUD];
+                isFollowing=!isFollowing;
+                self.navigationItem.rightBarButtonItem=nil;
+                UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"follow" style:UIBarButtonItemStylePlain target:self action:@selector(followAction)];
+                self.navigationItem.rightBarButtonItem=right;
+            });
+        }];
+
+
+    }else{
+        [self showYiProgressHUD:@"following……"];
+
+        [[client followUser:user]subscribeNext:^(id x) {
+            NSLog(@"a");
+         
+        } error:^(NSError *error) {
+            NSLog(@"e %@",error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self hideYiProgressHUD];
+                
+            });
+        } completed:^{
+            NSLog(@"c");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self hideYiProgressHUD];
+                isFollowing=!isFollowing;
+                self.navigationItem.rightBarButtonItem=nil;
+                UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"unfollow" style:UIBarButtonItemStylePlain target:self action:@selector(followAction)];
+                self.navigationItem.rightBarButtonItem=right;
+            });
+        }];
+
+    }
 }
 - (void)checkFollowStatusAction{
+    /*
     [ApplicationDelegate.apiEngine checkFollowStatusWithUsername:@"coderyi" target_user:_userModel.login completoinHandler:^(UserModel *model){
         
     } errorHandel:^(NSError* error){
         
     }];
-
-
-
+     */
+    NSString *savedLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
+    NSString *savedToken=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
+    if (savedLogin.length<1 || !savedLogin) {
+        return;
+    }
+    if (savedToken.length<1 || !savedToken) {
+        return;
+    }
+    
+    OCTUser *user = [OCTUser userWithRawLogin:savedLogin server:OCTServer.dotComServer];
+    client = [OCTClient authenticatedClientWithUser:user token:savedToken];
+   
+    
+    OCTUser *followUser=[OCTUser userWithRawLogin:_userModel.login server:OCTServer.dotComServer];
+    NSString *followLogin= _userModel.login;
+    followUser.login=followLogin;
+    [[client hasFollowUser:followUser] subscribeNext:^(NSNumber *hasFollowUser){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            isFollowing=hasFollowUser.boolValue;
+            NSLog(@"%@",hasFollowUser);
+            NSString *rightTitle;
+            if (isFollowing) {
+                rightTitle=@"unfollow";
+            }else{
+                rightTitle=@"follow";
+                
+            }
+            
+            self.navigationItem.rightBarButtonItem=nil;
+            UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:rightTitle style:UIBarButtonItemStylePlain target:self action:@selector(followAction)];
+            self.navigationItem.rightBarButtonItem=right;
+        
+        });
+        
+        
+    }  error:^(NSError *error) {
+        NSLog(@"e %@",error);
+    } completed:^{
+        NSLog(@"c");
+    }];
+    
+    
+    
+//    client
 
 }
 
@@ -274,8 +385,7 @@
 //    locationLabel.backgroundColor=[UIColor darkGrayColor];
 //    [emailBt setBackgroundColor:[UIColor darkGrayColor]];
 //    blogBt.backgroundColor=[UIColor darkGrayColor];
-    
-    login.text=_userModel.login;
+    [loginButton setTitle:_userModel.login forState:UIControlStateNormal];
     
     name.text=_userModel.name;
     createLabel.text=[_userModel.created_at substringWithRange:NSMakeRange(0, 10)];
@@ -625,6 +735,29 @@
     
 }
 
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (currentIndex==1) {
+        RepositoryModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
+        RepositoryDetailViewController *viewController=[[RepositoryDetailViewController alloc] init];
+        viewController.model=model;
+        [self.navigationController pushViewController:viewController animated:YES];
+
+    }else if (currentIndex==2){
+        UserModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
+        UserDetailViewController *detail=[[UserDetailViewController alloc] init];
+        
+        detail.userModel=model;
+        [self.navigationController pushViewController:detail animated:YES];
+    }else if (currentIndex==3){
+        UserModel  *model = [(self.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
+        UserDetailViewController *detail=[[UserDetailViewController alloc] init];
+        
+        detail.userModel=model;
+        [self.navigationController pushViewController:detail animated:YES];
+    }
+
+}
 /*
 #pragma mark - Navigation
 

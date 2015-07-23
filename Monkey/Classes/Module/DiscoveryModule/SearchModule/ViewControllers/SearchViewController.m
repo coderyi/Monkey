@@ -63,7 +63,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    if (iOS7) {
+    if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
@@ -129,7 +129,7 @@
 
     [searchBar becomeFirstResponder];
     
-    UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
+    UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"cancel", @"") style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
     self.navigationItem.rightBarButtonItem=right;
 }
 

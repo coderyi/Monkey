@@ -23,5 +23,5 @@
 #import "UIImageView+WebCache.h"
 #import "NSObject+HUD.h"
 #import "NSObject+JudgeNull.h"
-
+#import <OctoKit/OctoKit.h>
 #endif

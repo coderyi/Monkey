@@ -151,6 +151,13 @@
         
         // 设置刷新状态_scrollView的位置
         [UIView animateWithDuration:0.3 animations:^{
+            
+            //修改有时候refresh contentOffset 还在0，0的情况 20150723
+            CGPoint point= _scrollView.contentOffset;
+            if (point.y>-headerHeight*1.5) {
+                _scrollView.contentOffset=CGPointMake(0, -headerHeight*1.5);
+            }
+            //
             _scrollView.contentInset=UIEdgeInsetsMake(headerHeight*1.5, 0, 0, 0);
         }];
         
@@ -170,6 +177,11 @@
     dispatch_async(dispatch_get_main_queue(), ^{
 
         [UIView animateWithDuration:0.3 animations:^{
+            CGPoint point= _scrollView.contentOffset;
+            if (point.y!=0) {
+                _scrollView.contentOffset=CGPointMake(0, 0);
+            }
+            headerLabel.text=@"下拉可刷新";
             _scrollView.contentInset=UIEdgeInsetsMake(0, 0, 0, 0);
             headerIV.hidden=NO;
             headerIV.transform = CGAffineTransformMakeRotation(M_PI*2);
