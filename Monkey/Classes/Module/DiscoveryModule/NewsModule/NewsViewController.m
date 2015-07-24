@@ -125,7 +125,7 @@
         page = self.DsOfPageListObject.page+1;
     }
     
-    [ApplicationDelegate.apiEngine repositoriesTrendingWithPage:page login:@"coderyi" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
+    [ApplicationDelegate.apiEngine repositoriesTrendingWithPage:page login:_login completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
         
         if (page<=1) {
             [self.DsOfPageListObject.dsArray removeAllObjects];
@@ -137,7 +137,6 @@
         [self.DsOfPageListObject.dsArray addObjectsFromArray:modelArray];
         self.DsOfPageListObject.page=page;
         [tableView reloadData];
-        [refreshHeader endRefreshing];
         
         if (page>1) {
             

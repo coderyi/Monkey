@@ -182,7 +182,6 @@
         [self.DsOfPageListObject.dsArray addObjectsFromArray:modelArray];
         self.DsOfPageListObject.page=page;
         [tableView reloadData];
-        [refreshHeader endRefreshing];
         
         if (page>1) {
             

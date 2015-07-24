@@ -63,9 +63,14 @@
     }
     return self;
 }
+- (void)viewWillDisappear:(BOOL)animated{
+    self.tabBarController.tabBar.hidden = NO;
+    
+}
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    self.tabBarController.tabBar.hidden = YES;
+
     NSString *languageAppear=[[NSUserDefaults standardUserDefaults] objectForKey:@"trendingLanguageAppear"];
     if ([languageAppear isEqualToString:@"2"]) {
         
@@ -137,7 +142,7 @@
     titleText.text=language;
     self.view.backgroundColor=[UIColor whiteColor];
     titleHeight=35;
-    bgViewHeight=ScreenHeight-64-titleHeight-49;
+    bgViewHeight=ScreenHeight-64-titleHeight;
     [self initScroll];
     self.automaticallyAdjustsScrollViewInsets=NO;
     //    tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, WScreen, bgViewHeight) style:UITableViewStylePlain ];
@@ -256,7 +261,7 @@
                 tableView2.dataSource=self;
                 tableView2.delegate=self;
                 tableView2.separatorStyle=UITableViewCellSeparatorStyleNone;
-                tableView2.rowHeight=90.7;
+                tableView2.rowHeight=135.7;
                 [self addHeader:2];
                 [self addFooter:2];
                 
@@ -283,7 +288,7 @@
                 tableView3.dataSource=self;
                 tableView3.delegate=self;
                 tableView3.separatorStyle=UITableViewCellSeparatorStyleNone;
-                tableView3.rowHeight=90.7;
+                tableView3.rowHeight=135.7;
                 [self addHeader:3];
                 [self addFooter:3];
                 
@@ -440,9 +445,8 @@
             [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject1.page=page;
             [tableView1 reloadData];
-            [refreshHeader1 endRefreshing];
-            
-            if (page>1) {
+
+            if (!isFirst) {
                 
                 [refreshFooter1 endRefreshing];
                 
@@ -522,9 +526,8 @@
             [self.DsOfPageListObject2.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject2.page=page;
             [tableView2 reloadData];
-            [refreshHeader2 endRefreshing];
             
-            if (page>1) {
+            if (!isFirst) {
                 
                 [refreshFooter2 endRefreshing];
                 
@@ -595,9 +598,8 @@
             [self.DsOfPageListObject3.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject3.page=page;
             [tableView3 reloadData];
-            [refreshHeader3 endRefreshing];
             
-            if (page>1) {
+            if (!isFirst) {
                 
                 [refreshFooter3 endRefreshing];
                 

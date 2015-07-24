@@ -480,7 +480,6 @@
             [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject1.page=page;
             [tableView reloadData];
-            [refreshHeader endRefreshing];
             
             if (page>1) {
                 
@@ -533,7 +532,6 @@
                 
                 [self.DsOfPageListObject2.dsArray addObjectsFromArray:modelArray];
                 self.DsOfPageListObject2.page=page;
-                [refreshHeader endRefreshing];
                 
                 if (page>1) {
                     
@@ -586,7 +584,6 @@
                     
                     [self.DsOfPageListObject3.dsArray addObjectsFromArray:modelArray];
                     self.DsOfPageListObject3.page=page;
-                    [refreshHeader endRefreshing];
                     
                     if (page>1) {
                         

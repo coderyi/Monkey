@@ -51,7 +51,7 @@
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
-    
+    self.automaticallyAdjustsScrollViewInsets=NO;
     // Do any additional setup after loading the view.
 //    tableView=[[UITableView alloc] init];
     tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain ];
@@ -137,9 +137,8 @@
         [self.DsOfPageListObject.dsArray addObjectsFromArray:modelArray];
         self.DsOfPageListObject.page=page;
         [tableView reloadData];
-        [refreshHeader endRefreshing];
         
-        if (page>1) {
+        if (!isFirst) {
             
             [refreshFooter endRefreshing];
             

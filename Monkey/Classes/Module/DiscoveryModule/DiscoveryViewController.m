@@ -14,14 +14,21 @@
 #import "WebViewController.h"
 #import "GitHubRankingViewController.h"
 #import "GitHubAwardsViewController.h"
+#import "LoginViewController.h"
 @interface DiscoveryViewController ()<UITableViewDataSource,UITableViewDelegate>{
     UITableView *tableView;
+    NSString *currentLogin;
 }
 
 @end
 
 @implementation DiscoveryViewController
 #pragma mark -Lifecycle
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    currentLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -114,8 +121,16 @@
         [self.navigationController pushViewController:viewController animated:YES];
         
     }else if (indexPath.section==2){
-        NewsViewController *viewController=[[NewsViewController alloc] init];
-        [self.navigationController pushViewController:viewController animated:YES];
+       
+        if (currentLogin) {
+            NewsViewController *viewController=[[NewsViewController alloc] init];
+            viewController.login=currentLogin;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }else{
+            [self loginAction];
+        }
+        
+        
         
     }else if (indexPath.section==3){
         
@@ -142,6 +157,43 @@
     
     
 }
-
+- (void)loginAction{
+    
+    
+    /*
+     //    cookie清除
+     NSHTTPCookie *cookie;
+     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+     for (cookie in [storage cookies])
+     {
+     [storage deleteCookie:cookie];
+     }
+     
+     //    缓存  清除
+     [[NSURLCache sharedURLCache] removeAllCachedResponses];
+     LoginWebViewController *webViewController=[[LoginWebViewController alloc] init];
+     webViewController.urlString=@"https://github.com/login/oauth/authorize/?client_id=a8d9c1a366f057a23753&state=1995&redirect_uri=https://github.com/coderyi&scope=user:follow";
+     webViewController.callback=^(NSString *code){
+     
+     [self login1Action:code];
+     };
+     [self presentViewController:webViewController animated:YES completion:nil];
+     */
+    
+    LoginViewController *login=[[LoginViewController alloc] init];
+    login.callback=^(NSString *response){
+        if ([response isEqualToString:@"yes"]) {
+            currentLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
+            
+            [tableView reloadData];
+        }else{
+            
+        }
+        
+        
+    };
+    [self.navigationController pushViewController:login animated:YES];
+    
+}
 
 @end

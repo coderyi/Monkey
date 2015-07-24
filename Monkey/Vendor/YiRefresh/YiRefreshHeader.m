@@ -155,7 +155,7 @@
             //修改有时候refresh contentOffset 还在0，0的情况 20150723
             CGPoint point= _scrollView.contentOffset;
             if (point.y>-headerHeight*1.5) {
-                _scrollView.contentOffset=CGPointMake(0, -headerHeight*1.5);
+                _scrollView.contentOffset=CGPointMake(0, point.y-headerHeight*1.5);
             }
             //
             _scrollView.contentInset=UIEdgeInsetsMake(headerHeight*1.5, 0, 0, 0);
@@ -179,7 +179,7 @@
         [UIView animateWithDuration:0.3 animations:^{
             CGPoint point= _scrollView.contentOffset;
             if (point.y!=0) {
-                _scrollView.contentOffset=CGPointMake(0, 0);
+                _scrollView.contentOffset=CGPointMake(0, point.y+headerHeight*1.5);
             }
             headerLabel.text=@"下拉可刷新";
             _scrollView.contentInset=UIEdgeInsetsMake(0, 0, 0, 0);

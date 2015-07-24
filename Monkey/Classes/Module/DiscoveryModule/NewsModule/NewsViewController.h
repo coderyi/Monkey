@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface NewsViewController : UIViewController
-
+@property(nonatomic,strong) NSString *login;
 @end
