@@ -70,7 +70,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark -Actions
+#pragma mark - Actions
 
 - (void)footerButtonAction{
     WebViewController *viewController=[[WebViewController alloc] init];

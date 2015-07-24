@@ -23,6 +23,8 @@
 @end
 
 @implementation NewsViewController
+
+#pragma mark - Lifecycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -50,7 +52,7 @@
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
-    
+    self.automaticallyAdjustsScrollViewInsets=NO;
     // Do any additional setup after loading the view.
     //    tableView=[[UITableView alloc] init];
     tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain ];
@@ -75,6 +77,7 @@
     
 }
 
+#pragma mark - Private
 
 - (void)addHeader
 {  //    YiRefreshHeader  头部刷新按钮的使用
@@ -173,6 +176,7 @@
 
 
 
+#pragma mark - UITableViewDataSource  &UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.DsOfPageListObject.dsArray.count;

@@ -13,7 +13,7 @@
 #import "LoginViewController.h"
 #import "LoginWebViewController.h"
 #import "UserDetailViewController.h"
-@interface MoreViewController ()<UITableViewDataSource,UITableViewDelegate>{
+@interface MoreViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>{
     
     UITableView *tableView;
     UILabel *titleText;
@@ -297,19 +297,27 @@
     
     if (currentLogin) {
         if (indexPath.section==3){
+            UIAlertView *logoutAlertView=[[UIAlertView alloc] initWithTitle:@"提示" message:@"确定退出登录？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+            [logoutAlertView show];
             
-            currentLogin=nil;
-            currentAvatarUrl=nil;
-            [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"currentLogin"];
-            [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"currentAvatarUrl"];
-            [tableView reloadData];
         }
     }
     
     
 }
 
+#pragma mark - UIAlertViewDelegate
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+    if (buttonIndex==0) {
+        currentLogin=nil;
+        currentAvatarUrl=nil;
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"currentLogin"];
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"currentAvatarUrl"];
+        [tableView reloadData];
+    }
+}
 /*
 #pragma mark - Navigation
 

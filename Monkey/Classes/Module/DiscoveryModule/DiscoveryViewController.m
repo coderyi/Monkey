@@ -56,6 +56,51 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
+#pragma mark - Actions
+- (void)loginAction{
+    
+    
+    /*
+     //    cookie清除
+     NSHTTPCookie *cookie;
+     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+     for (cookie in [storage cookies])
+     {
+     [storage deleteCookie:cookie];
+     }
+     
+     //    缓存  清除
+     [[NSURLCache sharedURLCache] removeAllCachedResponses];
+     LoginWebViewController *webViewController=[[LoginWebViewController alloc] init];
+     webViewController.urlString=@"https://github.com/login/oauth/authorize/?client_id=a8d9c1a366f057a23753&state=1995&redirect_uri=https://github.com/coderyi&scope=user:follow";
+     webViewController.callback=^(NSString *code){
+     
+     [self login1Action:code];
+     };
+     [self presentViewController:webViewController animated:YES completion:nil];
+     */
+    
+    LoginViewController *login=[[LoginViewController alloc] init];
+    login.callback=^(NSString *response){
+        if ([response isEqualToString:@"yes"]) {
+            currentLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
+            
+            [tableView reloadData];
+        }else{
+            
+        }
+        
+        
+    };
+    [self.navigationController pushViewController:login animated:YES];
+    
+}
+
+
+
+
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -157,43 +202,4 @@
     
     
 }
-- (void)loginAction{
-    
-    
-    /*
-     //    cookie清除
-     NSHTTPCookie *cookie;
-     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-     for (cookie in [storage cookies])
-     {
-     [storage deleteCookie:cookie];
-     }
-     
-     //    缓存  清除
-     [[NSURLCache sharedURLCache] removeAllCachedResponses];
-     LoginWebViewController *webViewController=[[LoginWebViewController alloc] init];
-     webViewController.urlString=@"https://github.com/login/oauth/authorize/?client_id=a8d9c1a366f057a23753&state=1995&redirect_uri=https://github.com/coderyi&scope=user:follow";
-     webViewController.callback=^(NSString *code){
-     
-     [self login1Action:code];
-     };
-     [self presentViewController:webViewController animated:YES completion:nil];
-     */
-    
-    LoginViewController *login=[[LoginViewController alloc] init];
-    login.callback=^(NSString *response){
-        if ([response isEqualToString:@"yes"]) {
-            currentLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
-            
-            [tableView reloadData];
-        }else{
-            
-        }
-        
-        
-    };
-    [self.navigationController pushViewController:login animated:YES];
-    
-}
-
 @end

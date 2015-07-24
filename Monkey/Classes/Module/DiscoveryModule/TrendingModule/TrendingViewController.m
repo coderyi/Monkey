@@ -176,6 +176,17 @@
     self.navigationItem.rightBarButtonItem=right;
    
 }
+
+
+
+
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 #pragma mark - Actions
 
 
@@ -184,14 +195,6 @@
     LanguageViewController *viewController=[[LanguageViewController alloc] init];
     viewController.languageEntranceType=TrendingLanguageEntranceType;
     [self.navigationController pushViewController:viewController animated:YES];
-    
-    
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Private

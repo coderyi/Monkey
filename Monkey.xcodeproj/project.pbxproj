@@ -622,6 +622,7 @@
 		0A4780B61B5F1EBE00E99D7A /* TrendingModule */ = {
 			isa = PBXGroup;
 			children = (
+				0AFCEB9F1B62CCA800051D9A /* TableViewProtocol */,
 				0A4780C21B5F1ECF00E99D7A /* TrendingViewController.h */,
 				0A4780C31B5F1ECF00E99D7A /* TrendingViewController.m */,
 			);
@@ -1011,6 +1012,13 @@
 				0A1228E81B52022400D5BAD8 /* LoginWebViewController.m */,
 			);
 			path = LoginModule;
+			sourceTree = "<group>";
+		};
+		0AFCEB9F1B62CCA800051D9A /* TableViewProtocol */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TableViewProtocol;
 			sourceTree = "<group>";
 		};
 		A1FC32981B25D90B00FCBCE7 = {

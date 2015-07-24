@@ -285,6 +285,9 @@
     }
 }
 - (void)checkFollowStatusAction{
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"] isEqualToString:_userModel.login]) {
+        return;
+    }
     /*
     [ApplicationDelegate.apiEngine checkFollowStatusWithUsername:@"coderyi" target_user:_userModel.login completoinHandler:^(UserModel *model){
         

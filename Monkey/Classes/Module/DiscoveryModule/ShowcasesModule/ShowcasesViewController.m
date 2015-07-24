@@ -24,6 +24,7 @@
 @end
 
 @implementation ShowcasesViewController
+#pragma mark - Lifecycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -77,6 +78,13 @@
 }
 
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - Private
 - (void)addHeader
 {  //    YiRefreshHeader  头部刷新按钮的使用
     refreshHeader=[[YiRefreshHeader alloc] init];
@@ -171,6 +179,8 @@ errorHandel:^(NSError* error){
     
 }
 
+#pragma mark - UITableViewDataSource  &UITableViewDelegate
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -232,11 +242,6 @@ errorHandel:^(NSError* error){
     
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 /*
 #pragma mark - Navigation

@@ -210,6 +210,7 @@
         }
         [tableView reloadData];
     };
+    [self refreshTitleView];
     [self checkStarStatusAction];
 
 }
