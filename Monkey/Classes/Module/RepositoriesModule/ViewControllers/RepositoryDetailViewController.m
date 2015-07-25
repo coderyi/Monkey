@@ -13,13 +13,15 @@
 #import "RepositoriesTableViewCell.h"
 #import "WebViewController.h"
 #import "UserDetailViewController.h"
-@interface RepositoryDetailViewController ()<UITableViewDataSource,UITableViewDelegate>{
+#import "RepositoryDetailDataSource.h"
+#import "RepositoryDetailViewModel.h"
+@interface RepositoryDetailViewController ()<UITableViewDelegate>{
     
     UITableView *tableView;
     YiRefreshHeader *refreshHeader;
     YiRefreshFooter *refreshFooter;
     UILabel *titleText;
-    int currentIndex;
+    
 
     DetailSegmentControl *segmentControl;
     UIButton *nameBt;
@@ -34,16 +36,19 @@
     UIView *titleView;
     OCTClient *client;
     BOOL isStaring;
-
+    RepositoryDetailDataSource *repositoryDetailDataSource;
+    RepositoryDetailViewModel *repositoryDetailViewModel;
 }
 
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject3;
 @property (strong, nonatomic) MKNetworkOperation *apiOperation;
+@property(nonatomic,assign) int currentIndex;
 @end
 
 @implementation RepositoryDetailViewController
+@synthesize currentIndex;
 #pragma mark - Lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -69,7 +74,11 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    repositoryDetailDataSource=[[RepositoryDetailDataSource alloc] init];
+    repositoryDetailViewModel=[[RepositoryDetailViewModel alloc] init];
+    repositoryDetailViewModel.model=_model;
     currentIndex=1;
+    repositoryDetailDataSource.currentIndex=currentIndex;
 
     // Do any additional setup after loading the view.
     titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
@@ -93,7 +102,7 @@
     [self.view addSubview:tableView];
     
     tableView.delegate=self;
-    tableView.dataSource=self;
+    tableView.dataSource=repositoryDetailDataSource;
     tableView.rowHeight=135.7;
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self addHeader];
@@ -191,10 +200,14 @@
     segmentControl.bt3Label1.text=@"Stargazers";
 
     tableView.tableHeaderView=titleView;
-    
+//    @weakify(repositoryDetailDataSource);
     segmentControl.ButtonActionBlock=^(int buttonTag){
         
         currentIndex=buttonTag-100;
+//        @strongify(repositoryDetailDataSource);
+
+        repositoryDetailDataSource.currentIndex=buttonTag-100;
+
         if (currentIndex==1) {
             if (self.DsOfPageListObject1.dsArray.count<1) {
                 [refreshHeader beginRefreshing];
@@ -454,176 +467,63 @@
     };}
 
 
-- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
-{
+- (void)loadDataFromApiWithIsFirst:(BOOL)isFirst{
     
-    if (currentIndex==1) {
+    [repositoryDetailViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex firstTableData:^(DataSourceModel* DsOfPageListObject){
+        repositoryDetailDataSource.DsOfPageListObject1=DsOfPageListObject;
         
+                    [tableView reloadData];
         
-        NSInteger page = 0;
+                    if (!isFirst) {
         
-        if (isFirst) {
-            page = 1;
-            
-        }else{
-            
-            page = self.DsOfPageListObject1.page+1;
-        }
-        [ApplicationDelegate.apiEngine reposDetailCategoryWithPage:page userName:_model.user.login repositoryName:_model.name category:@"contributors" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-            
-            if (page<=1) {
-                [self.DsOfPageListObject1.dsArray removeAllObjects];
-            }
-            
-            
-            //        [self hideHUD];
-            
-            [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
-            self.DsOfPageListObject1.page=page;
-            [tableView reloadData];
-            
-            if (page>1) {
-                
-                [refreshFooter endRefreshing];
-                
-                
-            }else
-            {
-                [refreshHeader endRefreshing];
-            }
-            
-        } errorHandel:^(NSError* error){
-            if (isFirst) {
-                
-                [refreshHeader endRefreshing];
-                
-                
-                
-                
-            }else{
-                [refreshFooter endRefreshing];
-                
-            }
-            
-        }];
-        
-        
-        
-        
-        
-        return YES;
-    }else if (currentIndex==2){
-            NSInteger page = 0;
-            
-            if (isFirst) {
-                page = 1;
-                
-            }else{
-                
-                page = self.DsOfPageListObject2.page+1;
-            }
-            [ApplicationDelegate.apiEngine reposDetailCategoryWithPage:page userName:_model.user.login repositoryName:_model.name category:@"forks" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-                
-                if (page<=1) {
-                    [self.DsOfPageListObject2.dsArray removeAllObjects];
-                }
-                
-                
-                //        [self hideHUD];
-                
-                [self.DsOfPageListObject2.dsArray addObjectsFromArray:modelArray];
-                self.DsOfPageListObject2.page=page;
-                
-                if (page>1) {
-                    
-                    [refreshFooter endRefreshing];
-                    
-                    
-                }else
-                {
-                    [refreshHeader endRefreshing];
-                }
-                [tableView reloadData];
-            } errorHandel:^(NSError* error){
-                if (isFirst) {
-                    
-                    [refreshHeader endRefreshing];
-                    
-                    
-                    
-                    
-                }else{
-                    [refreshFooter endRefreshing];
-                    
-                }
-                
-            }];
-            
-            
-            
-            
-            
-            return YES;
-    }else if (currentIndex==3){
-                NSInteger page = 0;
-                
-                if (isFirst) {
-                    page = 1;
-                    
-                }else{
-                    
-                    page = self.DsOfPageListObject3.page+1;
-                }
-                [ApplicationDelegate.apiEngine reposDetailCategoryWithPage:page userName:_model.user.login repositoryName:_model.name category:@"stargazers" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-                    
-                    if (page<=1) {
-                        [self.DsOfPageListObject3.dsArray removeAllObjects];
-                    }
-                    
-                    
-                    //        [self hideHUD];
-                    
-                    [self.DsOfPageListObject3.dsArray addObjectsFromArray:modelArray];
-                    self.DsOfPageListObject3.page=page;
-                    
-                    if (page>1) {
-                        
                         [refreshFooter endRefreshing];
-                        
-                        
+        
+        
                     }else
                     {
                         [refreshHeader endRefreshing];
                     }
-                    [tableView reloadData];
-                } errorHandel:^(NSError* error){
-                    if (isFirst) {
-                        
-                        [refreshHeader endRefreshing];
-                        
-                        
-                        
-                        
-                    }else{
-                        [refreshFooter endRefreshing];
-                        
-                    }
-                    
-                }];
-                
-                
-                
-                
-                
-                return YES;
-    }
+        
+        
+        
+    } secondTableData:^(DataSourceModel* DsOfPageListObject){
+        repositoryDetailDataSource.DsOfPageListObject2=DsOfPageListObject;
+        
+        
+        [tableView reloadData];
+        
+        if (!isFirst) {
+            
+            [refreshFooter endRefreshing];
+            
+            
+        }else
+        {
+            [refreshHeader endRefreshing];
+        }
+
     
-    return YES;
+    } thirdTableData:^(DataSourceModel* DsOfPageListObject){
+        repositoryDetailDataSource.DsOfPageListObject3=DsOfPageListObject;
+        
+        [tableView reloadData];
+        
+        if (!isFirst) {
+            
+            [refreshFooter endRefreshing];
+            
+            
+        }else
+        {
+            [refreshHeader endRefreshing];
+        }
+
     
+    }];
+    
+
 }
-
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (currentIndex==1) {
         return 90.7;
@@ -633,81 +533,6 @@
         return 90.7;
     }
     return 1;
-    
-}
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (currentIndex==1) {
-        return self.DsOfPageListObject1.dsArray.count;
-        
-    }else if (currentIndex==2){
-        
-        return self.DsOfPageListObject2.dsArray.count;
-        
-    }else if (currentIndex==3){
-        
-        return self.DsOfPageListObject3.dsArray.count;
-        
-        
-    }
-    
-    return 1;
-}
-
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-
-- (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (currentIndex==1) {
-        
-        
-        RankTableViewCell *cell;
-        
-        NSString *cellId=@"CellId";
-        cell=[tableView1 dequeueReusableCellWithIdentifier:cellId];
-        if (cell==nil) {
-            cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-            cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        }
-        UserModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
-        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-        cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
-        cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
-        [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
-        return cell;
-    }else if (currentIndex==2){
-            
-        RankTableViewCell *cell;
-            
-        NSString *cellId=@"CellId1";
-        cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-        if (cell==nil) {
-            cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-            cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        }
-        RepositoryModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
-        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-        cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.user.login];
-        cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
-        [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url] placeholderImage:nil];
-        return cell;
-    }else if (currentIndex==3){ RankTableViewCell *cell;
-                
-        NSString *cellId=@"CellId2";
-        cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-        if (cell==nil) {
-            cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-            cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        }
-        UserModel  *model = [(self.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
-        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-        cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
-        cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
-        [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
-            
-        return cell;
-    }
-    return nil;
-    
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -737,14 +562,5 @@
 
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

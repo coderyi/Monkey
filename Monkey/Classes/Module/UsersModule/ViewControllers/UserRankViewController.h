@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LanguageRankViewController : UIViewController
+@interface UserRankViewController : UIViewController
 
 @end

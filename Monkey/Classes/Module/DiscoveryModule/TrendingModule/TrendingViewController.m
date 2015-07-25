@@ -15,6 +15,8 @@
 #import "UserDetailViewController.h"
 #import "CountryViewController.h"
 #import "RepositoriesTableViewCell.h"
+#import "TrendingDataSource.h"
+#import "TrendingViewModel.h"
 @interface TrendingViewController ()<UITableViewDataSource,UITableViewDelegate>{
     UIScrollView *scrollView;
     int currentIndex;
@@ -41,7 +43,8 @@
     NSString *tableView2Language;
     NSString *tableView3Language;
     UILabel *titleText;
-    
+    TrendingDataSource *trendingDataSource;
+    TrendingViewModel *trendingViewModel;
 }
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
@@ -117,7 +120,7 @@
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
-    
+    trendingViewModel=[[TrendingViewModel alloc] init];
     titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
@@ -230,14 +233,16 @@
     tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
     [scrollView addSubview:tableView1];
     //    tableView1.showsVerticalScrollIndicator = NO;
+    trendingDataSource=[[TrendingDataSource alloc] init];
     
-    tableView1.dataSource=self;
+    tableView1.dataSource=trendingDataSource;
+    
     tableView1.delegate=self;
     tableView1.tag=11;
     tableView1.rowHeight=135.7;
     tableView1.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self addHeader:1];
-    [self addFooter:1];
+//    [self addFooter:1];
     
     segmentControl.ButtonActionBlock=^(int buttonTag){
         
@@ -261,12 +266,12 @@
                 tableView2.showsVerticalScrollIndicator = NO;
                 
                 tableView2.tag=12;
-                tableView2.dataSource=self;
+                tableView2.dataSource=trendingDataSource;
                 tableView2.delegate=self;
                 tableView2.separatorStyle=UITableViewCellSeparatorStyleNone;
                 tableView2.rowHeight=135.7;
                 [self addHeader:2];
-                [self addFooter:2];
+//                [self addFooter:2];
                 
             }
             if (![titleText.text isEqualToString:tableView2Language]) {
@@ -288,12 +293,12 @@
                 tableView3.showsVerticalScrollIndicator = NO;
                 
                 tableView3.tag=13;
-                tableView3.dataSource=self;
+                tableView3.dataSource=trendingDataSource;
                 tableView3.delegate=self;
                 tableView3.separatorStyle=UITableViewCellSeparatorStyleNone;
                 tableView3.rowHeight=135.7;
                 [self addHeader:3];
-                [self addFooter:3];
+//                [self addFooter:3];
                 
             }
             if (![titleText.text isEqualToString:tableView3Language]) {
@@ -369,279 +374,62 @@
         
     }
 }
+- (void)loadDataFromApiWithIsFirst:(BOOL)isFirst{
+    if (currentIndex==1) {
+        tableView1Language=language;
 
-- (void)addFooter:(int)type
-{
-    __weak typeof(self) weakSelf = self;
-    if (type==1) {
-        
-        
-        //    YiRefreshFooter  底部刷新按钮的使用
-        refreshFooter1=[[YiRefreshFooter alloc] init];
-        refreshFooter1.scrollView=tableView1;
-        [refreshFooter1 footer];
-        refreshFooter1.beginRefreshingBlock=^(){
-            
-            [weakSelf loadDataFromApiWithIsFirst:NO];
-        };
-    }else if (type==2){
-        
-        //    YiRefreshFooter  底部刷新按钮的使用
-        refreshFooter2=[[YiRefreshFooter alloc] init];
-        refreshFooter2.scrollView=tableView2;
-        [refreshFooter2 footer];
-        refreshFooter2.beginRefreshingBlock=^(){
-            
-            [weakSelf loadDataFromApiWithIsFirst:NO];
-        };
-        
-    }else if (type==3){
-        
-        //    YiRefreshFooter  底部刷新按钮的使用
-        refreshFooter3=[[YiRefreshFooter alloc] init];
-        refreshFooter3.scrollView=tableView3;
-        [refreshFooter3 footer];
-        refreshFooter3.beginRefreshingBlock=^(){
-            
-            [weakSelf loadDataFromApiWithIsFirst:NO];
-        };
-        
-    }
-}
-
-
-- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
-{
-    YiNetworkEngine *networkEngine=[[YiNetworkEngine  alloc] initWithHostName:@"trending.codehub-app.com" customHeaderFields:nil];
-     if (currentIndex==1){
-        
-        NSInteger page = 0;
-        
-        if (isFirst) {
-            page = 1;
-            
-        }else{
-            
-            page = self.DsOfPageListObject1.page+1;
-        }
-                      language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language2"];
-        
-                if (language==nil || language.length<1) {
-                    language=NSLocalizedString(@"all languages", @"");
-        
-                }
-                tableView1Language=language;
-        
-         
-        
-        [networkEngine repositoriesTrendingWithType:@"daily" language:language completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-//            [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)totalCount] forState:UIControlStateNormal];
-            self.DsOfPageListObject1.totalCount=totalCount;
-            
-            if (page<=1) {
-                [self.DsOfPageListObject1.dsArray removeAllObjects];
-            }
-            
-            
-            //        [self hideHUD];
-            
-            [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
-            self.DsOfPageListObject1.page=page;
-            [tableView1 reloadData];
-
-            if (!isFirst) {
-                
-                [refreshFooter1 endRefreshing];
-                
-                
-            }else
-            {
-                [refreshHeader1 endRefreshing];
-            }
-            
-        }
-                                        errorHandel:^(NSError* error){
-                                            if (isFirst) {
-                                                
-                                                [refreshHeader1 endRefreshing];
-                                                
-                                                
-                                                
-                                                
-                                            }else{
-                                                [refreshFooter1 endRefreshing];
-                                                
-                                            }
-                                            
-                                        }];
-        
-        
-        
-        
-        
-        
-        return YES;
-        
     }else if (currentIndex==2) {
-        
-        NSInteger page = 0;
-        
-        if (isFirst) {
-            page = 1;
-            
-        }else{
-            
-            page = self.DsOfPageListObject2.page+1;
-        }
-//        language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
-//       
-//        NSString *q=[NSString stringWithFormat:@"language:%@",language];
-//        
-//        if (language==nil || language.length<1) {
-//            language=@"所有语言";
-//            
-//        }
-//        tableView2Language=language;
-//        
-//        if ([language isEqualToString:@"所有语言"]) {
-//            q=[NSString stringWithFormat:@"location:%@",country];
-//        }
-//        
-        language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language2"];
-        
-        if (language==nil || language.length<1) {
-            language=NSLocalizedString(@"all languages", @"");
-            
-        }
         tableView2Language=language;
         
-        [networkEngine repositoriesTrendingWithType:@"weekly" language:language completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-            self.DsOfPageListObject2.totalCount=totalCount;
-//            [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
-            
-            if (page<=1) {
-                [self.DsOfPageListObject2.dsArray removeAllObjects];
-            }
-            
-            
-            //        [self hideHUD];
-            
-            [self.DsOfPageListObject2.dsArray addObjectsFromArray:modelArray];
-            self.DsOfPageListObject2.page=page;
-            [tableView2 reloadData];
-            
-            if (!isFirst) {
-                
-                [refreshFooter2 endRefreshing];
-                
-                
-            }else
-            {
-                [refreshHeader2 endRefreshing];
-            }
-            
-        }
-                                        errorHandel:^(NSError* error){
-                                            if (isFirst) {
-                                                
-                                                [refreshHeader2 endRefreshing];
-                                                
-                                                
-                                                
-                                                
-                                            }else{
-                                                [refreshFooter2 endRefreshing];
-                                                
-                                            }
-                                            
-                                        }];
-        
-        
-        
-        
-        return YES;
-    }else if (currentIndex==3){
-        
-        NSInteger page = 0;
-        
-        if (isFirst) {
-            page = 1;
-            
-        }else{
-            
-            page = self.DsOfPageListObject3.page+1;
-        }
-//        language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
-//        if (language==nil || language.length<1) {
-//            language=@"所有语言";
-//            
-//        }
-        
-        language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language2"];
-        
-        if (language==nil || language.length<1) {
-            language=NSLocalizedString(@"all languages", @"");
-            
-        }
-        
+    }else if (currentIndex==3) {
         tableView3Language=language;
         
-        
-        [networkEngine repositoriesTrendingWithType:@"monthly" language:language completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-//            [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
-            self.DsOfPageListObject3.totalCount=totalCount;
-            
-            if (page<=1) {
-                [self.DsOfPageListObject3.dsArray removeAllObjects];
-            }
-            
-            
-            //        [self hideHUD];
-            
-            [self.DsOfPageListObject3.dsArray addObjectsFromArray:modelArray];
-            self.DsOfPageListObject3.page=page;
-            [tableView3 reloadData];
-            
-            if (!isFirst) {
-                
-                [refreshFooter3 endRefreshing];
-                
-                
-            }else
-            {
-                [refreshHeader3 endRefreshing];
-            }
-            
-        }
-                                               errorHandel:^(NSError* error){
-                                                   if (isFirst) {
-                                                       
-                                                       [refreshHeader3 endRefreshing];
-                                                       
-                                                       
-                                                       
-                                                       
-                                                   }else{
-                                                       [refreshFooter3 endRefreshing];
-                                                       
-                                                   }
-                                                   
-                                               }];
-        
-        
-        
-        
-        return YES;
-        
     }
-    return YES;
-    
+    [trendingViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex firstTableData:^(DataSourceModel* DsOfPageListObject){
+        trendingDataSource.DsOfPageListObject1=DsOfPageListObject;
+        
+        [tableView1 reloadData];
+        
+        if (!isFirst) {
+            
+            [refreshFooter1 endRefreshing];
+            
+            
+        }else
+        {
+            [refreshHeader1 endRefreshing];
+        }
+    } secondTableData:^(DataSourceModel* DsOfPageListObject){
+        trendingDataSource.DsOfPageListObject2=DsOfPageListObject;
+        
+        [tableView2 reloadData];
+        
+        if (!isFirst) {
+            
+            [refreshFooter2 endRefreshing];
+            
+            
+        }else
+        {
+            [refreshHeader2 endRefreshing];
+        }
+    } thirdTableData:^(DataSourceModel* DsOfPageListObject){
+        trendingDataSource.DsOfPageListObject3=DsOfPageListObject;
+        
+        [tableView3 reloadData];
+        
+        if (!isFirst) {
+            
+            [refreshFooter3 endRefreshing];
+            
+            
+        }else
+        {
+            [refreshHeader3 endRefreshing];
+        }
+    }];
+
 }
-
-
-
-
-
 
 #pragma mark - UIScrollViewDelegate
 
@@ -697,121 +485,6 @@
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (tableView.tag==11) {
-        
-        
-        return self.DsOfPageListObject1.dsArray.count;
-        
-    }else if (tableView.tag==12){
-        
-        
-        return self.DsOfPageListObject2.dsArray.count;
-    }else if (tableView.tag==13){
-        
-        
-        return self.DsOfPageListObject3.dsArray.count;
-    }
-    
-    return self.DsOfPageListObject1.dsArray.count;
-    
-}
-
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    RepositoriesTableViewCell *cell;
-    if (tableView.tag==11) {
-       
-        
-        NSString *cellId=@"CellId1";
-        cell=[tableView1 dequeueReusableCellWithIdentifier:cellId];
-        if (cell==nil) {
-            cell=[[RepositoriesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-            cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        }
-        RepositoryModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
-        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-        cell.repositoryLabel.text=[NSString stringWithFormat:@"%@",model.name];
-        cell.userLabel.text=[NSString stringWithFormat:@"Owner:%@",model.user.login];
-        [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url] placeholderImage:nil];
-        cell.descriptionLabel.text=[NSString stringWithFormat:@"%@",model.repositoryDescription];
-        
-        [cell.homePageBt setTitle:model.homepage forState:UIControlStateNormal];
-        if (model.homepage.length<1) {
-            cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 85, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
-            cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 85, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
-        }else{
-            cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 105, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
-            cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 105, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
-        }
-        cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
-        cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
-        return cell;
-
-        
-        
-    }else if (tableView.tag==12){
-        
-        
-        NSString *cellId=@"CellId2";
-        cell=[tableView2 dequeueReusableCellWithIdentifier:cellId];
-        if (cell==nil) {
-            cell=[[RepositoriesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-            cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        }
-        RepositoryModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
-        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-        cell.repositoryLabel.text=[NSString stringWithFormat:@"%@",model.name];
-        cell.userLabel.text=[NSString stringWithFormat:@"Owner:%@",model.user.login];
-        [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url] placeholderImage:nil];
-        cell.descriptionLabel.text=[NSString stringWithFormat:@"%@",model.repositoryDescription];
-        
-        [cell.homePageBt setTitle:model.homepage forState:UIControlStateNormal];
-        if (model.homepage.length<1) {
-            cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 85, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
-            cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 85, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
-        }else{
-            cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 105, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
-            cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 105, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
-        }
-        cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
-        cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
-        return cell;
-        
-    }else if (tableView.tag==13){
-        
-        NSString *cellId=@"CellId3";
-        cell=[tableView3 dequeueReusableCellWithIdentifier:cellId];
-        if (cell==nil) {
-            cell=[[RepositoriesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-            cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        }
-        RepositoryModel  *model = [(self.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
-        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-        cell.repositoryLabel.text=[NSString stringWithFormat:@"%@",model.name];
-        cell.userLabel.text=[NSString stringWithFormat:@"Owner:%@",model.user.login];
-        [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url] placeholderImage:nil];
-        cell.descriptionLabel.text=[NSString stringWithFormat:@"%@",model.repositoryDescription];
-        
-        [cell.homePageBt setTitle:model.homepage forState:UIControlStateNormal];
-        if (model.homepage.length<1) {
-            cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 85, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
-            cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 85, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
-        }else{
-            cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 105, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
-            cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 105, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
-        }
-        cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
-        cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
-        return cell;
-        
-    }
-    return cell;
-    
-    
-}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UserDetailViewController *detail=[[UserDetailViewController alloc] init];
     if (currentIndex==1) {
@@ -834,15 +507,5 @@
     
     
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

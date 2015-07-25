@@ -19,7 +19,8 @@
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
 #import "RepositoryDetailViewController.h"
-
+#import "UserDetailViewModel.h"
+#import "UserDetailDataSource.h"
 
 @interface UserDetailViewController ()<UITableViewDataSource,UITableViewDelegate>{
     UITableView *tableView;
@@ -39,6 +40,9 @@
     DetailSegmentControl *segmentControl;
     BOOL isFollowing;
     OCTClient *client;
+    UserDetailDataSource *userDetailDataSource;
+    UserDetailViewModel *userDetailViewModel;
+
 }
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
@@ -76,8 +80,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = _userModel.login;
+    userDetailDataSource=[[UserDetailDataSource alloc] init];
+    userDetailViewModel=[[UserDetailViewModel alloc] init];
+    userDetailViewModel.userModel=_userModel;
     currentIndex=1;
-
+    userDetailDataSource.currentIndex=currentIndex;
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
@@ -94,7 +101,7 @@
     [self.view addSubview:tableView];
     
     tableView.delegate=self;
-    tableView.dataSource=self;
+    tableView.dataSource=userDetailDataSource;
     tableView.rowHeight=135.7;
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self addHeader];
@@ -194,6 +201,8 @@
     segmentControl.ButtonActionBlock=^(int buttonTag){
         
         currentIndex=buttonTag-100;
+        userDetailDataSource.currentIndex=buttonTag-100;
+
         if (currentIndex==1) {
             if (self.DsOfPageListObject1.dsArray.count<1) {
                 [refreshHeader beginRefreshing];
@@ -460,282 +469,78 @@
         [weakSelf loadDataFromApiWithIsFirst:NO];
     };}
 
-
-- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
+- (void)loadDataFromApiWithIsFirst:(BOOL)isFirst
 {
-    
-    if (currentIndex==1) {
+    [userDetailViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex firstTableData:^(DataSourceModel* DsOfPageListObject){
+        userDetailDataSource.DsOfPageListObject1=DsOfPageListObject;
         
+        [tableView reloadData];
         
-        NSInteger page = 0;
-        
-        if (isFirst) {
-            page = 1;
+        if (!isFirst) {
             
-        }else{
+            [refreshFooter endRefreshing];
             
-            page = self.DsOfPageListObject1.page+1;
+            
+        }else
+        {
+            [refreshHeader endRefreshing];
         }
-        [ApplicationDelegate.apiEngine userRepositoriesWithPage:page userName:_userModel.login completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-            
-            if (page<=1) {
-                [self.DsOfPageListObject1.dsArray removeAllObjects];
-            }
-            
-            
-            //        [self hideHUD];
-            
-            [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
-            self.DsOfPageListObject1.page=page;
-            [tableView reloadData];
-            
-            if (page>1) {
-                
-                [refreshFooter endRefreshing];
-                
-                
-            }else
-            {
-                [refreshHeader endRefreshing];
-            }
-            
-        } errorHandel:^(NSError* error){
-            if (isFirst) {
-                
-                [refreshHeader endRefreshing];
-                
-                
-                
-                
-            }else{
-                [refreshFooter endRefreshing];
-                
-            }
-            
-        }];
         
         
         
+    } secondTableData:^(DataSourceModel* DsOfPageListObject){
+        userDetailDataSource.DsOfPageListObject2=DsOfPageListObject;
         
         
-        return YES;
-    }else if (currentIndex==2){
-            NSInteger page = 0;
+        [tableView reloadData];
+        
+        if (!isFirst) {
             
-            if (isFirst) {
-                page = 1;
-                
-            }else{
-                
-                page = self.DsOfPageListObject2.page+1;
-            }
-            [ApplicationDelegate.apiEngine userFollowingWithPage:page userName:_userModel.login completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-                
-                if (page<=1) {
-                    [self.DsOfPageListObject2.dsArray removeAllObjects];
-                }
-                
-                
-                //        [self hideHUD];
-                
-                [self.DsOfPageListObject2.dsArray addObjectsFromArray:modelArray];
-                self.DsOfPageListObject2.page=page;
-                [tableView reloadData];
-                
-                if (page>1) {
-                    
-                    [refreshFooter endRefreshing];
-                    
-                    
-                }else
-                {
-                    [refreshHeader endRefreshing];
-                }
-                
-            } errorHandel:^(NSError* error){
-                if (isFirst) {
-                    
-                    [refreshHeader endRefreshing];
-                    
-                    
-                    
-                    
-                }else{
-                    [refreshFooter endRefreshing];
-                    
-                }
-                
-            }];
+            [refreshFooter endRefreshing];
             
             
+        }else
+        {
+            [refreshHeader endRefreshing];
+        }
+        
+        
+    } thirdTableData:^(DataSourceModel* DsOfPageListObject){
+        userDetailDataSource.DsOfPageListObject3=DsOfPageListObject;
+        
+        [tableView reloadData];
+        
+        if (!isFirst) {
+            
+            [refreshFooter endRefreshing];
             
             
-            
-            return YES;
-    }else if (currentIndex==3){
-                NSInteger page = 0;
-                
-                if (isFirst) {
-                    page = 1;
-                    
-                }else{
-                    
-                    page = self.DsOfPageListObject3.page+1;
-                }
-                [ApplicationDelegate.apiEngine userFollowersWithPage:page userName:_userModel.login completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-                    
-                    if (page<=1) {
-                        [self.DsOfPageListObject3.dsArray removeAllObjects];
-                    }
-                    
-                    
-                    //        [self hideHUD];
-                    
-                    [self.DsOfPageListObject3.dsArray addObjectsFromArray:modelArray];
-                    self.DsOfPageListObject3.page=page;
-                    [tableView reloadData];
-                    
-                    if (page>1) {
-                        
-                        [refreshFooter endRefreshing];
-                        
-                        
-                    }else
-                    {
-                        [refreshHeader endRefreshing];
-                    }
-                    
-                } errorHandel:^(NSError* error){
-                    if (isFirst) {
-                        
-                        [refreshHeader endRefreshing];
-                        
-                        
-                        
-                        
-                    }else{
-                        [refreshFooter endRefreshing];
-                        
-                    }
-                    
-                }];
-                
-                
-                
-                
-                
-                return YES;
-    }
+        }else
+        {
+            [refreshHeader endRefreshing];
+        }
+        
+        
+    }];
     
-    return YES;
-    
+
 }
 
 
-
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (currentIndex==1) {
         return 135.7;
     }else if (currentIndex==2){
-    return 90.7;
+        return 90.7;
     }else if (currentIndex==3){
         return 90.7;
     }
     return 1;
-
-}
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (currentIndex==1) {
-        return self.DsOfPageListObject1.dsArray.count;
-
-    }else if (currentIndex==2){
-    
-        return self.DsOfPageListObject2.dsArray.count;
-
-    }else if (currentIndex==3){
-    
-        return self.DsOfPageListObject3.dsArray.count;
-
-    
-    }
-    
-    return 1;
-}
-
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-
-- (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (currentIndex==1) {
-        
-  
-        NSString *cellId=@"CellId";
-        RepositoriesTableViewCell *cell=[tableView1 dequeueReusableCellWithIdentifier:cellId];
-        if (cell==nil) {
-            cell=[[RepositoriesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-            cell.selectionStyle=UITableViewCellSelectionStyleNone;
-            cell.userLabel.hidden=YES;
-            cell.titleImageView.hidden=YES;
-    
-        }
-        RepositoryModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
-        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-        cell.repositoryLabel.text=[NSString stringWithFormat:@"%@",model.name];
-//    cell.userLabel.text=[NSString stringWithFormat:@"Owner:%@",model.user.login];
-//    [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url] placeholderImage:nil];
-        cell.descriptionLabel.text=[NSString stringWithFormat:@"%@",model.repositoryDescription];
-    
-        [cell.homePageBt setTitle:model.homepage forState:UIControlStateNormal];
-      
-        if (model.homepage.length<1) {
-            cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 85, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
-            cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 85, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
-        }else{
-            cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 105, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
-            cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 105, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
-        }
-        cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
-        cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
-        return cell;
-    }else if (currentIndex==2){
-            
-            RankTableViewCell *cell;
-            
-            NSString *cellId=@"CellId1";
-            cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-            if (cell==nil) {
-                cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-                cell.selectionStyle=UITableViewCellSelectionStyleNone;
-            }
-            UserModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
-            cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-            cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
-            cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
-            [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
-            return cell;
-    }else if (currentIndex==3){ RankTableViewCell *cell;
-                
-                NSString *cellId=@"CellId2";
-                cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-                if (cell==nil) {
-                    cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-                    cell.selectionStyle=UITableViewCellSelectionStyleNone;
-                }
-                UserModel  *model = [(self.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
-                cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-                cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
-                cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
-                [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
-                return cell;
-    }
-    return nil;
-    
     
 }
-
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (currentIndex==1) {
         RepositoryModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
@@ -758,14 +563,6 @@
     }
 
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

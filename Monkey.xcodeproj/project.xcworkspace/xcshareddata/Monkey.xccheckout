@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>2BE2C85B-BF89-4F62-AB1F-7D054631A256</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Monkey</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>DA50A2817A0C7BE5B961E4AB554BBF965872173E</key>
 		<string>https://github.com/coderyi/Monkey</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Monkey.xcodeproj/project.xcworkspace</string>
+	<string>Monkey.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>DA50A2817A0C7BE5B961E4AB554BBF965872173E</key>

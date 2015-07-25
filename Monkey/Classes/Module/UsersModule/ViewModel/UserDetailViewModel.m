@@ -1,0 +1,210 @@
+
+//
+//  UserDetailViewModel.m
+//  Monkey
+//
+//  Created by coderyi on 15/7/25.
+//  Copyright (c) 2015年 www.coderyi.com. All rights reserved.
+//
+
+#import "UserDetailViewModel.h"
+@interface UserDetailViewModel()
+@property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
+@property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
+@property(nonatomic,strong)DataSourceModel *DsOfPageListObject3;
+
+
+@end
+@implementation UserDetailViewModel
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        // Custom initialization
+        self.DsOfPageListObject1 = [[DataSourceModel alloc]init];
+        self.DsOfPageListObject2 = [[DataSourceModel alloc]init];
+        self.DsOfPageListObject3 = [[DataSourceModel alloc]init];
+    }
+    return self;
+}
+- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst  currentIndex:(int)currentIndex firstTableData:(UserDetailDataSourceModelResponseBlock)firstCompletionBlock secondTableData:(UserDetailDataSourceModelResponseBlock)secondCompletionBlock thirdTableData:(UserDetailDataSourceModelResponseBlock)thirdCompletionBlock
+{
+    
+    if (currentIndex==1) {
+        
+        
+        NSInteger page = 0;
+        
+        if (isFirst) {
+            page = 1;
+            
+        }else{
+            
+            page = self.DsOfPageListObject1.page+1;
+        }
+        [ApplicationDelegate.apiEngine userRepositoriesWithPage:page userName:_userModel.login completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
+            
+            if (page<=1) {
+                [self.DsOfPageListObject1.dsArray removeAllObjects];
+            }
+            
+            
+            //        [self hideHUD];
+            
+            [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
+            self.DsOfPageListObject1.page=page;
+            firstCompletionBlock(self.DsOfPageListObject1);
+//            [tableView reloadData];
+//            
+//            if (page>1) {
+//                
+//                [refreshFooter endRefreshing];
+//                
+//                
+//            }else
+//            {
+//                [refreshHeader endRefreshing];
+//            }
+            
+        } errorHandel:^(NSError* error){
+            firstCompletionBlock(self.DsOfPageListObject1);
+
+//            if (isFirst) {
+//                
+//                [refreshHeader endRefreshing];
+//                
+//                
+//                
+//                
+//            }else{
+//                [refreshFooter endRefreshing];
+//                
+//            }
+            
+        }];
+        
+        
+        
+        
+        
+        return YES;
+    }else if (currentIndex==2){
+        NSInteger page = 0;
+        
+        if (isFirst) {
+            page = 1;
+            
+        }else{
+            
+            page = self.DsOfPageListObject2.page+1;
+        }
+        [ApplicationDelegate.apiEngine userFollowingWithPage:page userName:_userModel.login completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
+            
+            if (page<=1) {
+                [self.DsOfPageListObject2.dsArray removeAllObjects];
+            }
+            
+            
+            //        [self hideHUD];
+            
+            [self.DsOfPageListObject2.dsArray addObjectsFromArray:modelArray];
+            self.DsOfPageListObject2.page=page;
+            secondCompletionBlock(self.DsOfPageListObject2);
+//            [tableView reloadData];
+//            
+//            if (page>1) {
+//                
+//                [refreshFooter endRefreshing];
+//                
+//                
+//            }else
+//            {
+//                [refreshHeader endRefreshing];
+//            }
+            
+        } errorHandel:^(NSError* error){
+            secondCompletionBlock(self.DsOfPageListObject2);
+
+//            if (isFirst) {
+//                
+//                [refreshHeader endRefreshing];
+//                
+//                
+//                
+//                
+//            }else{
+//                [refreshFooter endRefreshing];
+//                
+//            }
+            
+        }];
+        
+        
+        
+        
+        
+        return YES;
+    }else if (currentIndex==3){
+        NSInteger page = 0;
+        
+        if (isFirst) {
+            page = 1;
+            
+        }else{
+            
+            page = self.DsOfPageListObject3.page+1;
+        }
+        [ApplicationDelegate.apiEngine userFollowersWithPage:page userName:_userModel.login completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
+            
+            if (page<=1) {
+                [self.DsOfPageListObject3.dsArray removeAllObjects];
+            }
+            
+            
+            //        [self hideHUD];
+            
+            [self.DsOfPageListObject3.dsArray addObjectsFromArray:modelArray];
+            self.DsOfPageListObject3.page=page;
+            thirdCompletionBlock(self.DsOfPageListObject3);
+//            [tableView reloadData];
+//            
+//            if (page>1) {
+//                
+//                [refreshFooter endRefreshing];
+//                
+//                
+//            }else
+//            {
+//                [refreshHeader endRefreshing];
+//            }
+            
+        } errorHandel:^(NSError* error){
+            thirdCompletionBlock(self.DsOfPageListObject3);
+
+//            if (isFirst) {
+//                
+//                [refreshHeader endRefreshing];
+//                
+//                
+//                
+//                
+//            }else{
+//                [refreshFooter endRefreshing];
+//                
+//            }
+            
+        }];
+        
+        
+        
+        
+        
+        return YES;
+    }
+    
+    return YES;
+    
+}
+
+
+@end

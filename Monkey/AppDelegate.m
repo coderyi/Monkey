@@ -37,8 +37,7 @@
 //                  别人笑我忒疯癫，我笑自己命太贱；
 //                  不见满街漂亮妹，哪个归得程序员？
 #import "AppDelegate.h"
-#import "RankViewController.h"
-#import "LanguageRankViewController.h"
+#import "UserRankViewController.h"
 #import "RepositoriesViewController.h"
 #import "MoreViewController.h"
 #import "DiscoveryViewController.h"
@@ -60,7 +59,7 @@
     
 
     
-    LanguageRankViewController *languageRank=[[LanguageRankViewController alloc] init];
+    UserRankViewController *languageRank=[[UserRankViewController alloc] init];
     BaseNavigationController *navLanguageRank=[self initlizerNavigationControllerWithRootViewController:languageRank];
     navLanguageRank.navigationBar.barTintColor=YiBlue;
     navLanguageRank.navigationBar.tintColor=[UIColor whiteColor];

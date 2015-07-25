@@ -12,6 +12,8 @@
 #import "RepositoryModel.h"
 #import "UserDetailViewController.h"
 #import "RepositoryDetailViewController.h"
+#import "SearchViewModel.h"
+#import "SearchDataSource.h"
 @interface SearchViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>{
     UITableView *tableView1;
     UITableView *tableView2;
@@ -24,6 +26,8 @@
     UISearchBar *searchBar;
     SearchSegmentControl *searchSegment;
     UILabel *titleText;
+    SearchViewModel *searchViewModel;
+    SearchDataSource *searchDataSourcel;
 }
 @property (strong, nonatomic) MKNetworkOperation *apiOperation;
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
@@ -62,7 +66,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    searchViewModel=[[SearchViewModel alloc] init];
+    searchDataSourcel=[[SearchDataSource alloc] init];
+
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
@@ -85,7 +91,7 @@
     
     tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 30, ScreenWidth, ScreenHeight-64-30) style:UITableViewStylePlain];
     [self.view addSubview:tableView1];
-    tableView1.dataSource=self;
+    tableView1.dataSource=searchDataSourcel;
     tableView1.delegate=self;
     [self addHeader:1];
     [self addFooter:1];
@@ -104,7 +110,7 @@
                 [self.view addSubview:tableView2];
                 
                 tableView2.tag=12;
-                tableView2.dataSource=self;
+                tableView2.dataSource=searchDataSourcel;
                 tableView2.delegate=self;
                 [self addHeader:2];
                 [self addFooter:2];
@@ -214,7 +220,7 @@
 
             STRONGSELF
             [strongSelf loadDataFromApiWithIsFirst:NO];
-        };
+        };}else if (type==2){
         
             //    YiRefreshFooter  底部刷新按钮的使用
             refreshFooter2=[[YiRefreshFooter alloc] init];
@@ -231,133 +237,38 @@
     }
 }
 
-- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
-{ NSString *text=searchBar.text;
-    if (text!=nil) {
+- (void)loadDataFromApiWithIsFirst:(BOOL)isFirst{
+  
+    [searchViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex searchBarText:searchBar.text firstTableData:^(DataSourceModel* DsOfPageListObject){
+        searchDataSourcel.DsOfPageListObject1=DsOfPageListObject;
+                        [tableView1 reloadData];
+        
+                        if (!isFirst) {
+        
+                            [refreshFooter1 endRefreshing];
         
         
-        if (currentIndex==1){
+                        }else
+                        {
+                            [refreshHeader1 endRefreshing];
+                        }
+    } secondTableData:^(DataSourceModel* DsOfPageListObject){
+        searchDataSourcel.DsOfPageListObject2=DsOfPageListObject;
+        [tableView2 reloadData];
+        
+        if (!isFirst) {
             
-            NSInteger page = 0;
-            
-            if (isFirst) {
-                page = 1;
-                
-            }else{
-                
-                page = self.DsOfPageListObject1.page+1;
-            }
-            
-            
-            [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:text sort:@"followers" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-                self.DsOfPageListObject1.totalCount=totalCount;
-                
-                if (page<=1) {
-                    [self.DsOfPageListObject1.dsArray removeAllObjects];
-                }
-                
-                
-                //        [self hideHUD];
-                
-                [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
-                self.DsOfPageListObject1.page=page;
-                [tableView1 reloadData];
-                
-                if (page>1) {
-                    
-                    [refreshFooter1 endRefreshing];
-                    
-                    
-                }else
-                {
-                    [refreshHeader1 endRefreshing];
-                }
-                
-            }
-                                                   errorHandel:^(NSError* error){
-                                                       if (isFirst) {
-                                                           
-                                                           [refreshHeader1 endRefreshing];
-                                                           
-                                                           
-                                                           
-                                                           
-                                                       }else{
-                                                           [refreshFooter1 endRefreshing];
-                                                           
-                                                       }
-                                                       
-                                                   }];
+            [refreshFooter2 endRefreshing];
             
             
-            
-            
-            return YES;
-            
-        }else if (currentIndex==2) {
-            
-            
-            NSInteger page = 0;
-            
-            if (isFirst) {
-                page = 1;
-                
-            }else{
-                
-                page = self.DsOfPageListObject2.page+1;
-            }
-            
-            [ApplicationDelegate.apiEngine searchRepositoriesWithPage:page  q:text sort:@"stars" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-                
-                if (page<=1) {
-                    [self.DsOfPageListObject2.dsArray removeAllObjects];
-                }
-                
-                
-                //        [self hideHUD];
-                
-                [self.DsOfPageListObject2.dsArray addObjectsFromArray:modelArray];
-                self.DsOfPageListObject2.page=page;
-                [tableView2 reloadData];
-                
-                if (page>1) {
-                    
-                    [refreshFooter2 endRefreshing];
-                    
-                    
-                }else
-                {
-                    [refreshHeader2 endRefreshing];
-                }
-                
-            }
-                                                          errorHandel:^(NSError* error){
-                                                              if (isFirst) {
-                                                                  
-                                                                  [refreshHeader2 endRefreshing];
-                                                                  
-                                                                  
-                                                                  
-                                                                  
-                                                              }else{
-                                                                  [refreshFooter2 endRefreshing];
-                                                                  
-                                                              }
-                                                              
-                                                          }];
-            
-            
-            
-            
-            return YES;
+        }else
+        {
+            [refreshHeader2 endRefreshing];
         }
-    }
-    return YES;
+        
+    } ];
     
 }
-
-
-
 
 
 
@@ -368,65 +279,6 @@
     [searchBar endEditing:YES];
 }
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (tableView.tag==11) {
-        
-        
-        return self.DsOfPageListObject1.dsArray.count;
-        
-    }else if (tableView.tag==12){
-        
-        
-        return self.DsOfPageListObject2.dsArray.count;
-    }
-    
-    return self.DsOfPageListObject1.dsArray.count;
-    
-}
-
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell;
-    if (tableView.tag==11) {
-        NSString *cellId=@"CellId1";
-        cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-        if (cell==nil) {
-            cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-            cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        }
-        UserModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
-
-        cell.textLabel.text=model.login;
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
-        cell.imageView.layer.masksToBounds=YES;
-        cell.imageView.layer.cornerRadius=8;
-//
-//        cell.imageView.image=[UIImage imageNamed:@"github"];
-        return cell;
-        
-    }else if (tableView.tag==12){
-        
-        NSString *cellId=@"CellId2";
-        cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-        if (cell==nil) {
-            cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
-            cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        }
-        RepositoryModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
-        
-        cell.textLabel.text=model.full_name;
-        cell.detailTextLabel.text=model.language;
-        return cell;
-        
-    }
-    return cell;
-    
-    
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView.tag==11) {
         UserDetailViewController *detail=[[UserDetailViewController alloc] init];
@@ -451,14 +303,5 @@
 }
 
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 www.coderyi.com. All rights reserved.
 //
 
-#import "LanguageRankViewController.h"
+#import "UserRankViewController.h"
 #import "UserModel.h"
 #import "RankTableViewCell.h"
 #import "HeaderSegmentControl.h"
@@ -14,8 +14,9 @@
 #import "LanguageViewController.h"
 #import "UserDetailViewController.h"
 #import "CountryViewController.h"
-
-@interface LanguageRankViewController ()<UITableViewDataSource,UITableViewDelegate>{
+#import "UserRankDataSource.h"
+#import "UserRankViewModel.h"
+@interface UserRankViewController ()<UITableViewDataSource,UITableViewDelegate>{
     UIScrollView *scrollView;
     int currentIndex;
     UITableView *tableView1;
@@ -41,7 +42,8 @@
     NSString *tableView2Language;
     NSString *tableView3Language;
     UILabel *titleText;
-    
+    UserRankDataSource *userRankDataSource;
+    UserRankViewModel *userRankViewModel;
 }
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
@@ -49,7 +51,7 @@
 @property (strong, nonatomic) MKNetworkOperation *apiOperation;
 @end
 
-@implementation LanguageRankViewController
+@implementation UserRankViewController
 #pragma mark - Lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -145,6 +147,7 @@
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
+    userRankViewModel=[[UserRankViewModel alloc] init];
     titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
@@ -271,8 +274,8 @@
     tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
     [scrollView addSubview:tableView1];
     //    tableView1.showsVerticalScrollIndicator = NO;
-    
-    tableView1.dataSource=self;
+    userRankDataSource =[[UserRankDataSource alloc] init];
+    tableView1.dataSource=userRankDataSource;
     tableView1.delegate=self;
     tableView1.tag=11;
     tableView1.rowHeight=90.7;
@@ -302,7 +305,7 @@
                 tableView2.showsVerticalScrollIndicator = NO;
                 
                 tableView2.tag=12;
-                tableView2.dataSource=self;
+                tableView2.dataSource=userRankDataSource;
                 tableView2.delegate=self;
                 tableView2.separatorStyle=UITableViewCellSeparatorStyleNone;
                 tableView2.rowHeight=90.7;
@@ -329,7 +332,7 @@
                 tableView3.showsVerticalScrollIndicator = NO;
                 
                 tableView3.tag=13;
-                tableView3.dataSource=self;
+                tableView3.dataSource=userRankDataSource;
                 tableView3.delegate=self;
                 tableView3.separatorStyle=UITableViewCellSeparatorStyleNone;
                 tableView3.rowHeight=90.7;
@@ -448,232 +451,67 @@
     }
 }
 
-
-- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
-{
-    if (currentIndex==1){
-        
-        NSInteger page = 0;
-        
-        if (isFirst) {
-            page = 1;
-            
-        }else{
-            
-            page = self.DsOfPageListObject1.page+1;
-        }
-        NSString *city=[[NSUserDefaults standardUserDefaults] objectForKey:@"pinyinCity"];
-        //            city=AFBase64EncodedStringFromString(city);
-        city=[city stringByReplacingOccurrencesOfString:@" "  withString:@"%2B"];
-        if (city==nil || city.length<1) {
-            city=@"beijing";
-        }
-        language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
-        NSString *q=[NSString stringWithFormat:@"location:%@+language:%@",city,language];
-        
-        if (language==nil || language.length<1) {
-            language=NSLocalizedString(@"all languages", @"");
-            
-        }
+- (void)loadDataFromApiWithIsFirst:(BOOL)isFirst{
+    if (currentIndex==1) {
         tableView1Language=language;
         
-        if ([language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
-            q=[NSString stringWithFormat:@"location:%@",city];
-        }
-        
-        [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:q sort:@"followers" categoryLocation:city categoryLanguage:language completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-            [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)totalCount] forState:UIControlStateNormal];
-            self.DsOfPageListObject1.totalCount=totalCount;
-            
-            if (page<=1) {
-                [self.DsOfPageListObject1.dsArray removeAllObjects];
-            }
-            
-            
-            //        [self hideHUD];
-            
-            [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
-            self.DsOfPageListObject1.page=page;
-            [tableView1 reloadData];
-            
-            if (page>1) {
-                
-                [refreshFooter1 endRefreshing];
-                
-                
-            }else
-            {
-                [refreshHeader1 endRefreshing];
-            }
-            
-        }
-                                               errorHandel:^(NSError* error){
-                                                   if (isFirst) {
-                                                       
-                                                       [refreshHeader1 endRefreshing];
-                                                       
-                                                       
-                                                       
-                                                       
-                                                   }else{
-                                                       [refreshFooter1 endRefreshing];
-                                                       
-                                                   }
-                                                   
-                                               }];
-        
-        
-        
-        
-        return YES;
-        
     }else if (currentIndex==2) {
-        
-        NSInteger page = 0;
-        
-        if (isFirst) {
-            page = 1;
-            
-        }else{
-            
-            page = self.DsOfPageListObject2.page+1;
-        }
-        language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
-        NSString *country=[[NSUserDefaults standardUserDefaults] objectForKey:@"country"];
-        if (country==nil || country.length<1) {
-            country=@"China";
-        }
-        NSString *q=[NSString stringWithFormat:@"location:%@+language:%@",country,language];
-        
-        if (language==nil || language.length<1) {
-            language=NSLocalizedString(@"all languages", @"");
-            
-        }
         tableView2Language=language;
         
-        if ([language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
-            q=[NSString stringWithFormat:@"location:%@",country];
-        }
+    }else if (currentIndex==3) {
+        tableView3Language=language;
         
-        [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:q sort:@"followers" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-            self.DsOfPageListObject2.totalCount=totalCount;
-            [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
-            
-            if (page<=1) {
-                [self.DsOfPageListObject2.dsArray removeAllObjects];
-            }
-            
-            
-            //        [self hideHUD];
-            
-            [self.DsOfPageListObject2.dsArray addObjectsFromArray:modelArray];
-            self.DsOfPageListObject2.page=page;
-            [tableView2 reloadData];
-            
-            if (page>1) {
-                
-                [refreshFooter2 endRefreshing];
-                
-                
-            }else
-            {
-                [refreshHeader2 endRefreshing];
-            }
-            
-        }
-                                               errorHandel:^(NSError* error){
-                                                   if (isFirst) {
-                                                       
-                                                       [refreshHeader2 endRefreshing];
-                                                       
-                                                       
-                                                       
-                                                       
-                                                   }else{
-                                                       [refreshFooter2 endRefreshing];
-                                                       
-                                                   }
-                                                   
-                                               }];
+    }
+    
+    [userRankViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex firstTableData:^(DataSourceModel* DsOfPageListObject){
+        userRankDataSource.DsOfPageListObject1=DsOfPageListObject;
+        
+                    [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)DsOfPageListObject.totalCount] forState:UIControlStateNormal];
+                    [tableView1 reloadData];
+        
+                    if (!isFirst) {
+        
+                        [refreshFooter1 endRefreshing];
         
         
+                    }else
+                    {
+                        [refreshHeader1 endRefreshing];
+                    }
+    } secondTableData:^(DataSourceModel* DsOfPageListObject){
+        userRankDataSource.DsOfPageListObject2=DsOfPageListObject;
+
+                    [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",DsOfPageListObject.totalCount] forState:UIControlStateNormal];
+                    [tableView2 reloadData];
+        
+                    if (!isFirst) {
+        
+                        [refreshFooter2 endRefreshing];
         
         
-        return YES;
-    }else if (currentIndex==3){
-            
-            NSInteger page = 0;
-            
-            if (isFirst) {
-                page = 1;
-                
-            }else{
-                
-                page = self.DsOfPageListObject3.page+1;
-            }
-            language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
-            if (language==nil || language.length<1) {
-                language=NSLocalizedString(@"all languages", @"");
-                
-            }
-            
-            
-            tableView3Language=language;
-            [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:[NSString stringWithFormat:@"language:%@",language] sort:@"followers" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
-                self.DsOfPageListObject3.totalCount=totalCount;
-                
-                if (page<=1) {
-                    [self.DsOfPageListObject3.dsArray removeAllObjects];
-                }
-                
-                
-                //        [self hideHUD];
-                
-                [self.DsOfPageListObject3.dsArray addObjectsFromArray:modelArray];
-                self.DsOfPageListObject3.page=page;
-                [tableView3 reloadData];
-                
-                if (page>1) {
-                    
-                    [refreshFooter3 endRefreshing];
-                    
-                    
-                }else
-                {
-                    [refreshHeader3 endRefreshing];
-                }
-                
-            }
-                                                   errorHandel:^(NSError* error){
-                                                       if (isFirst) {
-                                                           
-                                                           [refreshHeader3 endRefreshing];
-                                                           
-                                                           
-                                                           
-                                                           
-                                                       }else{
-                                                           [refreshFooter3 endRefreshing];
-                                                           
-                                                       }
-                                                       
-                                                   }];
-            
-            
-            
-            
-            return YES;
-            
-        }
-    return YES;
+                    }else
+                    {
+                        [refreshHeader2 endRefreshing];
+                    }
+    } thirdTableData:^(DataSourceModel* DsOfPageListObject){
+        userRankDataSource.DsOfPageListObject3=DsOfPageListObject;
+
+                    [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",DsOfPageListObject.totalCount] forState:UIControlStateNormal];
+                    [tableView3 reloadData];
+        
+                    if (!isFirst) {
+        
+                        [refreshFooter3 endRefreshing];
+        
+        
+                    }else
+                    {
+                        [refreshHeader3 endRefreshing];
+                    }    }];
+
+    
     
 }
-
-
-
-
-
 
 #pragma mark - UIScrollViewDelegate
 
@@ -729,94 +567,20 @@
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (tableView.tag==11) {
-  
-
-        return self.DsOfPageListObject1.dsArray.count;
-        
-    }else if (tableView.tag==12){
-     
-
-        return self.DsOfPageListObject2.dsArray.count;
-    }else if (tableView.tag==13){
-     
-
-        return self.DsOfPageListObject3.dsArray.count;
-    }
-
-    return self.DsOfPageListObject1.dsArray.count;
-    
-}
-
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    RankTableViewCell *cell;
-    if (tableView.tag==11) {
-        NSString *cellId=@"CellId1";
-        cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-        if (cell==nil) {
-            cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-            cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        }
-        UserModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
-        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-        cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
-        cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
-        [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
-        return cell;
-        
-    }else if (tableView.tag==12){
-        
-        NSString *cellId=@"CellId2";
-        cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-        if (cell==nil) {
-            cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-            cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        }
-        UserModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
-        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-        cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
-        cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
-        [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
-        return cell;
-        
-    }else if (tableView.tag==13){
-        
-        NSString *cellId=@"CellId3";
-        cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-        if (cell==nil) {
-            cell=[[RankTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-            cell.selectionStyle=UITableViewCellSelectionStyleNone;
-        }
-        UserModel  *model = [(self.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
-        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-        cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
-        cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
-        [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
-        return cell;
-        
-    }
-    return cell;
-    
-    
-}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UserDetailViewController *detail=[[UserDetailViewController alloc] init];
     if (currentIndex==1) {
-        UserModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
+        UserModel  *model = [(userRankDataSource.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
 
         detail.userModel=model;
     }else  if (currentIndex==2) {
-        UserModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
+        UserModel  *model = [(userRankDataSource.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
 
         detail.userModel=model;
 
       
     }else if (currentIndex==3){
-        UserModel  *model = [(self.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
+        UserModel  *model = [(userRankDataSource.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
 
         detail.userModel=model;
 
@@ -826,14 +590,6 @@
 
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
