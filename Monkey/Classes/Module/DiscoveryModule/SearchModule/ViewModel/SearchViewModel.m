@@ -31,7 +31,6 @@
     
     
     
-//    NSString *text=searchBar.text;
     if (text!=nil) {
         
         
@@ -61,33 +60,13 @@
                 [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
                 self.DsOfPageListObject1.page=page;
                 firstCompletionBlock(self.DsOfPageListObject1);
-//                [tableView1 reloadData];
-//                
-//                if (page>1) {
-//                    
-//                    [refreshFooter1 endRefreshing];
-//                    
-//                    
-//                }else
-//                {
-//                    [refreshHeader1 endRefreshing];
-//                }
+
                 
             }
                                                    errorHandel:^(NSError* error){
                                                        firstCompletionBlock(self.DsOfPageListObject1);
 
-//                                                       if (isFirst) {
-//                                                           
-//                                                           [refreshHeader1 endRefreshing];
-//                                                           
-//                                                           
-//                                                           
-//                                                           
-//                                                       }else{
-//                                                           [refreshFooter1 endRefreshing];
-//                                                           
-//                                                       }
+
                                                        
                                                    }];
             
@@ -116,38 +95,17 @@
                 }
                 
                 
-                //        [self hideHUD];
                 
                 [self.DsOfPageListObject2.dsArray addObjectsFromArray:modelArray];
                 self.DsOfPageListObject2.page=page;
                 secondCompletionBlock(self.DsOfPageListObject2);
-//                [tableView2 reloadData];
-//                
-//                if (page>1) {
-//                    
-//                    [refreshFooter2 endRefreshing];
-//                    
-//                    
-//                }else
-//                {
-//                    [refreshHeader2 endRefreshing];
-//                }
+
                 
             }
                                                           errorHandel:^(NSError* error){
                                                               secondCompletionBlock(self.DsOfPageListObject2);
 
-//                                                              if (isFirst) {
-//                                                                  
-//                                                                  [refreshHeader2 endRefreshing];
-//                                                                  
-//                                                                  
-//                                                                  
-//                                                                  
-//                                                              }else{
-//                                                                  [refreshFooter2 endRefreshing];
-//                                                                  
-//                                                              }
+
                                                               
                                                           }];
             

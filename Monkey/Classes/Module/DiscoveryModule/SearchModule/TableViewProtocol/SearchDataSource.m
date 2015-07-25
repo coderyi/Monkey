@@ -27,8 +27,6 @@
     
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell;
@@ -45,8 +43,6 @@
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
         cell.imageView.layer.masksToBounds=YES;
         cell.imageView.layer.cornerRadius=8;
-        //
-        //        cell.imageView.image=[UIImage imageNamed:@"github"];
         return cell;
         
     }else if (tableView.tag==12){

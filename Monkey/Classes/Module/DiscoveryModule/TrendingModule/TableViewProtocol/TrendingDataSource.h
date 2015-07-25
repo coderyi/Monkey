@@ -12,8 +12,5 @@
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject3;
-//@property(nonatomic,strong) UITableView *tableView1;
-//@property(nonatomic,strong) UITableView *tableView2;
-//
-//@property(nonatomic,strong) UITableView *tableView3;
+
 @end

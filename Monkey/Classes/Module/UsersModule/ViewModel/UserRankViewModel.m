@@ -48,7 +48,6 @@
             page = self.DsOfPageListObject1.page+1;
         }
         NSString *city=[[NSUserDefaults standardUserDefaults] objectForKey:@"pinyinCity"];
-        //            city=AFBase64EncodedStringFromString(city);
         city=[city stringByReplacingOccurrencesOfString:@" "  withString:@"%2B"];
         if (city==nil || city.length<1) {
             city=@"beijing";
@@ -75,39 +74,15 @@
             }
             
             
-            //        [self hideHUD];
             
             [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject1.page=page;
             firstCompletionBlock(self.DsOfPageListObject1);
-//            [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)totalCount] forState:UIControlStateNormal];
-//            [tableView1 reloadData];
-//            
-//            if (page>1) {
-//                
-//                [refreshFooter1 endRefreshing];
-//                
-//                
-//            }else
-//            {
-//                [refreshHeader1 endRefreshing];
-//            }
+
             
         }
                                                errorHandel:^(NSError* error){
                                                    firstCompletionBlock(self.DsOfPageListObject1);
-
-//                                                   if (isFirst) {
-//                                                       
-//                                                       [refreshHeader1 endRefreshing];
-//                                                       
-//                                                       
-//                                                       
-//                                                       
-//                                                   }else{
-//                                                       [refreshFooter1 endRefreshing];
-//                                                       
-//                                                   }
                                                    
                                                }];
         
@@ -153,40 +128,17 @@
             }
             
             
-            //        [self hideHUD];
             
             [self.DsOfPageListObject2.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject2.page=page;
             secondCompletionBlock(self.DsOfPageListObject2);
 
-//            [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
-//            [tableView2 reloadData];
-//            
-//            if (page>1) {
-//                
-//                [refreshFooter2 endRefreshing];
-//                
-//                
-//            }else
-//            {
-//                [refreshHeader2 endRefreshing];
-//            }
             
         }
                                                errorHandel:^(NSError* error){
                                                    secondCompletionBlock(self.DsOfPageListObject2);
 
-//                                                   if (isFirst) {
-//                                                       
-//                                                       [refreshHeader2 endRefreshing];
-//                                                       
-//                                                       
-//                                                       
-//                                                       
-//                                                   }else{
-//                                                       [refreshFooter2 endRefreshing];
-//                                                       
-//                                                   }
+
                                                    
                                                }];
         
@@ -222,40 +174,17 @@
             }
             
             
-            //        [self hideHUD];
             
             [self.DsOfPageListObject3.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject3.page=page;
             thirdCompletionBlock(self.DsOfPageListObject3);
 
-//            [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
-//            [tableView3 reloadData];
-//            
-//            if (page>1) {
-//                
-//                [refreshFooter3 endRefreshing];
-//                
-//                
-//            }else
-//            {
-//                [refreshHeader3 endRefreshing];
-//            }
             
         }
                                                errorHandel:^(NSError* error){
                                                    thirdCompletionBlock(self.DsOfPageListObject3);
 
-//                                                   if (isFirst) {
-//                                                       
-//                                                       [refreshHeader3 endRefreshing];
-//                                                       
-//                                                       
-//                                                       
-//                                                       
-//                                                   }else{
-//                                                       [refreshFooter3 endRefreshing];
-//                                                       
-//                                                   }
+
                                                    
                                                }];
         

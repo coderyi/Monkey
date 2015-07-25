@@ -22,7 +22,6 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
-    //    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"cityAppear"];
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
@@ -41,13 +40,10 @@
     self.view.backgroundColor=[UIColor whiteColor];
     tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain];
     [self.view addSubview:tableView1];
-    //    tableView1.showsVerticalScrollIndicator = NO;
     
     tableView1.dataSource=self;
     tableView1.delegate=self;
-    
-    //    tableView1.separatorStyle=UITableViewCellSeparatorStyleNone;
-    //    citys=@[@"beijing",@"shanghai",@"guangzhou",@"shenzhen",@"chengdu",@"hangzhou",@"nanjing",@"wuhan武汉",@"suzhou苏州"];
+  
     
     if (_languageEntranceType==RepLanguageEntranceType) {
         languages=@[@"JavaScript",@"Java",@"PHP",@"Ruby",@"Python",@"CSS",@"C",@"Objective-C",@"Shell",@"R",@"Perl",@"Lua",@"HTML",@"Scala",@"Go"];
@@ -74,8 +70,7 @@
     
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell;
@@ -84,7 +79,6 @@
     cell=[tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell==nil) {
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-        //            cell.selectionStyle=UITableViewCellSelectionStyleNone;
     }
     cell.textLabel.text=(languages)[indexPath.row];
     return cell;
@@ -117,14 +111,5 @@
     
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

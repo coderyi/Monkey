@@ -148,11 +148,7 @@
     bgViewHeight=ScreenHeight-64-titleHeight;
     [self initScroll];
     self.automaticallyAdjustsScrollViewInsets=NO;
-    //    tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, WScreen, bgViewHeight) style:UITableViewStylePlain ];
-    //    [scrollView addSubview:tableView1];
-    //
-    //    tableView1.delegate=self;
-    //    tableView1.dataSource=self;
+
     
     
     
@@ -219,12 +215,9 @@
     [scrollView setContentSize:CGSizeMake(ScreenWidth * (3), bgViewHeight)];
     [scrollView setContentOffset:CGPointMake(0, 0)];
     [scrollView scrollRectToVisible:CGRectMake(0,0,ScreenWidth,bgViewHeight) animated:NO];
-//    if ([language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
-//        [scrollView setContentSize:CGSizeMake(ScreenWidth * (2), bgViewHeight)];
-//    }else{
+
         [scrollView setContentSize:CGSizeMake(ScreenWidth * (3), bgViewHeight)];
-        
-//    }
+ 
 }
 
 - (void)initTable{
@@ -239,10 +232,9 @@
     
     tableView1.delegate=self;
     tableView1.tag=11;
-    tableView1.rowHeight=135.7;
+    tableView1.rowHeight=RepositoriesTableViewCellheight;
     tableView1.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self addHeader:1];
-//    [self addFooter:1];
     
     segmentControl.ButtonActionBlock=^(int buttonTag){
         
@@ -254,11 +246,7 @@
             if (![titleText.text isEqualToString:tableView1Language]) {
                 [refreshHeader1 beginRefreshing];
             }
-//            if (self.DsOfPageListObject1.totalCount>0) {
-//                
-//                
-//                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject1.totalCount] forState:UIControlStateNormal];
-//            }
+
         }else if (currentIndex==2){
             if (tableView2==nil) {
                 tableView2=[[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
@@ -269,22 +257,15 @@
                 tableView2.dataSource=trendingDataSource;
                 tableView2.delegate=self;
                 tableView2.separatorStyle=UITableViewCellSeparatorStyleNone;
-                tableView2.rowHeight=135.7;
+                tableView2.rowHeight=RepositoriesTableViewCellheight;
                 [self addHeader:2];
-//                [self addFooter:2];
                 
             }
             if (![titleText.text isEqualToString:tableView2Language]) {
                 [refreshHeader2 beginRefreshing];
             }
             
-//            if (self.DsOfPageListObject2.totalCount>0) {
-//                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject2.totalCount] forState:UIControlStateNormal];
-//            }
-//            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"countryAppear"] isEqualToString:@"2"]) {
-//                [refreshHeader2 beginRefreshing];
-//                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"countryAppear"];
-//            }
+
             
         }else if (currentIndex==3){
             if (tableView3==nil) {
@@ -296,18 +277,14 @@
                 tableView3.dataSource=trendingDataSource;
                 tableView3.delegate=self;
                 tableView3.separatorStyle=UITableViewCellSeparatorStyleNone;
-                tableView3.rowHeight=135.7;
+                tableView3.rowHeight=RepositoriesTableViewCellheight;
                 [self addHeader:3];
-//                [self addFooter:3];
                 
             }
             if (![titleText.text isEqualToString:tableView3Language]) {
                 [refreshHeader3 beginRefreshing];
             }
-            
-//            if (self.DsOfPageListObject3.totalCount>0) {
-//                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject3.totalCount] forState:UIControlStateNormal];
-//            }
+    
         }else if (currentIndex==4){
             
         }
@@ -455,7 +432,6 @@
         }
         
         currentIndex=currentPage+1;
-        NSLog(@"cccc %d",currentIndex);
         [segmentControl swipeAction:(100+currentPage+1)];
     }else if (segmentControl.buttonCount==3){
         
@@ -477,7 +453,6 @@
         }
         
         currentIndex=currentPage+1;
-        NSLog(@"cccc %d",currentIndex);
         [segmentControl swipeAction:(100+currentPage+1)];
     }
     

@@ -54,7 +54,6 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
-    //    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"cityAppear"];
     [self.navigationController.navigationBar addSubview:searchBar];
 }
 - (void)viewWillDisappear:(BOOL)animated{
@@ -130,7 +129,6 @@
     [self.navigationController.navigationBar addSubview:searchBar];
     
     searchBar.delegate=self;
-//    searchBar.backgroundColor=[UIColor clearColor];
     searchBar.tintColor=YiBlue;
 
     [searchBar becomeFirstResponder];
@@ -274,7 +272,6 @@
 
 #pragma mark - UISearchBarDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-    NSLog(@"search  button");
     [self loadDataFromApiWithIsFirst:YES];
     [searchBar endEditing:YES];
 }

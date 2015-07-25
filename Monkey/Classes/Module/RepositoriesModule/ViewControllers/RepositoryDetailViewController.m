@@ -65,7 +65,6 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
-    //    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"cityAppear"];
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
@@ -103,7 +102,7 @@
     
     tableView.delegate=self;
     tableView.dataSource=repositoryDetailDataSource;
-    tableView.rowHeight=135.7;
+    tableView.rowHeight=RepositoriesTableViewCellheight;
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self addHeader];
     [self addFooter];
@@ -111,13 +110,11 @@
     
     
     titleView=[[UIView alloc] init];
-//    [self.view addSubview:titleView];
     tableView.tableHeaderView=titleView;
     float orginX=10;
     nameBt=[UIButton buttonWithType:UIButtonTypeCustom];
     nameBt.frame=CGRectMake(orginX, 0, (ScreenWidth-2*orginX)/2, 40);
     [nameBt setTitleColor:YiBlue forState:UIControlStateNormal];
-//    [nameBt setFont:[UIFont boldSystemFontOfSize:17]];
     nameBt.titleLabel.font=[UIFont boldSystemFontOfSize:17];
     [titleView addSubview:nameBt];
     [nameBt addTarget:self action:@selector(nameBtAction) forControlEvents:UIControlEventTouchUpInside];
@@ -126,7 +123,6 @@
     ownerBt=[UIButton buttonWithType:UIButtonTypeCustom];
     ownerBt.frame=CGRectMake(orginX+(ScreenWidth-2*orginX)/2, 0, (ScreenWidth-2*orginX)/2, 40);
     [ownerBt setTitleColor:YiBlue forState:UIControlStateNormal];
-//    [ownerBt setFont:[UIFont boldSystemFontOfSize:17]];
     ownerBt.titleLabel.font=[UIFont boldSystemFontOfSize:17];
     [titleView addSubview:ownerBt];
     ownerBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -137,7 +133,6 @@
     lineLabel=[[UILabel alloc] init];
     [titleView addSubview:lineLabel];
     lineLabel.font=[UIFont systemFontOfSize:20];
-//    lineLabel.backgroundColor=[UIColor redColor];
     lineLabel.textColor=YiGray;
     lineLabel.text=@"/";
 
@@ -152,7 +147,6 @@
     
    
     
-//    nameBt.backgroundColor=[UIColor redColor];
     
     
     forkLabel=[[UILabel alloc] initWithFrame:CGRectMake(orginX, 40, 70, 30)];
@@ -164,10 +158,8 @@
     parentBt=[UIButton buttonWithType:UIButtonTypeCustom];
     parentBt.frame=CGRectMake(orginX+70, 40, (ScreenWidth-2*orginX)/2, 30);
     [parentBt setTitleColor:YiBlue forState:UIControlStateNormal];
-//    [parentBt setFont:[UIFont boldSystemFontOfSize:15]];
     parentBt.titleLabel.font=[UIFont boldSystemFontOfSize:15];
     [titleView addSubview:parentBt];
-//    parentBt.backgroundColor=[UIColor redColor];
 
     
     createLabel=[[UILabel alloc] initWithFrame:CGRectMake(orginX, 70, 100, 30)];
@@ -176,23 +168,21 @@
     
     
     homePageBt=[UIButton buttonWithType:UIButtonTypeCustom];
-    homePageBt.frame=CGRectMake(orginX, 100, (ScreenWidth-2*orginX), 30);
+    homePageBt.frame=CGRectMake(orginX+100, 70, (ScreenWidth-2*orginX)-100, 30);
     [homePageBt setTitleColor:YiBlue forState:UIControlStateNormal];
-//    [homePageBt setFont:[UIFont boldSystemFontOfSize:13]];
     homePageBt.titleLabel.font=[UIFont boldSystemFontOfSize:13];
 
     [titleView addSubview:homePageBt];
-//    homePageBt.backgroundColor=[UIColor redColor];
     homePageBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     homePageBt.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     [homePageBt addTarget:self action:@selector(homePageAction) forControlEvents:UIControlEventTouchUpInside];
-    descLabel=[[UILabel alloc] initWithFrame:CGRectMake(orginX, 130, (ScreenWidth-2*orginX), 30)];
+    descLabel=[[UILabel alloc] initWithFrame:CGRectMake(orginX, 130-30, (ScreenWidth-2*orginX), 30)];
     [titleView addSubview:descLabel];
     descLabel.font=[UIFont systemFontOfSize:12];
     descLabel.numberOfLines=0;
     descLabel.lineBreakMode=NSLineBreakByWordWrapping;
     
-    segmentControl=[[DetailSegmentControl alloc] initWithFrame:CGRectMake(0, 130+5, ScreenWidth, 60)];
+    segmentControl=[[DetailSegmentControl alloc] initWithFrame:CGRectMake(0, 130+5-30, ScreenWidth, 60)];
     [titleView addSubview:segmentControl];
     segmentControl.bt1Label1.text=@"Contributors";
     segmentControl.bt2Label1.text=@"Forks";
@@ -200,11 +190,9 @@
     segmentControl.bt3Label1.text=@"Stargazers";
 
     tableView.tableHeaderView=titleView;
-//    @weakify(repositoryDetailDataSource);
     segmentControl.ButtonActionBlock=^(int buttonTag){
         
         currentIndex=buttonTag-100;
-//        @strongify(repositoryDetailDataSource);
 
         repositoryDetailDataSource.currentIndex=buttonTag-100;
 
@@ -265,15 +253,12 @@
         [self showYiProgressHUD:@"unstaring……"];
 
         [[client unstarRepository:starRep] subscribeNext:^(id x) {
-            NSLog(@"a");
         } error:^(NSError *error) {
-            NSLog(@"e %@",error);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self hideYiProgressHUD];
                 
             });
         } completed:^{
-            NSLog(@"c");
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self hideYiProgressHUD];
                 isStaring=!isStaring;
@@ -288,15 +273,12 @@
         [self showYiProgressHUD:@"staring……"];
 
         [[client starRepository:starRep]subscribeNext:^(id x) {
-            NSLog(@"a");
         } error:^(NSError *error) {
-            NSLog(@"e %@",error);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self hideYiProgressHUD];
                 
             });
         } completed:^{
-            NSLog(@"c");
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self hideYiProgressHUD];
                 isStaring=!isStaring;
@@ -309,13 +291,7 @@
     }
 }
 - (void)checkStarStatusAction{
-    /*
-     [ApplicationDelegate.apiEngine checkFollowStatusWithUsername:@"coderyi" target_user:_userModel.login completoinHandler:^(UserModel *model){
-     
-     } errorHandel:^(NSError* error){
-     
-     }];
-     */
+ 
     NSString *savedLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
     NSString *savedToken=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
     if (savedLogin.length<1 || !savedLogin) {
@@ -335,7 +311,6 @@
         dispatch_async(dispatch_get_main_queue(), ^{
         
             isStaring=hasStarRep.boolValue;
-            NSLog(@"%@",hasStarRep);
             NSString *rightTitle;
             if (isStaring) {
                 rightTitle=@"unstar";
@@ -350,9 +325,7 @@
         
         
     }  error:^(NSError *error) {
-        NSLog(@"e %@",error);
     } completed:^{
-        NSLog(@"c");
     }];
     
     
@@ -375,7 +348,6 @@
 
 - (void)refreshTitleView{
 
-//    segmentControl.bt1Label.text=[NSString stringWithFormat:@"%d",_model.public_repos];
     float orginX=10;
     segmentControl.bt2Label.text=[NSString stringWithFormat:@"%d",_model.forks_count];
     
@@ -400,15 +372,15 @@
     createLabel.frame=CGRectMake(orginX, 70+parentheight, 100, 30);
     createLabel.text=[_model.created_at substringWithRange:NSMakeRange(0, 10)];
     [homePageBt setTitle:_model.homepage forState:UIControlStateNormal];
-    homePageBt.frame=CGRectMake(orginX, 100+parentheight, (ScreenWidth-2*orginX), 30);
-    
-//    descLabel.backgroundColor=[UIColor redColor];
-//    _model.repositoryDescription=@"12345667890qwetruyoipasdfghjklzcxvbnm12345667890qwetruyoipasdfghjklzcxvbnm12345667890qwetruyoipasdfghjklzcxvbnm12345667890qwetruyoipasdfghjklzcxvbnm12345667890qwetruyoipasdfghjklzcxvbnm12345667890qwetruyoipasdfghjklzcxvbnm12345667890qwetruyoipasdfghjklzcxvbnm12345667890qwetruyoipasdfghjklzcxvbnm12345667890qwetruyoipasdfghjklzcxvbnm12345667890qwetruyoipasdfghjklzcxvbnm";
+//    homePageBt.frame=CGRectMake(orginX, 100+parentheight, (ScreenWidth-2*orginX), 30);
+    homePageBt.frame=CGRectMake(orginX+100, 70+parentheight, (ScreenWidth-2*orginX)-100, 30);
+
+
     float descHeight=[_model.repositoryDescription sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake((ScreenWidth-2*10), 700) lineBreakMode:NSLineBreakByWordWrapping].height;
     descLabel.text=_model.repositoryDescription;
-    descLabel.frame=CGRectMake(orginX, 130+parentheight, (ScreenWidth-2*orginX), descHeight);
-    segmentControl.frame=CGRectMake(0, 130+descHeight+5+parentheight, ScreenWidth, 60);
-    titleView.frame=CGRectMake(0, 0, ScreenWidth, 130+descHeight+5+60+parentheight);
+    descLabel.frame=CGRectMake(orginX, 130+parentheight-30, (ScreenWidth-2*orginX), descHeight);
+    segmentControl.frame=CGRectMake(0, 130+descHeight+5+parentheight-30, ScreenWidth, 60);
+    titleView.frame=CGRectMake(0, 0, ScreenWidth, 130+descHeight+5+60+parentheight-30);
     tableView.tableHeaderView=titleView;
     [tableView reloadData];
     
@@ -526,11 +498,11 @@
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (currentIndex==1) {
-        return 90.7;
+        return RankTableViewCellHeight;
     }else if (currentIndex==2){
-        return 90.7;
+        return RankTableViewCellHeight;
     }else if (currentIndex==3){
-        return 90.7;
+        return RankTableViewCellHeight;
     }
     return 1;
     

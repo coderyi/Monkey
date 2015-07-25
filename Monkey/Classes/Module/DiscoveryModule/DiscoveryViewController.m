@@ -114,8 +114,6 @@
     return 1;
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -139,7 +137,7 @@
         
     }else if (indexPath.section==2){
         
-        cell.textLabel.text=@"news";
+        cell.textLabel.text=NSLocalizedString(@"News", @"");
         
         
     }else if (indexPath.section==3){

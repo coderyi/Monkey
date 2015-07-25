@@ -15,7 +15,7 @@
 //@property BOOL isPrivate;
 @property(nonatomic,strong)NSString *html_url;
 @property(nonatomic,strong)NSString *repositoryDescription;
-//@property(nonatomic,strong)NSString *isFork;
+@property(nonatomic,assign)BOOL isFork;
 //@property(nonatomic,strong)NSString *url;
 
 //@property(nonatomic,strong)NSString *forks_url;

@@ -47,7 +47,7 @@
 		0ACEA2D71B513C17009F6B6D /* RepositoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA2C81B513C17009F6B6D /* RepositoryModel.m */; };
 		0ACEA2D81B513C17009F6B6D /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA2CA1B513C17009F6B6D /* UserModel.m */; };
 		0ACEA2D91B513C17009F6B6D /* DetailSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA2CD1B513C17009F6B6D /* DetailSegmentControl.m */; };
-		0ACEA2DA1B513C17009F6B6D /* HeaderSegmentControl.h.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA2CF1B513C17009F6B6D /* HeaderSegmentControl.h.m */; };
+		0ACEA2DA1B513C17009F6B6D /* HeaderSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA2CF1B513C17009F6B6D /* HeaderSegmentControl.m */; };
 		0ACEA2DB1B513C17009F6B6D /* RankTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA2D11B513C17009F6B6D /* RankTableViewCell.m */; };
 		0ACEA2DC1B513C17009F6B6D /* RepositoriesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA2D31B513C17009F6B6D /* RepositoriesTableViewCell.m */; };
 		0ACEA2DD1B513C17009F6B6D /* SearchSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA2D51B513C17009F6B6D /* SearchSegmentControl.m */; };
@@ -423,7 +423,7 @@
 		0ACEA2CC1B513C17009F6B6D /* DetailSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailSegmentControl.h; sourceTree = "<group>"; };
 		0ACEA2CD1B513C17009F6B6D /* DetailSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailSegmentControl.m; sourceTree = "<group>"; };
 		0ACEA2CE1B513C17009F6B6D /* HeaderSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderSegmentControl.h; sourceTree = "<group>"; };
-		0ACEA2CF1B513C17009F6B6D /* HeaderSegmentControl.h.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderSegmentControl.h.m; sourceTree = "<group>"; };
+		0ACEA2CF1B513C17009F6B6D /* HeaderSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderSegmentControl.m; sourceTree = "<group>"; };
 		0ACEA2D01B513C17009F6B6D /* RankTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankTableViewCell.h; sourceTree = "<group>"; };
 		0ACEA2D11B513C17009F6B6D /* RankTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankTableViewCell.m; sourceTree = "<group>"; };
 		0ACEA2D21B513C17009F6B6D /* RepositoriesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepositoriesTableViewCell.h; sourceTree = "<group>"; };
@@ -899,7 +899,7 @@
 				0ACEA2CC1B513C17009F6B6D /* DetailSegmentControl.h */,
 				0ACEA2CD1B513C17009F6B6D /* DetailSegmentControl.m */,
 				0ACEA2CE1B513C17009F6B6D /* HeaderSegmentControl.h */,
-				0ACEA2CF1B513C17009F6B6D /* HeaderSegmentControl.h.m */,
+				0ACEA2CF1B513C17009F6B6D /* HeaderSegmentControl.m */,
 				0ACEA2D01B513C17009F6B6D /* RankTableViewCell.h */,
 				0ACEA2D11B513C17009F6B6D /* RankTableViewCell.m */,
 				0ACEA2D21B513C17009F6B6D /* RepositoriesTableViewCell.h */,
@@ -1451,6 +1451,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = www.coderyi.com;
 				TargetAttributes = {
+					A1FC32A01B25D90B00FCBCE7 = {
+						DevelopmentTeam = HCTZ8VKJ47;
+					};
 					A1FC32C11B25D90B00FCBCE7 = {
 						TestTargetID = A1FC32A01B25D90B00FCBCE7;
 					};
@@ -1719,7 +1722,7 @@
 				A1FC33B61B25D92200FCBCE7 /* SDWebImagePrefetcher.m in Sources */,
 				0ACB64881B61079600E2D42C /* GitHubRankingViewController.m in Sources */,
 				A1FC33B91B25D92200FCBCE7 /* UIImage+MultiFormat.m in Sources */,
-				0ACEA2DA1B513C17009F6B6D /* HeaderSegmentControl.h.m in Sources */,
+				0ACEA2DA1B513C17009F6B6D /* HeaderSegmentControl.m in Sources */,
 				0AFCEBFE1B6359EF00051D9A /* UserDetailDataSource.m in Sources */,
 				0ACEA2D71B513C17009F6B6D /* RepositoryModel.m in Sources */,
 				0A91BEA71B5BC4D800A20743 /* DiscoveryViewController.m in Sources */,
@@ -1880,7 +1883,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ying yi (KWD8G776UD)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1899,7 +1902,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9c8e6ef9-f514-4ffd-b371-8009018df6ad";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1920,7 +1923,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ying yi (KWD8G776UD)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1932,7 +1935,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9c8e6ef9-f514-4ffd-b371-8009018df6ad";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1943,7 +1946,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ying yi (KWD8G776UD)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Monkey/Monkey-Prefix.pch";
@@ -1957,7 +1960,7 @@
 					"$(PROJECT_DIR)/Monkey/Vendor/UM/UMessage_Sdk_1.1.0",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9c8e6ef9-f514-4ffd-b371-8009018df6ad";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1967,7 +1970,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ying yi (KWD8G776UD)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Monkey/Monkey-Prefix.pch";
@@ -1981,7 +1984,7 @@
 					"$(PROJECT_DIR)/Monkey/Vendor/UM/UMessage_Sdk_1.1.0",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9c8e6ef9-f514-4ffd-b371-8009018df6ad";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

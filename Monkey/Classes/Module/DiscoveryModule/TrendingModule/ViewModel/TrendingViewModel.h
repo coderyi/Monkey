@@ -10,7 +10,6 @@
 typedef void (^DataSourceModelResponseBlock)(DataSourceModel* DsOfPageListObject);
 
 @interface TrendingViewModel : NSObject
-//@property(nonatomic,assign) int currentIndex;
 
 
 - (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst currentIndex:(int)currentIndex  firstTableData:(DataSourceModelResponseBlock)firstCompletionBlock secondTableData:(DataSourceModelResponseBlock)secondCompletionBlock thirdTableData:(DataSourceModelResponseBlock)thirdCompletionBlock;

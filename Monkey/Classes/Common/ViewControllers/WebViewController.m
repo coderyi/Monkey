@@ -27,7 +27,6 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
-    //    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"cityAppear"];
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
@@ -49,7 +48,6 @@
     [titleText setFont:[UIFont systemFontOfSize:19.0]];
     
     titleText.textAlignment=NSTextAlignmentCenter;
-//    self.navigationItem.titleView=titleText;
     titleText.text=_urlString;
     
     self.view.backgroundColor=[UIColor whiteColor];
@@ -61,8 +59,7 @@
     webView.delegate=self;
     [webView loadRequest:[[NSURLRequest alloc]initWithURL:[NSURL URLWithString:_urlString]] ];
     
-//    activityIndicator=[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake((ScreenWidth-60)/2, 100, 60, 60)];
-//    [self.view addSubview:activityIndicator];
+
     activityIndicator=[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(ScreenWidth-60, 0, 44, 44)];
     [self.navigationController.navigationBar addSubview:activityIndicator];
     activityIndicator.activityIndicatorViewStyle=UIActivityIndicatorViewStyleWhite;
@@ -72,7 +69,6 @@
     [backBt setTitle:@"back" forState:UIControlStateNormal];
     [backBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [backBt addTarget:self action:@selector(backBtAction) forControlEvents:UIControlEventTouchUpInside];
-//    [self.navigationController.navigationBar addSubview:backBt];
     UIButton *closeBt=[UIButton buttonWithType:UIButtonTypeCustom];
     closeBt.frame=CGRectMake(70, 10, 30, 50);
     closeBt.titleLabel.font=[UIFont systemFontOfSize:12];
@@ -80,9 +76,6 @@
     [closeBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [closeBt addTarget:self action:@selector(closeBtAction) forControlEvents:UIControlEventTouchUpInside];
 
-//    [self.navigationController.navigationBar addSubview:closeBt];
-    
-//    self.navigationItem.leftBarButtonItems=@[[[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(backBtAction)],[[UIBarButtonItem alloc] initWithTitle:@"close" style:UIBarButtonItemStylePlain target:self action:@selector(closeBtAction)]];
     self.navigationItem.leftBarButtonItems=@[[[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(backBtAction)]];
 }
 - (void)backBtAction{
@@ -125,14 +118,6 @@
     return YES;
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

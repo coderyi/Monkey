@@ -38,7 +38,6 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
-    //    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"cityAppear"];
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
@@ -53,19 +52,11 @@
         
     }
     self.automaticallyAdjustsScrollViewInsets=NO;
-    // Do any additional setup after loading the view.
-//    tableView=[[UITableView alloc] init];
+
     tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain ];
     [self.view addSubview:tableView];
-//    [self.view addSubview:tableView];
-//    tableView.translatesAutoresizingMaskIntoConstraints=NO;
-//    NSArray *constraints1=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[tableView]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(tableView)];
-//    
-//    NSArray *constraints2=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[tableView]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(tableView)];
-//    
-//    [self.view addConstraints:constraints1];
-//    [self.view addConstraints:constraints2];
-//    
+
+   
     tableView.dataSource=self;
     tableView.delegate=self;
    
@@ -140,7 +131,6 @@
         }
         
         
-        //        [self hideHUD];
         
         [self.DsOfPageListObject.dsArray addObjectsFromArray:modelArray];
         self.DsOfPageListObject.page=page;
@@ -201,8 +191,6 @@ errorHandel:^(NSError* error){
     return self.DsOfPageListObject.dsArray.count;
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -243,14 +231,6 @@ errorHandel:^(NSError* error){
 }
 
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -175,11 +175,7 @@
     bgViewHeight=ScreenHeight-64-titleHeight-49;
     [self initScroll];
     self.automaticallyAdjustsScrollViewInsets=NO;
-    //    tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, WScreen, bgViewHeight) style:UITableViewStylePlain ];
-    //    [scrollView addSubview:tableView1];
-    //
-    //    tableView1.delegate=self;
-    //    tableView1.dataSource=self;
+  
     
     
     
@@ -220,9 +216,7 @@
 #pragma mark - Actions
 
 - (void)leftAction{
-//    CityViewController *city=[[CityViewController alloc] init];
-//    [self.navigationController pushViewController:city animated:YES];
-    
+
     CountryViewController *viewController=[[CountryViewController alloc] init];
     [self.navigationController pushViewController:viewController animated:YES];
 }
@@ -273,12 +267,11 @@
     
     tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
     [scrollView addSubview:tableView1];
-    //    tableView1.showsVerticalScrollIndicator = NO;
     userRankDataSource =[[UserRankDataSource alloc] init];
     tableView1.dataSource=userRankDataSource;
     tableView1.delegate=self;
     tableView1.tag=11;
-    tableView1.rowHeight=90.7;
+    tableView1.rowHeight=RankTableViewCellHeight;
     tableView1.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self addHeader:1];
     [self addFooter:1];
@@ -308,7 +301,7 @@
                 tableView2.dataSource=userRankDataSource;
                 tableView2.delegate=self;
                 tableView2.separatorStyle=UITableViewCellSeparatorStyleNone;
-                tableView2.rowHeight=90.7;
+                tableView2.rowHeight=RankTableViewCellHeight;
                 [self addHeader:2];
                 [self addFooter:2];
                 
@@ -335,7 +328,7 @@
                 tableView3.dataSource=userRankDataSource;
                 tableView3.delegate=self;
                 tableView3.separatorStyle=UITableViewCellSeparatorStyleNone;
-                tableView3.rowHeight=90.7;
+                tableView3.rowHeight=RankTableViewCellHeight;
                 [self addHeader:3];
                 [self addFooter:3];
                 
@@ -537,7 +530,6 @@
     }
     
         currentIndex=currentPage+1;
-        NSLog(@"cccc %d",currentIndex);
         [segmentControl swipeAction:(100+currentPage+1)];
     }else if (segmentControl.buttonCount==3){
             
@@ -559,7 +551,6 @@
             }
             
             currentIndex=currentPage+1;
-            NSLog(@"cccc %d",currentIndex);
             [segmentControl swipeAction:(100+currentPage+1)];
         }
     

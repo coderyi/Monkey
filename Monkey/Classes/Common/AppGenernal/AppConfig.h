@@ -39,7 +39,8 @@
 #define CoderyiClientID @"a8d9c1a366f057a23753"
 #define CoderyiClientSecret @"f1e47cd31800a90e517b37731038ae07dca580d2"
 
-
+#define RepositoriesTableViewCellheight 94.7
+#define RankTableViewCellHeight 80.7
 #endif
 
 

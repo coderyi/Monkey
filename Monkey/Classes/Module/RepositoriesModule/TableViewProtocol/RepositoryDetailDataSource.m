@@ -29,8 +29,6 @@
     return 1;
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (currentIndex==1) {
@@ -46,6 +44,7 @@
         }
         UserModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
         cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
+        
         cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
         cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
         [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];

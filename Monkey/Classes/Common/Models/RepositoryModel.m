@@ -26,7 +26,7 @@
     model.html_url = [[dict objectForKey:@"html_url"] isNull]?@"":[dict objectForKey:@"html_url"] ;
     model.repositoryDescription = [dict objectForKey:@"description"] ;
   
-//    model.isFork = [dict objectForKey:@"isFork"] ;
+    model.isFork = [[dict objectForKey:@"fork"] boolValue] ;
 //    model.url = [dict objectForKey:@"url"] ;
 //    model.forks_url = [dict objectForKey:@"forks_url"] ;
 //    model.keys_url = [dict objectForKey:@"keys_url"] ;

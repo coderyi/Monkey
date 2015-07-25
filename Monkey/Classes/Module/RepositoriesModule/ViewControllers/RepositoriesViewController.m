@@ -96,7 +96,7 @@
     
     tableView.delegate=self;
     tableView.dataSource=self;
-    tableView.rowHeight=135.7;
+    tableView.rowHeight=RepositoriesTableViewCellheight;
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self addHeader];
     [self addFooter];
@@ -177,7 +177,6 @@
         }
         
         
-        //        [self hideHUD];
         
         [self.DsOfPageListObject.dsArray addObjectsFromArray:modelArray];
         self.DsOfPageListObject.page=page;
@@ -221,8 +220,7 @@
     return self.DsOfPageListObject.dsArray.count;
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *cellId=@"CellId";
@@ -233,19 +231,14 @@
     }
     RepositoryModel  *model = [(self.DsOfPageListObject.dsArray) objectAtIndex:indexPath.row];
     cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
+    
     cell.repositoryLabel.text=[NSString stringWithFormat:@"%@",model.name];
     cell.userLabel.text=[NSString stringWithFormat:@"Owner:%@",model.user.login];
     [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url] placeholderImage:nil];
     cell.descriptionLabel.text=[NSString stringWithFormat:@"%@",model.repositoryDescription];
     
     [cell.homePageBt setTitle:model.homepage forState:UIControlStateNormal];
-    if (model.homepage.length<1) {
-        cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 85, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
-        cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 85, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
-    }else{
-        cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 105, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
-        cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 105, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
-    }
+
     cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
     cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
     return cell;
@@ -263,14 +256,5 @@
 }
 
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -21,15 +21,22 @@ UIFont *lightFont;
         // Initialization code
         self.backgroundColor=[UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
         float h=35;
-        float space=5;
-        float width=(ScreenWidth)/4-5;
+        float space=0;
+        float width=(ScreenWidth)/4-space;
         float height=h;
         float w=space+width;
          black=[UIColor colorWithRed:0.35 green:0.35 blue:0.35 alpha:1];
         light=YiBlue;
      
-        normalFont=[UIFont systemFontOfSize:13];
-        lightFont=[UIFont systemFontOfSize:16];
+        normalFont=[UIFont systemFontOfSize:12];
+        if (ScreenWidth<=320) {
+            lightFont=[UIFont systemFontOfSize:12];
+
+        }else{
+            lightFont=[UIFont systemFontOfSize:14];
+
+        }
+        
        
         _button1=[UIButton buttonWithType:UIButtonTypeCustom];
         [self addSubview:_button1];

@@ -59,7 +59,7 @@
         
         
         [networkEngine repositoriesTrendingWithType:@"daily" language:language completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-            //            [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)totalCount] forState:UIControlStateNormal];
+        
             self.DsOfPageListObject1.totalCount=totalCount;
             
             if (page<=1) {
@@ -67,31 +67,16 @@
             }
             
             
-            //        [self hideHUD];
             
             [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject1.page=page;
             firstCompletionBlock(self.DsOfPageListObject1);
-//            trendingDataSource.DsOfPageListObject1=self.DsOfPageListObject1;
-//            [tableView1 reloadData];
-//            if (!isFirst) {
-//                [refreshFooter1 endRefreshing];
-//            }else
-//            {
-//                [refreshHeader1 endRefreshing];
-//            }
+
             
         }
                                         errorHandel:^(NSError* error){
                                             firstCompletionBlock(self.DsOfPageListObject1);
 
-//                                            if (isFirst) {
-//                                                [refreshHeader1 endRefreshing];
-//  
-//                                            }else{
-//                                                [refreshFooter1 endRefreshing];
-//                                                
-//                                            }
                                             
                                         }];
         
@@ -113,21 +98,7 @@
             
             page = self.DsOfPageListObject2.page+1;
         }
-        //        language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
-        //
-        //        NSString *q=[NSString stringWithFormat:@"language:%@",language];
-        //
-        //        if (language==nil || language.length<1) {
-        //            language=@"所有语言";
-        //
-        //        }
-        //        tableView2Language=language;
-        //
-        //        if ([language isEqualToString:@"所有语言"]) {
-        //            q=[NSString stringWithFormat:@"location:%@",country];
-        //        }
-        //
-        language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language2"];
+               language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language2"];
         
         if (language==nil || language.length<1) {
             language=NSLocalizedString(@"all languages", @"");
@@ -137,49 +108,23 @@
         
         [networkEngine repositoriesTrendingWithType:@"weekly" language:language completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
             self.DsOfPageListObject2.totalCount=totalCount;
-            //            [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
-            
-            if (page<=1) {
+                       if (page<=1) {
                 [self.DsOfPageListObject2.dsArray removeAllObjects];
             }
             
             
-            //        [self hideHUD];
             
             [self.DsOfPageListObject2.dsArray addObjectsFromArray:modelArray];
             
             self.DsOfPageListObject2.page=page;
             secondCompletionBlock(self.DsOfPageListObject2);
 
-//            trendingDataSource.DsOfPageListObject2=self.DsOfPageListObject2;
-//
-//            [tableView2 reloadData];
-//            
-//            if (!isFirst) {
-//                
-//                [refreshFooter2 endRefreshing];
-//                
-//                
-//            }else
-//            {
-//                [refreshHeader2 endRefreshing];
-//            }
             
         }
                                         errorHandel:^(NSError* error){
                                             secondCompletionBlock(self.DsOfPageListObject2);
 
-//                                            if (isFirst) {
-//                                                
-//                                                [refreshHeader2 endRefreshing];
-//                                                
-//                                                
-//                                                
-//                                                
-//                                            }else{
-//                                                [refreshFooter2 endRefreshing];
-//                                                
-//                                            }
+
                                             
                                         }];
         
@@ -198,11 +143,7 @@
             
             page = self.DsOfPageListObject3.page+1;
         }
-        //        language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
-        //        if (language==nil || language.length<1) {
-        //            language=@"所有语言";
-        //
-        //        }
+       
         
         language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language2"];
         
@@ -215,7 +156,7 @@
         
         
         [networkEngine repositoriesTrendingWithType:@"monthly" language:language completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-            //            [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",totalCount] forState:UIControlStateNormal];
+           
             self.DsOfPageListObject3.totalCount=totalCount;
             
             if (page<=1) {
@@ -223,42 +164,19 @@
             }
             
             
-            //        [self hideHUD];
             
             [self.DsOfPageListObject3.dsArray addObjectsFromArray:modelArray];
             
             self.DsOfPageListObject3.page=page;
             thirdCompletionBlock(self.DsOfPageListObject3);
 
-//            trendingDataSource.DsOfPageListObject3=self.DsOfPageListObject3;
-//
-//            [tableView3 reloadData];
-//            
-//            if (!isFirst) {
-//                
-//                [refreshFooter3 endRefreshing];
-//                
-//                
-//            }else
-//            {
-//                [refreshHeader3 endRefreshing];
-//            }
+
             
         }
                                         errorHandel:^(NSError* error){
                                             thirdCompletionBlock(self.DsOfPageListObject3);
 
-//                                            if (isFirst) {
-//                                                
-//                                                [refreshHeader3 endRefreshing];
-//                                                
-//                                                
-//                                                
-//                                                
-//                                            }else{
-//                                                [refreshFooter3 endRefreshing];
-//                                                
-//                                            }
+
                                             
                                         }];
         

@@ -49,37 +49,16 @@
             }
             
             
-            //        [self hideHUD];
             
             [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject1.page=page;
             firstCompletionBlock(self.DsOfPageListObject1);
-//            [tableView reloadData];
-//            
-//            if (page>1) {
-//                
-//                [refreshFooter endRefreshing];
-//                
-//                
-//            }else
-//            {
-//                [refreshHeader endRefreshing];
-//            }
+
             
         } errorHandel:^(NSError* error){
             firstCompletionBlock(self.DsOfPageListObject1);
 
-//            if (isFirst) {
-//                
-//                [refreshHeader endRefreshing];
-//                
-//                
-//                
-//                
-//            }else{
-//                [refreshFooter endRefreshing];
-//                
-//            }
+
             
         }];
         
@@ -105,37 +84,16 @@
             }
             
             
-            //        [self hideHUD];
             
             [self.DsOfPageListObject2.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject2.page=page;
             secondCompletionBlock(self.DsOfPageListObject2);
 
-            
-//            if (page>1) {
-//                
-//                [refreshFooter endRefreshing];
-//                
-//                
-//            }else
-//            {
-//                [refreshHeader endRefreshing];
-//            }
-//            [tableView reloadData];
+       
         } errorHandel:^(NSError* error){
             secondCompletionBlock(self.DsOfPageListObject2);
 
-//            if (isFirst) {
-//                
-//                [refreshHeader endRefreshing];
-//                
-//                
-//                
-//                
-//            }else{
-//                [refreshFooter endRefreshing];
-//                
-//            }
+
             
         }];
         
@@ -161,36 +119,16 @@
             }
             
             
-            //        [self hideHUD];
             
             [self.DsOfPageListObject3.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject3.page=page;
             thirdCompletionBlock(self.DsOfPageListObject3);
 
-//            if (page>1) {
-//                
-//                [refreshFooter endRefreshing];
-//                
-//                
-//            }else
-//            {
-//                [refreshHeader endRefreshing];
-//            }
-//            [tableView reloadData];
+
         } errorHandel:^(NSError* error){
             thirdCompletionBlock(self.DsOfPageListObject3);
 
-//            if (isFirst) {
-//                
-//                [refreshHeader endRefreshing];
-//                
-//                
-//                
-//                
-//            }else{
-//                [refreshFooter endRefreshing];
-//                
-//            }
+
             
         }];
         

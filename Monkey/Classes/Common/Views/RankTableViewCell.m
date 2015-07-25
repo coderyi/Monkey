@@ -15,7 +15,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        float h=90;
+        float h=80;
         float orginX=0;
         float w=ScreenWidth-orginX*2;
         float preWidth=15;

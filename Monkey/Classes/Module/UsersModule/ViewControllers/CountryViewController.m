@@ -22,7 +22,6 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
-    //    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"cityAppear"];
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
@@ -41,7 +40,6 @@
     self.view.backgroundColor=[UIColor whiteColor];
     tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain];
     [self.view addSubview:tableView1];
-    //    tableView1.showsVerticalScrollIndicator = NO;
     
     tableView1.dataSource=self;
     tableView1.delegate=self;
@@ -73,7 +71,6 @@
     cell=[tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell==nil) {
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-        //            cell.selectionStyle=UITableViewCellSelectionStyleNone;
     }
     cell.textLabel.text=(countrys)[indexPath.row];
     return cell;
@@ -83,12 +80,8 @@
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"cityAppear"];
-//    
-//    [[NSUserDefaults standardUserDefaults] setObject:pinyinCitys[indexPath.row] forKey:@"pinyinCity"];
-//    [[NSUserDefaults standardUserDefaults] setObject:citys[indexPath.row] forKey:@"city"];
-//    [self.navigationController popViewControllerAnimated:YES];
-//
+
+
     if (indexPath.row!=countrys.count-1) {
         [[NSUserDefaults standardUserDefaults] setObject:countrys[indexPath.row] forKey:@"country"];
 
@@ -135,14 +128,5 @@
 }
 
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

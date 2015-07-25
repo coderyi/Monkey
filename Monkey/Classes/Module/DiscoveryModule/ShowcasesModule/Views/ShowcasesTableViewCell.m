@@ -33,26 +33,7 @@
         titleLabel.translatesAutoresizingMaskIntoConstraints=NO;
           descriptionLabel.translatesAutoresizingMaskIntoConstraints=NO;
           logoImageView.translatesAutoresizingMaskIntoConstraints=NO;
-        
-//        
-//        NSArray *constraints1=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[titleLabel]-10-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(titleLabel)];
-//        
-//        NSArray *constraints2=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[titleLabel(==30)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(titleLabel)];
-//        
-//        [self.contentView addConstraints:constraints1];
-//        [self.contentView addConstraints:constraints2];
-//    
-//        
-//        NSArray *constraints3=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[logoImageView(==80)]-8-[descriptionLabel]-10-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logoImageView,descriptionLabel)];
-//        
-////        5+30+5
-//        NSArray *constraints4=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-40-[logoImageView(==90)]-(>=20)-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logoImageView)];
-////        5+30+17
-//          NSArray *constraints5=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-52-[descriptionLabel]-(>=20)-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(descriptionLabel)];
-//        
-//        [self.contentView addConstraints:constraints3];
-//        [self.contentView addConstraints:constraints4];
-//        [self.contentView addConstraints:constraints5];
+
         
         NSArray *constraints1=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[logoImageView(==40)]-8-[titleLabel]-10-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logoImageView,titleLabel)];
 

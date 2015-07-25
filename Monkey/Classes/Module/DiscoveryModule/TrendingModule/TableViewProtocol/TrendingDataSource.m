@@ -9,7 +9,6 @@
 #import "TrendingDataSource.h"
 #import "RepositoriesTableViewCell.h"
 @implementation TrendingDataSource
-//@synthesize tableView1,tableView2,tableView3;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView.tag==11) {
         
@@ -30,8 +29,6 @@
     
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     RepositoriesTableViewCell *cell;
@@ -52,13 +49,7 @@
         cell.descriptionLabel.text=[NSString stringWithFormat:@"%@",model.repositoryDescription];
         
         [cell.homePageBt setTitle:model.homepage forState:UIControlStateNormal];
-        if (model.homepage.length<1) {
-            cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 85, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
-            cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 85, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
-        }else{
-            cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 105, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
-            cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 105, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
-        }
+
         cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
         cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
         return cell;
@@ -82,13 +73,7 @@
         cell.descriptionLabel.text=[NSString stringWithFormat:@"%@",model.repositoryDescription];
         
         [cell.homePageBt setTitle:model.homepage forState:UIControlStateNormal];
-        if (model.homepage.length<1) {
-            cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 85, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
-            cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 85, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
-        }else{
-            cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 105, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
-            cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 105, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
-        }
+
         cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
         cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
         return cell;
@@ -109,13 +94,7 @@
         cell.descriptionLabel.text=[NSString stringWithFormat:@"%@",model.repositoryDescription];
         
         [cell.homePageBt setTitle:model.homepage forState:UIControlStateNormal];
-        if (model.homepage.length<1) {
-            cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 85, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
-            cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 85, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
-        }else{
-            cell.starLabel.frame=CGRectMake(cell.starLabel.frame.origin.x, 105, cell.starLabel.frame.size.width, cell.starLabel.frame.size.height);
-            cell.forkLabel.frame=CGRectMake(cell.forkLabel.frame.origin.x, 105, cell.forkLabel.frame.size.width, cell.forkLabel.frame.size.height);
-        }
+
         cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
         cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
         return cell;

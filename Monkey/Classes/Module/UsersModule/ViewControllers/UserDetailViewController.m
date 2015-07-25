@@ -69,7 +69,6 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
-    //    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"cityAppear"];
     
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -102,22 +101,29 @@
     
     tableView.delegate=self;
     tableView.dataSource=userDetailDataSource;
-    tableView.rowHeight=135.7;
+    tableView.rowHeight=RepositoriesTableViewCellheight;
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self addHeader];
     [self addFooter];
-//    UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"更多" style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
-//    self.navigationItem.rightBarButtonItem=right;
 
-    
-    UIView *titleView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 210+35)];
-    UIView *titleBg1=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 150+35)];
+
+    //orginY +30*3+heightSpace*2+orginY
+    UIView *titleView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 210+35-35-40)];
+    UIView *titleBg1=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 150+35-35-40)];
     [titleView addSubview:titleBg1];
-    
-    titleImageView=[[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 80, 80)];
-//    titleImageView.image=[UIImage imageNamed:@"github_square"];
+    float orginX=10;
+    float sufTitleImageViewSpace=10;
+    float widthSpace=2;
+    float orginY=10;
+    float titleImageViewWidth=50;
+    float heightSpace=0;
+    float loginButtonWidth=110;
+    float emailButtonWidth=ScreenWidth-orginX*3-titleImageViewWidth-loginButtonWidth-5;
+//    float blogButtonWidth=ScreenWidth-orginX*3-titleImageViewWidth-loginButtonWidth-5;
+
+    titleImageView=[[UIImageView alloc] initWithFrame:CGRectMake(orginX, orginY+5, titleImageViewWidth, titleImageViewWidth)];
     [titleBg1 addSubview:titleImageView];
-    titleImageView.layer.cornerRadius=13;
+    titleImageView.layer.cornerRadius=11;
     titleImageView.layer.borderColor=YiGray.CGColor;
     titleImageView.layer.borderWidth=0.3;
     titleImageView.layer.masksToBounds=YES;
@@ -131,38 +137,35 @@
     titleImageView.contentMode = UIViewContentModeScaleAspectFill;
     
     
-//    login=[[UILabel alloc] initWithFrame:CGRectMake(100, 10, 135, 30)];
-//    [titleBg1 addSubview:login];
-    
     loginButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    loginButton.frame=CGRectMake(100, 10, 135, 30);
+    loginButton.frame=CGRectMake(orginX+sufTitleImageViewSpace+titleImageViewWidth, orginY, loginButtonWidth, 30);
     
     [titleBg1 addSubview:loginButton];
     [loginButton setTitleColor:YiBlue forState:UIControlStateNormal];
     [loginButton addTarget:self action:@selector(loginButtonAction) forControlEvents:UIControlEventTouchUpInside];
     loginButton.contentHorizontalAlignment=UIControlContentHorizontalAlignmentLeft;
-    name=[[UILabel alloc] initWithFrame:CGRectMake(235, 10, 75+ScreenWidth-320, 30)];
+    name=[[UILabel alloc] initWithFrame:CGRectMake(orginX+sufTitleImageViewSpace+titleImageViewWidth, orginY+heightSpace+30, loginButtonWidth, 30)];
     [titleBg1 addSubview:name];
-    createLabel=[[UILabel alloc] initWithFrame:CGRectMake(100, 45, 210, 30)];
+    createLabel=[[UILabel alloc] initWithFrame:CGRectMake(orginX, orginY+titleImageViewWidth+5, titleImageViewWidth, 30)];
     [titleBg1 addSubview:createLabel];
     
 
     
     
-    company=[[UILabel alloc] initWithFrame:CGRectMake(100, 45+35, 95, 30)];
+    company=[[UILabel alloc] initWithFrame:CGRectMake(orginX+widthSpace+sufTitleImageViewSpace+titleImageViewWidth, orginY+heightSpace*2+30*2, loginButtonWidth, 30)];
     [titleBg1 addSubview:company];
     
-    locationLabel=[[UILabel alloc] initWithFrame:CGRectMake(200, 45+35, 110+ScreenWidth-320, 30)];
+    locationLabel=[[UILabel alloc] initWithFrame:CGRectMake(orginX+sufTitleImageViewSpace+titleImageViewWidth+loginButtonWidth, orginY+heightSpace*2+30*2, emailButtonWidth, 30)];
     [titleBg1 addSubview:locationLabel];
     
     emailBt=[UIButton buttonWithType:UIButtonTypeCustom];
     [titleBg1 addSubview:emailBt];
-    emailBt.frame=CGRectMake(100, 80+35, 210+ScreenWidth-320, 30);
+    emailBt.frame=CGRectMake(orginX+widthSpace+sufTitleImageViewSpace+titleImageViewWidth+loginButtonWidth, orginY, emailButtonWidth, 30);
     
     
     blogBt=[UIButton buttonWithType:UIButtonTypeCustom];
     [titleBg1 addSubview:blogBt];
-    blogBt.frame=CGRectMake(100, 115+35, 210+ScreenWidth-320, 30);
+    blogBt.frame=CGRectMake(orginX+widthSpace+sufTitleImageViewSpace+titleImageViewWidth+loginButtonWidth, orginY+heightSpace+30, emailButtonWidth, 30);
     [blogBt addTarget:self action:@selector(blogAction) forControlEvents:UIControlEventTouchUpInside];
     
     [blogBt setTitleColor:YiBlue forState:UIControlStateNormal];
@@ -170,32 +173,27 @@
     
     loginButton.titleLabel.font=[UIFont boldSystemFontOfSize:16];
     name.font=[UIFont systemFontOfSize:14];
-    company.font=[UIFont systemFontOfSize:14];
-    emailBt.titleLabel.font=[UIFont systemFontOfSize:15];
-    blogBt.titleLabel.font=[UIFont systemFontOfSize:15];
-//    company.backgroundColor =[UIColor redColor];
-//    locationLabel.backgroundColor=[UIColor greenColor];
-//    login.backgroundColor=[UIColor redColor];
-//    name.backgroundColor=[UIColor greenColor];
+    company.font=[UIFont systemFontOfSize:13];
+    emailBt.titleLabel.font=[UIFont systemFontOfSize:12];
+    blogBt.titleLabel.font=[UIFont systemFontOfSize:12];
     locationLabel.font=[UIFont systemFontOfSize:13];
     name.textColor=YiTextGray;
-    createLabel.font=[UIFont systemFontOfSize:12];
+    createLabel.font=[UIFont systemFontOfSize:9];
     blogBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     blogBt.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     emailBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     emailBt.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     
     UILabel *line=[[UILabel alloc] initWithFrame:CGRectMake(0, 182, ScreenWidth, 1)];
-//    [titleBg1 addSubview:line];
     line.backgroundColor=YiBlue;
     [self refreshTitleView];
     
-    UILabel *line1=[[UILabel alloc] initWithFrame:CGRectMake(0, 244, ScreenWidth, 1)];
+    UILabel *line1=[[UILabel alloc] initWithFrame:CGRectMake(0, 244-35-40, ScreenWidth, 1)];
     [titleBg1 addSubview:line1];
     line1.backgroundColor=YiGray;
     
     
-    segmentControl=[[DetailSegmentControl alloc] initWithFrame:CGRectMake(0, 150+34, ScreenWidth, 60)];
+    segmentControl=[[DetailSegmentControl alloc] initWithFrame:CGRectMake(0, 150+34-35-40, ScreenWidth, 60)];
     [titleView addSubview:segmentControl];
     tableView.tableHeaderView=titleView;
     segmentControl.ButtonActionBlock=^(int buttonTag){
@@ -220,6 +218,13 @@
     };
     
     
+//    loginButton.backgroundColor=[UIColor yellowColor];
+//    name.backgroundColor=[UIColor blueColor];
+//    createLabel.backgroundColor=[UIColor blueColor];
+//    company.backgroundColor=[UIColor yellowColor];
+//    locationLabel.backgroundColor=[UIColor blueColor];
+//    emailBt.backgroundColor=[UIColor grayColor];
+//    blogBt.backgroundColor=[UIColor brownColor];
     [self checkFollowStatusAction];
 }
 
@@ -248,16 +253,13 @@
     if (isFollowing) {
         [self showYiProgressHUD:@"unfollowing……"];
         [[client unfollowUser:user] subscribeNext:^(id x) {
-            NSLog(@"a");
            
         } error:^(NSError *error) {
-            NSLog(@"e %@",error);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self hideYiProgressHUD];
                 
             });
         } completed:^{
-            NSLog(@"c");
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self hideYiProgressHUD];
                 isFollowing=!isFollowing;
@@ -272,16 +274,13 @@
         [self showYiProgressHUD:@"following……"];
 
         [[client followUser:user]subscribeNext:^(id x) {
-            NSLog(@"a");
          
         } error:^(NSError *error) {
-            NSLog(@"e %@",error);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self hideYiProgressHUD];
                 
             });
         } completed:^{
-            NSLog(@"c");
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self hideYiProgressHUD];
                 isFollowing=!isFollowing;
@@ -297,13 +296,7 @@
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"] isEqualToString:_userModel.login]) {
         return;
     }
-    /*
-    [ApplicationDelegate.apiEngine checkFollowStatusWithUsername:@"coderyi" target_user:_userModel.login completoinHandler:^(UserModel *model){
-        
-    } errorHandel:^(NSError* error){
-        
-    }];
-     */
+
     NSString *savedLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
     NSString *savedToken=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
     if (savedLogin.length<1 || !savedLogin) {
@@ -389,14 +382,7 @@
 - (void)refreshTitleView{
     [titleImageView sd_setImageWithURL:[NSURL URLWithString:_userModel.avatar_url]];
 
- 
-//    login.backgroundColor=[UIColor darkGrayColor];
-//    name.backgroundColor=[UIColor blueColor];
-//    createLabel.backgroundColor=[UIColor darkGrayColor];
-//    company.backgroundColor=[UIColor darkGrayColor];
-//    locationLabel.backgroundColor=[UIColor darkGrayColor];
-//    [emailBt setBackgroundColor:[UIColor darkGrayColor]];
-//    blogBt.backgroundColor=[UIColor darkGrayColor];
+
     [loginButton setTitle:_userModel.login forState:UIControlStateNormal];
     
     name.text=_userModel.name;
@@ -411,14 +397,6 @@
 
     segmentControl.bt3Label.text=[NSString stringWithFormat:@"%d",_userModel.followers];
 
-    
-//    login.text=@"coderyi";
-//    name.text=@"coderyi";
-//    createLabel.text=@"2015-01-24";
-//    company.text=@"腾讯";
-//    locationLabel.text=@"Beijing China";
-//    [emailBt setTitle:@"coderyi@foxmail.com" forState:UIControlStateNormal];
-//    [blogBt setTitle:@"www.coderyi.com" forState:UIControlStateNormal];
     
     
     
@@ -532,11 +510,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (currentIndex==1) {
-        return 135.7;
+        return RepositoriesTableViewCellheight;
     }else if (currentIndex==2){
-        return 90.7;
+        return RankTableViewCellHeight;
     }else if (currentIndex==3){
-        return 90.7;
+        return RankTableViewCellHeight;
     }
     return 1;
     
