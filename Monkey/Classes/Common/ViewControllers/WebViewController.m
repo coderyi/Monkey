@@ -14,6 +14,8 @@
     UILabel *titleText;
     UIActivityIndicatorView *activityIndicator;
     UIWebView *webView;
+    UIButton *backBt;
+    UIButton *closeBt;
 }
 
 
@@ -64,25 +66,30 @@
     [self.navigationController.navigationBar addSubview:activityIndicator];
     activityIndicator.activityIndicatorViewStyle=UIActivityIndicatorViewStyleWhite;
     
-    UIButton *backBt=[UIButton buttonWithType:UIButtonTypeCustom];
-    backBt.frame=CGRectMake(10, 10, 30, 40);
-    [backBt setTitle:@"back" forState:UIControlStateNormal];
+    backBt=[UIButton buttonWithType:UIButtonTypeCustom];
+    backBt.frame=CGRectMake(0, 0, 30, 30);
+//    [backBt setTitle:@"back" forState:UIControlStateNormal];
+    [backBt setImage:[UIImage imageNamed:@"ic_arrow_back_white_48pt"] forState:UIControlStateNormal];
     [backBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [backBt addTarget:self action:@selector(backBtAction) forControlEvents:UIControlEventTouchUpInside];
-    UIButton *closeBt=[UIButton buttonWithType:UIButtonTypeCustom];
-    closeBt.frame=CGRectMake(70, 10, 30, 50);
+    closeBt=[UIButton buttonWithType:UIButtonTypeCustom];
+    closeBt.frame=CGRectMake(0, 0, 30, 30);
     closeBt.titleLabel.font=[UIFont systemFontOfSize:12];
-    [closeBt setTitle:@"close" forState:UIControlStateNormal];
+//    [closeBt setTitle:@"close" forState:UIControlStateNormal];
+    [closeBt setImage:[UIImage imageNamed:@"ic_cancel_white_48pt"] forState:UIControlStateNormal];
+
     [closeBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [closeBt addTarget:self action:@selector(closeBtAction) forControlEvents:UIControlEventTouchUpInside];
 
-    self.navigationItem.leftBarButtonItems=@[[[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(backBtAction)]];
+//    self.navigationItem.leftBarButtonItems=@[[[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(backBtAction)]];
+    self.navigationItem.leftBarButtonItems=@[[[UIBarButtonItem alloc] initWithCustomView:backBt]];
 }
 - (void)backBtAction{
     if (webView.canGoBack)
     {
         [webView goBack];
-        self.navigationItem.leftBarButtonItems=@[[[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(backBtAction)],[[UIBarButtonItem alloc] initWithTitle:@"close" style:UIBarButtonItemStylePlain target:self action:@selector(closeBtAction)]];
+//        self.navigationItem.leftBarButtonItems=@[[[UIBarButtonItem alloc] initWithTitle:@"back" style:UIBarButtonItemStylePlain target:self action:@selector(backBtAction)],[[UIBarButtonItem alloc] initWithTitle:@"close" style:UIBarButtonItemStylePlain target:self action:@selector(closeBtAction)]];
+                self.navigationItem.leftBarButtonItems=@[[[UIBarButtonItem alloc] initWithCustomView:backBt],[[UIBarButtonItem alloc] initWithCustomView:closeBt]];
     }else{
         [self closeBtAction];
     }

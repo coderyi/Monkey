@@ -2,17 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "ic_cancel_white_48pt.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "close_web@2x.png"
+      "filename" : "ic_cancel_white_48pt@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "close_web@3x.png"
+      "filename" : "ic_cancel_white_48pt@3x.png"
     }
   ],
   "info" : {

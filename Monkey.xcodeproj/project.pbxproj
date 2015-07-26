@@ -1451,9 +1451,6 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = www.coderyi.com;
 				TargetAttributes = {
-					A1FC32A01B25D90B00FCBCE7 = {
-						DevelopmentTeam = HCTZ8VKJ47;
-					};
 					A1FC32C11B25D90B00FCBCE7 = {
 						TestTargetID = A1FC32A01B25D90B00FCBCE7;
 					};
