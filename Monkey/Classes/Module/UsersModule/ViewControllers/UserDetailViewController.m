@@ -106,7 +106,6 @@
     [self addHeader];
     [self addFooter];
 
-
     //orginY +30*3+heightSpace*2+orginY
     UIView *titleView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 210+35-35-40)];
     UIView *titleBg1=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 150+35-35-40)];
@@ -521,19 +520,19 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (currentIndex==1) {
-        RepositoryModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
+        RepositoryModel  *model = [(userDetailDataSource.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
         RepositoryDetailViewController *viewController=[[RepositoryDetailViewController alloc] init];
         viewController.model=model;
         [self.navigationController pushViewController:viewController animated:YES];
 
     }else if (currentIndex==2){
-        UserModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
+        UserModel  *model = [(userDetailDataSource.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
         UserDetailViewController *detail=[[UserDetailViewController alloc] init];
         
         detail.userModel=model;
         [self.navigationController pushViewController:detail animated:YES];
     }else if (currentIndex==3){
-        UserModel  *model = [(self.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
+        UserModel  *model = [(userDetailDataSource.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
         UserDetailViewController *detail=[[UserDetailViewController alloc] init];
         
         detail.userModel=model;
@@ -541,6 +540,8 @@
     }
 
 }
+
+
 
 
 @end

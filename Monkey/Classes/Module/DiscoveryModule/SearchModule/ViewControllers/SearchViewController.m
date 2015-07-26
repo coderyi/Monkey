@@ -280,7 +280,7 @@
     if (tableView.tag==11) {
         UserDetailViewController *detail=[[UserDetailViewController alloc] init];
 
-        UserModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
+        UserModel  *model = [(searchDataSourcel.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
         
         detail.userModel=model;
         [self.navigationController pushViewController:detail animated:YES];
@@ -288,7 +288,7 @@
     }else  if (tableView.tag==12) {
         RepositoryDetailViewController *detail=[[RepositoryDetailViewController alloc] init];
 
-        RepositoryModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
+        RepositoryModel  *model = [(searchDataSourcel.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
         
         detail.model=model;
         [self.navigationController pushViewController:detail animated:YES];

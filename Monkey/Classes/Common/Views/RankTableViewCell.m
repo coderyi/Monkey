@@ -15,13 +15,13 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        float h=80;
+        float h=75;
         float orginX=0;
         float w=ScreenWidth-orginX*2;
         float preWidth=15;
         float rankWidth=45;
         float sufRankWidth=10;
-        float imageViewWidth=60;
+        float imageViewWidth=55;
         float sufImageViewWidth=25;
         float labelWidth=w-2*preWidth-rankWidth-sufRankWidth-imageViewWidth-sufImageViewWidth;
         

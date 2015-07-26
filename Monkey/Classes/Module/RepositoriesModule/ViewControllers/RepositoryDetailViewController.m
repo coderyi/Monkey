@@ -107,7 +107,7 @@
     [self addHeader];
     [self addFooter];
     
-    
+
     
     titleView=[[UIView alloc] init];
     tableView.tableHeaderView=titleView;
@@ -511,7 +511,7 @@
 
 
     if (currentIndex==1) {
-        UserModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
+        UserModel  *model = [(repositoryDetailDataSource.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
         UserDetailViewController *detail=[[UserDetailViewController alloc] init];
         
         detail.userModel=model;
@@ -519,12 +519,12 @@
        
         
     }else if (currentIndex==2){
-        RepositoryModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
+        RepositoryModel  *model = [(repositoryDetailDataSource.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
         RepositoryDetailViewController *viewController=[[RepositoryDetailViewController alloc] init];
         viewController.model=model;
         [self.navigationController pushViewController:viewController animated:YES];
     }else if (currentIndex==3){
-        UserModel  *model = [(self.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
+        UserModel  *model = [(repositoryDetailDataSource.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
         UserDetailViewController *detail=[[UserDetailViewController alloc] init];
         
         detail.userModel=model;
@@ -533,6 +533,7 @@
 
 
 }
+
 
 
 @end

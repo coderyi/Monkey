@@ -147,8 +147,10 @@
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
+    
     userRankViewModel=[[UserRankViewModel alloc] init];
     titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
+    NSLog(@"%f  %f",ScreenWidth,ScreenHeight);
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
     [titleText setFont:[UIFont systemFontOfSize:19.0]];
@@ -304,6 +306,7 @@
                 tableView2.rowHeight=RankTableViewCellHeight;
                 [self addHeader:2];
                 [self addFooter:2];
+
                 
             }
             if (![titleText.text isEqualToString:tableView2Language]) {
@@ -331,6 +334,7 @@
                 tableView3.rowHeight=RankTableViewCellHeight;
                 [self addHeader:3];
                 [self addFooter:3];
+
                 
             }
             if (![titleText.text isEqualToString:tableView3Language]) {
@@ -580,7 +584,6 @@
     
 
 }
-
 
 
 @end

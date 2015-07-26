@@ -17,6 +17,7 @@
 #import "RepositoriesTableViewCell.h"
 #import "TrendingDataSource.h"
 #import "TrendingViewModel.h"
+#import "RepositoryDetailViewController.h"
 @interface TrendingViewController ()<UITableViewDataSource,UITableViewDelegate>{
     UIScrollView *scrollView;
     int currentIndex;
@@ -461,21 +462,21 @@
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UserDetailViewController *detail=[[UserDetailViewController alloc] init];
+    RepositoryDetailViewController *detail=[[RepositoryDetailViewController alloc] init];
     if (currentIndex==1) {
-        UserModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
+        RepositoryModel  *model = [(trendingDataSource.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
         
-        detail.userModel=model;
+        detail.model=model;
     }else  if (currentIndex==2) {
-        UserModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
+        RepositoryModel  *model = [(trendingDataSource.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
         
-        detail.userModel=model;
+        detail.model=model;
         
         
     }else if (currentIndex==3){
-        UserModel  *model = [(self.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
+        RepositoryModel  *model = [(trendingDataSource.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
         
-        detail.userModel=model;
+        detail.model=model;
         
     }
     [self.navigationController pushViewController:detail animated:YES];
