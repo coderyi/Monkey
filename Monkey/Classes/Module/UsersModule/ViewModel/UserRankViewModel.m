@@ -138,8 +138,6 @@
                                                errorHandel:^(NSError* error){
                                                    secondCompletionBlock(self.DsOfPageListObject2);
 
-
-                                                   
                                                }];
         
         
@@ -183,13 +181,9 @@
         }
                                                errorHandel:^(NSError* error){
                                                    thirdCompletionBlock(self.DsOfPageListObject3);
-
-
-                                                   
+   
                                                }];
-        
-        
-        
+
         
         return YES;
         

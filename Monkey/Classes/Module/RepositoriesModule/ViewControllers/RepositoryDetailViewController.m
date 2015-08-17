@@ -330,8 +330,7 @@
     
     
     
-    //    client
-    
+
 }
 
 - (void)homePageAction{
@@ -372,7 +371,6 @@
     createLabel.frame=CGRectMake(orginX, 70+parentheight, 100, 30);
     createLabel.text=[_model.created_at substringWithRange:NSMakeRange(0, 10)];
     [homePageBt setTitle:_model.homepage forState:UIControlStateNormal];
-//    homePageBt.frame=CGRectMake(orginX, 100+parentheight, (ScreenWidth-2*orginX), 30);
     homePageBt.frame=CGRectMake(orginX+100, 70+parentheight, (ScreenWidth-2*orginX)-100, 30);
 
 

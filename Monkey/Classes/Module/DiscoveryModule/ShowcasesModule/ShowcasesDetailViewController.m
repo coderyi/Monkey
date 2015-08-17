@@ -136,7 +136,6 @@
         }
         
         
-        //        [self hideHUD];
         
         [self.DsOfPageListObject.dsArray addObjectsFromArray:modelArray];
         self.DsOfPageListObject.page=page;

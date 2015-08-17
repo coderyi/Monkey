@@ -150,7 +150,6 @@
     
     userRankViewModel=[[UserRankViewModel alloc] init];
     titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
-    NSLog(@"%f  %f",ScreenWidth,ScreenHeight);
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
     [titleText setFont:[UIFont systemFontOfSize:19.0]];

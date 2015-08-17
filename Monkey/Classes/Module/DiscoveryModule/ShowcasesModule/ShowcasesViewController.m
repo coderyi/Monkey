@@ -192,11 +192,11 @@ errorHandel:^(NSError* error){
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
     NSString *CellId = @"autoCell";
-    ShowcasesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellId];
+    ShowcasesTableViewCell *cell = [tableView1 dequeueReusableCellWithIdentifier:CellId];
     if (cell == nil) {
         cell = [[ShowcasesTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellId];
         cell.detailTextLabel.textColor=[UIColor grayColor];

@@ -53,7 +53,6 @@
     }
     self.automaticallyAdjustsScrollViewInsets=NO;
     self.title=NSLocalizedString(@"News", @"");
-    // Do any additional setup after loading the view.
     tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain ];
     [self.view addSubview:tableView];
 
@@ -174,11 +173,11 @@
 
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
     NSString *CellId = @"autoCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellId];
+    UITableViewCell *cell = [tableView1 dequeueReusableCellWithIdentifier:CellId];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellId];
         

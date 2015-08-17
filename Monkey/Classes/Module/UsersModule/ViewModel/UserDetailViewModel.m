@@ -62,9 +62,7 @@
             
         }];
         
-        
-        
-        
+
         
         return YES;
     }else if (currentIndex==2){
@@ -93,13 +91,8 @@
         } errorHandel:^(NSError* error){
             secondCompletionBlock(self.DsOfPageListObject2);
 
-
-            
         }];
-        
-        
-        
-        
+    
         
         return YES;
     }else if (currentIndex==3){
@@ -117,9 +110,7 @@
             if (page<=1) {
                 [self.DsOfPageListObject3.dsArray removeAllObjects];
             }
-            
-            
-            
+     
             [self.DsOfPageListObject3.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject3.page=page;
             thirdCompletionBlock(self.DsOfPageListObject3);
@@ -128,12 +119,8 @@
         } errorHandel:^(NSError* error){
             thirdCompletionBlock(self.DsOfPageListObject3);
 
-            
         }];
-        
-        
-        
-        
+      
         
         return YES;
     }

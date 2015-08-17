@@ -8,7 +8,6 @@
 
 #import "TrendingViewController.h"
 #import "UserModel.h"
-//#import "RankTableViewCell.h"
 #import "HeaderSegmentControl.h"
 #import "CityViewController.h"
 #import "LanguageViewController.h"
@@ -18,7 +17,7 @@
 #import "TrendingDataSource.h"
 #import "TrendingViewModel.h"
 #import "RepositoryDetailViewController.h"
-@interface TrendingViewController ()<UITableViewDataSource,UITableViewDelegate>{
+@interface TrendingViewController ()<UITableViewDelegate>{
     UIScrollView *scrollView;
     int currentIndex;
     UITableView *tableView1;
@@ -226,7 +225,6 @@
     
     tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
     [scrollView addSubview:tableView1];
-    //    tableView1.showsVerticalScrollIndicator = NO;
     trendingDataSource=[[TrendingDataSource alloc] init];
     
     tableView1.dataSource=trendingDataSource;

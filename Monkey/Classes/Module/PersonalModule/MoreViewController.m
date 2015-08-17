@@ -58,7 +58,6 @@
     [self.view addSubview:tableView];
     tableView.delegate=self;
     tableView.dataSource=self;
-//    tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
 
 }
 - (void)didReceiveMemoryWarning {

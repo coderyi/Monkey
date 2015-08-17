@@ -41,7 +41,6 @@
         if (cell==nil) {
             cell=[[RepositoriesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
-//            cell.userLabel.hidden=YES;
             cell.titleImageView.hidden=YES;
             
         }

@@ -106,7 +106,6 @@
     [self addHeader];
     [self addFooter];
 
-    //orginY +30*3+heightSpace*2+orginY
     UIView *titleView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 210+35-35-40)];
     UIView *titleBg1=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 150+35-35-40)];
     [titleView addSubview:titleBg1];
@@ -118,7 +117,6 @@
     float heightSpace=0;
     float loginButtonWidth=110;
     float emailButtonWidth=ScreenWidth-orginX*3-titleImageViewWidth-loginButtonWidth-5;
-//    float blogButtonWidth=ScreenWidth-orginX*3-titleImageViewWidth-loginButtonWidth-5;
 
     titleImageView=[[UIImageView alloc] initWithFrame:CGRectMake(orginX, orginY+5, titleImageViewWidth, titleImageViewWidth)];
     [titleBg1 addSubview:titleImageView];
@@ -217,13 +215,7 @@
     };
     
     
-//    loginButton.backgroundColor=[UIColor yellowColor];
-//    name.backgroundColor=[UIColor blueColor];
-//    createLabel.backgroundColor=[UIColor blueColor];
-//    company.backgroundColor=[UIColor yellowColor];
-//    locationLabel.backgroundColor=[UIColor blueColor];
-//    emailBt.backgroundColor=[UIColor grayColor];
-//    blogBt.backgroundColor=[UIColor brownColor];
+
     [self checkFollowStatusAction];
 }
 
@@ -315,7 +307,6 @@
     [[client hasFollowUser:followUser] subscribeNext:^(NSNumber *hasFollowUser){
         dispatch_async(dispatch_get_main_queue(), ^{
             isFollowing=hasFollowUser.boolValue;
-            NSLog(@"%@",hasFollowUser);
             NSString *rightTitle;
             if (isFollowing) {
                 rightTitle=@"unfollow";

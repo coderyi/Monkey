@@ -14,7 +14,7 @@
 #import "RepositoryDetailViewController.h"
 #import "SearchViewModel.h"
 #import "SearchDataSource.h"
-@interface SearchViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>{
+@interface SearchViewController ()<UITableViewDelegate,UISearchBarDelegate>{
     UITableView *tableView1;
     UITableView *tableView2;
     int currentIndex;

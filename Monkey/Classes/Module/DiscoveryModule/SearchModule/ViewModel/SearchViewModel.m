@@ -53,10 +53,7 @@
                 if (page<=1) {
                     [self.DsOfPageListObject1.dsArray removeAllObjects];
                 }
-                
-                
-                //        [self hideHUD];
-                
+     
                 [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
                 self.DsOfPageListObject1.page=page;
                 firstCompletionBlock(self.DsOfPageListObject1);
@@ -104,9 +101,7 @@
             }
                                                           errorHandel:^(NSError* error){
                                                               secondCompletionBlock(self.DsOfPageListObject2);
-
-
-                                                              
+     
                                                           }];
             
             

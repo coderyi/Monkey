@@ -96,7 +96,7 @@
         cityArray= @[@"San Francisco",@"New York",@"Seattle",@"Chicago",@"Los Angeles",@"Boston",@"Washington",@"San Diego",@"San Jose",@"Philadelphia"];
         
     }else if (indexPath.row==1){
-//        uk
+        //        uk
     cityArray= @[@"London",@"Cambridge",@"Manchester",@"Edinburgh",@"Bristol",@"Birmingham",@"Glasgow",@"Oxford",@"Newcastle",@"Leeds"];
     }else if (indexPath.row==2){
         //germany
@@ -105,7 +105,7 @@
         cityArray= @[@"beijing",@"shanghai",@"shenzhen",@"hangzhou",@"guangzhou",@"chengdu",@"nanjing",@"wuhan",@"suzhou",@"xiamen",@"tianjin",@"chongqing",@"changsha"];
         
     }else if (indexPath.row==4){
-//        canada
+        //        canada
         cityArray= @[@"Toronto",@"Vancouver",@"Montreal",@"ottawa",@"Calgary",@"Quebec"];
     }else if (indexPath.row==5){
         //        india
