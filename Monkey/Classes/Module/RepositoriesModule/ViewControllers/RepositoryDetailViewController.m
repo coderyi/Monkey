@@ -356,7 +356,7 @@
     nameBt.frame=CGRectMake(10, 0, nameWidth, 40);
     lineLabel.frame=CGRectMake(orginX+nameWidth, 0, 10, 40);
     ownerBt.frame=CGRectMake(orginX+nameWidth+10, 0, (ScreenWidth-2*orginX)/2-40, 40);
-    [ownerIV setImageWithURL:[NSURL URLWithString:_model.user.avatar_url]];
+    [ownerIV sd_setImageWithURL:[NSURL URLWithString:_model.user.avatar_url]];
     [nameBt setTitle:_model.name forState:UIControlStateNormal];
     [ownerBt setTitle:_model.user.login forState:UIControlStateNormal];
     [parentBt setTitle:_model.parentOwnerName forState:UIControlStateNormal];

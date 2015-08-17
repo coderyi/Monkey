@@ -23,7 +23,7 @@
     
     YiRefreshHeader *refreshHeader2;
     YiRefreshFooter *refreshFooter2;
-    UISearchBar *searchBar;
+    UISearchBar *mySearchBar;
     SearchSegmentControl *searchSegment;
     UILabel *titleText;
     SearchViewModel *searchViewModel;
@@ -54,11 +54,11 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
-    [self.navigationController.navigationBar addSubview:searchBar];
+    [self.navigationController.navigationBar addSubview:mySearchBar];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     self.tabBarController.tabBar.hidden = NO;
-    [searchBar removeFromSuperview];
+    [mySearchBar removeFromSuperview];
 }
 
 
@@ -125,13 +125,13 @@
      };
     self.navigationItem.hidesBackButton =YES;
     
-    searchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(10, 2, ScreenWidth-60, 40)];
-    [self.navigationController.navigationBar addSubview:searchBar];
+    mySearchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(10, 2, ScreenWidth-60, 40)];
+    [self.navigationController.navigationBar addSubview:mySearchBar];
     
-    searchBar.delegate=self;
-    searchBar.tintColor=YiBlue;
+    mySearchBar.delegate=self;
+    mySearchBar.tintColor=YiBlue;
 
-    [searchBar becomeFirstResponder];
+    [mySearchBar becomeFirstResponder];
     
     UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"cancel", @"") style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
     self.navigationItem.rightBarButtonItem=right;
@@ -144,7 +144,7 @@
 #pragma mark - Actions
 
 - (void)rightAction{
-    [searchBar removeFromSuperview];
+    [mySearchBar removeFromSuperview];
     
     [self.navigationController popViewControllerAnimated:YES];
     
@@ -237,7 +237,7 @@
 
 - (void)loadDataFromApiWithIsFirst:(BOOL)isFirst{
   
-    [searchViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex searchBarText:searchBar.text firstTableData:^(DataSourceModel* DsOfPageListObject){
+    [searchViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex searchBarText:mySearchBar.text firstTableData:^(DataSourceModel* DsOfPageListObject){
         searchDataSourcel.DsOfPageListObject1=DsOfPageListObject;
                         [tableView1 reloadData];
         

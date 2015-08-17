@@ -11,7 +11,6 @@
 #import "AboutViewController.h"
 #import "UMFeedback.h"
 #import "LoginViewController.h"
-#import "LoginWebViewController.h"
 #import "UserDetailViewController.h"
 @interface MoreViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>{
     
@@ -75,25 +74,7 @@
 - (void)loginAction{
 
     
-    /*
-    //    cookie清除
-    NSHTTPCookie *cookie;
-    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (cookie in [storage cookies])
-    {
-        [storage deleteCookie:cookie];
-    }
-    
-    //    缓存  清除
-    [[NSURLCache sharedURLCache] removeAllCachedResponses];
-    LoginWebViewController *webViewController=[[LoginWebViewController alloc] init];
-    webViewController.urlString=@"https://github.com/login/oauth/authorize/?client_id=a8d9c1a366f057a23753&state=1995&redirect_uri=https://github.com/coderyi&scope=user:follow";
-    webViewController.callback=^(NSString *code){
-        
-                [self login1Action:code];
-    };
-    [self presentViewController:webViewController animated:YES completion:nil];
-    */
+
     
     LoginViewController *login=[[LoginViewController alloc] init];
     login.callback=^(NSString *response){
@@ -109,79 +90,9 @@
         
     };
     [self.navigationController pushViewController:login animated:YES];
-    
-    
-//    [OCTClient setClientID:CoderyiClientID clientSecret:CoderyiClientSecret];
-//    [[OCTClient
-//      signInToServerUsingWebBrowser:OCTServer.dotComServer scopes:OCTClientAuthorizationScopesUser | OCTClientAuthorizationScopesRepository]
-//     subscribeNext:^(OCTClient *authenticatedClient) {
-//         // Authentication was successful. Do something with the created client.
-//         NSLog(@"%@",authenticatedClient);
-//         
-//         currentLogin=authenticatedClient.user.login;
-//         //         currentAvatarUrl=authenticatedClient.user.avatar_url;
-//         
-//         [[NSUserDefaults standardUserDefaults] setObject:currentLogin forKey:@"currentLogin"];
-//         //         [[NSUserDefaults standardUserDefaults] setObject:currentAvatarUrl forKey:@"currentAvatarUrl"];
-//         [tableView reloadData];
-//     } error:^(NSError *error) {
-//         // Authentication failed.
-//     }];
-    
-    
-//    
-//    OCTUser *user = [OCTUser userWithRawLogin:@"coderyi" server:OCTServer.dotComServer];
-//    [[OCTClient signInAsUser:user password:@"1991812yy" oneTimePassword:nil scopes:OCTClientAuthorizationScopesUser | OCTClientAuthorizationScopesRepository note:nil noteURL:nil fingerprint:nil]
-//subscribeNext:^(OCTClient *authenticatedClient) {
-//    // Authentication was successful. Do something with the created client.
-//    NSLog(@"%@",authenticatedClient);
-//    [[NSUserDefaults standardUserDefaults] setObject:authenticatedClient.token forKey:@"access_token"];
-//    currentLogin=authenticatedClient.user.login;
-//    currentAvatarUrl=[authenticatedClient.user.avatarURL absoluteString];
-//    [[NSUserDefaults standardUserDefaults] setObject:currentLogin forKey:@"currentLogin"];
-//    [[NSUserDefaults standardUserDefaults] setObject:currentAvatarUrl forKey:@"currentAvatarUrl"];
-//    [tableView reloadData];
-//
-//   
-//    
-//} error:^(NSError *error) {
-//    // Authentication failed.
-//}];
-    
-}
+    }
 
-- (void)login1Action:(NSString *)code{
-    YiNetworkEngine *apiEngine=[[YiNetworkEngine alloc] initWithHostName:@"github.com"];
-    [apiEngine loginWithCode:code completoinHandler:^(NSString *response){
-        //        [self login2Action:<#(NSString *)#>];
-        //        13 40
-        if ([[response substringWithRange:NSMakeRange(0, 13)] isEqualToString:@"access_token="]) {
-            NSString *token=[response substringWithRange:NSMakeRange(13, 40)];
-            [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"access_token"];
 
-            [self login2Action:token];
-        }
-        
-    } errorHandel:^(NSError* error){
-        
-    }];
-}
-
-- (void)login2Action:(NSString *)token{
-    [ApplicationDelegate.apiEngine getUserInfoWithToken:token completoinHandler:^(UserModel *model){
-        if (model) {
-            currentLogin=model.login;
-            currentAvatarUrl=model.avatar_url;
-            
-            [[NSUserDefaults standardUserDefaults] setObject:currentLogin forKey:@"currentLogin"];
-            [[NSUserDefaults standardUserDefaults] setObject:currentAvatarUrl forKey:@"currentAvatarUrl"];
-            [tableView reloadData];
-        }
-        
-    } errorHandel:^(NSError* error){
-        
-    }];
-}
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -256,31 +167,7 @@
         AboutViewController *about=[[AboutViewController alloc] init];
         
         [self.navigationController pushViewController:about animated:YES];
-//        NSString *savedLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
-//        NSString *savedToken=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
-//
-//        OCTUser *user1 = [OCTUser userWithRawLogin:savedLogin server:OCTServer.dotComServer];
-//        OCTClient *client1 = [OCTClient authenticatedClientWithUser:user1 token:savedToken];
-//            OCTUser *user=[OCTUser userWithRawLogin:@"onlyswan" server:OCTServer.dotComServer];
-////        user.login=@"onlyswan";
-//        OCTClient *client =[OCTClient unauthenticatedClientWithUser:user];
-//        [[client1 hasFollowUser:user] subscribeNext:^(NSNumber *isFollowing){
-//            
-//            NSLog(@"%@",isFollowing);
-//        }];
-//        
-//        [[client1 fetchUserInfoForUser:user] subscribeNext:^(OCTUser *user2){
-//        
-//            [client1 unfollowUser:user2];
-//            [[client1 hasFollowUser:user2] subscribeNext:^(NSNumber *isFollowing){
-//                
-//                NSLog(@"%@",isFollowing);
-//            }];
-//        
-//        } error:^(NSError *error) {
-//            // Authentication failed.
-//        }];
-        
+
         
         
           

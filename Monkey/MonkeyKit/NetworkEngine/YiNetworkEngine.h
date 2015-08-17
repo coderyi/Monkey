@@ -41,13 +41,6 @@ typedef void (^StringResponseBlock)(NSString* response);
                                           target_user:(NSString *)target_user
                                     completoinHandler:(UserModelResponseBlock)completionBlock
                                           errorHandel:(MKNKErrorBlock)errorBlock;
-#pragma mark - login module
-- (MKNetworkOperation *)loginWithCode:(NSString *)code
-                    completoinHandler:(StringResponseBlock)completionBlock
-                          errorHandel:(MKNKErrorBlock)errorBlock;
-- (MKNetworkOperation *)getUserInfoWithToken:(NSString *)token
-                           completoinHandler:(UserModelResponseBlock)completionBlock
-                                 errorHandel:(MKNKErrorBlock)errorBlock;
 #pragma mark - users module
 
 

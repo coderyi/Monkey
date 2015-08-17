@@ -24,7 +24,6 @@
         float sufRankWidth=10;
         float repositoryLabelWidth=180;
         float userLabelWidth=110;
-        float sufRepositoryWidth=10;
         float imageViewWidth=30;
         float labelWidth=w-2*preWidth-rankWidth-sufRankWidth;
 

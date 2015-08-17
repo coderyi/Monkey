@@ -22,7 +22,7 @@
 #import "UserDetailViewModel.h"
 #import "UserDetailDataSource.h"
 
-@interface UserDetailViewController ()<UITableViewDataSource,UITableViewDelegate>{
+@interface UserDetailViewController ()<UITableViewDelegate>{
     UITableView *tableView;
     YiRefreshHeader *refreshHeader;
     YiRefreshFooter *refreshFooter;

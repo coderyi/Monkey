@@ -7,7 +7,6 @@
 //
 
 #import "LoginViewController.h"
-#import "LoginWebViewController.h"
 @interface LoginViewController (){
 
     UITextField *usernameTF;
@@ -22,7 +21,6 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
-    //    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"cityAppear"];
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
@@ -127,68 +125,10 @@
              });
          
          });
-//     dispatch_async(dispatch_get_main_queue(), ^{
-//        if (_callback) {
-//            _callback(@"no");
-//            _callback = nil;
-//            [self.navigationController popViewControllerAnimated:YES];
-//            
-//        }
-//        
-//    });
+
      
      }];
 
-}
-- (void)loginAction{
-//    YiNetworkEngine *apiEngine=[[YiNetworkEngine alloc] initWithHostName:@"github.com"];
-//    [apiEngine loginWithCompletoinHandler:^(NSString *response){
-//        
-//    } errorHandel:^(NSError* error){
-//        
-//    }];
-//
-//    cookie清除
-    NSHTTPCookie *cookie;
-    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (cookie in [storage cookies])
-    {
-        [storage deleteCookie:cookie];
-    }
-    
-//    缓存  清除
-    [[NSURLCache sharedURLCache] removeAllCachedResponses];
-    LoginWebViewController *webViewController=[[LoginWebViewController alloc] init];
-    webViewController.urlString=@"https://github.com/login/oauth/authorize/?client_id=a8d9c1a366f057a23753&state=1995&redirect_uri=https://github.com/coderyi";
-    webViewController.callback=^(NSString *code){
-    
-//        [self login1Action:code];
-    };
-    [self presentViewController:webViewController animated:YES completion:nil];
-    
-}
-
-- (void)login1Action:(NSString *)code{
-        YiNetworkEngine *apiEngine=[[YiNetworkEngine alloc] initWithHostName:@"github.com"];
-    [apiEngine loginWithCode:code completoinHandler:^(NSString *response){
-//        [self login2Action:<#(NSString *)#>];
-//        13 40
-        if ([[response substringWithRange:NSMakeRange(0, 13)] isEqualToString:@"access_token="]) {
-            NSString *token=[response substringWithRange:NSMakeRange(13, 40)];
-            [self login2Action:token];
-        }
-       
-    } errorHandel:^(NSError* error){
-        
-    }];
-}
-
-- (void)login2Action:(NSString *)token{
-    [ApplicationDelegate.apiEngine getUserInfoWithToken:token completoinHandler:^(UserModel *model){
-        
-    } errorHandel:^(NSError* error){
-        
-    }];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
