@@ -273,7 +273,7 @@
 #pragma mark - UISearchBarDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [self loadDataFromApiWithIsFirst:YES];
-    [searchBar endEditing:YES];
+    [mySearchBar endEditing:YES];
 }
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

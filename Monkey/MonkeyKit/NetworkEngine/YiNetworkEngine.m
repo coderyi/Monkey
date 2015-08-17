@@ -20,7 +20,6 @@
     
     
     
-    //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
     
     NSString *getString = [NSString stringWithFormat:@"/users/%@/received_events?&page=%ld",login,(long)page];
     
@@ -28,14 +27,11 @@
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
-    NSLog(@"url is %@",op.url);
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         
         if ([[completedOperation responseJSON]
              isKindOfClass:[NSArray class]]) {
-//            NSArray *resultDictionary = [completedOperation responseJSON];
-            
-//            NSInteger totalCount=[[resultDictionary objectForKey:@"total_count"] intValue];
+
             NSArray *list = [completedOperation responseJSON];
             if ([list isKindOfClass:[NSArray class]]) {
                 if (list.count > 0) {
@@ -79,7 +75,6 @@
     
     
     
-    //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
     
     NSString *getString = [NSString stringWithFormat:@"/v2/showcases/%@",showcase];
     
@@ -87,14 +82,12 @@
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:NO];
-    NSLog(@"url is %@",op.url);
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         
         if ([[completedOperation responseJSON]
              isKindOfClass:[NSDictionary class]]) {
             NSDictionary *resultDictionary = [completedOperation responseJSON];
             
-//            NSInteger totalCount=[[resultDictionary objectForKey:@"total_count"] intValue];
             NSArray *list = [resultDictionary objectForKey:@"repositories"];
             if ([list isKindOfClass:[NSArray class]]) {
                 if (list.count > 0) {
@@ -136,16 +129,10 @@
                                  completoinHandler:(PageListInfoResponseBlock)completionBlock
                                        errorHandel:(MKNKErrorBlock)errorBlock
 {
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    
-    
-    [dic setValue:type forKey:@"since"];
-    [dic setValue:language forKey:@"language"];
-  
+ 
     
     
     
-    //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
     
     NSString *getString ;
     if (language.length<1 || !language || [language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
@@ -159,14 +146,11 @@
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:NO];
-    NSLog(@"url is %@",op.url);
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
 //        不是json
         if ([[completedOperation responseJSON]
              isKindOfClass:[NSArray class]]) {
-//            NSDictionary *resultDictionary = [completedOperation responseJSON];
-            
-//            NSInteger totalCount=[[resultDictionary objectForKey:@"total_count"] intValue];
+
             NSArray *list = [completedOperation responseJSON];
             if ([list isKindOfClass:[NSArray class]]) {
                 if (list.count > 0) {
@@ -207,25 +191,19 @@
     
     
     
-    //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
     
-    NSString *getString ;
-    
-        getString = [NSString stringWithFormat:@"/v2/showcases"];
+    NSString *getString = [NSString stringWithFormat:@"/v2/showcases"];
         
     
     
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:NO];
-    NSLog(@"url is %@",op.url);
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         //        不是json
         if ([[completedOperation responseJSON]
              isKindOfClass:[NSArray class]]) {
-            //            NSDictionary *resultDictionary = [completedOperation responseJSON];
-            
-            //            NSInteger totalCount=[[resultDictionary objectForKey:@"total_count"] intValue];
+
             NSArray *list = [completedOperation responseJSON];
             if ([list isKindOfClass:[NSArray class]]) {
                 if (list.count > 0) {
@@ -281,9 +259,7 @@
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
     [op setUsername:access_token password:@"x-oauth-basic" basicAuth:NO];
 
-    NSLog(@"%@", op.url);
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-        NSLog(@"%@",[completedOperation responseString]);
         
         if ([[completedOperation responseJSON]
              isKindOfClass:[NSDictionary class]]) {
@@ -329,7 +305,6 @@
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
-    NSLog(@"url is %@",op.url);
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         
         if ([[completedOperation responseJSON]
@@ -353,7 +328,6 @@
                         model.categoryLocation=categoryLocation;
                         model.myID=[[NSDate date] timeIntervalSince1970];
                         [listNew addObject:model];
-//                        [[UserManager sharedInstance] handleCategoryModel:model];
                         
                     }
                     completionBlock(listNew, page,totalCount);
@@ -379,24 +353,15 @@
 - (MKNetworkOperation *)searchUsersWithPage:(NSInteger)page q:(NSString *)q sort:(NSString *)sort completoinHandler:(PageListInfoResponseBlock)completionBlock
                                 errorHandel:(MKNKErrorBlock)errorBlock
 {
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    
-    
-    [dic setValue:q forKey:@"q"];
-    [dic setValue:sort forKey:@"sort"];
-    [dic setValue:[NSString stringWithFormat:@"%ld", (long)page] forKey:@"page"];
 
-    
-    
-//    NSString *getString = [NSString stringWithFormat:@"/search/users"];
 
+  
      NSString *getString = [NSString stringWithFormat:@"/search/users?q=%@&sort=%@&page=%ld",q,sort,(long)page];
     
     
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
-    NSLog(@"url is %@",op.url);
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         
         if ([[completedOperation responseJSON]
@@ -448,7 +413,6 @@
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
     
-    NSLog(@"%@", op.url);
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         
         if ([[completedOperation responseJSON]
@@ -485,7 +449,6 @@
     
     
     
-    //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
     
     NSString *getString = [NSString stringWithFormat:@"/users/%@/repos?sort=updated&page=%ld",userName,(long)page];
     
@@ -493,7 +456,6 @@
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
-    NSLog(@"url is %@",op.url);
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         
         if ([[completedOperation responseJSON]
@@ -541,7 +503,6 @@
     
     
     
-    //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
     
     NSString *getString = [NSString stringWithFormat:@"/users/%@/followers?page=%ld",userName,(long)page];
     
@@ -549,7 +510,6 @@
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
-    NSLog(@"url is %@",op.url);
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         
         if ([[completedOperation responseJSON]
@@ -598,7 +558,6 @@
     
     
     
-    //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
     
     NSString *getString = [NSString stringWithFormat:@"/users/%@/following?page=%ld",userName,(long)page];
     
@@ -606,7 +565,6 @@
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
-    NSLog(@"url is %@",op.url);
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         
         if ([[completedOperation responseJSON]
@@ -651,16 +609,9 @@
 - (MKNetworkOperation *)searchRepositoriesWithPage:(NSInteger)page q:(NSString *)q sort:(NSString *)sort completoinHandler:(PageListInfoResponseBlock)completionBlock
                                        errorHandel:(MKNKErrorBlock)errorBlock
 {
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+   
     
     
-    [dic setValue:q forKey:@"q"];
-    [dic setValue:sort forKey:@"sort"];
-    [dic setValue:[NSString stringWithFormat:@"%ld", (long)page] forKey:@"page"];
-    
-    
-    
-    //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
     
     NSString *getString = [NSString stringWithFormat:@"/search/repositories?q=%@&sort=%@&page=%ld",q,sort,(long)page];
     
@@ -728,7 +679,6 @@
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
     
-    NSLog(@"%@", op.url);
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         
         if ([[completedOperation responseJSON]
@@ -770,7 +720,6 @@
     
     
     
-    //    NSString *getString = [NSString stringWithFormat:@"/search/users"];
     
     if ([category isEqualToString:@"forks"]) {
         
@@ -780,7 +729,6 @@
         
         MKNetworkOperation *op =
         [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
-        NSLog(@"url is %@",op.url);
         [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
             
             if ([[completedOperation responseJSON]
@@ -826,7 +774,6 @@
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
-    NSLog(@"url is %@",op.url);
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         
         if ([[completedOperation responseJSON]
