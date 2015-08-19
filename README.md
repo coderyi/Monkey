@@ -72,6 +72,7 @@ Asynchronous image downloader with cache support with an UIImageView category
 ##LICENSE
 此开源项目可以用来做任何事情除了原封不动的分发到App Store。
 
+copyright (c) 2015 coderyi.all rights reserved.
 
 
 
