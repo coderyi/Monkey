@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A1228E91B52022400D5BAD8 /* LoginWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A1228E81B52022400D5BAD8 /* LoginWebViewController.m */; };
 		0A2FA7E01B5D556900E5AC56 /* CountryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2FA7DF1B5D556900E5AC56 /* CountryViewController.m */; };
 		0A4780C41B5F1ECF00E99D7A /* TrendingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4780C31B5F1ECF00E99D7A /* TrendingViewController.m */; };
 		0A4780C71B5F1FA900E99D7A /* ShowcasesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4780C61B5F1FA900E99D7A /* ShowcasesViewController.m */; };
@@ -359,8 +358,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0A1228E71B52022400D5BAD8 /* LoginWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginWebViewController.h; sourceTree = "<group>"; };
-		0A1228E81B52022400D5BAD8 /* LoginWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginWebViewController.m; sourceTree = "<group>"; };
 		0A2FA7DE1B5D556900E5AC56 /* CountryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountryViewController.h; sourceTree = "<group>"; };
 		0A2FA7DF1B5D556900E5AC56 /* CountryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountryViewController.m; sourceTree = "<group>"; };
 		0A4780C21B5F1ECF00E99D7A /* TrendingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendingViewController.h; sourceTree = "<group>"; };
@@ -1035,8 +1032,6 @@
 			children = (
 				0ACEA3531B51604A009F6B6D /* LoginViewController.h */,
 				0ACEA3541B51604A009F6B6D /* LoginViewController.m */,
-				0A1228E71B52022400D5BAD8 /* LoginWebViewController.h */,
-				0A1228E81B52022400D5BAD8 /* LoginWebViewController.m */,
 			);
 			path = LoginModule;
 			sourceTree = "<group>";
@@ -1735,7 +1730,6 @@
 				0AA374B61B5FA16F00C1C045 /* UserReceivedEventPayloadModel.m in Sources */,
 				A1FC33AA1B25D92200FCBCE7 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				A1FC33BC1B25D92200FCBCE7 /* UIImageView+WebCache.m in Sources */,
-				0A1228E91B52022400D5BAD8 /* LoginWebViewController.m in Sources */,
 				A1FC32B11B25D90B00FCBCE7 /* main.m in Sources */,
 				0ACEA31E1B5142F6009F6B6D /* README.md in Sources */,
 				0AA374AD1B5FA12100C1C045 /* UserReceivedEventModel.m in Sources */,
