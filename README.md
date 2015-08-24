@@ -14,11 +14,15 @@ App Store地址:[https://itunes.apple.com/cn/app/monkey-for-github/id1003765407]
 
 
 ##Monkey for GitHub
-目前App Store的版本是0.9，上线时间是2015.6.26.
+0.9.1版本
 
 Monkey是一个GitHub第三方客户端，Monkey取名就是表示我们程序猿的意思。
 
 Monkey主要是用来展示GitHub上的开发者的排名，以及仓库的排名，并且能够搜索开发者和仓库。
+
+登录GitHub功能，随手follow和star
+
+发现模块：包括GitHub仓库的trending；GitHub动态；showcases；搜索；以及其他排名数据
 
 开发者的排名是根据开发者的followers由高到低进行排名，有区分不同的语言和城市。
 
