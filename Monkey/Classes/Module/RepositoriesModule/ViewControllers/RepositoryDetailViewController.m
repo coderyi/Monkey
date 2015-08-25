@@ -374,7 +374,7 @@
     homePageBt.frame=CGRectMake(orginX+100, 70+parentheight, (ScreenWidth-2*orginX)-100, 30);
 
 
-    float descHeight=[_model.repositoryDescription sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake((ScreenWidth-2*10), 700) lineBreakMode:NSLineBreakByWordWrapping].height;
+    float descHeight=[_model.repositoryDescription sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake((ScreenWidth-2*orginX), 700) lineBreakMode:NSLineBreakByWordWrapping].height+5;
     descLabel.text=_model.repositoryDescription;
     descLabel.frame=CGRectMake(orginX, 130+parentheight-30, (ScreenWidth-2*orginX), descHeight);
     segmentControl.frame=CGRectMake(0, 130+descHeight+5+parentheight-30, ScreenWidth, 60);
