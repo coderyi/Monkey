@@ -2,7 +2,7 @@
 
 ![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_liantuerweima.png?imageMogr2/thumbnail/!60p) 
 
-Monkey是一个GitHub第三方客户端，Monkey取名就是表示我们程序猿的意思。Monkey for GitHub目前是0.9版本，这是我的第一个上线App，开源项目，希望多多指教。欢迎使用上面的二维码扫描下载。
+Monkey是一个GitHub第三方客户端，Monkey取名就是表示我们程序猿的意思。Monkey for GitHub是我的第一个上线App，开源项目，希望多多指教。欢迎使用上面的二维码扫描下载。
 
  
 
@@ -14,7 +14,7 @@ App Store地址:[https://itunes.apple.com/cn/app/monkey-for-github/id1003765407]
 
 
 ##Monkey for GitHub
-0.9.1版本
+
 
 Monkey是一个GitHub第三方客户端，Monkey取名就是表示我们程序猿的意思。
 
@@ -83,14 +83,7 @@ copyright (c) 2015 coderyi.all rights reserved.
 
 
 
-##To do
-1.增加英文社区的支持
 
-2.数据持久化
-
-3.增加登录功能
-
-4.增加关注人动态功能
 ##联系我
 对于Monkey，你可以随意提交；如果想加入更多的开发，欢迎联系我！
 
