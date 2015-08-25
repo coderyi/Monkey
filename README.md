@@ -18,11 +18,11 @@ App Store地址:[https://itunes.apple.com/cn/app/monkey-for-github/id1003765407]
 
 Monkey是一个GitHub第三方客户端，Monkey取名就是表示我们程序猿的意思。
 
-Monkey主要是用来展示GitHub上的开发者的排名，以及仓库的排名，并且能够搜索开发者和仓库。
+Monkey主要是用来展示GitHub上的开发者的排名，以及仓库的排名。
 
-登录GitHub功能，随手follow和star
+登录GitHub功能，随手follow开发者和star仓库，支持查看我的GitHub动态。
 
-发现模块：包括GitHub仓库的trending；GitHub动态；showcases；搜索；以及其他排名数据
+发现模块，包括GitHub仓库的trending；GitHub动态；showcases；搜索；以及其他排名数据
 
 开发者的排名是根据开发者的followers由高到低进行排名，有区分不同的语言和城市。
 
@@ -40,7 +40,7 @@ Monkey主要是用来展示GitHub上的开发者的排名，以及仓库的排�
 这个列表是我做[Monkey for GitHub](https://github.com/coderyi/Monkey)这个开源的GitHub第三方客户端的衍生品，欢迎交流意见。
 ##关于开源
 ####运行
-支持iOS7.1+，支持iPhone的各个尺寸，支持竖屏；目前我使用的是Xcode6.3
+支持iOS7.0+，支持iPhone的各个尺寸，支持竖屏；目前我使用的是Xcode6.3
 
 ####Monkey API
 我整理Monkey for GitHub的所有API，并做了一些说明和示例，希望能够帮助到您。
@@ -67,6 +67,9 @@ Asynchronous image downloader with cache support with an UIImageView category
 
 一个比较完整的图片浏览器。
 
+[octokit.objc](https://github.com/octokit/octokit.objc)
+
+GitHub API client for Objective-C
 
 
 
@@ -96,24 +99,29 @@ email:coderyi@foxmail.com
 
 ##App预览
 
-不分语言的国内程序员排名示例
 
-![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s1.png?imageMogr2/thumbnail/!40p) 
 
-Objective-C的国内程序员排名示例
+Objective-C的世界范围内程序员排名示例
 
-![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s2.png?imageMogr2/thumbnail/!40p) 
+<img  src="https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/images/6p-1.png" width="320" height="570">
 
-Objective-C的世界范围哪程序员排名示例
 
-![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s3.png?imageMogr2/thumbnail/!40p) 
-
-JavaScript的世界范围内仓库排名示例
-
-![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s4.png?imageMogr2/thumbnail/!40p) 
 
 Objective-C的世界范围内仓库排名示例
 
-![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_5s5.png?imageMogr2/thumbnail/!40p) 
+<img  src="https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/images/6p-2.png" width="320" height="570">
+
+程序员详细页面，支持star
+
+<img  src="https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/images/6p-3.png" width="320" height="570">
+
+Objective-C的trending界面
+
+<img  src="https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/images/6p-4.png" width="320" height="570">
+
+我的个人动态界面
+
+<img  src="https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/images/6p-5.png" width="320" height="570">
+
 
 [Knockin' On Heaven's Door-Guns N' Roses-网易云音乐](http://music.163.com/#/song?id=18095057)
