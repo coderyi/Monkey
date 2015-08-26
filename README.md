@@ -112,7 +112,7 @@ Objective-C的世界范围内仓库排名示例
 
 <img  src="https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/images/6p-2.png" width="320" height="570">
 
-程序员详细页面，支持star
+程序员详细页面，支持follow
 
 <img  src="https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/images/6p-3.png" width="320" height="570">
 
