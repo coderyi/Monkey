@@ -165,14 +165,11 @@
     emailBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     emailBt.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     
-    UILabel *line=[[UILabel alloc] initWithFrame:CGRectMake(0, 182, ScreenWidth, 1)];
-    line.backgroundColor=YiBlue;
     [self refreshTitleView];
     
-    UILabel *line1=[[UILabel alloc] initWithFrame:CGRectMake(0, 244-35-40, ScreenWidth, 1)];
-    [titleBg1 addSubview:line1];
+    UILabel *line1=[[UILabel alloc] initWithFrame:CGRectMake(0, 210-40-0.5, ScreenWidth, 0.5)];
+    [titleView addSubview:line1];
     line1.backgroundColor=YiGray;
-    
     segmentControl=[[DetailSegmentControl alloc] initWithFrame:CGRectMake(0, 150+34-35-40, ScreenWidth, 60)];
     [titleView addSubview:segmentControl];
     tableView.tableHeaderView=titleView;
@@ -344,6 +341,8 @@
     [self.navigationController pushViewController:login animated:YES];
     
 }
+
+
 #pragma mark - Private
 
 - (void)refreshTitleView{

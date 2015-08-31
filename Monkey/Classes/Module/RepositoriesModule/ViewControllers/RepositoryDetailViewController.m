@@ -37,6 +37,7 @@
     BOOL isStaring;
     RepositoryDetailDataSource *repositoryDetailDataSource;
     RepositoryDetailViewModel *repositoryDetailViewModel;
+    UILabel *line1;
 }
 
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
@@ -163,6 +164,10 @@
     descLabel.font=[UIFont systemFontOfSize:12];
     descLabel.numberOfLines=0;
     descLabel.lineBreakMode=NSLineBreakByWordWrapping;
+    
+    line1=[[UILabel alloc] init];
+    [titleView addSubview:line1];
+    line1.backgroundColor=YiGray;
     
     segmentControl=[[DetailSegmentControl alloc] initWithFrame:CGRectMake(0, 130+5-30, ScreenWidth, 60)];
     [titleView addSubview:segmentControl];
@@ -353,6 +358,7 @@
     descLabel.frame=CGRectMake(orginX, 130+parentheight-30, (ScreenWidth-2*orginX), descHeight);
     segmentControl.frame=CGRectMake(0, 130+descHeight+5+parentheight-30, ScreenWidth, 60);
     titleView.frame=CGRectMake(0, 0, ScreenWidth, 130+descHeight+5+60+parentheight-30);
+    line1.frame=CGRectMake(0, 130+descHeight+5+60+parentheight-30-0.5, ScreenWidth,0.5 );
     tableView.tableHeaderView=titleView;
     [tableView reloadData];
     
