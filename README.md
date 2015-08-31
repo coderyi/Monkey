@@ -29,7 +29,7 @@ repositories ranking is based on the repositories of stars by high to low rankin
 These data are provided from the GitHub interface,url is https://developer.github.com/v3/
 
 ##GitHub Top Users Repositories
-**[GitHub排名前50的Objective-C开发者(Objective-C top 50 GitHub developers)](https://github.com/coderyi/Monkey/blob/master/github_top_users_repositories/github_top_users_objective-c_world.md)**
+**[Objective-C top 50 GitHub developers](https://github.com/coderyi/Monkey/blob/master/github_top_users_repositories/github_top_users_objective-c_world.md)**
 
 This is the world's top 50 Objective-C programmers, and list the relevant information.
 
