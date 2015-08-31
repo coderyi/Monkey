@@ -85,7 +85,7 @@ GitHub:[https://github.com/coderyi](https://github.com/coderyi)
 
 email:coderyi@foxmail.com
 
-##App预览
+##App Preview
 
 
 
