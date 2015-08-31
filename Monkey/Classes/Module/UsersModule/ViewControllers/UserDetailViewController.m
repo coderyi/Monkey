@@ -21,8 +21,9 @@
 #import "RepositoryDetailViewController.h"
 #import "UserDetailViewModel.h"
 #import "UserDetailDataSource.h"
+#import "LoginViewController.h"
 
-@interface UserDetailViewController ()<UITableViewDelegate>{
+@interface UserDetailViewController ()<UITableViewDelegate,UIAlertViewDelegate>{
     UITableView *tableView;
     YiRefreshHeader *refreshHeader;
     YiRefreshFooter *refreshFooter;
@@ -324,6 +325,14 @@
         
     }  error:^(NSError *error) {
         NSLog(@"e %@",error);
+        NSString *localizedDescription=[error.userInfo objectForKey:@"NSLocalizedDescription"];
+        if ([localizedDescription isEqualToString:@"Sign In Required"] ) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"login message" message:@"please login" delegate:self cancelButtonTitle:@"sure" otherButtonTitles:@"cancel", nil];
+                [alert show];
+            });
+            
+        }
     } completed:^{
         NSLog(@"c");
     }];
@@ -366,7 +375,24 @@
         
     }
 }
-
+- (void)loginAction{
+    
+    
+    
+    
+    LoginViewController *login=[[LoginViewController alloc] init];
+    login.callback=^(NSString *response){
+        if ([response isEqualToString:@"yes"]) {
+            [self checkFollowStatusAction];
+        }else{
+            
+        }
+        
+        
+    };
+    [self.navigationController pushViewController:login animated:YES];
+    
+}
 #pragma mark - Private
 
 - (void)refreshTitleView{
@@ -493,7 +519,12 @@
     
 
 }
-
+#pragma mark - UIAlertDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==0) {
+        [self loginAction];
+    }
+}
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
