@@ -1,55 +1,52 @@
-# Monkey for GitHub(已上架)
+# Monkey for GitHub
 
 ![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_liantuerweima.png?imageMogr2/thumbnail/!60p) 
 
-Monkey是一个GitHub第三方客户端，Monkey取名就是表示我们程序猿的意思。Monkey for GitHub是我的第一个上线App，开源项目，希望多多指教。欢迎使用上面的二维码扫描下载。
+[中文README](https://github.com/coderyi/Monkey/blob/master/README_Chinese.md)
 
- 
+Monkey is a GitHub third party client,Monkey is a program ape. Monkey for GitHub is my first on-line App,open source project.Welcome to download through two-dimensional code.
 
-GitHub开源地址:[https://github.com/coderyi/Monkey](https://github.com/coderyi/Monkey)
+GitHub open source:[https://github.com/coderyi/Monkey](https://github.com/coderyi/Monkey)
 
-App Store地址:[https://itunes.apple.com/cn/app/monkey-for-github/id1003765407](https://itunes.apple.com/cn/app/monkey-for-github/id1003765407)
+App Store:[https://itunes.apple.com/cn/app/monkey-for-github/id1003765407](https://itunes.apple.com/cn/app/monkey-for-github/id1003765407)
 
-Monkey Mac地址:[https://github.com/coderyi/MonkeyForMac](https://github.com/coderyi/MonkeyForMac)
-
+Monkey Mac open source:[https://github.com/coderyi/MonkeyForMac](https://github.com/coderyi/MonkeyForMac)
 
 ##Monkey for GitHub
 
+Monkey is a GitHub third party client,Monkey is a program ape.
 
-Monkey是一个GitHub第三方客户端，Monkey取名就是表示我们程序猿的意思。
+Monkey show the rank of coders and repositories.
 
-Monkey主要是用来展示GitHub上的开发者的排名，以及仓库的排名。
+Login GitHub function,Follow developer and star repository,Support for viewing my GitHub dynamics.
 
-登录GitHub功能，随手follow开发者和star仓库，支持查看我的GitHub动态。
+The discovery module, including GitHub's repositories trending; GitHub dynamics; showcases; search; and other ranking data.
 
-发现模块，包括GitHub仓库的trending；GitHub动态；showcases；搜索；以及其他排名数据
+The developer's ranking is based on the developer's followers from high to low ranking, there is a distinction between different languages and cities.
 
-开发者的排名是根据开发者的followers由高到低进行排名，有区分不同的语言和城市。
+repositories ranking is based on the repositories of stars by high to low ranking, there is a distinction between different languages.
 
-仓库的排名是根据仓库的stars由高到低进行排名的，有区分不同的语言。
-
-这些数据是从GitHub提供的接口来的，地址是https://developer.github.com/v3/
-
+These data are provided from the GitHub interface,url is https://developer.github.com/v3/
 
 ##GitHub Top Users Repositories
 **[GitHub排名前50的Objective-C开发者(Objective-C top 50 GitHub developers)](https://github.com/coderyi/Monkey/blob/master/github_top_users_repositories/github_top_users_objective-c_world.md)**
 
-这是GitHub在世界范围内排名前50的Objective-C程序员，并且列出相关信息，从而可以走近他们的程序世界。
+This is the world's top 50 Objective-C programmers, and list the relevant information.
 
-数据来自GitHub的API以及自己整理的相关内容。
+Data comes from API GitHub and its related content.
 
-这个列表是我做[Monkey for GitHub](https://github.com/coderyi/Monkey)这个开源的GitHub第三方客户端的衍生品，欢迎交流意见。
-##关于开源
-####运行
-支持iOS7.0+，支持iPhone的各个尺寸，支持竖屏；目前我使用的是Xcode6.3
+
+##About Open Source
+
+####Requirements
+iOS7.0+,iPhone,Xcode6.3
 
 ####Monkey API
-我整理Monkey for GitHub的所有API，并做了一些说明和示例，希望能够帮助到您。
 
-地址是：https://github.com/coderyi/Monkey/blob/master/Monkey_API.md
+url : https://github.com/coderyi/Monkey/blob/master/Monkey_API.md
 
+####Open Source Components
 
-####项目中使用的开源组件
 
 [YiRefresh](https://github.com/coderyi/YiRefresh)
 
@@ -66,7 +63,7 @@ Asynchronous image downloader with cache support with an UIImageView category
 
 [MJPhotoBrowser](http://code4app.com/ios/%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90%E5%9B%BE%E7%89%87%E6%B5%8F%E8%A7%88%E5%99%A8/525e06116803fa7b0a000001)
 
-一个比较完整的图片浏览器。
+A relatively complete picture browser.
 
 [octokit.objc](https://github.com/octokit/octokit.objc)
 
@@ -74,55 +71,47 @@ GitHub API client for Objective-C
 
 
 
-另外项目中使用了友盟的相关服务。
-
-
 ##LICENSE
-此开源项目可以用来做任何事情除了原封不动的分发到App Store。
+MIT license.
 
 copyright (c) 2015 coderyi.all rights reserved.
 
+##Contact
 
 
-
-
-
-
-##联系我
-对于Monkey，你可以随意提交；如果想加入更多的开发，欢迎联系我！
-
-blog:[http://www.coderyi.com/](http://www.coderyi.com/)
+blog:[https://github.com/coderyi/blog](https://github.com/coderyi/blog)
 
 GitHub:[https://github.com/coderyi](https://github.com/coderyi)
 
 email:coderyi@foxmail.com
 
-
 ##App预览
 
 
 
-Objective-C的世界范围内程序员排名示例
+Objective-C World Coders rank
 
 <img  src="https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/images/6p-1.png" width="320" height="570">
 
 
 
-Objective-C的世界范围内仓库排名示例
+Objective-C World Repositories rank
 
 <img  src="https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/images/6p-2.png" width="320" height="570">
 
-程序员详细页面，支持follow
+Coder Detail,Support Follow
 
 <img  src="https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/images/6p-3.png" width="320" height="570">
 
-Objective-C的trending界面
+Objective-C Trending
 
 <img  src="https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/images/6p-4.png" width="320" height="570">
 
-我的个人动态界面
+My GitHub Dynamics
 
 <img  src="https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/images/6p-5.png" width="320" height="570">
 
 
-[Knockin' On Heaven's Door-Guns N' Roses-网易云音乐](http://music.163.com/#/song?id=18095057)
+[Knockin' On Heaven's Door-Guns N' Roses-Netease cloud music](http://music.163.com/#/song?id=18095057)
+
+
