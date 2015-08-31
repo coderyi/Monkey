@@ -10,7 +10,6 @@
 
 @interface WebViewController ()<UIWebViewDelegate>{
     
-    
     UILabel *titleText;
     UIActivityIndicatorView *activityIndicator;
     UIWebView *webView;
@@ -48,20 +47,17 @@
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
     [titleText setFont:[UIFont systemFontOfSize:19.0]];
-    
     titleText.textAlignment=NSTextAlignmentCenter;
     titleText.text=_urlString;
     
     self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets=NO;
     
-    
     webView=[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64)];
     [self.view addSubview:webView];
     webView.delegate=self;
     [webView loadRequest:[[NSURLRequest alloc]initWithURL:[NSURL URLWithString:_urlString]] ];
     
-
     activityIndicator=[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(ScreenWidth-60, 0, 44, 44)];
     [self.navigationController.navigationBar addSubview:activityIndicator];
     activityIndicator.activityIndicatorViewStyle=UIActivityIndicatorViewStyleWhite;
@@ -75,7 +71,6 @@
     closeBt.frame=CGRectMake(0, 0, 30, 30);
     closeBt.titleLabel.font=[UIFont systemFontOfSize:12];
     [closeBt setImage:[UIImage imageNamed:@"ic_cancel_white_48pt"] forState:UIControlStateNormal];
-
     [closeBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [closeBt addTarget:self action:@selector(closeBtAction) forControlEvents:UIControlEventTouchUpInside];
 
@@ -107,17 +102,14 @@
     
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-
     [activityIndicator stopAnimating];
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     [activityIndicator stopAnimating];
 
-
 }
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    
-    
+   
     return YES;
 }
 

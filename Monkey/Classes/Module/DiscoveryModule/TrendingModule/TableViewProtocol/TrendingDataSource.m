@@ -11,16 +11,13 @@
 @implementation TrendingDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView.tag==11) {
-        
-        
+    
         return self.DsOfPageListObject1.dsArray.count;
         
     }else if (tableView.tag==12){
         
-        
         return self.DsOfPageListObject2.dsArray.count;
     }else if (tableView.tag==13){
-        
         
         return self.DsOfPageListObject3.dsArray.count;
     }
@@ -34,7 +31,6 @@
     RepositoriesTableViewCell *cell;
     if (tableView.tag==11) {
         
-        
         NSString *cellId=@"CellId1";
         cell=[tableView dequeueReusableCellWithIdentifier:cellId];
         if (cell==nil) {
@@ -47,17 +43,12 @@
         cell.userLabel.text=[NSString stringWithFormat:@"Owner:%@",model.user.login];
         [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url] placeholderImage:nil];
         cell.descriptionLabel.text=[NSString stringWithFormat:@"%@",model.repositoryDescription];
-        
         [cell.homePageBt setTitle:model.homepage forState:UIControlStateNormal];
-
         cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
         cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
         return cell;
         
-        
-        
     }else if (tableView.tag==12){
-        
         
         NSString *cellId=@"CellId2";
         cell=[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -71,9 +62,7 @@
         cell.userLabel.text=[NSString stringWithFormat:@"Owner:%@",model.user.login];
         [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url] placeholderImage:nil];
         cell.descriptionLabel.text=[NSString stringWithFormat:@"%@",model.repositoryDescription];
-        
         [cell.homePageBt setTitle:model.homepage forState:UIControlStateNormal];
-
         cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
         cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
         return cell;
@@ -92,16 +81,13 @@
         cell.userLabel.text=[NSString stringWithFormat:@"Owner:%@",model.user.login];
         [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url] placeholderImage:nil];
         cell.descriptionLabel.text=[NSString stringWithFormat:@"%@",model.repositoryDescription];
-        
         [cell.homePageBt setTitle:model.homepage forState:UIControlStateNormal];
-
         cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
         cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
         return cell;
         
     }
     return cell;
-    
     
 }
 

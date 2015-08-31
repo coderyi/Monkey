@@ -23,7 +23,6 @@
         
         return self.DsOfPageListObject3.dsArray.count;
         
-        
     }
     
     return 1;
@@ -32,7 +31,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (currentIndex==1) {
-        
         
         RankTableViewCell *cell;
         
@@ -44,7 +42,6 @@
         }
         UserModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
         cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-        
         cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
         cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
         [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
@@ -52,7 +49,6 @@
     }else if (currentIndex==2){
         
         RankTableViewCell *cell;
-        
         NSString *cellId=@"CellId1";
         cell=[tableView dequeueReusableCellWithIdentifier:cellId];
         if (cell==nil) {
@@ -82,7 +78,6 @@
         return cell;
     }
     return nil;
-    
     
 }
 

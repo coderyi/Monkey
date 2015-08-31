@@ -23,8 +23,6 @@
     model.url = [dict objectForKey:@"url"] ;
     model.avatar_url = [dict objectForKey:@"avatar_url"] ;
 
-    
-    
     return model;
 }
 @end

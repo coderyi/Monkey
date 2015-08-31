@@ -45,17 +45,15 @@
     
     tableView1.dataSource=self;
     tableView1.delegate=self;
-
     
     if (pinyinCitys.count>0) {
-        ;
+    
         if (![pinyinCitys[0] isEqualToString:@"beijing"]) {
             
             citys=pinyinCitys;
         }else{
 
-            NSLocalizedString(@"key", @"");
-        citys=@[NSLocalizedString(@"beijing", @""),NSLocalizedString(@"shanghai", @""),NSLocalizedString(@"shenzhen", @""),
+            citys=@[NSLocalizedString(@"beijing", @""),NSLocalizedString(@"shanghai", @""),NSLocalizedString(@"shenzhen", @""),
                 NSLocalizedString(@"hangzhou", @""),NSLocalizedString(@"guangzhou", @""),NSLocalizedString(@"chengdu", @""),
                 NSLocalizedString(@"nanjing", @""),NSLocalizedString(@"wuhan", @""),NSLocalizedString(@"suzhou", @""),
                 NSLocalizedString(@"xiamen", @""),NSLocalizedString(@"tianjin", @""),NSLocalizedString(@"chongqing", @""),
@@ -73,11 +71,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
    
         return citys.count;
-   
-    
+
 }
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
         UITableViewCell *cell;
@@ -89,20 +84,15 @@
         }
         cell.textLabel.text=(citys)[indexPath.row];
         return cell;
-        
-
-    
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"cityAppear"];
     [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"countryAppear"];
-
     [[NSUserDefaults standardUserDefaults] setObject:pinyinCitys[indexPath.row] forKey:@"pinyinCity"];
     [[NSUserDefaults standardUserDefaults] setObject:citys[indexPath.row] forKey:@"city"];
     [self.navigationController popToRootViewControllerAnimated:YES];
     
-
 }
 
 

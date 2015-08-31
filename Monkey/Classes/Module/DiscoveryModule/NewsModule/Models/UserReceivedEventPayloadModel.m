@@ -20,22 +20,14 @@
     
     model.action = [dict objectForKey:@"action"] ;
     model.ref = [dict objectForKey:@"ref"] ;
-
     model.ref_type = [dict objectForKey:@"ref_type"] ;
-
     model.master_branch = [dict objectForKey:@"master_branch"] ;
-
     model.payloadDescription = [dict objectForKey:@"description"] ;
-
     model.pusher_type = [dict objectForKey:@"pusher_type"] ;
 
-   
     NSDictionary *forkee=[dict objectForKey:@"forkee"];
-    
     model.forkee=[RepositoryModel modelWithDict:forkee];
 
-    
-    
     return model;
 }
 

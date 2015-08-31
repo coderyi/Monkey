@@ -44,7 +44,6 @@
     tableView1.dataSource=self;
     tableView1.delegate=self;
     
-  
     countrys=@[@"USA",@"UK",@"Germany",@"China",@"Canada",@"India",@"France",@"Australia",@"Other"];
 }
 - (void)didReceiveMemoryWarning {
@@ -57,7 +56,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return countrys.count;
-    
     
 }
 
@@ -75,12 +73,8 @@
     cell.textLabel.text=(countrys)[indexPath.row];
     return cell;
     
-    
-    
-    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
 
     if (indexPath.row!=countrys.count-1) {
         [[NSUserDefaults standardUserDefaults] setObject:countrys[indexPath.row] forKey:@"country"];
@@ -97,7 +91,7 @@
         
     }else if (indexPath.row==1){
         //        uk
-    cityArray= @[@"London",@"Cambridge",@"Manchester",@"Edinburgh",@"Bristol",@"Birmingham",@"Glasgow",@"Oxford",@"Newcastle",@"Leeds"];
+        cityArray= @[@"London",@"Cambridge",@"Manchester",@"Edinburgh",@"Bristol",@"Birmingham",@"Glasgow",@"Oxford",@"Newcastle",@"Leeds"];
     }else if (indexPath.row==2){
         //germany
         cityArray= @[@"Berlin",@"Munich",@"Hamburg",@"Cologne",@"Stuttgart",@"Dresden",@"Leipzig"];
@@ -126,7 +120,5 @@
     [self.navigationController pushViewController:viewController animated:YES];
     
 }
-
-
 
 @end

@@ -14,13 +14,9 @@
     UITableView *tableView;
     YiRefreshHeader *refreshHeader;
     YiRefreshFooter *refreshFooter;
-  
-    
 }
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject;
 @property (strong, nonatomic) MKNetworkOperation *apiOperation;
-
-
 @end
 
 @implementation ShowcasesViewController
@@ -52,22 +48,14 @@
         
     }
     self.automaticallyAdjustsScrollViewInsets=NO;
-
     tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain ];
     [self.view addSubview:tableView];
-
-   
     tableView.dataSource=self;
     tableView.delegate=self;
-   
-    
-    
     [self addHeader];
     [self addFooter];
-    
-    
+  
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -81,13 +69,10 @@
     refreshHeader=[[YiRefreshHeader alloc] init];
     refreshHeader.scrollView=tableView;
     [refreshHeader header];
-    
-    
     WEAKSELF
     refreshHeader.beginRefreshingBlock=^(){
         STRONGSELF
         [strongSelf loadDataFromApiWithIsFirst:YES];
-        
     };
     
     //    是否在进入该界面的时候就开始进入刷新状态
@@ -100,13 +85,10 @@
     refreshFooter=[[YiRefreshFooter alloc] init];
     refreshFooter.scrollView=tableView;
     [refreshFooter footer];
-    
-    
     WEAKSELF
     refreshFooter.beginRefreshingBlock=^(){
         STRONGSELF
         [strongSelf loadDataFromApiWithIsFirst:NO];
-        
     };
 }
 
@@ -129,41 +111,26 @@
         if (page<=1) {
             [self.DsOfPageListObject.dsArray removeAllObjects];
         }
-        
-        
-        
         [self.DsOfPageListObject.dsArray addObjectsFromArray:modelArray];
         self.DsOfPageListObject.page=page;
         [tableView reloadData];
         
         if (!isFirst) {
-            
             [refreshFooter endRefreshing];
-            
-            
         }else
         {
             [refreshHeader endRefreshing];
         }
         
     }
-errorHandel:^(NSError* error){
-    if (isFirst) {
-        
-        [refreshHeader endRefreshing];
-        
-        
-        
-        
-    }else{
-        [refreshFooter endRefreshing];
-        
-    }
+                                      errorHandel:^(NSError* error){
+                                          if (isFirst) {
+                                              [refreshHeader endRefreshing];
+                                          }else{
+                                              [refreshFooter endRefreshing];
+                                          }
     
-}];
-    
-    
-    
+                                      }];
     
     return YES;
     
@@ -185,15 +152,12 @@ errorHandel:^(NSError* error){
 }
 
 
-
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.DsOfPageListObject.dsArray.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     
     NSString *CellId = @"autoCell";
     ShowcasesTableViewCell *cell = [tableView1 dequeueReusableCellWithIdentifier:CellId];
@@ -209,28 +173,19 @@ errorHandel:^(NSError* error){
     CGFloat preMaxWaith =[UIScreen mainScreen].bounds.size.width-108;
     [cell.descriptionLabel setPreferredMaxLayoutWidth:preMaxWaith];
     [cell.descriptionLabel layoutIfNeeded];
-    
-    
     [cell.descriptionLabel setText:nil];
     [cell.logoImageView sd_setImageWithURL:[NSURL URLWithString:model.image_url]];
-    
     [cell.descriptionLabel setText:model.showcasesDescription];
     
     return cell;
-    
-    
+ 
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ShowcasesDetailViewController *detail=[[ShowcasesDetailViewController alloc] init];
     ShowcasesModel  *model = [(self.DsOfPageListObject.dsArray) objectAtIndex:indexPath.row];
-    
     detail.model=model;
     [self.navigationController pushViewController:detail animated:YES];
-    
-    
+  
 }
-
-
-
 
 @end

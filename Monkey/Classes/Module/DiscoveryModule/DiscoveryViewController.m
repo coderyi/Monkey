@@ -37,7 +37,6 @@
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
     [titleText setFont:[UIFont systemFontOfSize:19.0]];
-    
     titleText.textAlignment=NSTextAlignmentCenter;
     self.navigationItem.titleView=titleText;
     titleText.text=NSLocalizedString(@"Discovery", @"");
@@ -47,7 +46,6 @@
     [self.view addSubview:tableView];
     tableView.delegate=self;
     tableView.dataSource=self;
-    
     
 }
 
@@ -61,19 +59,12 @@
 #pragma mark - Actions
 - (void)loginAction{
     
-    
-  
-    
     LoginViewController *login=[[LoginViewController alloc] init];
     login.callback=^(NSString *response){
         if ([response isEqualToString:@"yes"]) {
             currentLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
-            
             [tableView reloadData];
-        }else{
-            
         }
-        
         
     };
     [self.navigationController pushViewController:login animated:YES];
@@ -86,13 +77,9 @@
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    
     return 6;
-    
-    
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
     return 1;
 }
 
@@ -110,22 +97,18 @@
     }
     if (indexPath.section==0) {
         
-            cell.textLabel.text=@"trending";
-        
+        cell.textLabel.text=@"trending";
         
     }else if (indexPath.section==1){
         cell.textLabel.text=@"showcases";
-        
         
     }else if (indexPath.section==2){
         
         cell.textLabel.text=NSLocalizedString(@"News", @"");
         
-        
     }else if (indexPath.section==3){
         cell.textLabel.text=NSLocalizedString(@"search", @"");
     }else if (indexPath.section==4){
-        
         
         cell.textLabel.text=@"githubranking";
         
@@ -155,14 +138,11 @@
             [self loginAction];
         }
         
-        
-        
     }else if (indexPath.section==3){
         
         SearchViewController *viewController=[[SearchViewController alloc] init];
         
         [self.navigationController pushViewController:viewController animated:YES];
-        
         
     }else if (indexPath.section==4){
         
@@ -176,10 +156,6 @@
         
         [self.navigationController pushViewController:viewController animated:YES];
     }
-    
-    
-    
-    
     
 }
 @end

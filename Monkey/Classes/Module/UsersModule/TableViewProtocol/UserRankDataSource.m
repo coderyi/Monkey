@@ -13,17 +13,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView.tag==11) {
-        
-        
+
         return self.DsOfPageListObject1.dsArray.count;
         
     }else if (tableView.tag==12){
-        
-        
+
         return self.DsOfPageListObject2.dsArray.count;
     }else if (tableView.tag==13){
-        
-        
+
         return self.DsOfPageListObject3.dsArray.count;
     }
     

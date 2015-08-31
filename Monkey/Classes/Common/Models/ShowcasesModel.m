@@ -23,8 +23,6 @@
     model.showcasesDescription = [dict objectForKey:@"description"] ;
     model.image_url = [dict objectForKey:@"image_url"] ;
   
-    
-    
     return model;
 }
 

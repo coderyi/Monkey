@@ -39,7 +39,6 @@
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
     [titleText setFont:[UIFont systemFontOfSize:19.0]];
-    
     titleText.textAlignment=NSTextAlignmentCenter;
     self.navigationItem.titleView=titleText;
     titleText.text=@"More";
@@ -51,8 +50,7 @@
     
     self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets=NO;
-    
-    
+   
     tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64-49) style:UITableViewStyleGrouped ];
     [self.view addSubview:tableView];
     tableView.delegate=self;
@@ -67,30 +65,23 @@
 
 #pragma mark - loginmodule
 
-
 /**
  *  https://developer.github.com/v3/oauth/#redirect-users-to-request-github-access
  */
 - (void)loginAction{
 
-    
-
-    
     LoginViewController *login=[[LoginViewController alloc] init];
     login.callback=^(NSString *response){
         if ([response isEqualToString:@"yes"]) {
             currentLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
             currentAvatarUrl=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentAvatarUrl"];
-            
             [tableView reloadData];
-        }else{
-        
         }
-        
         
     };
     [self.navigationController pushViewController:login animated:YES];
-    }
+    
+}
 
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
@@ -100,7 +91,6 @@
         return 4;
     }
     return 3;
-    
 
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -131,10 +121,9 @@
         }
         
     }else if (indexPath.section==1){
-        
+    
         cell.textLabel.text=NSLocalizedString(@"about", @"");;
 
-        
     }else if (indexPath.section==2){
         cell.textLabel.text=NSLocalizedString(@"feedback", @"");;
     }
@@ -148,11 +137,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==0) {
-//        LoginViewController *login=[[LoginViewController alloc] init];
-//        [self.navigationController pushViewController:login animated:YES];
         if (currentLogin) {
             UserDetailViewController *detail=[[UserDetailViewController alloc] init];
-            
             
             UserModel *model=[[UserModel alloc] init];
             model.login=currentLogin;
@@ -168,18 +154,12 @@
         
         [self.navigationController pushViewController:about animated:YES];
 
-        
-        
-          
-        
     }else if (indexPath.section==2){
-        
         
         [self presentModalViewController:[UMFeedback feedbackModalViewController]
                                 animated:YES];
 
     }
-    
     
     if (currentLogin) {
         if (indexPath.section==3){
@@ -188,8 +168,7 @@
             
         }
     }
-    
-    
+ 
 }
 
 #pragma mark - UIAlertViewDelegate
@@ -204,14 +183,6 @@
         [tableView reloadData];
     }
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

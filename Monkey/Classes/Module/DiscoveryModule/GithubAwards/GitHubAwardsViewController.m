@@ -35,17 +35,14 @@
     
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-        
     }
     self.title=@"github-awards";
     self.automaticallyAdjustsScrollViewInsets=NO;
     self.view.backgroundColor=[UIColor whiteColor];
     tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStyleGrouped];
     [self.view addSubview:tableView1];
-    
     tableView1.dataSource=self;
     tableView1.delegate=self;
-    
     
     rankCategorys=@[@"users ranking world",@"users ranking country",@"users ranking city"];
     
@@ -93,7 +90,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell;
-    
     NSString *cellId=@"CellId1";
     cell=[tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell==nil) {
@@ -101,15 +97,11 @@
     }
     cell.textLabel.text=(rankCategorys)[indexPath.section];
     return cell;
-    
-    
-    
-    
+  
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     WebViewController *viewController=[[WebViewController alloc] init];
-    
     NSArray *webViewRankCategorys=@[@"world",@"country",@"city"];
     viewController.urlString=[NSString stringWithFormat:@"http://github-awards.com/users?type=%@",webViewRankCategorys[indexPath.section]];
     [self.navigationController pushViewController:viewController animated:YES];

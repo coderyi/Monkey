@@ -37,7 +37,6 @@ UIFont *lightFont;
 
         }
         
-       
         _button1=[UIButton buttonWithType:UIButtonTypeCustom];
         [self addSubview:_button1];
         _button1.frame=CGRectMake(space, (h-height)/2, width, height);
@@ -48,7 +47,6 @@ UIFont *lightFont;
         _button1.tag=101;
         [_button1 addTarget:self action:@selector(btAction:) forControlEvents:UIControlEventTouchUpInside];
         
-        
         _button2=[UIButton buttonWithType:UIButtonTypeCustom];
         [self addSubview:_button2];
         _button2.frame=CGRectMake(w+space, (h-height)/2, width, height);
@@ -57,7 +55,6 @@ UIFont *lightFont;
         [_button2 setTitleColor:black forState:UIControlStateNormal];
         _button2.tag=102;
         [_button2 addTarget:self action:@selector(btAction:) forControlEvents:UIControlEventTouchUpInside];
-        
         
         _button3=[UIButton buttonWithType:UIButtonTypeCustom];
         [self addSubview:_button3];
@@ -77,11 +74,6 @@ UIFont *lightFont;
         _button4.tag=104;
         [_button4 addTarget:self action:@selector(btAction:) forControlEvents:UIControlEventTouchUpInside];
         
-      
-
-//        [_button2 setBackgroundColor:[UIColor yellowColor]];
-//        [_button1 setBackgroundColor:[UIColor yellowColor]];
-//        [_button3 setBackgroundColor:[UIColor yellowColor]];
         [_button4 setBackgroundColor:YiBlue];
         [_button4 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
@@ -97,16 +89,14 @@ UIFont *lightFont;
     UIColor *black=[UIColor blackColor];
     switch (tag) {
         case 101:
-                        currentTag=101;
+            currentTag=101;
             [_button1 setTitleColor:light forState:UIControlStateNormal];
             [_button2 setTitleColor:black forState:UIControlStateNormal];
             [_button3 setTitleColor:black forState:UIControlStateNormal];
-//            [_button4 setTitleColor:black forState:UIControlStateNormal];
             
             _button1.titleLabel.font = lightFont;
             _button2.titleLabel.font = normalFont;
             _button3.titleLabel.font = normalFont;
-//            _button4.titleLabel.font = normalFont;
             break;
         case 102:
          
@@ -114,13 +104,10 @@ UIFont *lightFont;
             [_button1 setTitleColor:black forState:UIControlStateNormal];
             [_button2 setTitleColor:light forState:UIControlStateNormal];
             [_button3 setTitleColor:black forState:UIControlStateNormal];
-//            [_button4 setTitleColor:black forState:UIControlStateNormal];
             
             _button1.titleLabel.font = normalFont;
             _button2.titleLabel.font = lightFont;
             _button3.titleLabel.font = normalFont;
-//            _button4.titleLabel.font = normalFont;
-            
             
             break;
         case 103:
@@ -131,13 +118,10 @@ UIFont *lightFont;
             [_button1 setTitleColor:black forState:UIControlStateNormal];
             [_button2 setTitleColor:black forState:UIControlStateNormal];
             [_button3 setTitleColor:light forState:UIControlStateNormal];
-//            [_button4 setTitleColor:black forState:UIControlStateNormal];
             
             _button1.titleLabel.font = normalFont;
             _button2.titleLabel.font = normalFont;
             _button3.titleLabel.font = lightFont;
-//            _button4.titleLabel.font = normalFont;
-            
             
             break;
         case 104:
@@ -148,12 +132,10 @@ UIFont *lightFont;
             [_button1 setTitleColor:black forState:UIControlStateNormal];
             [_button2 setTitleColor:black forState:UIControlStateNormal];
             [_button3 setTitleColor:black forState:UIControlStateNormal];
-//            [_button4 setTitleColor:light forState:UIControlStateNormal];
             
             _button1.titleLabel.font = normalFont;
             _button2.titleLabel.font = normalFont;
             _button3.titleLabel.font = normalFont;
-//            _button4.titleLabel.font = lightFont;
             break;
         default:
             break;

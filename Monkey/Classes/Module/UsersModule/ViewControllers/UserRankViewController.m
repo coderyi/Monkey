@@ -16,7 +16,7 @@
 #import "CountryViewController.h"
 #import "UserRankDataSource.h"
 #import "UserRankViewModel.h"
-@interface UserRankViewController ()<UITableViewDataSource,UITableViewDelegate>{
+@interface UserRankViewController ()<UITableViewDelegate>{
     UIScrollView *scrollView;
     int currentIndex;
     UITableView *tableView1;
@@ -101,42 +101,29 @@
         }else{
             segmentControl.buttonCount=3;
             segmentControl.button3.hidden=NO;
-
-
         }
-        
         
         if (currentIndex==1) {
             [refreshHeader1 beginRefreshing];
-          
-
         }else if (currentIndex==2){
             [refreshHeader2 beginRefreshing];
-
         }else if (currentIndex==3){
             if ([language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
                 currentIndex=2;
                 [segmentControl swipeAction:102];
-                 [refreshHeader2 beginRefreshing];
+                [refreshHeader2 beginRefreshing];
             }else{
                 [refreshHeader3 beginRefreshing];
-
             }
-         
-            
-            
         }
-       
         titleText.text=language;
     }
     if ([language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
         [scrollView setContentSize:CGSizeMake(ScreenWidth * (2), bgViewHeight)];
     }else{
         [scrollView setContentSize:CGSizeMake(ScreenWidth * (3), bgViewHeight)];
-        
     }
 
-    
 }
 
 
@@ -145,7 +132,6 @@
     // Do any additional setup after loading the view.
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-        
     }
     
     userRankViewModel=[[UserRankViewModel alloc] init];
@@ -153,23 +139,16 @@
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
     [titleText setFont:[UIFont systemFontOfSize:19.0]];
-    
     titleText.textAlignment=NSTextAlignmentCenter;
     self.navigationItem.titleView=titleText;
 
-    
-    
     language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
     if (language==nil || language.length<1) {
         language=NSLocalizedString(@"all languages", @"");
-        
     }
     tableView1Language=language;
     tableView2Language=language;
-
     tableView3Language=language;
-
-    
     titleText.text=language;
     self.view.backgroundColor=[UIColor whiteColor];
     titleHeight=35;
@@ -177,9 +156,6 @@
     [self initScroll];
     self.automaticallyAdjustsScrollViewInsets=NO;
   
-    
-    
-    
     segmentControl=[[HeaderSegmentControl alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, titleHeight)];
     [self.view addSubview:segmentControl];
     if ([language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
@@ -188,11 +164,8 @@
     }else{
         segmentControl.buttonCount=3;
         segmentControl.button3.hidden=NO;
-        
-        
     }
 
-    
     currentIndex=1;
     NSString *city=[[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
     if (city==nil || city.length<1) {
@@ -226,10 +199,7 @@
     LanguageViewController *viewController=[[LanguageViewController alloc] init];
     viewController.languageEntranceType=UserLanguageEntranceType;
     [self.navigationController pushViewController:viewController animated:YES];
-    
-    
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -239,7 +209,6 @@
 #pragma mark - Private
 
 - (void)initScroll{
-    
     
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, titleHeight, ScreenWidth, bgViewHeight)];
     scrollView.alwaysBounceHorizontal=YES;
@@ -259,12 +228,10 @@
         [scrollView setContentSize:CGSizeMake(ScreenWidth * (2), bgViewHeight)];
     }else{
         [scrollView setContentSize:CGSizeMake(ScreenWidth * (3), bgViewHeight)];
-        
     }
 }
 
 - (void)initTable{
-    
     
     tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
     [scrollView addSubview:tableView1];
@@ -288,8 +255,6 @@
                 [refreshHeader1 beginRefreshing];
             }
             if (self.DsOfPageListObject1.totalCount>0) {
-                
-           
               [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject1.totalCount] forState:UIControlStateNormal];
             }
         }else if (currentIndex==2){
@@ -297,7 +262,6 @@
                 tableView2=[[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
                 [scrollView addSubview:tableView2];
                 tableView2.showsVerticalScrollIndicator = NO;
-                
                 tableView2.tag=12;
                 tableView2.dataSource=userRankDataSource;
                 tableView2.delegate=self;
@@ -305,8 +269,6 @@
                 tableView2.rowHeight=RankTableViewCellHeight;
                 [self addHeader:2];
                 [self addFooter:2];
-
-                
             }
             if (![titleText.text isEqualToString:tableView2Language]) {
                 [refreshHeader2 beginRefreshing];
@@ -316,7 +278,7 @@
                 [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject2.totalCount] forState:UIControlStateNormal];
             }
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"countryAppear"] isEqualToString:@"2"]) {
-                 [refreshHeader2 beginRefreshing];
+                [refreshHeader2 beginRefreshing];
                 [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"countryAppear"];
             }
           
@@ -334,28 +296,24 @@
                 [self addHeader:3];
                 [self addFooter:3];
 
-                
             }
             if (![titleText.text isEqualToString:tableView3Language]) {
                 [refreshHeader3 beginRefreshing];
-            }   if (self.DsOfPageListObject3.totalCount>0) {
+            }
+            if (self.DsOfPageListObject3.totalCount>0) {
                 [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject3.totalCount] forState:UIControlStateNormal];
             }
         }else if (currentIndex==4){
             
         }
     };
-    
     currentIndex=1;
-    
-    
 }
 
 - (void)addHeader:(int)type
 {
     if (type==1) {
-        
-        
+
         //    YiRefreshHeader  头部刷新按钮的使用
         refreshHeader1=[[YiRefreshHeader alloc] init];
         refreshHeader1.scrollView=tableView1;
@@ -363,9 +321,6 @@
         __weak typeof(self) weakSelf = self;
         refreshHeader1.beginRefreshingBlock=^(){
             [weakSelf loadDataFromApiWithIsFirst:YES];
-            
-            
-            
         };
         
         //    是否在进入该界面的时候就开始进入刷新状态
@@ -379,9 +334,6 @@
         __weak typeof(self) weakSelf = self;
         refreshHeader2.beginRefreshingBlock=^(){
             [weakSelf loadDataFromApiWithIsFirst:YES];
-            
-            
-            
         };
         
         //    是否在进入该界面的时候就开始进入刷新状态
@@ -396,9 +348,6 @@
         __weak typeof(self) weakSelf = self;
         refreshHeader3.beginRefreshingBlock=^(){
             [weakSelf loadDataFromApiWithIsFirst:YES];
-            
-            
-            
         };
         
         //    是否在进入该界面的时候就开始进入刷新状态
@@ -412,14 +361,12 @@
 {
     __weak typeof(self) weakSelf = self;
     if (type==1) {
-        
-        
+
         //    YiRefreshFooter  底部刷新按钮的使用
         refreshFooter1=[[YiRefreshFooter alloc] init];
         refreshFooter1.scrollView=tableView1;
         [refreshFooter1 footer];
         refreshFooter1.beginRefreshingBlock=^(){
-            
             [weakSelf loadDataFromApiWithIsFirst:NO];
         };
     }else if (type==2){
@@ -429,7 +376,6 @@
             refreshFooter2.scrollView=tableView2;
             [refreshFooter2 footer];
             refreshFooter2.beginRefreshingBlock=^(){
-                
                 [weakSelf loadDataFromApiWithIsFirst:NO];
             };
             
@@ -440,10 +386,8 @@
             refreshFooter3.scrollView=tableView3;
             [refreshFooter3 footer];
             refreshFooter3.beginRefreshingBlock=^(){
-                
                 [weakSelf loadDataFromApiWithIsFirst:NO];
             };
-            
     }
 }
 
@@ -466,10 +410,7 @@
                     [tableView1 reloadData];
         
                     if (!isFirst) {
-        
                         [refreshFooter1 endRefreshing];
-        
-        
                     }else
                     {
                         [refreshHeader1 endRefreshing];
@@ -481,10 +422,7 @@
                     [tableView2 reloadData];
         
                     if (!isFirst) {
-        
                         [refreshFooter2 endRefreshing];
-        
-        
                     }else
                     {
                         [refreshHeader2 endRefreshing];
@@ -494,19 +432,14 @@
 
                     [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",DsOfPageListObject.totalCount] forState:UIControlStateNormal];
                     [tableView3 reloadData];
-        
                     if (!isFirst) {
-        
                         [refreshFooter3 endRefreshing];
-        
         
                     }else
                     {
                         [refreshHeader3 endRefreshing];
-                    }    }];
-
-    
-    
+                    }
+    }];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -514,23 +447,19 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView1
 {
     if (segmentControl.buttonCount==2) {
-        
     
-    CGFloat pagewidth = scrollView.frame.size.width;
-    int currentPage = floor((scrollView.contentOffset.x - pagewidth/ (2)) / pagewidth) + 1;
+        CGFloat pagewidth = scrollView.frame.size.width;
+        int currentPage = floor((scrollView.contentOffset.x - pagewidth/ (2)) / pagewidth) + 1;
     
-    if (currentPage==0)
-    {
+        if (currentPage==0){
         
-        [scrollView scrollRectToVisible:CGRectMake(0,0,ScreenWidth,bgViewHeight) animated:NO];
-        [scrollView setContentOffset:CGPointMake(0,0)];
-    }
-    else if (currentPage>=(1))
-    {
-        currentPage=1;
-        [scrollView scrollRectToVisible:CGRectMake(ScreenWidth * 1,0,ScreenWidth,bgViewHeight) animated:NO];
-        [scrollView setContentOffset:CGPointMake(ScreenWidth* 1,0)];
-    }
+            [scrollView scrollRectToVisible:CGRectMake(0,0,ScreenWidth,bgViewHeight) animated:NO];
+            [scrollView setContentOffset:CGPointMake(0,0)];
+        }else if (currentPage>=(1)){
+            currentPage=1;
+            [scrollView scrollRectToVisible:CGRectMake(ScreenWidth * 1,0,ScreenWidth,bgViewHeight) animated:NO];
+            [scrollView setContentOffset:CGPointMake(ScreenWidth* 1,0)];
+        }
     
         currentIndex=currentPage+1;
         [segmentControl swipeAction:(100+currentPage+1)];
@@ -540,23 +469,18 @@
             CGFloat pagewidth = scrollView.frame.size.width;
             int currentPage = floor((scrollView.contentOffset.x - pagewidth/ (3)) / pagewidth) + 1;
             
-            if (currentPage==0)
-            {
+            if (currentPage==0){
                 
                 [scrollView scrollRectToVisible:CGRectMake(0,0,ScreenWidth,bgViewHeight) animated:NO];
                 [scrollView setContentOffset:CGPointMake(0,0)];
-            }
-            else if (currentPage>=(2))
-            {
+            }else if (currentPage>=(2)){
                 currentPage=2;
                 [scrollView scrollRectToVisible:CGRectMake(ScreenWidth * 2,0,ScreenWidth,bgViewHeight) animated:NO];
                 [scrollView setContentOffset:CGPointMake(ScreenWidth* 2,0)];
             }
-            
             currentIndex=currentPage+1;
             [segmentControl swipeAction:(100+currentPage+1)];
         }
-    
 }
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
@@ -565,23 +489,15 @@
     UserDetailViewController *detail=[[UserDetailViewController alloc] init];
     if (currentIndex==1) {
         UserModel  *model = [(userRankDataSource.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
-
         detail.userModel=model;
     }else  if (currentIndex==2) {
         UserModel  *model = [(userRankDataSource.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
-
         detail.userModel=model;
-
-      
     }else if (currentIndex==3){
         UserModel  *model = [(userRankDataSource.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
-
         detail.userModel=model;
-
     }
     [self.navigationController pushViewController:detail animated:YES];
-    
-
 }
 
 

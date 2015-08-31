@@ -57,8 +57,6 @@
 {
     // Override point for customization after application launch.
     
-
-    
     UserRankViewController *languageRank=[[UserRankViewController alloc] init];
     BaseNavigationController *navLanguageRank=[self initlizerNavigationControllerWithRootViewController:languageRank];
     navLanguageRank.navigationBar.barTintColor=YiBlue;
@@ -77,7 +75,6 @@
     navDiscovery.navigationBar.tintColor=[UIColor whiteColor];
     navDiscovery.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
     
-    
     MoreViewController *more=[[MoreViewController alloc] init];
     BaseNavigationController *navMore = [self initlizerNavigationControllerWithRootViewController:more];
     navMore.navigationBar.barTintColor=YiBlue;
@@ -89,7 +86,6 @@
     UITabBar *tabBar = tab.tabBar;
     tab.tabBar.backgroundColor=[UIColor whiteColor];
     tab.tabBar.tintColor=YiBlue;
-    
     
     UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
     UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
@@ -110,7 +106,6 @@
     self.window.rootViewController=tab;
     self.apiEngine = [[YiNetworkEngine alloc] initWithDefaultSet];
     
-    
     [MobClick startWithAppkey:@"551ff351fd98c56f12000013"];
     
     [MobClick checkUpdate];
@@ -118,12 +113,9 @@
     
     [UMOpus setAudioEnable:YES];
     
-    
-    
     //    下面的代码是友盟推送 需要证书
     
     [UMessage startWithAppkey:@"551ff351fd98c56f12000013" launchOptions:launchOptions];
-    
     
     if (IOS_8_OR_LATER) {
         //register remoteNotification types
@@ -161,11 +153,6 @@
     [[UMFeedback sharedInstance] setFeedbackViewController:nil shouldPush:NO];
     //    上面的代码是友盟推送 需要证书
     
-    
-    
-    
-    
-   
     return YES;
 }
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -180,7 +167,6 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    //    [UMessage didReceiveRemoteNotification:userInfo];
     [UMFeedback didReceiveRemoteNotification:userInfo];
 }
 

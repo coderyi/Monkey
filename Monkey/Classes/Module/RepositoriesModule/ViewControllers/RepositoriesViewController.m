@@ -51,30 +51,23 @@
             
         }
     
-        
-      
         [refreshHeader beginRefreshing];
-            
-            
+        
         titleText.text=language;
     }
   
-    
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-        
     }
     titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
     [titleText setFont:[UIFont systemFontOfSize:19.0]];
-    
     titleText.textAlignment=NSTextAlignmentCenter;
     self.navigationItem.titleView=titleText;
     language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language1"];
@@ -82,11 +75,6 @@
         language=@"JavaScript";
         
     }
-    
-    
-    
-    
-    
     titleText.text=language;
     
     self.view.backgroundColor=[UIColor whiteColor];
@@ -116,7 +104,6 @@
     viewController.languageEntranceType=RepLanguageEntranceType;
     [self.navigationController pushViewController:viewController animated:YES];
     
-    
 }
 
 #pragma mark - Private
@@ -127,14 +114,13 @@
     refreshHeader.scrollView=tableView;
     [refreshHeader header];
 
-    
     WEAKSELF
     refreshHeader.beginRefreshingBlock=^(){
         STRONGSELF
         [strongSelf loadDataFromApiWithIsFirst:YES];
 
     };
-    
+
     //    是否在进入该界面的时候就开始进入刷新状态
     
     [refreshHeader beginRefreshing];
@@ -146,19 +132,18 @@
     refreshFooter.scrollView=tableView;
     [refreshFooter footer];
 
-    
     WEAKSELF
     refreshFooter.beginRefreshingBlock=^(){
         STRONGSELF
         [strongSelf loadDataFromApiWithIsFirst:NO];
 
     };
-    }
+    
+}
 
 
 - (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
 {
-    
     
     NSInteger page = 0;
     
@@ -176,8 +161,6 @@
             [self.DsOfPageListObject.dsArray removeAllObjects];
         }
         
-        
-        
         [self.DsOfPageListObject.dsArray addObjectsFromArray:modelArray];
         self.DsOfPageListObject.page=page;
         [tableView reloadData];
@@ -186,20 +169,15 @@
             
             [refreshFooter endRefreshing];
             
-            
         }else
         {
             [refreshHeader endRefreshing];
         }
-        
     }
                                            errorHandel:^(NSError* error){
                                                if (isFirst) {
                                                    
                                                    [refreshHeader endRefreshing];
-                                                   
-                                                   
-                                                   
                                                    
                                                }else{
                                                    [refreshFooter endRefreshing];
@@ -207,8 +185,6 @@
                                                }
                                                
                                            }];
-    
-    
     
     
     return YES;
@@ -231,28 +207,21 @@
     }
     RepositoryModel  *model = [(self.DsOfPageListObject.dsArray) objectAtIndex:indexPath.row];
     cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
-    
     cell.repositoryLabel.text=[NSString stringWithFormat:@"%@",model.name];
     cell.userLabel.text=[NSString stringWithFormat:@"Owner:%@",model.user.login];
     [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url] placeholderImage:nil];
     cell.descriptionLabel.text=[NSString stringWithFormat:@"%@",model.repositoryDescription];
-    
     [cell.homePageBt setTitle:model.homepage forState:UIControlStateNormal];
-
     cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
     cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
     return cell;
-    
-    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     RepositoryDetailViewController *detail=[[RepositoryDetailViewController alloc] init];
     RepositoryModel  *model = [(self.DsOfPageListObject.dsArray) objectAtIndex:indexPath.row];
-    
     detail.model=model;
     [self.navigationController pushViewController:detail animated:YES];
-    
-    
+   
 }
 
 

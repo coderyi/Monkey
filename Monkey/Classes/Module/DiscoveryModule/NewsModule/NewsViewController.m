@@ -13,13 +13,9 @@
     UITableView *tableView;
     YiRefreshHeader *refreshHeader;
     YiRefreshFooter *refreshFooter;
-    
-    
 }
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject;
 @property (strong, nonatomic) MKNetworkOperation *apiOperation;
-
-
 @end
 
 @implementation NewsViewController
@@ -55,16 +51,12 @@
     self.title=NSLocalizedString(@"News", @"");
     tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain ];
     [self.view addSubview:tableView];
-
     tableView.dataSource=self;
     tableView.delegate=self;
-    
-    
-    
+ 
     [self addHeader];
     [self addFooter];
-    
-    
+   
 }
 
 #pragma mark - Private
@@ -74,13 +66,10 @@
     refreshHeader=[[YiRefreshHeader alloc] init];
     refreshHeader.scrollView=tableView;
     [refreshHeader header];
-    
-    
     WEAKSELF
     refreshHeader.beginRefreshingBlock=^(){
         STRONGSELF
         [strongSelf loadDataFromApiWithIsFirst:YES];
-        
     };
     
     //    是否在进入该界面的时候就开始进入刷新状态
@@ -94,7 +83,6 @@
     refreshFooter.scrollView=tableView;
     [refreshFooter footer];
     
-    
     WEAKSELF
     refreshFooter.beginRefreshingBlock=^(){
         STRONGSELF
@@ -106,15 +94,11 @@
 
 - (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
 {
-  
-    
     NSInteger page = 0;
-    
     if (isFirst) {
         page = 1;
         
     }else{
-        
         page = self.DsOfPageListObject.page+1;
     }
     
@@ -124,16 +108,13 @@
             [self.DsOfPageListObject.dsArray removeAllObjects];
         }
         
-        
-        
         [self.DsOfPageListObject.dsArray addObjectsFromArray:modelArray];
         self.DsOfPageListObject.page=page;
         [tableView reloadData];
-        
+
         if (page>1) {
             
             [refreshFooter endRefreshing];
-            
             
         }else
         {
@@ -146,18 +127,12 @@
                                                             
                                                             [refreshHeader endRefreshing];
                                                             
-                                                            
-                                                            
-                                                            
                                                         }else{
                                                             [refreshFooter endRefreshing];
                                                             
                                                         }
                                                         
                                                     }];
-    
-    
-    
     
     return YES;
     
@@ -171,10 +146,7 @@
     return self.DsOfPageListObject.dsArray.count;
 }
 
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     
     NSString *CellId = @"autoCell";
     UITableViewCell *cell = [tableView1 dequeueReusableCellWithIdentifier:CellId];
@@ -197,7 +169,6 @@
     
     return cell;
     
-    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UserReceivedEventModel *model=((UserReceivedEventModel *)([self.DsOfPageListObject.dsArray objectAtIndex:indexPath.row]));
@@ -205,15 +176,13 @@
     RepositoryDetailViewController *viewController=[[RepositoryDetailViewController alloc] init];
     RepositoryModel *model1=[[RepositoryModel alloc] init];
     model1.user=[[UserModel alloc] init];
-    
+
     NSRange range = [model.repo.name rangeOfString:@"/"]; //现获取要截取的字符串位置
     NSString * result = [model.repo.name substringFromIndex:(range.location+1)]; //截取字符串
-    
     model1.user.login=[model.repo.name substringToIndex:(range.location)];
     model1.name=result;
     viewController.model=model1;
     [self.navigationController pushViewController:viewController animated:YES];
-    
     
 }
 

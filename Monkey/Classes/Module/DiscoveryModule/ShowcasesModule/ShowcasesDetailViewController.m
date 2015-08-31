@@ -41,7 +41,6 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
-    
 }
 - (void)viewWillDisappear:(BOOL)animated{
     self.tabBarController.tabBar.hidden = NO;
@@ -57,20 +56,17 @@
         
     }
     
-    
     self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets=NO;
     tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain ];
     [self.view addSubview:tableView];
-    
     tableView.delegate=self;
     tableView.dataSource=self;
     tableView.rowHeight=RepositoriesTableViewCellheight;
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self addHeader];
     [self addFooter];
-    
-    
+  
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,13 +82,10 @@
     refreshHeader=[[YiRefreshHeader alloc] init];
     refreshHeader.scrollView=tableView;
     [refreshHeader header];
-    
-    
     WEAKSELF
     refreshHeader.beginRefreshingBlock=^(){
         STRONGSELF
         [strongSelf loadDataFromApiWithIsFirst:YES];
-        
     };
     
     //    是否在进入该界面的时候就开始进入刷新状态
@@ -105,13 +98,10 @@
     refreshFooter=[[YiRefreshFooter alloc] init];
     refreshFooter.scrollView=tableView;
     [refreshFooter footer];
-    
-    
     WEAKSELF
     refreshFooter.beginRefreshingBlock=^(){
         STRONGSELF
         [strongSelf loadDataFromApiWithIsFirst:NO];
-        
     };
 }
 
@@ -135,17 +125,12 @@
             [self.DsOfPageListObject.dsArray removeAllObjects];
         }
         
-        
-        
         [self.DsOfPageListObject.dsArray addObjectsFromArray:modelArray];
         self.DsOfPageListObject.page=page;
         [tableView reloadData];
         
         if (!isFirst) {
-            
             [refreshFooter endRefreshing];
-            
-            
         }else
         {
             [refreshHeader endRefreshing];
@@ -154,21 +139,13 @@
     }
                                        errorHandel:^(NSError* error){
                                            if (isFirst) {
-                                               
                                                [refreshHeader endRefreshing];
-                                               
-                                               
-                                               
-                                               
                                            }else{
                                                [refreshFooter endRefreshing];
                                                
                                            }
                                            
                                        }];
-    
-    
-    
     
     return YES;
     
@@ -193,25 +170,18 @@
     cell.userLabel.text=[NSString stringWithFormat:@"Owner:%@",model.user.login];
     [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url] placeholderImage:nil];
     cell.descriptionLabel.text=[NSString stringWithFormat:@"%@",model.repositoryDescription];
-    
     [cell.homePageBt setTitle:model.homepage forState:UIControlStateNormal];
-
     cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
     cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
     return cell;
-    
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     RepositoryDetailViewController *detail=[[RepositoryDetailViewController alloc] init];
     RepositoryModel  *model = [(self.DsOfPageListObject.dsArray) objectAtIndex:indexPath.row];
-    
     detail.model=model;
     [self.navigationController pushViewController:detail animated:YES];
-    
-    
+   
 }
-
-
 
 @end

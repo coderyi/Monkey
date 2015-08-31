@@ -45,7 +45,6 @@
     tableView1.dataSource=self;
     tableView1.delegate=self;
     
-    
     rankCategorys=@[@"repositories ranking",@"users ranking",@"organizations ranking"];
     
     UILabel *headerLabel=[[UILabel alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
@@ -100,10 +99,7 @@
     }
     cell.textLabel.text=(rankCategorys)[indexPath.section];
     return cell;
-    
-    
-    
-    
+
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -114,9 +110,5 @@
     [self.navigationController pushViewController:viewController animated:YES];
     
 }
-
-
-
-
 
 @end

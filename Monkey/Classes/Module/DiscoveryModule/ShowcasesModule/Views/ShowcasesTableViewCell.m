@@ -31,12 +31,10 @@
         logoImageView.layer.cornerRadius=20;
         [self.contentView addSubview:logoImageView];
         titleLabel.translatesAutoresizingMaskIntoConstraints=NO;
-          descriptionLabel.translatesAutoresizingMaskIntoConstraints=NO;
-          logoImageView.translatesAutoresizingMaskIntoConstraints=NO;
-
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints=NO;
+        logoImageView.translatesAutoresizingMaskIntoConstraints=NO;
         
         NSArray *constraints1=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[logoImageView(==40)]-8-[titleLabel]-10-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logoImageView,titleLabel)];
-
         NSArray *constraints2=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[logoImageView(==40)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(logoImageView)];
          NSArray *constraints3=[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[titleLabel(==30)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(titleLabel)];
         NSArray *constraints4=[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-58-[descriptionLabel]-10-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(descriptionLabel)];
@@ -69,12 +67,7 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
- 
-    
-    
 }
-
-
 
 - (void)awakeFromNib {
     // Initialization code

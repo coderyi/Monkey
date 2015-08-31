@@ -22,7 +22,6 @@
     int currentIndex;
     UITableView *tableView1;
     UITableView *tableView2;
-    
     UITableView *tableView3;
     
     float titleHeight;
@@ -76,39 +75,26 @@
 
     NSString *languageAppear=[[NSUserDefaults standardUserDefaults] objectForKey:@"trendingLanguageAppear"];
     if ([languageAppear isEqualToString:@"2"]) {
-        
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"trendingLanguageAppear"];
         language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language2"];
         if (language==nil || language.length<1) {
             language=NSLocalizedString(@"all languages", @"");
-            
         }
-        
-       
-        
         
         if (currentIndex==1) {
             [refreshHeader1 beginRefreshing];
-            
             
         }else if (currentIndex==2){
             [refreshHeader2 beginRefreshing];
             
         }else if (currentIndex==3){
-            
-                [refreshHeader3 beginRefreshing];
-            
-            
-            
+            [refreshHeader3 beginRefreshing];
             
         }
         
         titleText.text=language;
     }
-    
         [scrollView setContentSize:CGSizeMake(ScreenWidth * (3), bgViewHeight)];
-    
-    
     
 }
 
@@ -125,11 +111,8 @@
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
     [titleText setFont:[UIFont systemFontOfSize:19.0]];
-    
     titleText.textAlignment=NSTextAlignmentCenter;
     self.navigationItem.titleView=titleText;
-    
-    
     
     language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language2"];
     if (language==nil || language.length<1) {
@@ -138,9 +121,7 @@
     }
     tableView1Language=language;
     tableView2Language=language;
-    
     tableView3Language=language;
-    
     
     titleText.text=language;
     self.view.backgroundColor=[UIColor whiteColor];
@@ -149,36 +130,24 @@
     [self initScroll];
     self.automaticallyAdjustsScrollViewInsets=NO;
 
-    
-    
-    
     segmentControl=[[HeaderSegmentControl alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, titleHeight)];
     [self.view addSubview:segmentControl];
     [segmentControl.button1 setTitle:@"daily" forState:UIControlStateNormal];
     [segmentControl.button2 setTitle:@"weekly" forState:UIControlStateNormal];
-
     [segmentControl.button3 setTitle:@"monthly" forState:UIControlStateNormal];
 
-        segmentControl.buttonCount=3;
-        segmentControl.button3.hidden=NO;
-        segmentControl.button4.hidden=YES;
+    segmentControl.buttonCount=3;
+    segmentControl.button3.hidden=NO;
+    segmentControl.button4.hidden=YES;
    
-    
-    
     currentIndex=1;
     
     [self initTable];
-    
-
     
     UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"language", @"") style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
     self.navigationItem.rightBarButtonItem=right;
    
 }
-
-
-
-
 
 
 - (void)didReceiveMemoryWarning {
@@ -187,8 +156,6 @@
 }
 
 #pragma mark - Actions
-
-
 
 - (void)rightAction{
     LanguageViewController *viewController=[[LanguageViewController alloc] init];
@@ -200,7 +167,6 @@
 
 - (void)initScroll{
     
-    
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, titleHeight, ScreenWidth, bgViewHeight)];
     scrollView.alwaysBounceHorizontal=YES;
     scrollView.backgroundColor=[UIColor whiteColor];
@@ -211,47 +177,37 @@
     scrollView.showsHorizontalScrollIndicator = NO;
     scrollView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:scrollView];
-    
     [scrollView setContentSize:CGSizeMake(ScreenWidth * (3), bgViewHeight)];
     [scrollView setContentOffset:CGPointMake(0, 0)];
     [scrollView scrollRectToVisible:CGRectMake(0,0,ScreenWidth,bgViewHeight) animated:NO];
-
-        [scrollView setContentSize:CGSizeMake(ScreenWidth * (3), bgViewHeight)];
+    [scrollView setContentSize:CGSizeMake(ScreenWidth * (3), bgViewHeight)];
  
 }
 
 - (void)initTable{
     
-    
     tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
     [scrollView addSubview:tableView1];
     trendingDataSource=[[TrendingDataSource alloc] init];
-    
     tableView1.dataSource=trendingDataSource;
-    
     tableView1.delegate=self;
     tableView1.tag=11;
     tableView1.rowHeight=RepositoriesTableViewCellheight;
     tableView1.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self addHeader:1];
-    
     segmentControl.ButtonActionBlock=^(int buttonTag){
-        
         currentIndex=buttonTag-100;
         [scrollView scrollRectToVisible:CGRectMake(ScreenWidth * (currentIndex-1),0,ScreenWidth,bgViewHeight) animated:NO];
         [scrollView setContentOffset:CGPointMake(ScreenWidth* (currentIndex-1),0)];
-        
         if (currentIndex==1) {
             if (![titleText.text isEqualToString:tableView1Language]) {
                 [refreshHeader1 beginRefreshing];
             }
-
         }else if (currentIndex==2){
             if (tableView2==nil) {
                 tableView2=[[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
                 [scrollView addSubview:tableView2];
                 tableView2.showsVerticalScrollIndicator = NO;
-                
                 tableView2.tag=12;
                 tableView2.dataSource=trendingDataSource;
                 tableView2.delegate=self;
@@ -264,14 +220,11 @@
                 [refreshHeader2 beginRefreshing];
             }
             
-
-            
         }else if (currentIndex==3){
             if (tableView3==nil) {
                 tableView3=[[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth*2, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
                 [scrollView addSubview:tableView3];
                 tableView3.showsVerticalScrollIndicator = NO;
-                
                 tableView3.tag=13;
                 tableView3.dataSource=trendingDataSource;
                 tableView3.delegate=self;
@@ -291,13 +244,11 @@
     
     currentIndex=1;
     
-    
 }
 
 - (void)addHeader:(int)type
 {
     if (type==1) {
-        
         
         //    YiRefreshHeader  头部刷新按钮的使用
         refreshHeader1=[[YiRefreshHeader alloc] init];
@@ -306,8 +257,6 @@
         __weak typeof(self) weakSelf = self;
         refreshHeader1.beginRefreshingBlock=^(){
             [weakSelf loadDataFromApiWithIsFirst:YES];
-            
-            
             
         };
         
@@ -323,8 +272,6 @@
         refreshHeader2.beginRefreshingBlock=^(){
             [weakSelf loadDataFromApiWithIsFirst:YES];
             
-            
-            
         };
         
         //    是否在进入该界面的时候就开始进入刷新状态
@@ -339,8 +286,6 @@
         __weak typeof(self) weakSelf = self;
         refreshHeader3.beginRefreshingBlock=^(){
             [weakSelf loadDataFromApiWithIsFirst:YES];
-            
-            
             
         };
         
@@ -367,24 +312,17 @@
         [tableView1 reloadData];
         
         if (!isFirst) {
-            
             [refreshFooter1 endRefreshing];
-            
-            
         }else
         {
             [refreshHeader1 endRefreshing];
         }
     } secondTableData:^(DataSourceModel* DsOfPageListObject){
         trendingDataSource.DsOfPageListObject2=DsOfPageListObject;
-        
         [tableView2 reloadData];
         
         if (!isFirst) {
-            
             [refreshFooter2 endRefreshing];
-            
-            
         }else
         {
             [refreshHeader2 endRefreshing];
@@ -395,10 +333,7 @@
         [tableView3 reloadData];
         
         if (!isFirst) {
-            
             [refreshFooter3 endRefreshing];
-            
-            
         }else
         {
             [refreshHeader3 endRefreshing];
@@ -413,13 +348,10 @@
 {
     if (segmentControl.buttonCount==2) {
         
-        
         CGFloat pagewidth = scrollView.frame.size.width;
         int currentPage = floor((scrollView.contentOffset.x - pagewidth/ (2)) / pagewidth) + 1;
-        
         if (currentPage==0)
         {
-            
             [scrollView scrollRectToVisible:CGRectMake(0,0,ScreenWidth,bgViewHeight) animated:NO];
             [scrollView setContentOffset:CGPointMake(0,0)];
         }
@@ -434,13 +366,10 @@
         [segmentControl swipeAction:(100+currentPage+1)];
     }else if (segmentControl.buttonCount==3){
         
-        
         CGFloat pagewidth = scrollView.frame.size.width;
         int currentPage = floor((scrollView.contentOffset.x - pagewidth/ (3)) / pagewidth) + 1;
-        
         if (currentPage==0)
         {
-            
             [scrollView scrollRectToVisible:CGRectMake(0,0,ScreenWidth,bgViewHeight) animated:NO];
             [scrollView setContentOffset:CGPointMake(0,0)];
         }
@@ -463,22 +392,15 @@
     RepositoryDetailViewController *detail=[[RepositoryDetailViewController alloc] init];
     if (currentIndex==1) {
         RepositoryModel  *model = [(trendingDataSource.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
-        
         detail.model=model;
     }else  if (currentIndex==2) {
         RepositoryModel  *model = [(trendingDataSource.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
-        
         detail.model=model;
-        
-        
     }else if (currentIndex==3){
         RepositoryModel  *model = [(trendingDataSource.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
-        
         detail.model=model;
-        
     }
     [self.navigationController pushViewController:detail animated:YES];
-    
     
 }
 

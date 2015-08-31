@@ -17,13 +17,7 @@
                                           errorHandel:(MKNKErrorBlock)errorBlock
 {
     
-    
-    
-    
-    
     NSString *getString = [NSString stringWithFormat:@"/users/%@/received_events?&page=%ld",login,(long)page];
-    
-    
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
@@ -40,10 +34,9 @@
                     [[NSMutableArray alloc] initWithCapacity:32];
                     for (NSInteger i = 0; i < list.count; i++) {
                         
-                        
                         NSDictionary *dict = [list objectAtIndex:i];
                         UserReceivedEventModel *model = [UserReceivedEventModel modelWithDict:dict];
-                        
+            
                         [listNew addObject:model];
                         
                     }
@@ -52,7 +45,6 @@
                 }
             }
         }
-        
         
     } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
         
@@ -72,13 +64,7 @@
                                        errorHandel:(MKNKErrorBlock)errorBlock
 {
     
-    
-    
-    
-    
     NSString *getString = [NSString stringWithFormat:@"/v2/showcases/%@",showcase];
-    
-    
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:NO];
@@ -96,7 +82,6 @@
                     [[NSMutableArray alloc] initWithCapacity:32];
                     for (NSInteger i = 0; i < list.count; i++) {
                         
-                        
                         NSDictionary *dict = [list objectAtIndex:i];
                         RepositoryModel *model = [RepositoryModel modelWithDict:dict];
                         
@@ -108,7 +93,6 @@
                 }
             }
         }
-        
         
     } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
         
@@ -130,10 +114,6 @@
                                        errorHandel:(MKNKErrorBlock)errorBlock
 {
  
-    
-    
-    
-    
     NSString *getString ;
     if (language.length<1 || !language || [language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
         getString = [NSString stringWithFormat:@"/v2/trending?since=%@",type];
@@ -143,11 +123,10 @@
     
     }
     
-    
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:NO];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-//        不是json
+
         if ([[completedOperation responseJSON]
              isKindOfClass:[NSArray class]]) {
 
@@ -158,7 +137,6 @@
                     NSMutableArray *listNew =
                     [[NSMutableArray alloc] initWithCapacity:32];
                     for (NSInteger i = 0; i < list.count; i++) {
-                        
                         
                         NSDictionary *dict = [list objectAtIndex:i];
                         RepositoryModel *model = [RepositoryModel modelWithDict:dict];
@@ -188,19 +166,12 @@
                                          errorHandel:(MKNKErrorBlock)errorBlock
 {
     
-    
-    
-    
-    
     NSString *getString = [NSString stringWithFormat:@"/v2/showcases"];
-        
-    
-    
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:NO];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-        //        不是json
+
         if ([[completedOperation responseJSON]
              isKindOfClass:[NSArray class]]) {
 
@@ -258,7 +229,6 @@
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
     [op setUsername:access_token password:@"x-oauth-basic" basicAuth:NO];
-
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         
         if ([[completedOperation responseJSON]
@@ -267,12 +237,7 @@
             
             UserModel *model = [UserModel modelWithDict:resultDictionary];
             
-            
-            
             completionBlock(model);
-            
-            
-            
             
         }
         
@@ -293,13 +258,6 @@
 - (MKNetworkOperation *)searchUsersWithPage:(NSInteger)page q:(NSString *)q sort:(NSString *)sort categoryLocation:(NSString *)categoryLocation categoryLanguage:(NSString *)categoryLanguage completoinHandler:(PageListInfoResponseBlock)completionBlock
                                 errorHandel:(MKNKErrorBlock)errorBlock
 {
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    [dic setValue:q forKey:@"q"];
-    [dic setValue:sort forKey:@"sort"];
-    [dic setValue:[NSString stringWithFormat:@"%ld", (long)page] forKey:@"page"];
-    
-    
-    
     
     NSString *getString = [NSString stringWithFormat:@"/search/users?q=%@&sort=%@&page=%li",q,sort,(long)page];
     
@@ -320,7 +278,6 @@
                     [[NSMutableArray alloc] initWithCapacity:32];
                     for (NSInteger i = 0; i < list.count; i++) {
                         
-                        
                         NSDictionary *dict = [list objectAtIndex:i];
                         UserModel *model = [UserModel modelWithDict:dict];
                         model.rank=(int)((page-1)*30+(i+1));
@@ -335,7 +292,6 @@
                 }
             }
         }
-        
         
     } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
         
@@ -354,11 +310,7 @@
                                 errorHandel:(MKNKErrorBlock)errorBlock
 {
 
-
-  
      NSString *getString = [NSString stringWithFormat:@"/search/users?q=%@&sort=%@&page=%ld",q,sort,(long)page];
-    
-    
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
@@ -367,30 +319,26 @@
         if ([[completedOperation responseJSON]
              isKindOfClass:[NSDictionary class]]) {
             NSDictionary *resultDictionary = [completedOperation responseJSON];
-          
-                NSInteger totalCount=[[resultDictionary objectForKey:@"total_count"] intValue];
-                NSArray *list = [resultDictionary objectForKey:@"items"];
-                if ([list isKindOfClass:[NSArray class]]) {
-                    if (list.count > 0) {
+        
+            NSInteger totalCount=[[resultDictionary objectForKey:@"total_count"] intValue];
+            NSArray *list = [resultDictionary objectForKey:@"items"];
+            if ([list isKindOfClass:[NSArray class]]) {
+                if (list.count > 0) {
                         
-                        NSMutableArray *listNew =
-                        [[NSMutableArray alloc] initWithCapacity:32];
-                        for (NSInteger i = 0; i < list.count; i++) {
+                    NSMutableArray *listNew =
+                    [[NSMutableArray alloc] initWithCapacity:32];
+                    for (NSInteger i = 0; i < list.count; i++) {
+                        NSDictionary *dict = [list objectAtIndex:i];
+                        UserModel *model = [UserModel modelWithDict:dict];
+                        [listNew addObject:model];
                             
-                            
-                            NSDictionary *dict = [list objectAtIndex:i];
-                            UserModel *model = [UserModel modelWithDict:dict];
-                            
-                            [listNew addObject:model];
-                            
-                        }
-                            completionBlock(listNew, page,totalCount);
-                        
                     }
+                    completionBlock(listNew, page,totalCount);
+                        
                 }
             }
+        }
       
-        
     } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
         
         errorBlock(error);
@@ -420,12 +368,9 @@
             NSDictionary *resultDictionary = [completedOperation responseJSON];
           
                 UserModel *model = [UserModel modelWithDict:resultDictionary];
-                
-                
-                
+            
                 completionBlock(model);
           
-            
         }
         
     } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
@@ -446,13 +391,7 @@
                                        errorHandel:(MKNKErrorBlock)errorBlock
 {
 
-    
-    
-    
-    
     NSString *getString = [NSString stringWithFormat:@"/users/%@/repos?sort=updated&page=%ld",userName,(long)page];
-    
-    
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
@@ -469,7 +408,6 @@
                     [[NSMutableArray alloc] initWithCapacity:32];
                     for (NSInteger i = 0; i < list.count; i++) {
                         
-                        
                         NSDictionary *dict = [list objectAtIndex:i];
                         RepositoryModel *model = [RepositoryModel modelWithDict:dict];
                         
@@ -481,7 +419,6 @@
                 }
             }
         }
-        
         
     } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
         
@@ -500,13 +437,7 @@
                                      errorHandel:(MKNKErrorBlock)errorBlock
 {
     
-    
-    
-    
-    
     NSString *getString = [NSString stringWithFormat:@"/users/%@/followers?page=%ld",userName,(long)page];
-    
-    
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
@@ -523,7 +454,6 @@
                     [[NSMutableArray alloc] initWithCapacity:32];
                     for (NSInteger i = 0; i < list.count; i++) {
                         
-                        
                         NSDictionary *dict = [list objectAtIndex:i];
                         UserModel *model = [UserModel modelWithDict:dict];
                         
@@ -535,7 +465,6 @@
                 }
             }
         }
-        
         
     } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
         
@@ -555,13 +484,7 @@
                                      errorHandel:(MKNKErrorBlock)errorBlock
 {
     
-    
-    
-    
-    
     NSString *getString = [NSString stringWithFormat:@"/users/%@/following?page=%ld",userName,(long)page];
-    
-    
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
@@ -578,7 +501,6 @@
                     [[NSMutableArray alloc] initWithCapacity:32];
                     for (NSInteger i = 0; i < list.count; i++) {
                         
-                        
                         NSDictionary *dict = [list objectAtIndex:i];
                         UserModel *model = [UserModel modelWithDict:dict];
                         
@@ -590,7 +512,6 @@
                 }
             }
         }
-        
         
     } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
         
@@ -610,16 +531,10 @@
                                        errorHandel:(MKNKErrorBlock)errorBlock
 {
    
-    
-    
-    
     NSString *getString = [NSString stringWithFormat:@"/search/repositories?q=%@&sort=%@&page=%ld",q,sort,(long)page];
-    
-    
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
-    NSLog(@"url is %@",op.url);
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         
         if ([[completedOperation responseJSON]
@@ -635,10 +550,8 @@
                     [[NSMutableArray alloc] initWithCapacity:32];
                     for (NSInteger i = 0; i < list.count; i++) {
                         
-                        
                         NSDictionary *dict = [list objectAtIndex:i];
                         RepositoryModel *model = [RepositoryModel modelWithDict:dict];
-                        
                         [listNew addObject:model];
                         
                     }
@@ -647,7 +560,6 @@
                 }
             }
         }
-        
         
     } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
         
@@ -687,10 +599,7 @@
             
             RepositoryModel *model = [RepositoryModel modelWithDict:resultDictionary];
             
-            
-            
             completionBlock(model);
-            
             
         }
         
@@ -717,15 +626,9 @@
                                   errorHandel:(MKNKErrorBlock)errorBlock
 {
     
-    
-    
-    
-    
     if ([category isEqualToString:@"forks"]) {
         
         NSString *getString = [NSString stringWithFormat:@"/repos/%@/%@/%@?page=%ld",userName,repositoryName,category,(long)page];
-        
-        
         
         MKNetworkOperation *op =
         [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
@@ -742,10 +645,8 @@
                         [[NSMutableArray alloc] initWithCapacity:32];
                         for (NSInteger i = 0; i < list.count; i++) {
                             
-                            
                             NSDictionary *dict = [list objectAtIndex:i];
                             RepositoryModel *model = [RepositoryModel modelWithDict:dict];
-                            
                             [listNew addObject:model];
                             
                         }
@@ -754,7 +655,6 @@
                     }
                 }
             }
-            
             
         } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
             
@@ -767,10 +667,7 @@
         return op;
     }else{
     
-    
     NSString *getString = [NSString stringWithFormat:@"/repos/%@/%@/%@?page=%ld",userName,repositoryName,category,(long)page];
-    
-    
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
@@ -787,7 +684,6 @@
                     [[NSMutableArray alloc] initWithCapacity:32];
                     for (NSInteger i = 0; i < list.count; i++) {
                         
-                        
                         NSDictionary *dict = [list objectAtIndex:i];
                         UserModel *model = [UserModel modelWithDict:dict];
                         
@@ -799,7 +695,6 @@
                 }
             }
         }
-        
         
     } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
         

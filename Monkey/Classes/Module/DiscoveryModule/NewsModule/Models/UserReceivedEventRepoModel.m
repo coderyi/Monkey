@@ -16,12 +16,10 @@
     }
     
     UserReceivedEventRepoModel *model = [[UserReceivedEventRepoModel alloc]init];
-    
+
     model.name = [dict objectForKey:@"name"] ;
     model.userReceivedEventRepoID = [dict objectForKey:@"id"] ;
     model.url = [dict objectForKey:@"url"] ;
-    
-    
     
     return model;
 }

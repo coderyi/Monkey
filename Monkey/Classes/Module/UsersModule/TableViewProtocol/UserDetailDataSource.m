@@ -24,8 +24,7 @@
     }else if (currentIndex==3){
         
         return self.DsOfPageListObject3.dsArray.count;
-        
-        
+   
     }
     
     return 1;
@@ -34,15 +33,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (currentIndex==1) {
-        
-        
+  
         NSString *cellId=@"CellId";
         RepositoriesTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellId];
         if (cell==nil) {
             cell=[[RepositoriesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
             cell.titleImageView.hidden=YES;
-            
         }
         RepositoryModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
         cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
@@ -56,7 +53,6 @@
         cell.descriptionLabel.text=[NSString stringWithFormat:@"%@",model.repositoryDescription];
         
         [cell.homePageBt setTitle:model.homepage forState:UIControlStateNormal];
-        
 
         cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
         cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
@@ -93,7 +89,6 @@
         return cell;
     }
     return nil;
-    
     
 }
 

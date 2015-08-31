@@ -30,21 +30,14 @@ int currentTag;
         [_button1 addSubview:bt1Label];
         bt1Label.textColor=YiBlue;
         bt1Label.font=myFont;
-//        bt1Label.text=@"12121";
         bt1Label.textAlignment=NSTextAlignmentCenter;
-//        bt1Label.backgroundColor=[UIColor darkGrayColor];
-        
         bt1Label1=[[UILabel alloc] initWithFrame:CGRectMake(0, 28, w/3, 23)];
         [_button1 addSubview:bt1Label1];
         bt1Label1.textColor=YiBlue;
         bt1Label1.font=myFont;
         bt1Label1.text=@"Repositories";
         bt1Label1.textAlignment=NSTextAlignmentCenter;
-//        bt1Label1.backgroundColor=[UIColor redColor];
-        
-//        _button1.backgroundColor=[UIColor redColor];
-//        [_button1 setTitle:@"Repositories" forState:UIControlStateNormal];
-        //  [_button1 setFont:[UIFont systemFontOfSize:12]];
+
         _button1.titleLabel.font = myFont;
         [_button1 setTitleColor:black forState:UIControlStateNormal];
         _button1.tag=101;
@@ -53,9 +46,7 @@ int currentTag;
         _button2=[UIButton buttonWithType:UIButtonTypeCustom];
         [self addSubview:_button2];
         _button2.frame=CGRectMake(w/3, 0, w/3, 58);
-//        [_button2 setTitle:@"Following" forState:UIControlStateNormal];
         _button2.titleLabel.font = myFont;
-        // [_button2 setFont:[UIFont systemFontOfSize:12]];
         [_button2 setTitleColor:black forState:UIControlStateNormal];
         _button2.tag=102;
         [_button2 addTarget:self action:@selector(btAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -64,8 +55,6 @@ int currentTag;
         _button3=[UIButton buttonWithType:UIButtonTypeCustom];
         [self addSubview:_button3];
         _button3.frame=CGRectMake(w/3+w/3, 0, w/3, 58);
-//        [_button3 setTitle:@"Follower" forState:UIControlStateNormal];
-        // [_button3 setFont:[UIFont systemFontOfSize:12]];
         _button3.titleLabel.font = myFont;
         [_button3 setTitleColor:black forState:UIControlStateNormal];
         _button3.tag=103;
@@ -76,9 +65,7 @@ int currentTag;
         [_button2 addSubview:bt2Label];
         bt2Label.textColor=black;
         bt2Label.font=myFont;
-//        bt2Label.text=@"12121";
         bt2Label.textAlignment=NSTextAlignmentCenter;
-        //        bt1Label.backgroundColor=[UIColor darkGrayColor];
         
         bt2Label1=[[UILabel alloc] initWithFrame:CGRectMake(0, 28, w/3, 23)];
         [_button2 addSubview:bt2Label1];
@@ -91,9 +78,7 @@ int currentTag;
         [_button3 addSubview:bt3Label];
         bt3Label.textColor=black;
         bt3Label.font=myFont;
-//        bt3Label.text=@"12121";
         bt3Label.textAlignment=NSTextAlignmentCenter;
-        //        bt1Label.backgroundColor=[UIColor darkGrayColor];
         
         bt3Label1=[[UILabel alloc] initWithFrame:CGRectMake(0, 28, w/3, 23)];
         [_button3 addSubview:bt3Label1];
@@ -116,13 +101,9 @@ int currentTag;
         [self addSubview:label3];
         label3.backgroundColor=YiBlue;
         
-       
-        
-        
         label1.hidden=YES;
         label2.hidden=YES;
         label3.hidden=YES;
-        
         
         //        默认情况
         currentTag=101;
@@ -197,12 +178,6 @@ int currentTag;
 
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+
 
 @end

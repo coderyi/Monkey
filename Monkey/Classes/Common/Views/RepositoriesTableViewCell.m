@@ -15,7 +15,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        float h=94; //orginY*2+repositoryLabelHeight*4+spacce*2=96
+        float h=94.5; //orginY*2+repositoryLabelHeight*4+spacce*2=96
         float heightSpace=2;
         float orginX=0;
         float w=ScreenWidth-orginX*2;
@@ -62,9 +62,7 @@
         
         _homePageBt=[UIButton buttonWithType:UIButtonTypeCustom];
         [bgView addSubview:_homePageBt];
-//        _homePageBt.backgroundColor=[UIColor colorWithRed:0.90f green:0.90f blue:0.90f alpha:1.00f];
         [_homePageBt setTitleColor:YiBlue forState:UIControlStateNormal];
-//        [_homePageBt setFont:[UIFont systemFontOfSize:12]];
         _homePageBt.titleLabel.font=[UIFont systemFontOfSize:12];
         _homePageBt.frame=CGRectMake(preWidth+rankWidth+sufRankWidth+userLabelWidth, orginY+repositoryLabelHeight+heightSpace, labelWidth-userLabelWidth, repositoryLabelHeight);
         _homePageBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;

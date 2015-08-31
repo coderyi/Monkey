@@ -15,7 +15,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        float h=70;
+        float h=70.5;
         float orginX=0;
         float w=ScreenWidth-orginX*2;
         float preWidth=15;
@@ -47,11 +47,9 @@
         _rankLabel.textColor=YiBlue;
         _mainLabel.textColor=YiBlue;
         _detailLabel.textColor=YiGray;
-//        _rankLabel.backgroundColor=YiBlue;
         _rankLabel.textAlignment=NSTextAlignmentCenter;
         _mainLabel.font=[UIFont systemFontOfSize:18];
         _detailLabel.font=[UIFont systemFontOfSize:13];
-        
         _mainLabel.textAlignment=NSTextAlignmentLeft;
         _detailLabel.textAlignment=NSTextAlignmentLeft;
         

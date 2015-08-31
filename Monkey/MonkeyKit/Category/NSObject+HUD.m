@@ -18,15 +18,12 @@ UIAlertView *alertView;
                                    userInfo:nil
                                     repeats:NO];
     
-    
 }
 - (void)showYiProgressHUD:(NSString *)title{
     alertView = [[UIAlertView alloc] initWithTitle:@""
                                            message:title
                                           delegate:nil
                                  cancelButtonTitle:nil otherButtonTitles:nil, nil];
-    
-    
     
     [alertView show];
 }
@@ -35,7 +32,6 @@ UIAlertView *alertView;
     
 }
 - (void)hideYiProgressHUD:(NSTimer*)timer {
-    NSLog(@"Dismiss alert view");
     
     [alertView dismissWithClickedButtonIndex:0 animated:YES];
 }

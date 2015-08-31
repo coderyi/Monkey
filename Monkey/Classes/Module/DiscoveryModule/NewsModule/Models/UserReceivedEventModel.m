@@ -20,27 +20,17 @@
     model.userReceivedEventID = [dict objectForKey:@"id"] ;
     model.type = [dict objectForKey:@"type"] ;
    
-   
-    
     NSDictionary *actor=[dict objectForKey:@"actor"];
-    
     model.actor=[UserReceivedEventActorModel modelWithDict:actor];
     
-    
     NSDictionary *repo=[dict objectForKey:@"repo"];
-    
     model.repo=[UserReceivedEventRepoModel modelWithDict:repo];
     
-    
     NSDictionary *payload=[dict objectForKey:@"payload"];
-    
     model.payload=[UserReceivedEventPayloadModel modelWithDict:payload];
-    
-    
     model.userReceivedEventPublic = [dict objectForKey:@"public"] ;
     model.created_at = [dict objectForKey:@"created_at"] ;
-    
-    
+   
     return model;
 }
 @end

@@ -40,11 +40,9 @@
     self.view.backgroundColor=[UIColor whiteColor];
     tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain];
     [self.view addSubview:tableView1];
-    
     tableView1.dataSource=self;
     tableView1.delegate=self;
   
-    
     if (_languageEntranceType==RepLanguageEntranceType) {
         languages=@[@"JavaScript",@"Java",@"PHP",@"Ruby",@"Python",@"CSS",@"C",@"Objective-C",@"Shell",@"R",@"Perl",@"Lua",@"HTML",@"Scala",@"Go"];
     }else if (_languageEntranceType==UserLanguageEntranceType  ) {
@@ -52,7 +50,6 @@
     
     }else if (_languageEntranceType==TrendingLanguageEntranceType ) {
         languages=@[NSLocalizedString(@"all languages", @""),@"javascript",@"java",@"php",@"ruby",@"python",@"css",@"c",@"objective-c",@"shell",@"r",@"perl",@"lua",@"html",@"scala",@"go"];
-        
     }
     
 }
@@ -66,11 +63,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return languages.count;
-    
-    
+   
 }
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell;
@@ -82,33 +76,25 @@
     }
     cell.textLabel.text=(languages)[indexPath.row];
     return cell;
-    
-    
-    
-    
+   
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_languageEntranceType==RepLanguageEntranceType) {
         [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"languageAppear1"];
-        
         [[NSUserDefaults standardUserDefaults] setObject:languages[indexPath.row] forKey:@"language1"];
         [self.navigationController popViewControllerAnimated:YES];
     }else if (_languageEntranceType==UserLanguageEntranceType) {
     
         [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"languageAppear"];
-        
         [[NSUserDefaults standardUserDefaults] setObject:languages[indexPath.row] forKey:@"language"];
         [self.navigationController popViewControllerAnimated:YES];
     }else if (_languageEntranceType==TrendingLanguageEntranceType) {
         
         [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"trendingLanguageAppear"];
-        
         [[NSUserDefaults standardUserDefaults] setObject:languages[indexPath.row] forKey:@"language2"];
         [self.navigationController popViewControllerAnimated:YES];
     }
-    
-    
-    
+ 
 }
 
 

@@ -14,11 +14,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView.tag==11) {
         
-        
         return self.DsOfPageListObject1.dsArray.count;
         
     }else if (tableView.tag==12){
-        
         
         return self.DsOfPageListObject2.dsArray.count;
     }
@@ -38,7 +36,6 @@
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
         }
         UserModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
-        
         cell.textLabel.text=model.login;
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
         cell.imageView.layer.masksToBounds=YES;
@@ -50,19 +47,19 @@
         NSString *cellId=@"CellId2";
         cell=[tableView dequeueReusableCellWithIdentifier:cellId];
         if (cell==nil) {
-            cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+            cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
         }
         RepositoryModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
         
-        cell.textLabel.text=model.full_name;
-        cell.detailTextLabel.text=model.language;
+        cell.textLabel.text=[NSString stringWithFormat:@"%@",model.full_name];
+        cell.detailTextLabel.text=[NSString stringWithFormat:@"%@  %@",model.language,model.repositoryDescription];
+        cell.detailTextLabel.textColor=YiTextGray;
         return cell;
         
     }
     return cell;
-    
-    
+  
 }
 
 

@@ -77,7 +77,6 @@
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
     [titleText setFont:[UIFont systemFontOfSize:19.0]];
-    
     titleText.textAlignment=NSTextAlignmentCenter;
     self.navigationItem.titleView=titleText;
     titleText.text=@"Search";
@@ -95,10 +94,9 @@
     [self addHeader:1];
     [self addFooter:1];
     tableView1.tag=11;
-    
+
     searchSegment.ButtonActionBlock=^(int buttonTag){
         currentIndex=buttonTag-100;
-        
         
         if (currentIndex==1) {
             tableView1.hidden=NO;
@@ -119,18 +117,13 @@
             tableView2.hidden=NO;
         }
         
-        
-        
-        
      };
     self.navigationItem.hidesBackButton =YES;
     
     mySearchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(10, 2, ScreenWidth-60, 40)];
     [self.navigationController.navigationBar addSubview:mySearchBar];
-    
     mySearchBar.delegate=self;
     mySearchBar.tintColor=YiBlue;
-
     [mySearchBar becomeFirstResponder];
     
     UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"cancel", @"") style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
@@ -145,35 +138,24 @@
 
 - (void)rightAction{
     [mySearchBar removeFromSuperview];
-    
     [self.navigationController popViewControllerAnimated:YES];
-    
     
 }
     
 
 #pragma mark - Private
 
-
 - (void)addHeader:(int)type
 {
     WEAKSELF
     if (type==1) {
-        
-        
         //    YiRefreshHeader  头部刷新按钮的使用
         refreshHeader1=[[YiRefreshHeader alloc] init];
         refreshHeader1.scrollView=tableView1;
         [refreshHeader1 header];
-        
         refreshHeader1.beginRefreshingBlock=^(){
-
             STRONGSELF
             [strongSelf loadDataFromApiWithIsFirst:YES];
-
-            
-            
-            
         };
         
         //    是否在进入该界面的时候就开始进入刷新状态
@@ -186,13 +168,9 @@
         [refreshHeader2 header];
         
         refreshHeader2.beginRefreshingBlock=^(){
-
             STRONGSELF
             [strongSelf loadDataFromApiWithIsFirst:YES];
 
-            
-            
-            
         };
         
         //    是否在进入该界面的时候就开始进入刷新状态
@@ -209,7 +187,6 @@
 
     if (type==1) {
         
-        
         //    YiRefreshFooter  底部刷新按钮的使用
         refreshFooter1=[[YiRefreshFooter alloc] init];
         refreshFooter1.scrollView=tableView1;
@@ -224,14 +201,12 @@
             refreshFooter2=[[YiRefreshFooter alloc] init];
             refreshFooter2.scrollView=tableView2;
             [refreshFooter2 footer];
-        
             refreshFooter2.beginRefreshingBlock=^(){
 
                 STRONGSELF
                 [strongSelf loadDataFromApiWithIsFirst:NO];
 
             };
-            
     }
 }
 
@@ -242,10 +217,7 @@
                         [tableView1 reloadData];
         
                         if (!isFirst) {
-        
                             [refreshFooter1 endRefreshing];
-        
-        
                         }else
                         {
                             [refreshHeader1 endRefreshing];
@@ -257,7 +229,6 @@
         if (!isFirst) {
             
             [refreshFooter2 endRefreshing];
-            
             
         }else
         {
@@ -293,10 +264,7 @@
         detail.model=model;
         [self.navigationController pushViewController:detail animated:YES];
 
-        
     }
-    
-    
 }
 
 

@@ -37,7 +37,6 @@
     model.type = [dict objectForKey:@"type"] ;
     model.site_admin = [[dict objectForKey:@"site_admin"] boolValue] ;
     model.score = [dict objectForKey:@"score"] ;
-
     model.name = [[dict objectForKey:@"name"] isNull]?@"":[dict objectForKey:@"name"] ;
     model.company = [[dict objectForKey:@"company"] isNull]?@"":[dict objectForKey:@"company"];
     model.blog = [[dict objectForKey:@"blog"] isNull]?@"":[dict objectForKey:@"blog"];
@@ -46,10 +45,8 @@
     model.public_repos = [[dict objectForKey:@"public_repos"] intValue];
     model.followers = [[dict objectForKey:@"followers"] intValue];
     model.following = [[dict objectForKey:@"following"] intValue];
-
     model.created_at = [dict objectForKey:@"created_at"] ;
 
-    
     return model;
 }
 

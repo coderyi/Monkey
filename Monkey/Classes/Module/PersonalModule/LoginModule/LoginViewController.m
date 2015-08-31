@@ -8,7 +8,6 @@
 
 #import "LoginViewController.h"
 @interface LoginViewController (){
-
     UITextField *usernameTF;
     UITextField *pwdTF;
 }
@@ -53,7 +52,6 @@
     pwdTF.backgroundColor=[UIColor whiteColor];
     pwdTF.secureTextEntry = YES;
     
-    
     UIButton *but=[UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:but];
     but.frame=CGRectMake((ScreenWidth-200)/2, 250, 200, 40);
@@ -90,17 +88,11 @@
     [[OCTClient signInAsUser:user password:pwdTF.text oneTimePassword:nil scopes:OCTClientAuthorizationScopesUser | OCTClientAuthorizationScopesRepository note:nil noteURL:nil fingerprint:nil]
      subscribeNext:^(OCTClient *authenticatedClient) {
          // Authentication was successful. Do something with the created client.
-         NSLog(@"%@",authenticatedClient);
          [[NSUserDefaults standardUserDefaults] setObject:authenticatedClient.token forKey:@"access_token"];
          
          [[NSUserDefaults standardUserDefaults] setObject:authenticatedClient.user.login forKey:@"currentLogin"];
          [[NSUserDefaults standardUserDefaults] setObject:[authenticatedClient.user.avatarURL absoluteString] forKey:@"currentAvatarUrl"];
-         if ([[NSThread currentThread] isMainThread]) {
-             NSLog(@"yes");
-         }else{
-             NSLog(@"no");
-
-         }
+         
          dispatch_async(dispatch_get_main_queue(), ^{
              [self hideYiProgressHUD];
              if (_callback) {

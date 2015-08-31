@@ -21,7 +21,6 @@
     YiRefreshHeader *refreshHeader;
     YiRefreshFooter *refreshFooter;
     UILabel *titleText;
-    
 
     DetailSegmentControl *segmentControl;
     UIButton *nameBt;
@@ -90,24 +89,19 @@
     
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-        
     }
     
     self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets=NO;
     
-    
     tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain ];
     [self.view addSubview:tableView];
-    
     tableView.delegate=self;
     tableView.dataSource=repositoryDetailDataSource;
     tableView.rowHeight=RepositoriesTableViewCellheight;
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self addHeader];
     [self addFooter];
-    
-
     
     titleView=[[UIView alloc] init];
     tableView.tableHeaderView=titleView;
@@ -119,7 +113,6 @@
     [titleView addSubview:nameBt];
     [nameBt addTarget:self action:@selector(nameBtAction) forControlEvents:UIControlEventTouchUpInside];
     
-    
     ownerBt=[UIButton buttonWithType:UIButtonTypeCustom];
     ownerBt.frame=CGRectMake(orginX+(ScreenWidth-2*orginX)/2, 0, (ScreenWidth-2*orginX)/2, 40);
     [ownerBt setTitleColor:YiBlue forState:UIControlStateNormal];
@@ -128,26 +121,17 @@
     ownerBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [ownerBt addTarget:self action:@selector(ownerBtAction) forControlEvents:UIControlEventTouchUpInside];
 
-    
-    
     lineLabel=[[UILabel alloc] init];
     [titleView addSubview:lineLabel];
     lineLabel.font=[UIFont systemFontOfSize:20];
     lineLabel.textColor=YiGray;
     lineLabel.text=@"/";
 
-    
-    
     ownerIV=[[UIImageView alloc] init];
     [titleView addSubview:ownerIV];
     ownerIV.frame=CGRectMake(ScreenWidth-45, 5, 30, 30);
     ownerIV.layer.masksToBounds=YES;
     ownerIV.layer.cornerRadius=4;
-    
-    
-   
-    
-    
     
     forkLabel=[[UILabel alloc] initWithFrame:CGRectMake(orginX, 40, 70, 30)];
     [titleView addSubview:forkLabel];
@@ -161,11 +145,9 @@
     parentBt.titleLabel.font=[UIFont boldSystemFontOfSize:15];
     [titleView addSubview:parentBt];
 
-    
     createLabel=[[UILabel alloc] initWithFrame:CGRectMake(orginX, 70, 100, 30)];
     [titleView addSubview:createLabel];
     createLabel.font=[UIFont systemFontOfSize:11];
-    
     
     homePageBt=[UIButton buttonWithType:UIButtonTypeCustom];
     homePageBt.frame=CGRectMake(orginX+100, 70, (ScreenWidth-2*orginX)-100, 30);
@@ -186,14 +168,11 @@
     [titleView addSubview:segmentControl];
     segmentControl.bt1Label1.text=@"Contributors";
     segmentControl.bt2Label1.text=@"Forks";
-
     segmentControl.bt3Label1.text=@"Stargazers";
-
     tableView.tableHeaderView=titleView;
     segmentControl.ButtonActionBlock=^(int buttonTag){
         
         currentIndex=buttonTag-100;
-
         repositoryDetailDataSource.currentIndex=buttonTag-100;
 
         if (currentIndex==1) {
@@ -248,10 +227,8 @@
     starRep.ownerLogin=_model.user.login;
     starRep.name=_model.name;
     
-    
     if (isStaring) {
         [self showYiProgressHUD:@"unstaring……"];
-
         [[client unstarRepository:starRep] subscribeNext:^(id x) {
         } error:^(NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -271,7 +248,6 @@
         
     }else{
         [self showYiProgressHUD:@"staring……"];
-
         [[client starRepository:starRep]subscribeNext:^(id x) {
         } error:^(NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -326,11 +302,9 @@
         
     }  error:^(NSError *error) {
     } completed:^{
+        
     }];
-    
-    
-    
-
+  
 }
 
 - (void)homePageAction{
@@ -382,8 +356,6 @@
     tableView.tableHeaderView=titleView;
     [tableView reloadData];
     
-    
-    
 }
 
 - (void)addHeader
@@ -396,7 +368,6 @@
 
     refreshHeader.beginRefreshingBlock=^(){
         
-        
         [ApplicationDelegate.apiEngine repositoryDetailWithUserName:_model.user.login repositoryName:_model.name completoinHandler:^(RepositoryModel *model){
             _model=model;
             STRONGSELF
@@ -408,16 +379,8 @@
             STRONGSELF
             [strongSelf loadDataFromApiWithIsFirst:YES];
 
-            
-            
-            
         }];
-        
-        
-        
-        
-        
-        
+       
     };
     
     //    是否在进入该界面的时候就开始进入刷新状态
@@ -434,7 +397,8 @@
     refreshFooter.beginRefreshingBlock=^(){
         STRONGSELF
         [strongSelf loadDataFromApiWithIsFirst:NO];
-    };}
+    };
+}
 
 
 - (void)loadDataFromApiWithIsFirst:(BOOL)isFirst{
@@ -445,53 +409,35 @@
                     [tableView reloadData];
         
                     if (!isFirst) {
-        
                         [refreshFooter endRefreshing];
-        
-        
                     }else
                     {
                         [refreshHeader endRefreshing];
                     }
         
-        
-        
     } secondTableData:^(DataSourceModel* DsOfPageListObject){
         repositoryDetailDataSource.DsOfPageListObject2=DsOfPageListObject;
-        
-        
         [tableView reloadData];
         
         if (!isFirst) {
-            
             [refreshFooter endRefreshing];
-            
-            
         }else
         {
             [refreshHeader endRefreshing];
         }
 
-    
     } thirdTableData:^(DataSourceModel* DsOfPageListObject){
         repositoryDetailDataSource.DsOfPageListObject3=DsOfPageListObject;
-        
         [tableView reloadData];
         
         if (!isFirst) {
-            
             [refreshFooter endRefreshing];
-            
-            
         }else
         {
             [refreshHeader endRefreshing];
         }
-
-    
     }];
-    
-
+  
 }
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -507,15 +453,12 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
-
     if (currentIndex==1) {
         UserModel  *model = [(repositoryDetailDataSource.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
         UserDetailViewController *detail=[[UserDetailViewController alloc] init];
-        
         detail.userModel=model;
         [self.navigationController pushViewController:detail animated:YES];
        
-        
     }else if (currentIndex==2){
         RepositoryModel  *model = [(repositoryDetailDataSource.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
         RepositoryDetailViewController *viewController=[[RepositoryDetailViewController alloc] init];
@@ -524,12 +467,9 @@
     }else if (currentIndex==3){
         UserModel  *model = [(repositoryDetailDataSource.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
         UserDetailViewController *detail=[[UserDetailViewController alloc] init];
-        
         detail.userModel=model;
         [self.navigationController pushViewController:detail animated:YES];
     }
-
-
 }
 
 

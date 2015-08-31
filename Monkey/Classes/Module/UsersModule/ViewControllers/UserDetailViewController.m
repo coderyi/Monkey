@@ -13,8 +13,6 @@
 #import "RepositoriesTableViewCell.h"
 #import "DetailSegmentControl.h"
 #import "WebViewController.h"
-
-
 #import "UIImageView+MJWebCache.h"
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
@@ -28,8 +26,6 @@
     YiRefreshHeader *refreshHeader;
     YiRefreshFooter *refreshFooter;
     int currentIndex;
-
-    
     UIImageView *titleImageView;
     UIButton *loginButton;
     UILabel *name;
@@ -87,19 +83,13 @@
     userDetailDataSource.currentIndex=currentIndex;
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-        
     }
 
-    
     self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets=NO;
     
-   
-    
-    
     tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain ];
     [self.view addSubview:tableView];
-    
     tableView.delegate=self;
     tableView.dataSource=userDetailDataSource;
     tableView.rowHeight=RepositoriesTableViewCellheight;
@@ -134,10 +124,8 @@
     titleImageView.clipsToBounds = YES;
     titleImageView.contentMode = UIViewContentModeScaleAspectFill;
     
-    
     loginButton=[UIButton buttonWithType:UIButtonTypeCustom];
     loginButton.frame=CGRectMake(orginX+sufTitleImageViewSpace+titleImageViewWidth, orginY, loginButtonWidth, 30);
-    
     [titleBg1 addSubview:loginButton];
     [loginButton setTitleColor:YiBlue forState:UIControlStateNormal];
     [loginButton addTarget:self action:@selector(loginButtonAction) forControlEvents:UIControlEventTouchUpInside];
@@ -146,9 +134,6 @@
     [titleBg1 addSubview:name];
     createLabel=[[UILabel alloc] initWithFrame:CGRectMake(orginX, orginY+titleImageViewWidth+5, titleImageViewWidth, 30)];
     [titleBg1 addSubview:createLabel];
-    
-
-    
     
     company=[[UILabel alloc] initWithFrame:CGRectMake(orginX+widthSpace+sufTitleImageViewSpace+titleImageViewWidth, orginY+heightSpace*2+30*2, loginButtonWidth, 30)];
     [titleBg1 addSubview:company];
@@ -160,12 +145,10 @@
     [titleBg1 addSubview:emailBt];
     emailBt.frame=CGRectMake(orginX+widthSpace+sufTitleImageViewSpace+titleImageViewWidth+loginButtonWidth, orginY, emailButtonWidth, 30);
     
-    
     blogBt=[UIButton buttonWithType:UIButtonTypeCustom];
     [titleBg1 addSubview:blogBt];
     blogBt.frame=CGRectMake(orginX+widthSpace+sufTitleImageViewSpace+titleImageViewWidth+loginButtonWidth, orginY+heightSpace+30, emailButtonWidth, 30);
     [blogBt addTarget:self action:@selector(blogAction) forControlEvents:UIControlEventTouchUpInside];
-    
     [blogBt setTitleColor:YiBlue forState:UIControlStateNormal];
     [emailBt setTitleColor:YiBlue forState:UIControlStateNormal];
     
@@ -190,7 +173,6 @@
     [titleBg1 addSubview:line1];
     line1.backgroundColor=YiGray;
     
-    
     segmentControl=[[DetailSegmentControl alloc] initWithFrame:CGRectMake(0, 150+34-35-40, ScreenWidth, 60)];
     [titleView addSubview:segmentControl];
     tableView.tableHeaderView=titleView;
@@ -210,16 +192,11 @@
         }else if (currentIndex==3){
             if (self.DsOfPageListObject3.dsArray.count<1) {
                 [refreshHeader beginRefreshing];}
-
-        }
+            }
         [tableView reloadData];
     };
-    
-    
-
     [self checkFollowStatusAction];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -233,14 +210,12 @@
         WebViewController *web=[[WebViewController alloc] init];
         web.urlString=_userModel.html_url;
         [self.navigationController pushViewController:web animated:YES];
-        
     }
 }
 - (void)followAction{
     OCTUser *user=[OCTUser userWithRawLogin:_userModel.login server:OCTServer.dotComServer];
     NSString *login= _userModel.login;
     user.login=login;
-    
     
     if (isFollowing) {
         [self showYiProgressHUD:@"unfollowing……"];
@@ -300,7 +275,6 @@
     
     OCTUser *user = [OCTUser userWithRawLogin:savedLogin server:OCTServer.dotComServer];
     client = [OCTClient authenticatedClientWithUser:user token:savedToken];
-   
     
     OCTUser *followUser=[OCTUser userWithRawLogin:_userModel.login server:OCTServer.dotComServer];
     NSString *followLogin= _userModel.login;
@@ -309,22 +283,12 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             isFollowing=hasFollowUser.boolValue;
             NSString *rightTitle;
-            if (isFollowing) {
-                rightTitle=@"unfollow";
-            }else{
-                rightTitle=@"follow";
-                
-            }
-            
             self.navigationItem.rightBarButtonItem=nil;
             UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:rightTitle style:UIBarButtonItemStylePlain target:self action:@selector(followAction)];
             self.navigationItem.rightBarButtonItem=right;
-        
         });
         
-        
     }  error:^(NSError *error) {
-        NSLog(@"e %@",error);
         NSString *localizedDescription=[error.userInfo objectForKey:@"NSLocalizedDescription"];
         if ([localizedDescription isEqualToString:@"Sign In Required"] ) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -334,13 +298,9 @@
             
         }
     } completed:^{
-        NSLog(@"c");
-    }];
-    
-    
-    
-//    client
 
+    }];
+ 
 }
 
 //详细见mj的code4app
@@ -372,23 +332,14 @@
         WebViewController *web=[[WebViewController alloc] init];
         web.urlString=_userModel.blog;
         [self.navigationController pushViewController:web animated:YES];
-        
     }
 }
 - (void)loginAction{
-    
-    
-    
-    
     LoginViewController *login=[[LoginViewController alloc] init];
     login.callback=^(NSString *response){
         if ([response isEqualToString:@"yes"]) {
             [self checkFollowStatusAction];
-        }else{
-            
         }
-        
-        
     };
     [self.navigationController pushViewController:login animated:YES];
     
@@ -397,7 +348,6 @@
 
 - (void)refreshTitleView{
     [titleImageView sd_setImageWithURL:[NSURL URLWithString:_userModel.avatar_url]];
-
 
     [loginButton setTitle:_userModel.login forState:UIControlStateNormal];
     
@@ -412,9 +362,6 @@
     segmentControl.bt2Label.text=[NSString stringWithFormat:@"%d",_userModel.following];
 
     segmentControl.bt3Label.text=[NSString stringWithFormat:@"%d",_userModel.followers];
-
-    
-    
     
 }
 
@@ -431,20 +378,12 @@
             [self refreshTitleView];
             [self loadDataFromApiWithIsFirst:YES];
             
-            
         } errorHandel:^(NSError* error){
             
             [self loadDataFromApiWithIsFirst:YES];
             
-            
-            
         }];
-        
-        
-        
-        
-        
-        
+      
     };
     
     //    是否在进入该界面的时候就开始进入刷新状态
@@ -459,9 +398,9 @@
     [refreshFooter footer];
     __weak typeof(self) weakSelf = self;
     refreshFooter.beginRefreshingBlock=^(){
-        
         [weakSelf loadDataFromApiWithIsFirst:NO];
-    };}
+    };
+}
 
 - (void)loadDataFromApiWithIsFirst:(BOOL)isFirst
 {
@@ -471,33 +410,25 @@
         [tableView reloadData];
         
         if (!isFirst) {
-            
             [refreshFooter endRefreshing];
-            
-            
         }else
         {
             [refreshHeader endRefreshing];
         }
         
-        
-        
     } secondTableData:^(DataSourceModel* DsOfPageListObject){
         userDetailDataSource.DsOfPageListObject2=DsOfPageListObject;
-        
-        
+       
         [tableView reloadData];
         
         if (!isFirst) {
             
             [refreshFooter endRefreshing];
             
-            
         }else
         {
             [refreshHeader endRefreshing];
         }
-        
         
     } thirdTableData:^(DataSourceModel* DsOfPageListObject){
         userDetailDataSource.DsOfPageListObject3=DsOfPageListObject;
@@ -505,15 +436,11 @@
         [tableView reloadData];
         
         if (!isFirst) {
-            
             [refreshFooter endRefreshing];
-            
-            
         }else
         {
             [refreshHeader endRefreshing];
         }
-        
         
     }];
     
@@ -527,7 +454,6 @@
 }
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (currentIndex==1) {
@@ -550,20 +476,15 @@
     }else if (currentIndex==2){
         UserModel  *model = [(userDetailDataSource.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
         UserDetailViewController *detail=[[UserDetailViewController alloc] init];
-        
         detail.userModel=model;
         [self.navigationController pushViewController:detail animated:YES];
     }else if (currentIndex==3){
         UserModel  *model = [(userDetailDataSource.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
         UserDetailViewController *detail=[[UserDetailViewController alloc] init];
-        
         detail.userModel=model;
         [self.navigationController pushViewController:detail animated:YES];
     }
 
 }
-
-
-
 
 @end

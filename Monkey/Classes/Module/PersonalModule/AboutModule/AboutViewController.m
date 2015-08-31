@@ -10,10 +10,7 @@
 #import "UserDetailViewController.h"
 #import "RepositoryDetailViewController.h"
 @interface AboutViewController (){
-
-
     UILabel *titleText;
-
 }
 
 @end
@@ -24,7 +21,6 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
-    //    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"cityAppear"];
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
@@ -44,14 +40,12 @@
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
     [titleText setFont:[UIFont systemFontOfSize:19.0]];
-    
     titleText.textAlignment=NSTextAlignmentCenter;
     self.navigationItem.titleView=titleText;
     titleText.text=NSLocalizedString(@"about", @"");
     
     self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets=NO;
-    
     
     UILabel *creator=[[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth-120)/2, 120, 60, 40)];
     [self.view addSubview:creator];
@@ -65,7 +59,6 @@
     [button1 setTitleColor:YiBlue forState:UIControlStateNormal];
     [button1 setTitle:@"coderyi" forState:UIControlStateNormal];
     [button1 addTarget:self action:@selector(bt1Action) forControlEvents:UIControlEventTouchUpInside];
-    
     
     UILabel *edition=[[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth-150)/2, 160, 150, 40)];
     [self.view addSubview:edition];
@@ -92,16 +85,13 @@
     [button2 addTarget:self action:@selector(bt2Action) forControlEvents:UIControlEventTouchUpInside];
     button2.titleLabel.font=[UIFont systemFontOfSize:14];
     
-    
     UILabel *someLabel=[[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth-200)/2, 270, 200, 40)];
     [self.view addSubview:someLabel];
     someLabel.textAlignment=NSTextAlignmentCenter;
     someLabel.textColor=YiTextGray;
     someLabel.text=@"To my old friend,Fengliang";
     someLabel.font=[UIFont systemFontOfSize:14];
-    
-
-    
+   
 }
 
 - (void)didReceiveMemoryWarning {
