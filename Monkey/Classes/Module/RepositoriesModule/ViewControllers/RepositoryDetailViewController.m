@@ -327,6 +327,7 @@
 - (void)refreshTitleView{
 
     float orginX=10;
+    
     segmentControl.bt2Label.text=[NSString stringWithFormat:@"%d",_model.forks_count];
     
     segmentControl.bt3Label.text=[NSString stringWithFormat:@"%d",_model.stargazers_count];
