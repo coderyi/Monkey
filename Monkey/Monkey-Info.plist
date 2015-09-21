@@ -4,14 +4,9 @@
 <dict>
     <key>NSAppTransportSecurity</key>
     <dict>
-        <key>NSExceptionDomains</key>
-        <dict>
-            <key>trending.codehub-app.com</key>
-            <dict>
-                <key>NSThirdPartyExceptionMinimumTLSVersion</key>
-                <string>TLSv1.1</string>
-            </dict>
-        </dict>
+        <!--Connect to anything (this is probably BAD)-->
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
     </dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>

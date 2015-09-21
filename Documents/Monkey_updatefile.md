@@ -9,6 +9,8 @@ iOS9 SDK新增了对App瘦身的功能，详情见[App thining](https://develope
 
 注：bitcode仅在Xcode7以上显示并默认开启。
 
+当然也可以写在新的支持bitcode的第三方库，[iOS 统计分析SDK v3.5.16](http://dev.umeng.com/analytics/ios-doc/sdk-download)
+
 3.HTTP传输安全的问题
 为了强制增强数据访问安全， iOS9 默认会把 所有的http请求 所有从NSURLConnection 、 CFURL 、 NSURLSession发出的 HTTP 请求，都改为 HTTPS 请求：iOS9.x-SDK编译时，默认会让所有从NSURLConnection 、 CFURL 、 NSURLSession发出的 HTTP 请求统一采用TLS 1.2 协议。
 
@@ -21,6 +23,8 @@ iOS9 SDK新增了对App瘦身的功能，详情见[App thining](https://develope
     <true/>
 </dict>
 
-http://dev.umeng.com/social/ios/ios9
+参考链接：
 
-https://github.com/ChenYilong/iOS9AdaptationTips
+[适配iOS9系统](http://dev.umeng.com/social/ios/ios9)
+
+[iOS9适配系列教程](https://github.com/ChenYilong/iOS9AdaptationTips)
