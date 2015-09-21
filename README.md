@@ -39,7 +39,7 @@ Data comes from API GitHub and its related content.
 ##About Open Source
 
 ####Requirements
-iOS7.0+,iPhone,Xcode6.3
+iOS8.0+,iPhone,Xcode7.0
 
 ####Monkey API
 
