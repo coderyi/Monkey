@@ -6,11 +6,15 @@
 
 Monkey is a GitHub third party client,Monkey is a program ape. Monkey for GitHub is my first on-line App,open source project.Welcome to download through two-dimensional code.
 
+
+
 GitHub open source:[https://github.com/coderyi/Monkey](https://github.com/coderyi/Monkey)
 
 App Store:[https://itunes.apple.com/cn/app/monkey-for-github/id1003765407](https://itunes.apple.com/cn/app/monkey-for-github/id1003765407)
 
 Monkey Mac open source:[https://github.com/coderyi/MonkeyForMac](https://github.com/coderyi/MonkeyForMac)
+
+Besides, you can get Android version [GitHot](https://github.com/andyiac/githot) by [andyiac](https://github.com/andyiac) from [this link](http://fir.im/githot) .
 
 ##Monkey for GitHub
 

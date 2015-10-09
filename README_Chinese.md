@@ -12,6 +12,7 @@ App Store地址:[https://itunes.apple.com/cn/app/monkey-for-github/id1003765407]
 
 Monkey Mac地址:[https://github.com/coderyi/MonkeyForMac](https://github.com/coderyi/MonkeyForMac)
 
+另外, 你能够获取Android版本[andyiac](https://github.com/andyiac) 写的 [GitHot](https://github.com/andyiac/githot) ，下载链接 [ fir.im/githot](http://fir.im/githot) .
 
 ##Monkey for GitHub
 
