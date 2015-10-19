@@ -51,12 +51,6 @@
 		0ACEA2DC1B513C17009F6B6D /* RepositoriesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA2D31B513C17009F6B6D /* RepositoriesTableViewCell.m */; };
 		0ACEA2DD1B513C17009F6B6D /* SearchSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA2D51B513C17009F6B6D /* SearchSegmentControl.m */; };
 		0ACEA3081B513E17009F6B6D /* NSObject+JudgeNull.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3071B513E17009F6B6D /* NSObject+JudgeNull.m */; };
-		0ACEA3141B5141D5009F6B6D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3131B5141D5009F6B6D /* README.md */; };
-		0ACEA3161B5141ED009F6B6D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3151B5141ED009F6B6D /* README.md */; };
-		0ACEA3181B51425C009F6B6D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3171B51425C009F6B6D /* README.md */; };
-		0ACEA31A1B514268009F6B6D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3191B514268009F6B6D /* README.md */; };
-		0ACEA31C1B514298009F6B6D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA31B1B514298009F6B6D /* README.md */; };
-		0ACEA31E1B5142F6009F6B6D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA31D1B5142F6009F6B6D /* README.md */; };
 		0ACEA3211B5145A4009F6B6D /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3201B5145A4009F6B6D /* WebViewController.m */; };
 		0ACEA3451B51467A009F6B6D /* RepositoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3341B51467A009F6B6D /* RepositoriesViewController.m */; };
 		0ACEA3461B51467A009F6B6D /* RepositoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3361B51467A009F6B6D /* RepositoryDetailViewController.m */; };
@@ -1664,7 +1658,6 @@
 				0ACEA2C31B513BD2009F6B6D /* BaseNavigationController.m in Sources */,
 				0A857C4E1B4CE4FF00516D23 /* YiRefreshFooter.m in Sources */,
 				0AA374B01B5FA14B00C1C045 /* UserReceivedEventActorModel.m in Sources */,
-				0ACEA3181B51425C009F6B6D /* README.md in Sources */,
 				A1FC339E1B25D92200FCBCE7 /* MJPhotoLoadingView.m in Sources */,
 				A1FC339D1B25D92200FCBCE7 /* MJPhotoBrowser.m in Sources */,
 				0AFCEBE61B63478300051D9A /* RepositoryDetailDataSource.m in Sources */,
@@ -1674,7 +1667,6 @@
 				0ACEA2D61B513C17009F6B6D /* DataSourceModel.m in Sources */,
 				0AFCEC011B6359FD00051D9A /* UserDetailViewModel.m in Sources */,
 				0A91BEAD1B5BC4E700A20743 /* LanguageViewController.m in Sources */,
-				0ACEA3141B5141D5009F6B6D /* README.md in Sources */,
 				A1FC33B51B25D92200FCBCE7 /* SDWebImageManager.m in Sources */,
 				A1FC33A31B25D92200FCBCE7 /* UIImageView+MJWebCache.m in Sources */,
 				A1FC33BB1B25D92200FCBCE7 /* UIImageView+HighlightedWebCache.m in Sources */,
@@ -1698,7 +1690,6 @@
 				0ACEA3481B51467A009F6B6D /* UserRankViewController.m in Sources */,
 				0ACEA2DD1B513C17009F6B6D /* SearchSegmentControl.m in Sources */,
 				0AFCEBF81B63575300051D9A /* SearchDataSource.m in Sources */,
-				0ACEA31A1B514268009F6B6D /* README.md in Sources */,
 				0AA3747E1B5F87D200C1C045 /* ShowcasesTableViewCell.m in Sources */,
 				A1FC33B71B25D92200FCBCE7 /* UIButton+WebCache.m in Sources */,
 				A1FC33B31B25D92200FCBCE7 /* SDWebImageDownloader.m in Sources */,
@@ -1721,7 +1712,6 @@
 				A1FC33B11B25D92200FCBCE7 /* SDWebImageCompat.m in Sources */,
 				0ACEA3451B51467A009F6B6D /* RepositoriesViewController.m in Sources */,
 				0AFCEBCC1B63352D00051D9A /* UserRankViewModel.m in Sources */,
-				0ACEA3161B5141ED009F6B6D /* README.md in Sources */,
 				0AA374911B5F8B0200C1C045 /* ShowcasesDetailViewController.m in Sources */,
 				A1FC33A51B25D92200FCBCE7 /* NSData+MKBase64.m in Sources */,
 				A1FC33AC1B25D92200FCBCE7 /* MKNetworkOperation.m in Sources */,
@@ -1731,11 +1721,9 @@
 				A1FC33AA1B25D92200FCBCE7 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				A1FC33BC1B25D92200FCBCE7 /* UIImageView+WebCache.m in Sources */,
 				A1FC32B11B25D90B00FCBCE7 /* main.m in Sources */,
-				0ACEA31E1B5142F6009F6B6D /* README.md in Sources */,
 				0AA374AD1B5FA12100C1C045 /* UserReceivedEventModel.m in Sources */,
 				0AA374B31B5FA15E00C1C045 /* UserReceivedEventRepoModel.m in Sources */,
 				0AFCEBFB1B63575F00051D9A /* SearchViewModel.m in Sources */,
-				0ACEA31C1B514298009F6B6D /* README.md in Sources */,
 				0AFCEBBE1B62CE3A00051D9A /* TrendingDataSource.m in Sources */,
 				0AFCEBE91B63479000051D9A /* RepositoryDetailViewModel.m in Sources */,
 				0ACEA2A91B51383C009F6B6D /* NSObject+HUD.m in Sources */,
