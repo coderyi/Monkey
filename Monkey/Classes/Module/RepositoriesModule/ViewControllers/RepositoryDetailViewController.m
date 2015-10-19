@@ -331,8 +331,12 @@
     segmentControl.bt2Label.text=[NSString stringWithFormat:@"%d",_model.forks_count];
     
     segmentControl.bt3Label.text=[NSString stringWithFormat:@"%d",_model.stargazers_count];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
     float nameWidth=[_model.name sizeWithFont:[UIFont boldSystemFontOfSize:19] constrainedToSize:CGSizeMake((ScreenWidth-2*10)/2, 40) lineBreakMode:NSLineBreakByWordWrapping].width;
-    
+#pragma clang diagnostic pop
+
     nameBt.frame=CGRectMake(10, 0, nameWidth, 40);
     lineLabel.frame=CGRectMake(orginX+nameWidth, 0, 10, 40);
     ownerBt.frame=CGRectMake(orginX+nameWidth+10, 0, (ScreenWidth-2*orginX)/2-40, 40);

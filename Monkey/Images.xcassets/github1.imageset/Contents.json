@@ -2,8 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "github1.png"
+      "filename" : "github1.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
@@ -12,10 +12,6 @@
     {
       "idiom" : "universal",
       "scale" : "3x"
-    },
-    {
-      "idiom" : "universal",
-      "unassigned" : true
     }
   ],
   "info" : {

@@ -155,9 +155,12 @@
         [self.navigationController pushViewController:about animated:YES];
 
     }else if (indexPath.section==2){
-        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
         [self presentModalViewController:[UMFeedback feedbackModalViewController]
                                 animated:YES];
+#pragma clang diagnostic pop
 
     }
     

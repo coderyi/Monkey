@@ -173,24 +173,32 @@
     segmentControl=[[DetailSegmentControl alloc] initWithFrame:CGRectMake(0, 150+34-35-40, ScreenWidth, 60)];
     [titleView addSubview:segmentControl];
     tableView.tableHeaderView=titleView;
+    __weak UserDetailDataSource * weakUserDetailDataSource=userDetailDataSource;
+    __weak YiRefreshHeader * weakRefreshHeader=refreshHeader;
+    __weak UITableView * weakTableView=tableView;
+
     segmentControl.ButtonActionBlock=^(int buttonTag){
         
         currentIndex=buttonTag-100;
-        userDetailDataSource.currentIndex=buttonTag-100;
+        __strong UserDetailDataSource * strongUserDetailDataSource=weakUserDetailDataSource;
+        __strong YiRefreshHeader * strongRefreshHeader=weakRefreshHeader;
+        __strong UITableView * strongTableView=weakTableView;
+
+        strongUserDetailDataSource.currentIndex=buttonTag-100;
 
         if (currentIndex==1) {
             if (self.DsOfPageListObject1.dsArray.count<1) {
-                [refreshHeader beginRefreshing];
+                [strongRefreshHeader beginRefreshing];
             }
         }else if (currentIndex==2){
             if (self.DsOfPageListObject2.dsArray.count<1) {
-                [refreshHeader beginRefreshing];}
+                [strongRefreshHeader beginRefreshing];}
 
         }else if (currentIndex==3){
             if (self.DsOfPageListObject3.dsArray.count<1) {
-                [refreshHeader beginRefreshing];}
+                [strongRefreshHeader beginRefreshing];}
             }
-        [tableView reloadData];
+        [strongTableView reloadData];
     };
     [self checkFollowStatusAction];
 }

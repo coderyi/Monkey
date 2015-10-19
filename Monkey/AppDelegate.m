@@ -140,9 +140,14 @@
         
         [UMessage registerRemoteNotificationAndUserNotificationSettings:userSettings];
     } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
         [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge |
          UIRemoteNotificationTypeSound |
          UIRemoteNotificationTypeAlert];
+#pragma clang diagnostic pop
+
     }
     [UMessage setLogEnabled:NO];
     

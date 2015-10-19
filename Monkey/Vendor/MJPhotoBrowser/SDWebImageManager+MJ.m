@@ -12,8 +12,14 @@
 + (void)downloadWithURL:(NSURL *)url
 {
     // cmp不能为空
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
     [[self sharedManager] downloadWithURL:url options:SDWebImageLowPriority|SDWebImageRetryFailed progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
         
     }];
+#pragma clang diagnostic pop
+
 }
 @end

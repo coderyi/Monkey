@@ -113,7 +113,9 @@
         __unsafe_unretained MJPhotoView *photoView = self;
         __unsafe_unretained MJPhotoLoadingView *loading = _photoLoadingView;
       
-        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
         [_imageView setImageWithURL:_photo.url placeholderImage:_photo.srcImageView.image options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
             if (receivedSize > kMinProgress) {
                 loading.progress = (float)receivedSize/expectedSize;
@@ -121,6 +123,8 @@
         } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             [photoView photoDidFinishLoadWithImage:image];
         }];
+#pragma clang diagnostic pop
+
     }
 }
 

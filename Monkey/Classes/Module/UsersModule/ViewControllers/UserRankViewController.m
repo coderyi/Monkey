@@ -243,12 +243,16 @@
     tableView1.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self addHeader:1];
     [self addFooter:1];
-    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-retain-cycles"
+
+    __weak UIScrollView * weakScrollView=scrollView;
     segmentControl.ButtonActionBlock=^(int buttonTag){
-        
+        __strong UIScrollView * strongScrollView=weakScrollView;
+
         currentIndex=buttonTag-100;
-        [scrollView scrollRectToVisible:CGRectMake(ScreenWidth * (currentIndex-1),0,ScreenWidth,bgViewHeight) animated:NO];
-        [scrollView setContentOffset:CGPointMake(ScreenWidth* (currentIndex-1),0)];
+        [strongScrollView scrollRectToVisible:CGRectMake(ScreenWidth * (currentIndex-1),0,ScreenWidth,bgViewHeight) animated:NO];
+        [strongScrollView setContentOffset:CGPointMake(ScreenWidth* (currentIndex-1),0)];
         
         if (currentIndex==1) {
             if (![titleText.text isEqualToString:tableView1Language]) {
@@ -307,6 +311,8 @@
             
         }
     };
+#pragma clang diagnostic pop
+
     currentIndex=1;
 }
 

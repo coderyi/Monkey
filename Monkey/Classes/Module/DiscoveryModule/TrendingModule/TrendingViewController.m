@@ -195,6 +195,9 @@
     tableView1.rowHeight=RepositoriesTableViewCellheight;
     tableView1.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self addHeader:1];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-retain-cycles"
+
     segmentControl.ButtonActionBlock=^(int buttonTag){
         currentIndex=buttonTag-100;
         [scrollView scrollRectToVisible:CGRectMake(ScreenWidth * (currentIndex-1),0,ScreenWidth,bgViewHeight) animated:NO];
@@ -241,7 +244,8 @@
             
         }
     };
-    
+#pragma clang diagnostic pop
+
     currentIndex=1;
     
 }

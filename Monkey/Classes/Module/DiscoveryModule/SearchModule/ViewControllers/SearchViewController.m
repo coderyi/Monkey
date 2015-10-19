@@ -15,8 +15,6 @@
 #import "SearchViewModel.h"
 #import "SearchDataSource.h"
 @interface SearchViewController ()<UITableViewDelegate,UISearchBarDelegate>{
-    UITableView *tableView1;
-    UITableView *tableView2;
     int currentIndex;
     YiRefreshHeader *refreshHeader1;
     YiRefreshFooter *refreshFooter1;
@@ -32,11 +30,13 @@
 @property (strong, nonatomic) MKNetworkOperation *apiOperation;
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
+@property(nonatomic,strong)UITableView *tableView1;
+@property(nonatomic,strong)UITableView *tableView2;
 
 @end
 
 @implementation SearchViewController
-
+@synthesize tableView1,tableView2;
 #pragma mark - Lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -94,27 +94,33 @@
     [self addHeader:1];
     [self addFooter:1];
     tableView1.tag=11;
+    @weakify(self);
+    __weak SearchDataSource * weakSearchDataSourcel = searchDataSourcel;
+
 
     searchSegment.ButtonActionBlock=^(int buttonTag){
         currentIndex=buttonTag-100;
-        
+        @strongify(self);
+        __strong SearchDataSource * strongSearchDataSourcel = weakSearchDataSourcel;
+
         if (currentIndex==1) {
-            tableView1.hidden=NO;
-            tableView2.hidden=YES;
+
+            self.tableView1.hidden=NO;
+            self.tableView2.hidden=YES;
         }else if (currentIndex==2){
             if (tableView2==nil) {
                 tableView2=[[UITableView alloc] initWithFrame:CGRectMake(0, 30, ScreenWidth, ScreenHeight-64-30) style:UITableViewStylePlain];
-                [self.view addSubview:tableView2];
+                [self.view addSubview:self.tableView2];
                 
-                tableView2.tag=12;
-                tableView2.dataSource=searchDataSourcel;
-                tableView2.delegate=self;
+                self.tableView2.tag=12;
+                self.tableView2.dataSource=strongSearchDataSourcel;
+                self.tableView2.delegate=self;
                 [self addHeader:2];
                 [self addFooter:2];
                 
             }
-            tableView1.hidden=YES;
-            tableView2.hidden=NO;
+            self.tableView1.hidden=YES;
+            self.tableView2.hidden=NO;
         }
         
      };
