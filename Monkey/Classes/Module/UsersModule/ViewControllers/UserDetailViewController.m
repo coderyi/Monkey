@@ -378,7 +378,8 @@
     refreshHeader=[[YiRefreshHeader alloc] init];
     refreshHeader.scrollView=tableView;
     [refreshHeader header];
-    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-retain-cycles"
     refreshHeader.beginRefreshingBlock=^(){
         [ApplicationDelegate.apiEngine userDetailWithUserName:_userModel.login completoinHandler:^(UserModel *model){
             _userModel=model;
@@ -392,7 +393,8 @@
         }];
       
     };
-    
+#pragma clang diagnostic pop
+
     //    是否在进入该界面的时候就开始进入刷新状态
     
     [refreshHeader beginRefreshing];

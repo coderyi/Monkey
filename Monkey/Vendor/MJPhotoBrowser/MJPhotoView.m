@@ -269,7 +269,12 @@
 
 - (void)dealloc
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-retain-cycles"
+
     // 取消请求
-    [_imageView setImageWithURL:[NSURL URLWithString:@"file:///abc"]];
+    [_imageView sd_setImageWithURL:[NSURL URLWithString:@"file:///abc"]];
+#pragma clang diagnostic pop
+
 }
 @end

@@ -175,6 +175,9 @@
     segmentControl.bt2Label1.text=@"Forks";
     segmentControl.bt3Label1.text=@"Stargazers";
     tableView.tableHeaderView=titleView;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-retain-cycles"
+
     segmentControl.ButtonActionBlock=^(int buttonTag){
         
         currentIndex=buttonTag-100;
@@ -195,6 +198,8 @@
         }
         [tableView reloadData];
     };
+#pragma clang diagnostic pop
+
     [self refreshTitleView];
     [self checkStarStatusAction];
 
@@ -335,7 +340,6 @@
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
     float nameWidth=[_model.name sizeWithFont:[UIFont boldSystemFontOfSize:19] constrainedToSize:CGSizeMake((ScreenWidth-2*10)/2, 40) lineBreakMode:NSLineBreakByWordWrapping].width;
-#pragma clang diagnostic pop
 
     nameBt.frame=CGRectMake(10, 0, nameWidth, 40);
     lineLabel.frame=CGRectMake(orginX+nameWidth, 0, 10, 40);
@@ -359,6 +363,8 @@
 
 
     float descHeight=[_model.repositoryDescription sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake((ScreenWidth-2*orginX), 700) lineBreakMode:NSLineBreakByWordWrapping].height+5;
+#pragma clang diagnostic pop
+
     descLabel.text=_model.repositoryDescription;
     descLabel.frame=CGRectMake(orginX, 130+parentheight-30, (ScreenWidth-2*orginX), descHeight);
     segmentControl.frame=CGRectMake(0, 130+descHeight+5+parentheight-30, ScreenWidth, 60);
@@ -374,8 +380,9 @@
     refreshHeader=[[YiRefreshHeader alloc] init];
     refreshHeader.scrollView=tableView;
     [refreshHeader header];
-
-    WEAKSELF    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-retain-cycles"
+    WEAKSELF
 
     refreshHeader.beginRefreshingBlock=^(){
         
@@ -393,7 +400,8 @@
         }];
        
     };
-    
+#pragma clang diagnostic pop
+
     //    是否在进入该界面的时候就开始进入刷新状态
     
     [refreshHeader beginRefreshing];
