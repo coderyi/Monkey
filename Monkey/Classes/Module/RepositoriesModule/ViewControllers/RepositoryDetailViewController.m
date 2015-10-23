@@ -20,7 +20,6 @@
     UITableView *tableView;
     YiRefreshHeader *refreshHeader;
     YiRefreshFooter *refreshFooter;
-    UILabel *titleText;
 
     DetailSegmentControl *segmentControl;
     UIButton *nameBt;
@@ -73,6 +72,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = _model.name;
+
     repositoryDetailDataSource=[[RepositoryDetailDataSource alloc] init];
     repositoryDetailViewModel=[[RepositoryDetailViewModel alloc] init];
     repositoryDetailViewModel.model=_model;
@@ -80,13 +81,6 @@
     repositoryDetailDataSource.currentIndex=currentIndex;
 
     // Do any additional setup after loading the view.
-    titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
-    titleText.backgroundColor = [UIColor clearColor];
-    titleText.textColor=[UIColor whiteColor];
-    [titleText setFont:[UIFont systemFontOfSize:19.0]];
-    
-    titleText.textAlignment=NSTextAlignmentCenter;
-    self.navigationItem.titleView=titleText;
     
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;

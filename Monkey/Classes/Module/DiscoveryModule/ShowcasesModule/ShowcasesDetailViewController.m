@@ -55,7 +55,7 @@
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
-    
+    self.title=_model.name;
     self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets=NO;
     tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain ];
@@ -165,10 +165,10 @@
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
     }
     RepositoryModel  *model = [(self.DsOfPageListObject.dsArray) objectAtIndex:indexPath.row];
-    cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
+    cell.rankLabel.text=[NSString stringWithFormat:@"%ld",(long)(indexPath.row+1)];
     cell.repositoryLabel.text=[NSString stringWithFormat:@"%@",model.name];
     cell.userLabel.text=[NSString stringWithFormat:@"Owner:%@",model.user.login];
-    [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url] placeholderImage:nil];
+    [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url]];
     cell.descriptionLabel.text=[NSString stringWithFormat:@"%@",model.repositoryDescription];
     [cell.homePageBt setTitle:model.homepage forState:UIControlStateNormal];
     cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];

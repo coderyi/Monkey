@@ -47,6 +47,7 @@
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
         
     }
+    self.title=@"Showcases";
     self.automaticallyAdjustsScrollViewInsets=NO;
     tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain ];
     [self.view addSubview:tableView];

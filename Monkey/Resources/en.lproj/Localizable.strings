@@ -25,6 +25,7 @@
 "all languages"="all languages";
 "city"="city";
 "language"="language";
+"Language"="Language";
 
 
 "Discovery"="Discovery";
@@ -42,3 +43,7 @@
 "pull down"="pull down";
 "release"="release";
 "News"="News";
+"More"="More";
+"Select City"="Select City";
+"Select Country"="Select Country";
+

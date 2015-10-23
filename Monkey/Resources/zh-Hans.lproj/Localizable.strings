@@ -24,6 +24,8 @@
 "all languages"="所有语言";
 "city"="城市";
 "language"="语言";
+"Language"="语言";
+
 "Discovery"="发现";
 
 "login"="登录";
@@ -40,3 +42,9 @@
 "release"="松开以刷新";
 
 "News"="动态";
+"More"="更多";
+"Select City"="选择城市";
+"Select Country"="选择国家";
+
+
+

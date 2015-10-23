@@ -259,7 +259,7 @@
                 [refreshHeader1 beginRefreshing];
             }
             if (self.DsOfPageListObject1.totalCount>0) {
-              [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject1.totalCount] forState:UIControlStateNormal];
+              [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)self.DsOfPageListObject1.totalCount] forState:UIControlStateNormal];
             }
         }else if (currentIndex==2){
             if (tableView2==nil) {
@@ -279,7 +279,7 @@
             }
             
             if (self.DsOfPageListObject2.totalCount>0) {
-                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject2.totalCount] forState:UIControlStateNormal];
+                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)self.DsOfPageListObject2.totalCount] forState:UIControlStateNormal];
             }
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"countryAppear"] isEqualToString:@"2"]) {
                 [refreshHeader2 beginRefreshing];
@@ -305,7 +305,7 @@
                 [refreshHeader3 beginRefreshing];
             }
             if (self.DsOfPageListObject3.totalCount>0) {
-                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",self.DsOfPageListObject3.totalCount] forState:UIControlStateNormal];
+                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)(self.DsOfPageListObject3.totalCount)] forState:UIControlStateNormal];
             }
         }else if (currentIndex==4){
             
@@ -326,6 +326,7 @@
         [refreshHeader1 header];
         __weak typeof(self) weakSelf = self;
         refreshHeader1.beginRefreshingBlock=^(){
+            __strong typeof(self) strongSelf = weakSelf;
             [weakSelf loadDataFromApiWithIsFirst:YES];
         };
         
@@ -337,9 +338,10 @@
         refreshHeader2=[[YiRefreshHeader alloc] init];
         refreshHeader2.scrollView=tableView2;
         [refreshHeader2 header];
-        __weak typeof(self) weakSelf = self;
+        @weakify(self);
         refreshHeader2.beginRefreshingBlock=^(){
-            [weakSelf loadDataFromApiWithIsFirst:YES];
+            @strongify(self);
+            [self loadDataFromApiWithIsFirst:YES];
         };
         
         //    是否在进入该界面的时候就开始进入刷新状态
@@ -351,9 +353,10 @@
         refreshHeader3=[[YiRefreshHeader alloc] init];
         refreshHeader3.scrollView=tableView3;
         [refreshHeader3 header];
-        __weak typeof(self) weakSelf = self;
+        @weakify(self);
         refreshHeader3.beginRefreshingBlock=^(){
-            [weakSelf loadDataFromApiWithIsFirst:YES];
+            @strongify(self);
+            [self loadDataFromApiWithIsFirst:YES];
         };
         
         //    是否在进入该界面的时候就开始进入刷新状态
@@ -365,34 +368,34 @@
 
 - (void)addFooter:(int)type
 {
-    __weak typeof(self) weakSelf = self;
+    @weakify(self);
     if (type==1) {
-
+        @strongify(self);
         //    YiRefreshFooter  底部刷新按钮的使用
         refreshFooter1=[[YiRefreshFooter alloc] init];
         refreshFooter1.scrollView=tableView1;
         [refreshFooter1 footer];
         refreshFooter1.beginRefreshingBlock=^(){
-            [weakSelf loadDataFromApiWithIsFirst:NO];
+            [self loadDataFromApiWithIsFirst:NO];
         };
     }else if (type==2){
-            
+            @strongify(self);
             //    YiRefreshFooter  底部刷新按钮的使用
             refreshFooter2=[[YiRefreshFooter alloc] init];
             refreshFooter2.scrollView=tableView2;
             [refreshFooter2 footer];
             refreshFooter2.beginRefreshingBlock=^(){
-                [weakSelf loadDataFromApiWithIsFirst:NO];
+                [self loadDataFromApiWithIsFirst:NO];
             };
             
     }else if (type==3){
-            
+            @strongify(self);
             //    YiRefreshFooter  底部刷新按钮的使用
             refreshFooter3=[[YiRefreshFooter alloc] init];
             refreshFooter3.scrollView=tableView3;
             [refreshFooter3 footer];
             refreshFooter3.beginRefreshingBlock=^(){
-                [weakSelf loadDataFromApiWithIsFirst:NO];
+                [self loadDataFromApiWithIsFirst:NO];
             };
     }
 }
@@ -424,7 +427,7 @@
     } secondTableData:^(DataSourceModel* DsOfPageListObject){
         userRankDataSource.DsOfPageListObject2=DsOfPageListObject;
 
-                    [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",DsOfPageListObject.totalCount] forState:UIControlStateNormal];
+                    [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)DsOfPageListObject.totalCount] forState:UIControlStateNormal];
                     [tableView2 reloadData];
         
                     if (!isFirst) {
@@ -436,7 +439,7 @@
     } thirdTableData:^(DataSourceModel* DsOfPageListObject){
         userRankDataSource.DsOfPageListObject3=DsOfPageListObject;
 
-                    [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",DsOfPageListObject.totalCount] forState:UIControlStateNormal];
+                    [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)DsOfPageListObject.totalCount] forState:UIControlStateNormal];
                     [tableView3 reloadData];
                     if (!isFirst) {
                         [refreshFooter3 endRefreshing];

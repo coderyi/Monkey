@@ -37,7 +37,7 @@
         }
         UserModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
         cell.textLabel.text=model.login;
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url]];
         cell.imageView.layer.masksToBounds=YES;
         cell.imageView.layer.cornerRadius=8;
         return cell;

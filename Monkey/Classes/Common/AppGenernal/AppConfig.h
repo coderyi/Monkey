@@ -34,7 +34,7 @@
 #define STRONGSELF typeof(weakSelf) __strong strongSelf = weakSelf;
 
 /**
- *  我的GitHub的信息,这个是不能被您使用的，否则侵权
+ *  this is not to be used by you, otherwise infringement
  */
 #define CoderyiClientID @"a8d9c1a366f057a23753"
 #define CoderyiClientSecret @"f1e47cd31800a90e517b37731038ae07dca580d2"

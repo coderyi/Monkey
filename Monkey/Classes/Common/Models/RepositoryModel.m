@@ -24,7 +24,7 @@
 //    model.isPrivate = [[dict objectForKey:@"isPrivate"] boolValue] ;
 
     model.html_url = [[dict objectForKey:@"html_url"] isNull]?@"":[dict objectForKey:@"html_url"] ;
-    model.repositoryDescription = [dict objectForKey:@"description"] ;
+    model.repositoryDescription = [[dict objectForKey:@"description"] isNull]?@"":[dict objectForKey:@"description"] ;
     model.isFork = [[dict objectForKey:@"fork"] boolValue] ;
 //    model.url = [dict objectForKey:@"url"] ;
 //    model.forks_url = [dict objectForKey:@"forks_url"] ;
@@ -50,7 +50,8 @@
     NSDictionary *parent=[dict objectForKey:@"parent"];
     NSDictionary *parentOwner=[parent objectForKey:@"owner"];
     model.parentOwnerName=[parentOwner objectForKey:@"login"];
-    
+    model.mirror_url =[[dict objectForKey:@"mirror_url"] isNull]?@"":[dict objectForKey:@"mirror_url"] ;
+
     return model;
 }
 

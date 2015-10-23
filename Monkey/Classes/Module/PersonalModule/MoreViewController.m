@@ -41,7 +41,7 @@
     [titleText setFont:[UIFont systemFontOfSize:19.0]];
     titleText.textAlignment=NSTextAlignmentCenter;
     self.navigationItem.titleView=titleText;
-    titleText.text=@"More";
+    titleText.text=NSLocalizedString(@"More", nil);
     
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;

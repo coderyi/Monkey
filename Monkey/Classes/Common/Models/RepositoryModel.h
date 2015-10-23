@@ -35,6 +35,8 @@
 //@property int open_issues;
 //@property int watchers;
 @property(nonatomic,strong) UserModel *user;
+@property(nonatomic,strong)NSString *mirror_url;
+
 
 //detail
 @property(nonatomic,strong) NSString *parentOwnerName;

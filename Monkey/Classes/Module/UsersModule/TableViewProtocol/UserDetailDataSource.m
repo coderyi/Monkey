@@ -42,7 +42,7 @@
             cell.titleImageView.hidden=YES;
         }
         RepositoryModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
-        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
+        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",(long)(indexPath.row+1)];
         cell.repositoryLabel.text=[NSString stringWithFormat:@"%@",model.name];
         if (model.isFork) {
             cell.userLabel.text=[NSString stringWithFormat:@"fork  %@",model.language];
@@ -68,10 +68,10 @@
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
         }
         UserModel  *model = [(self.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
-        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
+        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",(long)(indexPath.row+1)];
         cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
         cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
-        [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
+        [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url]];
         return cell;
     }else if (currentIndex==3){ RankTableViewCell *cell;
         
@@ -82,10 +82,10 @@
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
         }
         UserModel  *model = [(self.DsOfPageListObject3.dsArray) objectAtIndex:indexPath.row];
-        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
+        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",(long)(indexPath.row+1)];
         cell.mainLabel.text=[NSString stringWithFormat:@"%@",model.login];
         cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
-        [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:nil];
+        [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url]];
         return cell;
     }
     return nil;

@@ -407,7 +407,8 @@
     [refreshFooter footer];
     __weak typeof(self) weakSelf = self;
     refreshFooter.beginRefreshingBlock=^(){
-        [weakSelf loadDataFromApiWithIsFirst:NO];
+        __strong typeof(self) strongSelf = weakSelf;
+        [strongSelf loadDataFromApiWithIsFirst:NO];
     };
 }
 
