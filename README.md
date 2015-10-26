@@ -1,5 +1,7 @@
 # Monkey for GitHub
 
+[![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=562db3ea2492560100211452&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/562db3ea2492560100211452/build/latest)
+
 ![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_liantuerweima.png?imageMogr2/thumbnail/!60p) 
 
 [中文README](https://github.com/coderyi/Monkey/blob/master/README_Chinese.md)
