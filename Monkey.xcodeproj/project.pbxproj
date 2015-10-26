@@ -59,6 +59,13 @@
 		0ACEA34C1B51467A009F6B6D /* UserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3441B51467A009F6B6D /* UserDetailViewController.m */; };
 		0ACEA3521B516030009F6B6D /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3501B516030009F6B6D /* AboutViewController.m */; };
 		0ACEA3551B51604A009F6B6D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3541B51604A009F6B6D /* LoginViewController.m */; };
+		0AFC7E0A1BDE0BF7008B9A5D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC7DFF1BDE0BF7008B9A5D /* .gitignore */; settings = {ASSET_TAGS = (); }; };
+		0AFC7E0B1BDE0BF7008B9A5D /* AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC7E011BDE0BF7008B9A5D /* AESCrypt.m */; settings = {ASSET_TAGS = (); }; };
+		0AFC7E0C1BDE0BF7008B9A5D /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC7E021BDE0BF7008B9A5D /* LICENSE */; settings = {ASSET_TAGS = (); }; };
+		0AFC7E0D1BDE0BF7008B9A5D /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC7E041BDE0BF7008B9A5D /* NSData+Base64.m */; settings = {ASSET_TAGS = (); }; };
+		0AFC7E0E1BDE0BF7008B9A5D /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC7E061BDE0BF7008B9A5D /* NSData+CommonCrypto.m */; settings = {ASSET_TAGS = (); }; };
+		0AFC7E0F1BDE0BF7008B9A5D /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC7E081BDE0BF7008B9A5D /* NSString+Base64.m */; settings = {ASSET_TAGS = (); }; };
+		0AFC7E101BDE0BF7008B9A5D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC7E091BDE0BF7008B9A5D /* README.md */; settings = {ASSET_TAGS = (); }; };
 		0AFCEBBE1B62CE3A00051D9A /* TrendingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFCEBBD1B62CE3A00051D9A /* TrendingDataSource.m */; };
 		0AFCEBC41B62D17D00051D9A /* TrendingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFCEBC31B62D17D00051D9A /* TrendingViewModel.m */; };
 		0AFCEBC91B63347C00051D9A /* UserRankDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFCEBC81B63347C00051D9A /* UserRankDataSource.m */; };
@@ -447,6 +454,17 @@
 		0ACEA3501B516030009F6B6D /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		0ACEA3531B51604A009F6B6D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		0ACEA3541B51604A009F6B6D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		0AFC7DFF1BDE0BF7008B9A5D /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		0AFC7E001BDE0BF7008B9A5D /* AESCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESCrypt.h; sourceTree = "<group>"; };
+		0AFC7E011BDE0BF7008B9A5D /* AESCrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESCrypt.m; sourceTree = "<group>"; };
+		0AFC7E021BDE0BF7008B9A5D /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		0AFC7E031BDE0BF7008B9A5D /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		0AFC7E041BDE0BF7008B9A5D /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		0AFC7E051BDE0BF7008B9A5D /* NSData+CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+CommonCrypto.h"; sourceTree = "<group>"; };
+		0AFC7E061BDE0BF7008B9A5D /* NSData+CommonCrypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CommonCrypto.m"; sourceTree = "<group>"; };
+		0AFC7E071BDE0BF7008B9A5D /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
+		0AFC7E081BDE0BF7008B9A5D /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
+		0AFC7E091BDE0BF7008B9A5D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0AFCEBBC1B62CE3A00051D9A /* TrendingDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendingDataSource.h; sourceTree = "<group>"; };
 		0AFCEBBD1B62CE3A00051D9A /* TrendingDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendingDataSource.m; sourceTree = "<group>"; };
 		0AFCEBC21B62D17D00051D9A /* TrendingViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendingViewModel.h; sourceTree = "<group>"; };
@@ -1030,6 +1048,24 @@
 			path = LoginModule;
 			sourceTree = "<group>";
 		};
+		0AFC7DFE1BDE0BF7008B9A5D /* AESCrypt-ObjC */ = {
+			isa = PBXGroup;
+			children = (
+				0AFC7DFF1BDE0BF7008B9A5D /* .gitignore */,
+				0AFC7E001BDE0BF7008B9A5D /* AESCrypt.h */,
+				0AFC7E011BDE0BF7008B9A5D /* AESCrypt.m */,
+				0AFC7E021BDE0BF7008B9A5D /* LICENSE */,
+				0AFC7E031BDE0BF7008B9A5D /* NSData+Base64.h */,
+				0AFC7E041BDE0BF7008B9A5D /* NSData+Base64.m */,
+				0AFC7E051BDE0BF7008B9A5D /* NSData+CommonCrypto.h */,
+				0AFC7E061BDE0BF7008B9A5D /* NSData+CommonCrypto.m */,
+				0AFC7E071BDE0BF7008B9A5D /* NSString+Base64.h */,
+				0AFC7E081BDE0BF7008B9A5D /* NSString+Base64.m */,
+				0AFC7E091BDE0BF7008B9A5D /* README.md */,
+			);
+			path = "AESCrypt-ObjC";
+			sourceTree = "<group>";
+		};
 		0AFCEB9F1B62CCA800051D9A /* TableViewProtocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -1193,6 +1229,7 @@
 			isa = PBXGroup;
 			children = (
 				0ACEA3171B51425C009F6B6D /* README.md */,
+				0AFC7DFE1BDE0BF7008B9A5D /* AESCrypt-ObjC */,
 				0A857C471B4CE4FF00516D23 /* YiRefresh */,
 				A1FC32F91B25D92200FCBCE7 /* MJPhotoBrowser */,
 				A1FC330B1B25D92200FCBCE7 /* MKNetworkKit */,
@@ -1607,6 +1644,7 @@
 				A1FC33C41B25D92200FCBCE7 /* save@2x.png in Resources */,
 				A1FC33BF1B25D92200FCBCE7 /* UMFeedbackLocalizable.strings in Resources */,
 				A1FC33CB1B25D92200FCBCE7 /* umeng_fb_audio_play_01@2x.png in Resources */,
+				0AFC7E0A1BDE0BF7008B9A5D /* .gitignore in Resources */,
 				A1FC33C81B25D92200FCBCE7 /* ToolViewInputVoiceHL@2x.png in Resources */,
 				A1FC33C91B25D92200FCBCE7 /* umeng_fb_audio_dialog_cancel@2x.png in Resources */,
 				A1FC33C31B25D92200FCBCE7 /* microphone@2x.png in Resources */,
@@ -1615,6 +1653,7 @@
 				A1FC33C61B25D92200FCBCE7 /* ToolViewInputTextHL@2x.png in Resources */,
 				0A969C8F1B5E742300601969 /* Localizable.strings in Resources */,
 				A1FC33C51B25D92200FCBCE7 /* ToolViewInputText@2x.png in Resources */,
+				0AFC7E0C1BDE0BF7008B9A5D /* LICENSE in Resources */,
 				A1FC339C1B25D92200FCBCE7 /* MJPhotoBrowser.bundle in Resources */,
 				0A857C4D1B4CE4FF00516D23 /* down@2x.png in Resources */,
 				A1FC32B81B25D90B00FCBCE7 /* Main.storyboard in Resources */,
@@ -1659,6 +1698,7 @@
 				0A857C4E1B4CE4FF00516D23 /* YiRefreshFooter.m in Sources */,
 				0AA374B01B5FA14B00C1C045 /* UserReceivedEventActorModel.m in Sources */,
 				A1FC339E1B25D92200FCBCE7 /* MJPhotoLoadingView.m in Sources */,
+				0AFC7E101BDE0BF7008B9A5D /* README.md in Sources */,
 				A1FC339D1B25D92200FCBCE7 /* MJPhotoBrowser.m in Sources */,
 				0AFCEBE61B63478300051D9A /* RepositoryDetailDataSource.m in Sources */,
 				A1FC33BD1B25D92200FCBCE7 /* UIView+WebCacheOperation.m in Sources */,
@@ -1685,6 +1725,7 @@
 				0ACEA3461B51467A009F6B6D /* RepositoryDetailViewController.m in Sources */,
 				0ACEA34C1B51467A009F6B6D /* UserDetailViewController.m in Sources */,
 				0AA3746F1B5F867600C1C045 /* ShowcasesModel.m in Sources */,
+				0AFC7E0E1BDE0BF7008B9A5D /* NSData+CommonCrypto.m in Sources */,
 				A1FC33A71B25D92200FCBCE7 /* NSDictionary+RequestEncoding.m in Sources */,
 				A1FC33A11B25D92200FCBCE7 /* MJPhotoView.m in Sources */,
 				0ACEA3481B51467A009F6B6D /* UserRankViewController.m in Sources */,
@@ -1695,6 +1736,7 @@
 				A1FC33B31B25D92200FCBCE7 /* SDWebImageDownloader.m in Sources */,
 				A1FC33AF1B25D92200FCBCE7 /* NSData+ImageContentType.m in Sources */,
 				0ACEA3551B51604A009F6B6D /* LoginViewController.m in Sources */,
+				0AFC7E0F1BDE0BF7008B9A5D /* NSString+Base64.m in Sources */,
 				A1FC339F1B25D92200FCBCE7 /* MJPhotoProgressView.m in Sources */,
 				0A91BEAA1B5BC4DF00A20743 /* MoreViewController.m in Sources */,
 				A1FC33BA1B25D92200FCBCE7 /* UIImage+WebP.m in Sources */,
@@ -1711,10 +1753,12 @@
 				0A91BEA71B5BC4D800A20743 /* DiscoveryViewController.m in Sources */,
 				A1FC33B11B25D92200FCBCE7 /* SDWebImageCompat.m in Sources */,
 				0ACEA3451B51467A009F6B6D /* RepositoriesViewController.m in Sources */,
+				0AFC7E0D1BDE0BF7008B9A5D /* NSData+Base64.m in Sources */,
 				0AFCEBCC1B63352D00051D9A /* UserRankViewModel.m in Sources */,
 				0AA374911B5F8B0200C1C045 /* ShowcasesDetailViewController.m in Sources */,
 				A1FC33A51B25D92200FCBCE7 /* NSData+MKBase64.m in Sources */,
 				A1FC33AC1B25D92200FCBCE7 /* MKNetworkOperation.m in Sources */,
+				0AFC7E0B1BDE0BF7008B9A5D /* AESCrypt.m in Sources */,
 				0A4780C41B5F1ECF00E99D7A /* TrendingViewController.m in Sources */,
 				0AA374AA1B5F9FFA00C1C045 /* NewsViewController.m in Sources */,
 				0AA374B61B5FA16F00C1C045 /* UserReceivedEventPayloadModel.m in Sources */,

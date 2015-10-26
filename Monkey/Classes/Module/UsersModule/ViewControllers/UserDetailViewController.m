@@ -288,6 +288,13 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             isFollowing=hasFollowUser.boolValue;
             NSString *rightTitle;
+            if (isFollowing) {
+                rightTitle=@"unfollow";
+            }else{
+                rightTitle=@"follow";
+                
+            }
+
             self.navigationItem.rightBarButtonItem=nil;
             UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:rightTitle style:UIBarButtonItemStylePlain target:self action:@selector(followAction)];
             self.navigationItem.rightBarButtonItem=right;

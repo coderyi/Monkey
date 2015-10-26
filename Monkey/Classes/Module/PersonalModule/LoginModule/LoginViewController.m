@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "AESCrypt.h"
 @interface LoginViewController (){
     UITextField *usernameTF;
     UITextField *pwdTF;
@@ -80,8 +81,15 @@
     if (pwdTF.text.length<1 || !pwdTF.text) {
         return;
     }
+    NSString *coderyiClientID=CoderyiClientID;
+    NSString *encryptedData = [AESCrypt encrypt:coderyiClientID password:@"xxxsd-sdsd*sd672323q___---_w.."];
+    NSString *coderyiClientSecret=CoderyiClientSecret;
+    NSString *message = [AESCrypt encrypt:coderyiClientSecret password:@"xx3xc45sqvzupb4xsd-sdsd*sd672323q___---_w.."];
+
     
-    [OCTClient setClientID:CoderyiClientID clientSecret:CoderyiClientSecret];
+    
+    
+    [OCTClient setClientID:[[AESCrypt decrypt:CoderyiClientID password:@"xxxsd-sdsd*sd672323q___---_w.."] substringFromIndex:1] clientSecret:[[AESCrypt decrypt:CoderyiClientSecret password:@"xx3xc45sqvzupb4xsd-sdsd*sd672323q___---_w.."] substringFromIndex:1]];
 
     OCTUser *user = [OCTUser userWithRawLogin:usernameTF.text server:OCTServer.dotComServer];
     [self showYiProgressHUD:@"logining"];
