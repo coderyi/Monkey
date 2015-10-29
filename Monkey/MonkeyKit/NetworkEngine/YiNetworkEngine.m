@@ -347,7 +347,7 @@
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"PUT" ssl:YES];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-        NSLog(@"%d",completedOperation.HTTPStatusCode);
+//        NSLog(@"%d",completedOperation.HTTPStatusCode);
         
         if (completedOperation.HTTPStatusCode==204) {
             completionBlock(YES);
@@ -359,7 +359,7 @@
         
         
     } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
-        NSLog(@"%d",errorOp.HTTPStatusCode);
+//        NSLog(@"%d",errorOp.HTTPStatusCode);
         if (errorOp.HTTPStatusCode==204) {
             completionBlock(YES);
             
@@ -387,7 +387,7 @@
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"DELETE" ssl:YES];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-        NSLog(@"%d",completedOperation.HTTPStatusCode);
+//        NSLog(@"%d",completedOperation.HTTPStatusCode);
         
         if (completedOperation.HTTPStatusCode==204) {
             completionBlock(YES);
@@ -399,7 +399,7 @@
         
         
     } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
-        NSLog(@"%d",errorOp.HTTPStatusCode);
+//        NSLog(@"%d",errorOp.HTTPStatusCode);
         if (errorOp.HTTPStatusCode==204) {
             completionBlock(YES);
             
@@ -435,7 +435,7 @@
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-        NSLog(@"%d",completedOperation.HTTPStatusCode);
+//        NSLog(@"%d",completedOperation.HTTPStatusCode);
         
         if (completedOperation.HTTPStatusCode==204) {
             completionBlock(YES);
@@ -447,7 +447,7 @@
         
      
     } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
-        NSLog(@"%d",errorOp.HTTPStatusCode);
+//        NSLog(@"%d",errorOp.HTTPStatusCode);
         if (errorOp.HTTPStatusCode==204) {
             completionBlock(YES);
             
@@ -479,7 +479,7 @@
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"PUT" ssl:YES];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-        NSLog(@"%d",completedOperation.HTTPStatusCode);
+//        NSLog(@"%d",completedOperation.HTTPStatusCode);
         
         if (completedOperation.HTTPStatusCode==204) {
             completionBlock(YES);
@@ -491,7 +491,7 @@
         
         
     } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
-        NSLog(@"%d",errorOp.HTTPStatusCode);
+//        NSLog(@"%d",errorOp.HTTPStatusCode);
         if (errorOp.HTTPStatusCode==204) {
             completionBlock(YES);
             
@@ -524,7 +524,7 @@
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"DELETE" ssl:YES];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-        NSLog(@"%d",completedOperation.HTTPStatusCode);
+//        NSLog(@"%d",completedOperation.HTTPStatusCode);
         
         if (completedOperation.HTTPStatusCode==204) {
             completionBlock(YES);
@@ -536,7 +536,7 @@
         
         
     } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
-        NSLog(@"%d",errorOp.HTTPStatusCode);
+//        NSLog(@"%d",errorOp.HTTPStatusCode);
         if (errorOp.HTTPStatusCode==204) {
             completionBlock(YES);
             
