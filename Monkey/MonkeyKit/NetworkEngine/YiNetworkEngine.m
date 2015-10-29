@@ -569,6 +569,7 @@
     
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
+    
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         
         if ([[completedOperation responseJSON]
