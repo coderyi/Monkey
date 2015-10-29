@@ -41,17 +41,7 @@
     NSLog(@"%@", op.url);
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         completionBlock([completedOperation responseString]);
-        if ([[completedOperation responseJSON]
-             isKindOfClass:[NSDictionary class]]) {
-            NSDictionary *resultDictionary = [completedOperation responseJSON];
-            
-            
-            
-            
-            //            completionBlock(model);
-            
-            
-        }
+     
         
     } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
         

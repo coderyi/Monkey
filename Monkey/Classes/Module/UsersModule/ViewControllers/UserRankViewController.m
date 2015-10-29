@@ -327,7 +327,7 @@
         __weak typeof(self) weakSelf = self;
         refreshHeader1.beginRefreshingBlock=^(){
             __strong typeof(self) strongSelf = weakSelf;
-            [weakSelf loadDataFromApiWithIsFirst:YES];
+            [strongSelf loadDataFromApiWithIsFirst:YES];
         };
         
         //    是否在进入该界面的时候就开始进入刷新状态

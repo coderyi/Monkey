@@ -38,7 +38,7 @@
             cell.selectionStyle=UITableViewCellSelectionStyleNone;
         }
         RepositoryModel  *model = [(self.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
-        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",indexPath.row+1];
+        cell.rankLabel.text=[NSString stringWithFormat:@"%ld",(long)(indexPath.row+1)];
         cell.repositoryLabel.text=[NSString stringWithFormat:@"%@",model.name];
         cell.userLabel.text=[NSString stringWithFormat:@"Owner:%@",model.user.login];
         [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url]];

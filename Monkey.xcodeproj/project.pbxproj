@@ -55,7 +55,6 @@
 		0AFC7E0D1BDE0BF7008B9A5D /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC7E041BDE0BF7008B9A5D /* NSData+Base64.m */; settings = {ASSET_TAGS = (); }; };
 		0AFC7E0E1BDE0BF7008B9A5D /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC7E061BDE0BF7008B9A5D /* NSData+CommonCrypto.m */; settings = {ASSET_TAGS = (); }; };
 		0AFC7E0F1BDE0BF7008B9A5D /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC7E081BDE0BF7008B9A5D /* NSString+Base64.m */; settings = {ASSET_TAGS = (); }; };
-		0AFC7E101BDE0BF7008B9A5D /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC7E091BDE0BF7008B9A5D /* README.md */; settings = {ASSET_TAGS = (); }; };
 		0AFCEBBE1B62CE3A00051D9A /* TrendingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFCEBBD1B62CE3A00051D9A /* TrendingDataSource.m */; };
 		0AFCEBC41B62D17D00051D9A /* TrendingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFCEBC31B62D17D00051D9A /* TrendingViewModel.m */; };
 		0AFCEBC91B63347C00051D9A /* UserRankDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFCEBC81B63347C00051D9A /* UserRankDataSource.m */; };
@@ -1301,7 +1300,6 @@
 				0A857C4E1B4CE4FF00516D23 /* YiRefreshFooter.m in Sources */,
 				0AA374B01B5FA14B00C1C045 /* UserReceivedEventActorModel.m in Sources */,
 				A1FC339E1B25D92200FCBCE7 /* MJPhotoLoadingView.m in Sources */,
-				0AFC7E101BDE0BF7008B9A5D /* README.md in Sources */,
 				A1FC339D1B25D92200FCBCE7 /* MJPhotoBrowser.m in Sources */,
 				0AFCEBE61B63478300051D9A /* RepositoryDetailDataSource.m in Sources */,
 				A1FC33BD1B25D92200FCBCE7 /* UIView+WebCacheOperation.m in Sources */,
