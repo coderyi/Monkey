@@ -69,10 +69,6 @@ Asynchronous image downloader with cache support with an UIImageView category
 
 一个比较完整的图片浏览器。
 
-[octokit.objc](https://github.com/octokit/octokit.objc)
-
-GitHub API client for Objective-C
-
 
 
 另外项目中使用了友盟的相关服务。
