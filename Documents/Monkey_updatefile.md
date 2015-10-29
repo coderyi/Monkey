@@ -1,4 +1,39 @@
 #更新日志
+######2015.10.29
+1.去除octokit，follow和star操作都采用token来做，修改相关VC，并且network增加相应的请求
+
+2.采用oauth2登录，去除LoginViewController的octokit登录，增加LoginWebViewController的oauth2登录
+
+3.增加@weakify的宏定义
+
+4.支持无网的时候缓存查看，加快网络加载速度
+<pre>
+          self.request = [NSMutableURLRequest requestWithURL:finalURL
+                                                 cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                             timeoutInterval:kMKNetworkKitRequestTimeOutInSeconds];
+          
+
+</pre>
+修改为
+<pre>
+
+      if (![MKNetworkOperation connectedToNetwork]) {
+          //add by @coderyi.com
+          self.request = [NSMutableURLRequest requestWithURL:finalURL
+                                                 cachePolicy:NSURLRequestReturnCacheDataDontLoad
+                                             timeoutInterval:kMKNetworkKitRequestTimeOutInSeconds];
+          
+
+      }else{
+          self.request = [NSMutableURLRequest requestWithURL:finalURL
+                                                 cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                             timeoutInterval:kMKNetworkKitRequestTimeOutInSeconds];
+          
+
+          //NSURLRequestReloadIgnoringLocalCacheData modify NSURLRequestUseProtocolCachePolicy @coderyi.com
+      }
+</pre>
+
 ######2015.9.21
 
 主要最低支持版本iOS7.0提高至iOS8.0
