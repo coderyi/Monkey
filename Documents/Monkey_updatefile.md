@@ -34,6 +34,23 @@
       }
 </pre>
 
+
+5.终于修复下面这个bug
+<pre>
+[NSNull rangeOfCharacterFromSet:]: unrecognized selector sent to instance
+</pre>
+其实就是这里没做null判断，弱了我这么久
+这个接口这方法
+//https://developer.github.com/v3/users/#get-a-single-user
+<pre>
+YiNetworkEngine  userDetailWithUserName
+</pre>
+UserModel修改一下就好
+<pre>
+	model.location =  [[dict objectForKey:@"location"] isNull]?@"":[dict objectForKey:@"location"];
+//    model.location =  [dict objectForKey:@"location"];
+</pre>
+
 ######2015.9.21
 
 主要最低支持版本iOS7.0提高至iOS8.0

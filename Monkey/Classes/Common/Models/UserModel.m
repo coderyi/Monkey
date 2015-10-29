@@ -40,7 +40,8 @@
     model.name = [[dict objectForKey:@"name"] isNull]?@"":[dict objectForKey:@"name"] ;
     model.company = [[dict objectForKey:@"company"] isNull]?@"":[dict objectForKey:@"company"];
     model.blog = [[dict objectForKey:@"blog"] isNull]?@"":[dict objectForKey:@"blog"];
-    model.location = [dict objectForKey:@"location"] ;
+    model.location =  [[dict objectForKey:@"location"] isNull]?@"":[dict objectForKey:@"location"];
+//    model.location =  [dict objectForKey:@"location"];
     model.email = [[dict objectForKey:@"email"] isNull]?@"":[dict objectForKey:@"email"];
     model.public_repos = [[dict objectForKey:@"public_repos"] intValue];
     model.followers = [[dict objectForKey:@"followers"] intValue];
