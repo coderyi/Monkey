@@ -19,7 +19,7 @@
 #import "RepositoryDetailViewController.h"
 #import "UserDetailViewModel.h"
 #import "UserDetailDataSource.h"
-#import "LoginViewController.h"
+//#import "LoginViewController.h"
 
 @interface UserDetailViewController ()<UITableViewDelegate,UIAlertViewDelegate>{
     UITableView *tableView;
@@ -36,7 +36,6 @@
     UIButton *blogBt;
     DetailSegmentControl *segmentControl;
     BOOL isFollowing;
-    OCTClient *client;
     UserDetailDataSource *userDetailDataSource;
     UserDetailViewModel *userDetailViewModel;
 
@@ -218,50 +217,55 @@
     }
 }
 - (void)followAction{
-    OCTUser *user=[OCTUser userWithRawLogin:_userModel.login server:OCTServer.dotComServer];
-    NSString *login= _userModel.login;
-    user.login=login;
-    
+
+    NSString *access_token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
+    if (access_token.length<1 || !access_token) {
+        
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"login message" message:@"please login" delegate:self cancelButtonTitle:@"sure" otherButtonTitles:@"cancel", nil];
+        [alert show];
+        
+        
+        return;
+    }
     if (isFollowing) {
         [self showYiProgressHUD:@"unfollowing……"];
-        [[client unfollowUser:user] subscribeNext:^(id x) {
-           
-        } error:^(NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self hideYiProgressHUD];
-                
-            });
-        } completed:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
+        [ApplicationDelegate.apiEngine unfollowUserWithUsername:nil target_user:_userModel.login completoinHandler:^(BOOL isSuccess){
+            if (isSuccess) {
                 [self hideYiProgressHUD];
                 isFollowing=!isFollowing;
                 self.navigationItem.rightBarButtonItem=nil;
                 UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"follow" style:UIBarButtonItemStylePlain target:self action:@selector(followAction)];
                 self.navigationItem.rightBarButtonItem=right;
-            });
+            }else{
+                [self hideYiProgressHUD];
+                
+            }
+            
+        } errorHandel:^(NSError *error){
+            [self hideYiProgressHUD];
+            
+            
         }];
-
 
     }else{
         [self showYiProgressHUD:@"following……"];
-
-        [[client followUser:user]subscribeNext:^(id x) {
-         
-        } error:^(NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self hideYiProgressHUD];
-                
-            });
-        } completed:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
+        [ApplicationDelegate.apiEngine followUserWithUsername:nil target_user:_userModel.login completoinHandler:^(BOOL isSuccess){
+            if (isSuccess) {
                 [self hideYiProgressHUD];
                 isFollowing=!isFollowing;
                 self.navigationItem.rightBarButtonItem=nil;
                 UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"unfollow" style:UIBarButtonItemStylePlain target:self action:@selector(followAction)];
                 self.navigationItem.rightBarButtonItem=right;
-            });
-        }];
+            }else{
+                [self hideYiProgressHUD];
+               
+            }
 
+        } errorHandel:^(NSError *error){
+            [self hideYiProgressHUD];
+           
+
+        }];
     }
 }
 - (void)checkFollowStatusAction{
@@ -277,30 +281,21 @@
     if (savedToken.length<1 || !savedToken) {
         return;
     }
-    
-    OCTUser *user = [OCTUser userWithRawLogin:savedLogin server:OCTServer.dotComServer];
-    client = [OCTClient authenticatedClientWithUser:user token:savedToken];
-    
-    OCTUser *followUser=[OCTUser userWithRawLogin:_userModel.login server:OCTServer.dotComServer];
-    NSString *followLogin= _userModel.login;
-    followUser.login=followLogin;
-    [[client hasFollowUser:followUser] subscribeNext:^(NSNumber *hasFollowUser){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            isFollowing=hasFollowUser.boolValue;
-            NSString *rightTitle;
-            if (isFollowing) {
-                rightTitle=@"unfollow";
-            }else{
-                rightTitle=@"follow";
-                
-            }
-
-            self.navigationItem.rightBarButtonItem=nil;
-            UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:rightTitle style:UIBarButtonItemStylePlain target:self action:@selector(followAction)];
-            self.navigationItem.rightBarButtonItem=right;
-        });
+ 
+    [ApplicationDelegate.apiEngine checkFollowStatusWithUsername:nil target_user:_userModel.login completoinHandler:^(BOOL isFollowing1){
+        isFollowing=isFollowing1;
+        NSString *rightTitle;
+        if (isFollowing) {
+            rightTitle=@"unfollow";
+        }else{
+            rightTitle=@"follow";
+            
+        }
         
-    }  error:^(NSError *error) {
+        self.navigationItem.rightBarButtonItem=nil;
+        UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:rightTitle style:UIBarButtonItemStylePlain target:self action:@selector(followAction)];
+        self.navigationItem.rightBarButtonItem=right;
+    } errorHandel:^(NSError *error){
         NSString *localizedDescription=[error.userInfo objectForKey:@"NSLocalizedDescription"];
         if ([localizedDescription isEqualToString:@"Sign In Required"] ) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -309,10 +304,9 @@
             });
             
         }
-    } completed:^{
-
+    
     }];
- 
+    
 }
 
 //详细见mj的code4app
@@ -347,13 +341,13 @@
     }
 }
 - (void)loginAction{
-    LoginViewController *login=[[LoginViewController alloc] init];
-    login.callback=^(NSString *response){
-        if ([response isEqualToString:@"yes"]) {
-            [self checkFollowStatusAction];
-        }
-    };
-    [self.navigationController pushViewController:login animated:YES];
+//    LoginViewController *login=[[LoginViewController alloc] init];
+//    login.callback=^(NSString *response){
+//        if ([response isEqualToString:@"yes"]) {
+//            [self checkFollowStatusAction];
+//        }
+//    };
+//    [self.navigationController pushViewController:login animated:YES];
     
 }
 

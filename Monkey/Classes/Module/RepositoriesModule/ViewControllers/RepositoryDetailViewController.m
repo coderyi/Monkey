@@ -32,7 +32,6 @@
     UIImageView *ownerIV;
     UILabel *descLabel;
     UIView *titleView;
-    OCTClient *client;
     BOOL isStaring;
     RepositoryDetailDataSource *repositoryDetailDataSource;
     RepositoryDetailViewModel *repositoryDetailViewModel;
@@ -227,47 +226,45 @@
 
 - (void)starAction{
     
-    OCTRepository *starRep=[[OCTRepository alloc] init];
-    starRep.ownerLogin=_model.user.login;
-    starRep.name=_model.name;
+
     
     if (isStaring) {
         [self showYiProgressHUD:@"unstaring……"];
-        [[client unstarRepository:starRep] subscribeNext:^(id x) {
-        } error:^(NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self hideYiProgressHUD];
-                
-            });
-        } completed:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
+
+        
+        [ApplicationDelegate.apiEngine unStarRepoWithOwner:_model.user.login repo:_model.name completoinHandler:^(BOOL isSuccess){
+            if (isSuccess) {
                 [self hideYiProgressHUD];
                 isStaring=!isStaring;
                 self.navigationItem.rightBarButtonItem=nil;
                 UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"star" style:UIBarButtonItemStylePlain target:self action:@selector(starAction)];
                 self.navigationItem.rightBarButtonItem=right;
-            });
+                
+            }else{
+                [self hideYiProgressHUD];
+            }
+        } errorHandel:^(NSError *error){
+            [self hideYiProgressHUD];
         }];
-        
         
     }else{
         [self showYiProgressHUD:@"staring……"];
-        [[client starRepository:starRep]subscribeNext:^(id x) {
-        } error:^(NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self hideYiProgressHUD];
-                
-            });
-        } completed:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
+
+        
+        [ApplicationDelegate.apiEngine starRepoWithOwner:_model.user.login repo:_model.name completoinHandler:^(BOOL isSuccess){
+            if (isSuccess) {
                 [self hideYiProgressHUD];
                 isStaring=!isStaring;
                 self.navigationItem.rightBarButtonItem=nil;
                 UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"unstar" style:UIBarButtonItemStylePlain target:self action:@selector(starAction)];
                 self.navigationItem.rightBarButtonItem=right;
-            });
+
+            }else{
+              [self hideYiProgressHUD];
+            }
+        } errorHandel:^(NSError *error){
+          [self hideYiProgressHUD];
         }];
-        
     }
 }
 - (void)checkStarStatusAction{
@@ -280,33 +277,21 @@
     if (savedToken.length<1 || !savedToken) {
         return;
     }
-    OCTUser *user = [OCTUser userWithRawLogin:savedLogin server:OCTServer.dotComServer];
-    client = [OCTClient authenticatedClientWithUser:user token:savedToken];
+    [ApplicationDelegate.apiEngine checkStarStatusWithOwner:_model.user.login repo:_model.name completoinHandler:^(BOOL isStarred){
+        isStaring=isStarred;
+        NSString *rightTitle;
+        if (isStaring) {
+            rightTitle=@"unstar";
+        }else{
+            rightTitle=@"star";
+            
+        }
+        self.navigationItem.rightBarButtonItem=nil;
+        UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:rightTitle style:UIBarButtonItemStylePlain target:self action:@selector(starAction)];
+        self.navigationItem.rightBarButtonItem=right;
     
+    } errorHandel:^(NSError *error){
     
-    OCTRepository *starRep=[[OCTRepository alloc] init];
-    starRep.ownerLogin=_model.user.login;
-    starRep.name=_model.name;
-    [[client hasUserStarredRepository:starRep] subscribeNext:^(NSNumber *hasStarRep){
-        dispatch_async(dispatch_get_main_queue(), ^{
-        
-            isStaring=hasStarRep.boolValue;
-            NSString *rightTitle;
-            if (isStaring) {
-                rightTitle=@"unstar";
-            }else{
-                rightTitle=@"star";
-                
-            }
-            self.navigationItem.rightBarButtonItem=nil;
-            UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:rightTitle style:UIBarButtonItemStylePlain target:self action:@selector(starAction)];
-            self.navigationItem.rightBarButtonItem=right;
-        });
-        
-        
-    }  error:^(NSError *error) {
-    } completed:^{
-        
     }];
   
 }

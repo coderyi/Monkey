@@ -178,12 +178,9 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     // For handling a callback URL like my-app://oauth
     NSLog(@"%@",URL.host);
-    if ([URL.host isEqual:@"monkey.com"]) {
-        [OCTClient completeSignInWithCallbackURL:URL];
-        return YES;
-    } else {
-        return NO;
-    }
+ 
+    return YES;
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

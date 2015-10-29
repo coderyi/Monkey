@@ -21,6 +21,14 @@ typedef void (^RepositoryModelResponseBlock)(RepositoryModel* model);
 typedef void (^StringResponseBlock)(NSString* response);
 
 @interface YiNetworkEngine : MKNetworkEngine
+
+#pragma mark - login module
+- (MKNetworkOperation *)loginWithCode:(NSString *)code
+                    completoinHandler:(StringResponseBlock)completionBlock
+                          errorHandel:(MKNKErrorBlock)errorBlock;
+- (MKNetworkOperation *)getUserInfoWithToken:(NSString *)token
+                           completoinHandler:(UserModelResponseBlock)completionBlock
+                                 errorHandel:(MKNKErrorBlock)errorBlock;
 #pragma mark - event 、news
 - (MKNetworkOperation *)repositoriesTrendingWithPage:(NSInteger)page login:(NSString *)login
                                    completoinHandler:(PageListInfoResponseBlock)completionBlock
@@ -39,8 +47,36 @@ typedef void (^StringResponseBlock)(NSString* response);
 //https://developer.github.com/v3/users/followers/#check-if-one-user-follows-another
 - (MKNetworkOperation *)checkFollowStatusWithUsername:(NSString *)username
                                           target_user:(NSString *)target_user
-                                    completoinHandler:(UserModelResponseBlock)completionBlock
+                                    completoinHandler:(void (^)(BOOL isFollowing))completionBlock
                                           errorHandel:(MKNKErrorBlock)errorBlock;
+
+- (MKNetworkOperation *)followUserWithUsername:(NSString *)username
+                                   target_user:(NSString *)target_user
+                             completoinHandler:(void (^)(BOOL isSuccess))completionBlock
+                                   errorHandel:(MKNKErrorBlock)errorBlock;
+- (MKNetworkOperation *)unfollowUserWithUsername:(NSString *)username
+                                     target_user:(NSString *)target_user
+                               completoinHandler:(void (^)(BOOL isSuccess))completionBlock
+                                     errorHandel:(MKNKErrorBlock)errorBlock;
+
+#pragma mark - starmodule
+- (MKNetworkOperation *)checkStarStatusWithOwner:(NSString *)owner
+                                        repo:(NSString *)repo
+                                  completoinHandler:(void (^)(BOOL isStarring))completionBlock
+                                        errorHandel:(MKNKErrorBlock)errorBlock;
+
+//Star a repository
+//PUT /user/starred/:owner/:repo
+- (MKNetworkOperation *)starRepoWithOwner:(NSString *)owner
+                                     repo:(NSString *)repo
+                        completoinHandler:(void (^)(BOOL isSuccess))completionBlock
+                              errorHandel:(MKNKErrorBlock)errorBlock;
+
+- (MKNetworkOperation *)unStarRepoWithOwner:(NSString *)owner
+                                       repo:(NSString *)repo
+                          completoinHandler:(void (^)(BOOL isSuccess))completionBlock
+                                errorHandel:(MKNKErrorBlock)errorBlock;
+
 #pragma mark - users module
 
 

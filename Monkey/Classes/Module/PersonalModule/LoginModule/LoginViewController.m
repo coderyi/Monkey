@@ -88,46 +88,46 @@
 
     
     
-    
-    [OCTClient setClientID:[[AESCrypt decrypt:CoderyiClientID password:@"xxxsd-sdsd*sd672323q___---_w.."] substringFromIndex:1] clientSecret:[[AESCrypt decrypt:CoderyiClientSecret password:@"xx3xc45sqvzupb4xsd-sdsd*sd672323q___---_w.."] substringFromIndex:1]];
-
-    OCTUser *user = [OCTUser userWithRawLogin:usernameTF.text server:OCTServer.dotComServer];
-    [self showYiProgressHUD:@"logining"];
-    [[OCTClient signInAsUser:user password:pwdTF.text oneTimePassword:nil scopes:OCTClientAuthorizationScopesUser | OCTClientAuthorizationScopesRepository note:nil noteURL:nil fingerprint:nil]
-     subscribeNext:^(OCTClient *authenticatedClient) {
-         // Authentication was successful. Do something with the created client.
-         [[NSUserDefaults standardUserDefaults] setObject:authenticatedClient.token forKey:@"access_token"];
-         
-         [[NSUserDefaults standardUserDefaults] setObject:authenticatedClient.user.login forKey:@"currentLogin"];
-         [[NSUserDefaults standardUserDefaults] setObject:[authenticatedClient.user.avatarURL absoluteString] forKey:@"currentAvatarUrl"];
-         
-         dispatch_async(dispatch_get_main_queue(), ^{
-             [self hideYiProgressHUD];
-             if (_callback) {
-                 _callback(@"yes");
-                 _callback = nil;
-                 [self.navigationController popViewControllerAnimated:YES];
-                 
-             }
-
-         });
-
-     } error:^(NSError *error) {
-         // Authentication failed.
-         dispatch_async(dispatch_get_main_queue(), ^{
-             [self hideYiProgressHUD];
-             double delayInSeconds = 0.6;
-             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                 // code to be executed on the main queue after delay
-                 [self showYiProgressHUD:@"login error" afterDelay:1.5];
-
-             });
-         
-         });
-
-     
-     }];
+//    
+//    [OCTClient setClientID:[[AESCrypt decrypt:CoderyiClientID password:@"xxxsd-sdsd*sd672323q___---_w.."] substringFromIndex:1] clientSecret:[[AESCrypt decrypt:CoderyiClientSecret password:@"xx3xc45sqvzupb4xsd-sdsd*sd672323q___---_w.."] substringFromIndex:1]];
+//
+//    OCTUser *user = [OCTUser userWithRawLogin:usernameTF.text server:OCTServer.dotComServer];
+//    [self showYiProgressHUD:@"logining"];
+//    [[OCTClient signInAsUser:user password:pwdTF.text oneTimePassword:nil scopes:OCTClientAuthorizationScopesUser | OCTClientAuthorizationScopesRepository note:nil noteURL:nil fingerprint:nil]
+//     subscribeNext:^(OCTClient *authenticatedClient) {
+//         // Authentication was successful. Do something with the created client.
+//         [[NSUserDefaults standardUserDefaults] setObject:authenticatedClient.token forKey:@"access_token"];
+//         
+//         [[NSUserDefaults standardUserDefaults] setObject:authenticatedClient.user.login forKey:@"currentLogin"];
+//         [[NSUserDefaults standardUserDefaults] setObject:[authenticatedClient.user.avatarURL absoluteString] forKey:@"currentAvatarUrl"];
+//         
+//         dispatch_async(dispatch_get_main_queue(), ^{
+//             [self hideYiProgressHUD];
+//             if (_callback) {
+//                 _callback(@"yes");
+//                 _callback = nil;
+//                 [self.navigationController popViewControllerAnimated:YES];
+//                 
+//             }
+//
+//         });
+//
+//     } error:^(NSError *error) {
+//         // Authentication failed.
+//         dispatch_async(dispatch_get_main_queue(), ^{
+//             [self hideYiProgressHUD];
+//             double delayInSeconds = 0.6;
+//             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+//             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//                 // code to be executed on the main queue after delay
+//                 [self showYiProgressHUD:@"login error" afterDelay:1.5];
+//
+//             });
+//         
+//         });
+//
+//     
+//     }];
 
 }
 - (void)didReceiveMemoryWarning {

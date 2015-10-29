@@ -14,7 +14,7 @@
 #import "WebViewController.h"
 #import "GitHubRankingViewController.h"
 #import "GitHubAwardsViewController.h"
-#import "LoginViewController.h"
+//#import "LoginViewController.h"
 @interface DiscoveryViewController ()<UITableViewDataSource,UITableViewDelegate>{
     UITableView *tableView;
     NSString *currentLogin;
@@ -59,15 +59,15 @@
 #pragma mark - Actions
 - (void)loginAction{
     
-    LoginViewController *login=[[LoginViewController alloc] init];
-    login.callback=^(NSString *response){
-        if ([response isEqualToString:@"yes"]) {
-            currentLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
-            [tableView reloadData];
-        }
-        
-    };
-    [self.navigationController pushViewController:login animated:YES];
+//    LoginViewController *login=[[LoginViewController alloc] init];
+//    login.callback=^(NSString *response){
+//        if ([response isEqualToString:@"yes"]) {
+//            currentLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
+//            [tableView reloadData];
+//        }
+//        
+//    };
+//    [self.navigationController pushViewController:login animated:YES];
     
 }
 

@@ -10,8 +10,10 @@
 #import "SearchViewController.h"
 #import "AboutViewController.h"
 #import "UMFeedback.h"
-#import "LoginViewController.h"
+//#import "LoginViewController.h"
 #import "UserDetailViewController.h"
+#import "LoginWebViewController.h"
+#import "AESCrypt.h"
 @interface MoreViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>{
     
     UITableView *tableView;
@@ -70,19 +72,75 @@
  */
 - (void)loginAction{
 
-    LoginViewController *login=[[LoginViewController alloc] init];
-    login.callback=^(NSString *response){
-        if ([response isEqualToString:@"yes"]) {
-            currentLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
-            currentAvatarUrl=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentAvatarUrl"];
+//    LoginViewController *login=[[LoginViewController alloc] init];
+//    login.callback=^(NSString *response){
+//        if ([response isEqualToString:@"yes"]) {
+//            currentLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
+//            currentAvatarUrl=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentAvatarUrl"];
+//            [tableView reloadData];
+//        }
+//        
+//    };
+//    [self.navigationController pushViewController:login animated:YES];
+    [self oauth2LoginAction];
+}
+- (void)oauth2LoginAction{
+
+    //    cookie清除
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [storage cookies])
+    {
+        [storage deleteCookie:cookie];
+    }
+    
+    //    缓存  清除
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    LoginWebViewController *webViewController=[[LoginWebViewController alloc] init];
+    webViewController.urlString=[NSString stringWithFormat:@"https://github.com/login/oauth/authorize/?client_id=%@&state=1995&redirect_uri=https://github.com/coderyi/monkey&scope=user,public_repo",[[AESCrypt decrypt:CoderyiClientID password:@"xxxsd-sdsd*sd672323q___---_w.."] substringFromIndex:1] ];
+    webViewController.callback=^(NSString *code){
+        
+        [self loginTokenAction:code];
+    };
+    [self presentViewController:webViewController animated:YES completion:nil];
+}
+
+- (void)loginTokenAction:(NSString *)code{
+    YiNetworkEngine *apiEngine=[[YiNetworkEngine alloc] initWithHostName:@"github.com"];
+    [apiEngine loginWithCode:code completoinHandler:^(NSString *response){
+
+        
+        for (int i=0; i<response.length-13; i++) {
+            if ([[response substringWithRange:NSMakeRange(i, 13)] isEqualToString:@"access_token="]) {
+                NSString *token=[response substringWithRange:NSMakeRange(i+13, 40)];
+                [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"access_token"];
+                
+                [self getUserInfoAction:token];
+                
+            }
+        }
+        
+        
+    } errorHandel:^(NSError* error){
+        
+    }];
+}
+
+- (void)getUserInfoAction:(NSString *)token{
+    [ApplicationDelegate.apiEngine getUserInfoWithToken:token completoinHandler:^(UserModel *model){
+        if (model) {
+            currentLogin=model.login;
+            currentAvatarUrl=model.avatar_url;
+            
+            [[NSUserDefaults standardUserDefaults] setObject:currentLogin forKey:@"currentLogin"];
+            [[NSUserDefaults standardUserDefaults] setObject:currentAvatarUrl forKey:@"currentAvatarUrl"];
             [tableView reloadData];
         }
         
-    };
-    [self.navigationController pushViewController:login animated:YES];
-    
+    } errorHandel:^(NSError* error){
+        
+    }];
 }
-
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 

@@ -10,7 +10,100 @@
 #import "RepositoryModel.h"
 #import "ShowcasesModel.h"
 #import "UserReceivedEventModel.h"
+#import "AESCrypt.h"
 @implementation YiNetworkEngine
+
+#pragma mark - login module
+//GitHub redirects back to your site
+//https://developer.github.com/v3/oauth/#github-redirects-back-to-your-site
+//POST https://github.com/login/oauth/access_token
+- (MKNetworkOperation *)loginWithCode:(NSString *)code
+                    completoinHandler:(StringResponseBlock)completionBlock
+                          errorHandel:(MKNKErrorBlock)errorBlock {
+    
+    NSString *getString = [NSString stringWithFormat:@"/login/oauth/access_token/"];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    
+    
+    
+    
+    
+    
+    [dic setValue:[[AESCrypt decrypt:CoderyiClientID password:@"xxxsd-sdsd*sd672323q___---_w.."] substringFromIndex:1] forKey:@"client_id"];
+    [dic setValue:[[AESCrypt decrypt:CoderyiClientSecret password:@"xx3xc45sqvzupb4xsd-sdsd*sd672323q___---_w.."] substringFromIndex:1] forKey:@"client_secret"];
+    [dic setValue:code forKey:@"code"];
+    [dic setValue:@"1995" forKey:@"state"];
+    [dic setValue:@"https://github.com/coderyi/monkey" forKey:@"redirect_uri"];
+    
+    MKNetworkOperation *op =
+    [self operationWithPath:getString params:dic httpMethod:@"POST" ssl:YES];
+    
+    NSLog(@"%@", op.url);
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        completionBlock([completedOperation responseString]);
+        if ([[completedOperation responseJSON]
+             isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *resultDictionary = [completedOperation responseJSON];
+            
+            
+            
+            
+            //            completionBlock(model);
+            
+            
+        }
+        
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
+        
+        errorBlock(error);
+        
+    }];
+    
+    [self enqueueOperation:op];
+    
+    return op;
+}
+
+
+//https://developer.github.com/v3/oauth/#use-the-access-token-to-access-the-api
+- (MKNetworkOperation *)getUserInfoWithToken:(NSString *)token
+                           completoinHandler:(UserModelResponseBlock)completionBlock
+                                 errorHandel:(MKNKErrorBlock)errorBlock {
+    
+    NSString *getString = [NSString stringWithFormat:@"/user?access_token=%@",token];
+    
+    MKNetworkOperation *op =
+    [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
+    
+    NSLog(@"%@", op.url);
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        
+        if ([[completedOperation responseJSON]
+             isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *resultDictionary = [completedOperation responseJSON];
+            
+            UserModel *model = [UserModel modelWithDict:resultDictionary];
+            
+            
+            
+            completionBlock(model);
+            
+            
+            
+            
+        }
+        
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
+        
+        errorBlock(error);
+        
+    }];
+    
+    [self enqueueOperation:op];
+    
+    return op;
+}
+
 #pragma mark - event 、news
 - (MKNetworkOperation *)repositoriesTrendingWithPage:(NSInteger)page login:(NSString *)login
                                     completoinHandler:(PageListInfoResponseBlock)completionBlock
@@ -209,41 +302,38 @@
 }
 
 
+#pragma mark - starmodule
+- (MKNetworkOperation *)checkStarStatusWithOwner:(NSString *)owner
+                                            repo:(NSString *)repo
+                               completoinHandler:(void (^)(BOOL isStarring))completionBlock
+                                     errorHandel:(MKNKErrorBlock)errorBlock {
 
-
-#pragma mark - followmodule
-
-//Check if one user follows another
-//https://developer.github.com/v3/users/followers/#check-if-one-user-follows-another
-- (MKNetworkOperation *)checkFollowStatusWithUsername:(NSString *)username
-                                          target_user:(NSString *)target_user
-                           completoinHandler:(UserModelResponseBlock)completionBlock
-                                 errorHandel:(MKNKErrorBlock)errorBlock {
-    if (username.length<1) {
-        username=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
-
-    }
     NSString *access_token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
-    NSString *getString = [NSString stringWithFormat:@"/user/following/%@",target_user];
-    
+    NSString *getString = [NSString stringWithFormat:@"/user/starred/%@/%@?access_token=%@",owner,repo,access_token];
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
-    [op setUsername:access_token password:@"x-oauth-basic" basicAuth:NO];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         
-        if ([[completedOperation responseJSON]
-             isKindOfClass:[NSDictionary class]]) {
-            NSDictionary *resultDictionary = [completedOperation responseJSON];
+        if (completedOperation.HTTPStatusCode==204) {
+            completionBlock(YES);
             
-            UserModel *model = [UserModel modelWithDict:resultDictionary];
-            
-            completionBlock(model);
+        }else if (completedOperation.HTTPStatusCode==404){
+            completionBlock(NO);
             
         }
         
-    } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
         
-        errorBlock(error);
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
+        if (errorOp.HTTPStatusCode==204) {
+            completionBlock(YES);
+            
+        }else if (errorOp.HTTPStatusCode==404){
+            completionBlock(NO);
+            
+        }else{
+            errorBlock(error);
+            
+        }
         
     }];
     
@@ -251,6 +341,228 @@
     
     return op;
 }
+//Star a repository
+//PUT /user/starred/:owner/:repo
+- (MKNetworkOperation *)starRepoWithOwner:(NSString *)owner
+                                   repo:(NSString *)repo
+                             completoinHandler:(void (^)(BOOL isSuccess))completionBlock
+                                   errorHandel:(MKNKErrorBlock)errorBlock {
+
+    NSString *access_token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
+    NSString *getString = [NSString stringWithFormat:@"/user/starred/%@/%@?access_token=%@",owner,repo,access_token];
+    MKNetworkOperation *op =
+    [self operationWithPath:getString params:nil httpMethod:@"PUT" ssl:YES];
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        NSLog(@"%d",completedOperation.HTTPStatusCode);
+        
+        if (completedOperation.HTTPStatusCode==204) {
+            completionBlock(YES);
+            
+        }else if (completedOperation.HTTPStatusCode==404){
+            completionBlock(NO);
+            
+        }
+        
+        
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
+        NSLog(@"%d",errorOp.HTTPStatusCode);
+        if (errorOp.HTTPStatusCode==204) {
+            completionBlock(YES);
+            
+        }else if (errorOp.HTTPStatusCode==404){
+            completionBlock(NO);
+            
+        }else{
+            errorBlock(error);
+            
+        }
+        
+    }];
+    
+    [self enqueueOperation:op];
+    
+    return op;
+}
+- (MKNetworkOperation *)unStarRepoWithOwner:(NSString *)owner
+                                     repo:(NSString *)repo
+                        completoinHandler:(void (^)(BOOL isSuccess))completionBlock
+                              errorHandel:(MKNKErrorBlock)errorBlock {
+    
+    NSString *access_token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
+    NSString *getString = [NSString stringWithFormat:@"/user/starred/%@/%@?access_token=%@",owner,repo,access_token];
+    MKNetworkOperation *op =
+    [self operationWithPath:getString params:nil httpMethod:@"DELETE" ssl:YES];
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        NSLog(@"%d",completedOperation.HTTPStatusCode);
+        
+        if (completedOperation.HTTPStatusCode==204) {
+            completionBlock(YES);
+            
+        }else if (completedOperation.HTTPStatusCode==404){
+            completionBlock(NO);
+            
+        }
+        
+        
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
+        NSLog(@"%d",errorOp.HTTPStatusCode);
+        if (errorOp.HTTPStatusCode==204) {
+            completionBlock(YES);
+            
+        }else if (errorOp.HTTPStatusCode==404){
+            completionBlock(NO);
+            
+        }else{
+            errorBlock(error);
+            
+        }
+        
+    }];
+    
+    [self enqueueOperation:op];
+    
+    return op;
+}
+
+
+#pragma mark - followmodule
+//Check if one user follows another
+//https://developer.github.com/v3/users/followers/#check-if-one-user-follows-another
+- (MKNetworkOperation *)checkFollowStatusWithUsername:(NSString *)username
+                                          target_user:(NSString *)target_user
+                           completoinHandler:(void (^)(BOOL isFollowing))completionBlock
+                                 errorHandel:(MKNKErrorBlock)errorBlock {
+    if (username.length<1) {
+        username=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
+
+    }
+    NSString *access_token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
+    NSString *getString = [NSString stringWithFormat:@"/users/%@/following/%@",username,target_user];
+    MKNetworkOperation *op =
+    [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        NSLog(@"%d",completedOperation.HTTPStatusCode);
+        
+        if (completedOperation.HTTPStatusCode==204) {
+            completionBlock(YES);
+
+        }else if (completedOperation.HTTPStatusCode==404){
+            completionBlock(NO);
+
+        }
+        
+     
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
+        NSLog(@"%d",errorOp.HTTPStatusCode);
+        if (errorOp.HTTPStatusCode==204) {
+            completionBlock(YES);
+            
+        }else if (errorOp.HTTPStatusCode==404){
+            completionBlock(NO);
+            
+        }else{
+            errorBlock(error);
+
+        }
+        
+    }];
+    
+    [self enqueueOperation:op];
+    
+    return op;
+}
+
+- (MKNetworkOperation *)followUserWithUsername:(NSString *)username
+                                          target_user:(NSString *)target_user
+                                    completoinHandler:(void (^)(BOOL isSuccess))completionBlock
+                                          errorHandel:(MKNKErrorBlock)errorBlock {
+    if (username.length<1) {
+        username=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
+        
+    }
+    NSString *access_token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
+    NSString *getString = [NSString stringWithFormat:@"/user/following/%@?access_token=%@",target_user,access_token];
+    MKNetworkOperation *op =
+    [self operationWithPath:getString params:nil httpMethod:@"PUT" ssl:YES];
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        NSLog(@"%d",completedOperation.HTTPStatusCode);
+        
+        if (completedOperation.HTTPStatusCode==204) {
+            completionBlock(YES);
+            
+        }else if (completedOperation.HTTPStatusCode==404){
+            completionBlock(NO);
+            
+        }
+        
+        
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
+        NSLog(@"%d",errorOp.HTTPStatusCode);
+        if (errorOp.HTTPStatusCode==204) {
+            completionBlock(YES);
+            
+        }else if (errorOp.HTTPStatusCode==404){
+            completionBlock(NO);
+            
+        }else{
+            errorBlock(error);
+            
+        }
+        
+    }];
+    
+    [self enqueueOperation:op];
+    
+    return op;
+}
+
+
+- (MKNetworkOperation *)unfollowUserWithUsername:(NSString *)username
+                                   target_user:(NSString *)target_user
+                             completoinHandler:(void (^)(BOOL isSuccess))completionBlock
+                                   errorHandel:(MKNKErrorBlock)errorBlock {
+    if (username.length<1) {
+        username=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
+        
+    }
+    NSString *access_token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
+    NSString *getString = [NSString stringWithFormat:@"/user/following/%@?access_token=%@",target_user,access_token];
+    MKNetworkOperation *op =
+    [self operationWithPath:getString params:nil httpMethod:@"DELETE" ssl:YES];
+    [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        NSLog(@"%d",completedOperation.HTTPStatusCode);
+        
+        if (completedOperation.HTTPStatusCode==204) {
+            completionBlock(YES);
+            
+        }else if (completedOperation.HTTPStatusCode==404){
+            completionBlock(NO);
+            
+        }
+        
+        
+    } errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
+        NSLog(@"%d",errorOp.HTTPStatusCode);
+        if (errorOp.HTTPStatusCode==204) {
+            completionBlock(YES);
+            
+        }else if (errorOp.HTTPStatusCode==404){
+            completionBlock(NO);
+            
+        }else{
+            errorBlock(error);
+            
+        }
+        
+    }];
+    
+    [self enqueueOperation:op];
+    
+    return op;
+}
+
+
+
 #pragma mark - users module
 
 //https://developer.github.com/v3/search/#search-users
