@@ -15,7 +15,9 @@
 #import "GitHubRankingViewController.h"
 #import "GitHubAwardsViewController.h"
 //#import "LoginViewController.h"
-@interface DiscoveryViewController ()<UITableViewDataSource,UITableViewDelegate>{
+#import "LoginWebViewController.h"
+#import "AESCrypt.h"
+@interface DiscoveryViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>{
     UITableView *tableView;
     NSString *currentLogin;
 }
@@ -68,10 +70,48 @@
 //        
 //    };
 //    [self.navigationController pushViewController:login animated:YES];
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [storage cookies])
+    {
+        [storage deleteCookie:cookie];
+    }
     
+    //    缓存  清除
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    LoginWebViewController *webViewController=[[LoginWebViewController alloc] init];
+    webViewController.urlString=[NSString stringWithFormat:@"https://github.com/login/oauth/authorize/?client_id=%@&state=1995&redirect_uri=https://github.com/coderyi/monkey&scope=user,public_repo",[[AESCrypt decrypt:CoderyiClientID password:@"xxxsd-sdsd*sd672323q___---_w.."] substringFromIndex:1] ];
+    webViewController.callback=^(NSString *code){
+        
+        //        [self loginTokenAction:code];
+        
+        [self getUserInfoAction];
+        
+        
+    };
+    [self presentViewController:webViewController animated:YES completion:nil];
+
 }
 
-
+- (void)getUserInfoAction{
+    NSString *token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
+    if (token.length<1 || !token) {
+        return;
+    }
+    [ApplicationDelegate.apiEngine getUserInfoWithToken:nil completoinHandler:^(UserModel *model){
+        if (model) {
+            currentLogin=model.login;
+//            currentAvatarUrl=model.avatar_url;
+            
+            [[NSUserDefaults standardUserDefaults] setObject:currentLogin forKey:@"currentLogin"];
+            [[NSUserDefaults standardUserDefaults] setObject:model.avatar_url forKey:@"currentAvatarUrl"];
+            [tableView reloadData];
+        }
+        
+    } errorHandel:^(NSError* error){
+        
+    }];
+}
 
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
@@ -135,7 +175,11 @@
             viewController.login=currentLogin;
             [self.navigationController pushViewController:viewController animated:YES];
         }else{
-            [self loginAction];
+//            [self loginAction];
+            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"login message" message:@"please login" delegate:self cancelButtonTitle:@"sure" otherButtonTitles:@"cancel", nil];
+            [alert show];
+            
+
         }
         
     }else if (indexPath.section==3){
@@ -158,4 +202,11 @@
     }
     
 }
+#pragma mark - UIAlertDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==0) {
+        [self loginAction];
+    }
+}
+
 @end

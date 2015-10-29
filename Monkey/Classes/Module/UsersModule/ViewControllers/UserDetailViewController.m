@@ -20,7 +20,8 @@
 #import "UserDetailViewModel.h"
 #import "UserDetailDataSource.h"
 //#import "LoginViewController.h"
-
+#import "LoginWebViewController.h"
+#import "AESCrypt.h"
 @interface UserDetailViewController ()<UITableViewDelegate,UIAlertViewDelegate>{
     UITableView *tableView;
     YiRefreshHeader *refreshHeader;
@@ -348,8 +349,50 @@
 //        }
 //    };
 //    [self.navigationController pushViewController:login animated:YES];
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [storage cookies])
+    {
+        [storage deleteCookie:cookie];
+    }
     
+    //    缓存  清除
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    LoginWebViewController *webViewController=[[LoginWebViewController alloc] init];
+    webViewController.urlString=[NSString stringWithFormat:@"https://github.com/login/oauth/authorize/?client_id=%@&state=1995&redirect_uri=https://github.com/coderyi/monkey&scope=user,public_repo",[[AESCrypt decrypt:CoderyiClientID password:@"xxxsd-sdsd*sd672323q___---_w.."] substringFromIndex:1] ];
+    webViewController.callback=^(NSString *code){
+        
+        //        [self loginTokenAction:code];
+        
+        [self getUserInfoAction];
+        
+        
+    };
+    [self presentViewController:webViewController animated:YES completion:nil];
+    
+
 }
+
+- (void)getUserInfoAction{
+    NSString *token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
+    if (token.length<1 || !token) {
+        return;
+    }
+    [ApplicationDelegate.apiEngine getUserInfoWithToken:nil completoinHandler:^(UserModel *model){
+        if (model) {
+//            currentLogin=model.login;
+            //            currentAvatarUrl=model.avatar_url;
+            
+            [[NSUserDefaults standardUserDefaults] setObject:model.login forKey:@"currentLogin"];
+            [[NSUserDefaults standardUserDefaults] setObject:model.avatar_url forKey:@"currentAvatarUrl"];
+            [tableView reloadData];
+        }
+        
+    } errorHandel:^(NSError* error){
+        
+    }];
+}
+
 
 
 #pragma mark - Private

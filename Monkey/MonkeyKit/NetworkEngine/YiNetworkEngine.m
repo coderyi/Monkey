@@ -59,7 +59,11 @@
 - (MKNetworkOperation *)getUserInfoWithToken:(NSString *)token
                            completoinHandler:(UserModelResponseBlock)completionBlock
                                  errorHandel:(MKNKErrorBlock)errorBlock {
-    
+    if (token.length<1 || !token) {
+        token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
+
+    }
+
     NSString *getString = [NSString stringWithFormat:@"/user?access_token=%@",token];
     
     MKNetworkOperation *op =

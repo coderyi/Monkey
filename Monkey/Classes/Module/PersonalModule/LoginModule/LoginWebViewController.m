@@ -13,6 +13,7 @@
     
     UILabel *titleText;
     UIActivityIndicatorView *activityIndicator;
+    UIButton *backBt;
 }
 
 
@@ -53,15 +54,33 @@
     self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets=NO;
     
+    UINavigationBar *bar=[[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 64)];
+    [self.view addSubview:bar];
+    bar.barTintColor=YiBlue;
     
-    UIWebView *webView=[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64)];
+    
+    backBt=[UIButton buttonWithType:UIButtonTypeCustom];
+    backBt.frame=CGRectMake(10, 27, 30, 30);
+    [backBt setImage:[UIImage imageNamed:@"ic_arrow_back_white_48pt"] forState:UIControlStateNormal];
+    [backBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [backBt addTarget:self action:@selector(backBtAction) forControlEvents:UIControlEventTouchUpInside];
+    [bar addSubview:backBt];
+    backBt.hidden=YES;
+    UIWebView *webView=[[UIWebView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight-64)];
     [self.view addSubview:webView];
     webView.delegate=self;
     [webView loadRequest:[[NSURLRequest alloc]initWithURL:[NSURL URLWithString:_urlString]] ];
     
     activityIndicator=[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake((ScreenWidth-60)/2, 100, 60, 60)];
-    [self.view addSubview:activityIndicator];
+//    [self.view addSubview:activityIndicator];
     activityIndicator.activityIndicatorViewStyle=UIActivityIndicatorViewStyleGray;
+}
+
+- (void)backBtAction{
+    _callback(@"error");
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,30 +92,36 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView{
     [activityIndicator startAnimating];
+//    [self hideYiProgressHUD];
+    [self showYiProgressHUD:@"Login Loading..."];
+
     
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     NSString *requestUrl = webView.request.URL.absoluteString;
-    NSLog(@"requestUrl   %@",requestUrl);
     [activityIndicator stopAnimating];
-//    if ([[requestUrl substringWithRange:NSMakeRange(27, 5)] isEqualToString:@"code="]) {
-//        _callback([requestUrl substringWithRange:NSMakeRange(32, 20)]);
-//        [self dismissViewControllerAnimated:YES completion:nil];
-//    }
-//    32  20
+    [self hideYiProgressHUD];
+
     for (int i=0; i<requestUrl.length-5; i++) {
         if ([[requestUrl substringWithRange:NSMakeRange(i, 5)] isEqualToString:@"code="]) {
-            
-            _callback([requestUrl substringWithRange:NSMakeRange(i+5, 20)]);
-            [self dismissViewControllerAnimated:YES completion:nil];
+            backBt.hidden=YES;
+
+            [self loginTokenAction:[requestUrl substringWithRange:NSMakeRange(i+5, 20)]];
+//            _callback([requestUrl substringWithRange:NSMakeRange(i+5, 20)]);
+//            [self dismissViewControllerAnimated:YES completion:nil];
+
             return;
         }
     }
 
-    
+    backBt.hidden=NO;
+
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     [activityIndicator stopAnimating];
+    [self hideYiProgressHUD];
+    backBt.hidden=NO;
+
     
     
 }
@@ -105,15 +130,36 @@
     
     return YES;
 }
+- (void)loginTokenAction:(NSString *)code{
+    [self showYiProgressHUD:@"Login..."];
+    YiNetworkEngine *apiEngine=[[YiNetworkEngine alloc] initWithHostName:@"github.com"];
+    [apiEngine loginWithCode:code completoinHandler:^(NSString *response){
+        
+        [self hideYiProgressHUD];
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+        for (int i=0; i<response.length-13; i++) {
+            if ([[response substringWithRange:NSMakeRange(i, 13)] isEqualToString:@"access_token="]) {
+                NSString *token=[response substringWithRange:NSMakeRange(i+13, 40)];
+                [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"access_token"];
+                
+//                [self getUserInfoAction:token];
+                            _callback(@"success");
+
+                [self dismissViewControllerAnimated:YES completion:nil];
+                return ;
+                
+            }
+        }
+        backBt.hidden=NO;
+
+        
+    } errorHandel:^(NSError* error){
+        backBt.hidden=NO;
+        [self hideYiProgressHUD];
+
+    }];
+}
+
+
 
 @end

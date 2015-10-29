@@ -29,6 +29,8 @@
 #pragma mark - Lifecycle
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self getUserInfoAction];
+
     currentLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
     currentAvatarUrl=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentAvatarUrl"];
     [tableView reloadData];
@@ -57,7 +59,6 @@
     [self.view addSubview:tableView];
     tableView.delegate=self;
     tableView.dataSource=self;
-
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -100,34 +101,41 @@
     webViewController.urlString=[NSString stringWithFormat:@"https://github.com/login/oauth/authorize/?client_id=%@&state=1995&redirect_uri=https://github.com/coderyi/monkey&scope=user,public_repo",[[AESCrypt decrypt:CoderyiClientID password:@"xxxsd-sdsd*sd672323q___---_w.."] substringFromIndex:1] ];
     webViewController.callback=^(NSString *code){
         
-        [self loginTokenAction:code];
+//        [self loginTokenAction:code];
+        
+        [self getUserInfoAction];
+        
     };
     [self presentViewController:webViewController animated:YES completion:nil];
 }
 
-- (void)loginTokenAction:(NSString *)code{
-    YiNetworkEngine *apiEngine=[[YiNetworkEngine alloc] initWithHostName:@"github.com"];
-    [apiEngine loginWithCode:code completoinHandler:^(NSString *response){
-
-        
-        for (int i=0; i<response.length-13; i++) {
-            if ([[response substringWithRange:NSMakeRange(i, 13)] isEqualToString:@"access_token="]) {
-                NSString *token=[response substringWithRange:NSMakeRange(i+13, 40)];
-                [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"access_token"];
-                
-                [self getUserInfoAction:token];
-                
-            }
-        }
-        
-        
-    } errorHandel:^(NSError* error){
-        
-    }];
-}
-
-- (void)getUserInfoAction:(NSString *)token{
-    [ApplicationDelegate.apiEngine getUserInfoWithToken:token completoinHandler:^(UserModel *model){
+//- (void)loginTokenAction:(NSString *)code{
+//    YiNetworkEngine *apiEngine=[[YiNetworkEngine alloc] initWithHostName:@"github.com"];
+//    [apiEngine loginWithCode:code completoinHandler:^(NSString *response){
+//
+//        
+//        for (int i=0; i<response.length-13; i++) {
+//            if ([[response substringWithRange:NSMakeRange(i, 13)] isEqualToString:@"access_token="]) {
+//                NSString *token=[response substringWithRange:NSMakeRange(i+13, 40)];
+//                [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"access_token"];
+//                
+//                [self getUserInfoAction:token];
+//                
+//            }
+//        }
+//        
+//        
+//    } errorHandel:^(NSError* error){
+//        
+//    }];
+//}
+//
+- (void)getUserInfoAction{
+    NSString *token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
+    if (token.length<1 || !token) {
+        return;
+    }
+    [ApplicationDelegate.apiEngine getUserInfoWithToken:nil completoinHandler:^(UserModel *model){
         if (model) {
             currentLogin=model.login;
             currentAvatarUrl=model.avatar_url;
@@ -241,6 +249,8 @@
         currentAvatarUrl=nil;
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"currentLogin"];
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"currentAvatarUrl"];
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"access_token"];
+
         [tableView reloadData];
     }
 }
