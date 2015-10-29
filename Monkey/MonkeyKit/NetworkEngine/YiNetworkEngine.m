@@ -430,7 +430,7 @@
         username=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
 
     }
-    NSString *access_token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
+//    NSString *access_token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
     NSString *getString = [NSString stringWithFormat:@"/users/%@/following/%@",username,target_user];
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
