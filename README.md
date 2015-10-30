@@ -40,7 +40,7 @@ This is the world's top 50 Objective-C programmers, and list the relevant inform
 Data comes from API GitHub and its related content.
 ##Monkey architecture
 
-![](https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/Monkey_architecture_img.png)
+![](https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/Monkey_architecture_img1.png)
 
 ##About Open Source
 
