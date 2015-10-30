@@ -42,6 +42,9 @@ Data comes from API GitHub and its related content.
 
 ![](https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/Monkey_architecture_img1.png)
 
+![](https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/Monkey_architecture_img2.pdf)
+
+
 ##About Open Source
 
 ####Requirements
