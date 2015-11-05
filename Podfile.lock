@@ -1,0 +1,19 @@
+PODS:
+  - NetworkEye (0.9.3):
+    - NetworkEye/SQLCipher (= 0.9.3)
+  - NetworkEye/SQLCipher (0.9.3):
+    - SQLCipher
+  - SQLCipher (3.1.0):
+    - SQLCipher/standard (= 3.1.0)
+  - SQLCipher/common (3.1.0)
+  - SQLCipher/standard (3.1.0):
+    - SQLCipher/common
+
+DEPENDENCIES:
+  - NetworkEye
+
+SPEC CHECKSUMS:
+  NetworkEye: b73df13ab72a75f43386ffe24ba3b48193c27317
+  SQLCipher: c44fcca49c31483c2489cfb79aa7a69407f3794a
+
+COCOAPODS: 0.39.0

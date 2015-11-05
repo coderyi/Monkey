@@ -10,10 +10,10 @@
 #import "SearchViewController.h"
 #import "AboutViewController.h"
 #import "UMFeedback.h"
-//#import "LoginViewController.h"
 #import "UserDetailViewController.h"
 #import "LoginWebViewController.h"
 #import "AESCrypt.h"
+#import "NEHTTPEyeViewController.h"
 @interface MoreViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>{
     
     UITableView *tableView;
@@ -154,9 +154,9 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if (currentLogin) {
-        return 4;
+        return 5;
     }
-    return 3;
+    return 4;
 
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -183,19 +183,21 @@
             cell.textLabel.text=currentLogin;
             [cell.imageView sd_setImageWithURL:[NSURL URLWithString:currentAvatarUrl]];
         }else{
-            cell.textLabel.text=NSLocalizedString(@"login", @"");;
+            cell.textLabel.text=NSLocalizedString(@"login", @"");
         }
         
     }else if (indexPath.section==1){
     
-        cell.textLabel.text=NSLocalizedString(@"about", @"");;
+        cell.textLabel.text=NSLocalizedString(@"about", @"");
 
     }else if (indexPath.section==2){
-        cell.textLabel.text=NSLocalizedString(@"feedback", @"");;
+        cell.textLabel.text=NSLocalizedString(@"feedback", @"");
+    }else if (indexPath.section==3){
+        cell.textLabel.text=@"Network Debug";
     }
     if (currentLogin) {
-        if (indexPath.section==3){
-            cell.textLabel.text=NSLocalizedString(@"logout", @"");;
+        if (indexPath.section==4){
+            cell.textLabel.text=NSLocalizedString(@"logout", @"");
         }
     }
     return cell;
@@ -228,10 +230,16 @@
                                 animated:YES];
 #pragma clang diagnostic pop
 
+    }else if (indexPath.section==3){
+#if defined(DEBUG)||defined(_DEBUG)
+        NEHTTPEyeViewController *vc=[[NEHTTPEyeViewController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
+#endif
+        
     }
     
     if (currentLogin) {
-        if (indexPath.section==3){
+        if (indexPath.section==4){
             UIAlertView *logoutAlertView=[[UIAlertView alloc] initWithTitle:@"提示" message:@"确定退出登录？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
             [logoutAlertView show];
             

@@ -45,6 +45,7 @@
 #import "UMFeedback.h"
 #import "UMOpus.h"
 #import "UMessage.h"
+#import "NEHTTPEye.h"
 
 #import "BaseNavigationController.h"
 @implementation AppDelegate
@@ -56,7 +57,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    
+#if defined(DEBUG)||defined(_DEBUG)
+    [NSURLProtocol registerClass:[NEHTTPEye class]];
+#endif
     UserRankViewController *languageRank=[[UserRankViewController alloc] init];
     BaseNavigationController *navLanguageRank=[self initlizerNavigationControllerWithRootViewController:languageRank];
     navLanguageRank.navigationBar.barTintColor=YiBlue;
