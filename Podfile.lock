@@ -1,8 +1,10 @@
 PODS:
-  - NetworkEye (0.9.3):
-    - NetworkEye/SQLCipher (= 0.9.3)
-  - NetworkEye/SQLCipher (0.9.3):
+  - FMDB/common (2.5)
+  - FMDB/SQLCipher (2.5):
+    - FMDB/common
     - SQLCipher
+  - NetworkEye (0.9.4):
+    - FMDB/SQLCipher (~> 2.5)
   - SQLCipher (3.1.0):
     - SQLCipher/standard (= 3.1.0)
   - SQLCipher/common (3.1.0)
@@ -10,10 +12,11 @@ PODS:
     - SQLCipher/common
 
 DEPENDENCIES:
-  - NetworkEye
+  - NetworkEye (~> 0.9.4)
 
 SPEC CHECKSUMS:
-  NetworkEye: b73df13ab72a75f43386ffe24ba3b48193c27317
+  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
+  NetworkEye: 864dd7703c1f20d04f52db7386a9aaa268dfae93
   SQLCipher: c44fcca49c31483c2489cfb79aa7a69407f3794a
 
 COCOAPODS: 0.39.0

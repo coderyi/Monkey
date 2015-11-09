@@ -1,4 +1,4 @@
 platform :ios, '7.0'
 
 
-pod 'NetworkEye'
+pod 'NetworkEye', '~> 0.9.4'
