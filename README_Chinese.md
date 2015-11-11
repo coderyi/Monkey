@@ -51,6 +51,9 @@ Monkey主要是用来展示GitHub上的开发者的排名，以及仓库的排�
 
 
 ####项目中使用的开源组件
+[NetworkEye](https://github.com/coderyi/NetworkEye)
+
+NetworkEye,a iOS network debug library,It can monitor all HTTP requests within the App and displays all information related to the request.
 
 [YiRefresh](https://github.com/coderyi/YiRefresh)
 
