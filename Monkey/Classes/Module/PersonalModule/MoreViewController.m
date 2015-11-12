@@ -153,10 +153,18 @@
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+#if defined(DEBUG)||defined(_DEBUG)
     if (currentLogin) {
         return 5;
     }
     return 4;
+#else
+    if (currentLogin) {
+        return 4;
+    }
+    return 3;
+#endif
+    
 
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -178,6 +186,8 @@
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     }
+    
+#if defined(DEBUG)||defined(_DEBUG)
     if (indexPath.section==0) {
         if (currentLogin) {
             cell.textLabel.text=currentLogin;
@@ -187,23 +197,52 @@
         }
         
     }else if (indexPath.section==1){
-    
+        
         cell.textLabel.text=NSLocalizedString(@"about", @"");
-
+        
     }else if (indexPath.section==2){
         cell.textLabel.text=NSLocalizedString(@"feedback", @"");
     }else if (indexPath.section==3){
-        cell.textLabel.text=@"Network Debug";
+            cell.textLabel.text=@"Network Debug";
     }
     if (currentLogin) {
         if (indexPath.section==4){
             cell.textLabel.text=NSLocalizedString(@"logout", @"");
         }
     }
+#else
+    if (indexPath.section==0) {
+        if (currentLogin) {
+            cell.textLabel.text=currentLogin;
+            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:currentAvatarUrl]];
+        }else{
+            cell.textLabel.text=NSLocalizedString(@"login", @"");
+        }
+        
+    }else if (indexPath.section==1){
+        
+        cell.textLabel.text=NSLocalizedString(@"about", @"");
+        
+    }else if (indexPath.section==2){
+        cell.textLabel.text=NSLocalizedString(@"feedback", @"");
+    }
+    //    else if (indexPath.section==3){
+    //        cell.textLabel.text=@"Network Debug";
+    //    }
+    if (currentLogin) {
+        if (indexPath.section==3){
+            cell.textLabel.text=NSLocalizedString(@"logout", @"");
+        }
+    }
+#endif
+    
+    
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+#if defined(DEBUG)||defined(_DEBUG)
     if (indexPath.section==0) {
         if (currentLogin) {
             UserDetailViewController *detail=[[UserDetailViewController alloc] init];
@@ -211,7 +250,7 @@
             UserModel *model=[[UserModel alloc] init];
             model.login=currentLogin;
             detail.userModel=model;
-           
+            
             [self.navigationController pushViewController:detail animated:YES];
         }else{
             [self loginAction];
@@ -221,21 +260,21 @@
         AboutViewController *about=[[AboutViewController alloc] init];
         
         [self.navigationController pushViewController:about animated:YES];
-
+        
     }else if (indexPath.section==2){
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-
+        
         [self presentModalViewController:[UMFeedback feedbackModalViewController]
                                 animated:YES];
 #pragma clang diagnostic pop
-
-    }else if (indexPath.section==3){
-#if defined(DEBUG)||defined(_DEBUG)
-        NEHTTPEyeViewController *vc=[[NEHTTPEyeViewController alloc] init];
-        [self presentViewController:vc animated:YES completion:nil];
-#endif
         
+    }else if (indexPath.section==3){
+    #if defined(DEBUG)||defined(_DEBUG)
+            NEHTTPEyeViewController *vc=[[NEHTTPEyeViewController alloc] init];
+            [self presentViewController:vc animated:YES completion:nil];
+    #endif
+    
     }
     
     if (currentLogin) {
@@ -245,7 +284,54 @@
             
         }
     }
- 
+
+#else
+    if (indexPath.section==0) {
+        if (currentLogin) {
+            UserDetailViewController *detail=[[UserDetailViewController alloc] init];
+            
+            UserModel *model=[[UserModel alloc] init];
+            model.login=currentLogin;
+            detail.userModel=model;
+            
+            [self.navigationController pushViewController:detail animated:YES];
+        }else{
+            [self loginAction];
+        }
+        
+    }else if (indexPath.section==1){
+        AboutViewController *about=[[AboutViewController alloc] init];
+        
+        [self.navigationController pushViewController:about animated:YES];
+        
+    }else if (indexPath.section==2){
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        
+        [self presentModalViewController:[UMFeedback feedbackModalViewController]
+                                animated:YES];
+#pragma clang diagnostic pop
+        
+    }
+    
+    //    else if (indexPath.section==3){
+    //#if defined(DEBUG)||defined(_DEBUG)
+    ////        NEHTTPEyeViewController *vc=[[NEHTTPEyeViewController alloc] init];
+    ////        [self presentViewController:vc animated:YES completion:nil];
+    //#endif
+    //
+    //    }
+    
+    if (currentLogin) {
+        if (indexPath.section==3){
+            UIAlertView *logoutAlertView=[[UIAlertView alloc] initWithTitle:@"提示" message:@"确定退出登录？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+            [logoutAlertView show];
+            
+        }
+    }
+
+#endif
+    
 }
 
 #pragma mark - UIAlertViewDelegate

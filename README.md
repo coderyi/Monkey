@@ -119,6 +119,14 @@ My GitHub Dynamics
 
 <img  src="https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/images/6p-5.png" width="320" height="570">
 
+####Contributors
+
+thanks!
+
+[Jack](https://github.com/xhzengAIB)
+
+[xavier](https://github.com/WoodTable)
+
 
 [Knockin' On Heaven's Door-Guns N' Roses-Netease cloud music](http://music.163.com/#/song?id=18095057)
 
