@@ -35,9 +35,17 @@ These data are provided from the GitHub interface,url is https://developer.githu
 I created a google group，this group is for general discussion NetworkEye
 ,welcome to join,[https://groups.google.com/d/forum/monkeyforgithub](https://groups.google.com/d/forum/monkeyforgithub)
 
+welcome to [new issues](https://github.com/coderyi/Monkey/issues).
 
-welcome to new pull request,that fix bug,add new features,add support other platform.and welcome to [new issues](https://github.com/coderyi/Monkey/issues).
-
+If you want to make some contributions to this project or just want to build the project, please using the following command:
+<pre>
+$ git clone https://github.com/coderyi/Monkey.git
+</pre>
+and when it is completed,using the following command:
+<pre>
+$ pod install
+</pre>
+Once finished, you can open the project through double-click the Monkey.xcworkspace file and build the Monkey target. Any pull request will be welcome.
 
 ##GitHub Top Users Repositories
 **[Objective-C top 50 GitHub developers](https://github.com/coderyi/Monkey/blob/master/github_top_users_repositories/github_top_users_objective-c_world.md)**
@@ -54,7 +62,7 @@ Data comes from API GitHub and its related content.
 ##About Open Source
 
 ####Requirements
-iOS8.0+,iPhone,Xcode7.0
+iOS7.0+,iPhone,Xcode7.0
 
 ####Monkey API
 
