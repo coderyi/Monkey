@@ -11,7 +11,6 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic,strong) YiNetworkEngine *apiEngine;//a api engine
 
-
-@property (nonatomic,strong) YiNetworkEngine *apiEngine;
 @end

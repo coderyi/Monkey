@@ -9,5 +9,12 @@
 #import "MKNetworkEngine.h"
 
 @interface MKNetworkEngine (DefaultSet)
+
+/**
+ *  set HTTP hostname and headerfields
+ *
+ *  @return MKNetworkEngine
+ */
 - (id)initWithDefaultSet;
+
 @end

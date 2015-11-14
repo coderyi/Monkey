@@ -9,5 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @interface NSObject (JudgeNull)
+
+/**
+ *  judge a object it is null or not
+ *
+ *  @return a object it is null or not
+ */
 - (BOOL)isNull;
+
 @end

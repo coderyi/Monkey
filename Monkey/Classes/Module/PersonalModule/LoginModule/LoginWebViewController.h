@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface LoginWebViewController : UIViewController
-@property(nonatomic,strong) NSString *urlString;
-@property(nonatomic,copy) void (^callback) (NSString* code);
+
+@property(nonatomic,strong) NSString *urlString;//LoginWebViewController 's url
+@property(nonatomic,copy) void (^callback) (NSString* code);// login callback
+
 @end

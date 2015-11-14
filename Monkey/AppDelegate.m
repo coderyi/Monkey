@@ -50,16 +50,21 @@
 #import "BaseNavigationController.h"
 @implementation AppDelegate
 
-- (BaseNavigationController *)initlizerNavigationControllerWithRootViewController:(UIViewController *)rootViewController {
-    return [[BaseNavigationController alloc] initWithRootViewController:rootViewController];
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
 #if defined(DEBUG)||defined(_DEBUG)
-    [NSURLProtocol registerClass:[NEHTTPEye class]];
+    [NSURLProtocol registerClass:[NEHTTPEye class]];// open a network debug library
 #endif
+    [self setupTabBar];//setup tabbar
+    self.apiEngine = [[YiNetworkEngine alloc] initWithDefaultSet];//set a app network engine
+    [self setupUM:launchOptions];//setup UM
+    return YES;
+}
+
+- (void)setupTabBar{
+
     UserRankViewController *languageRank=[[UserRankViewController alloc] init];
     BaseNavigationController *navLanguageRank=[self initlizerNavigationControllerWithRootViewController:languageRank];
     navLanguageRank.navigationBar.barTintColor=YiBlue;
@@ -107,8 +112,14 @@
     tabBarItem4.image=[UIImage imageNamed:@"more"];
     
     self.window.rootViewController=tab;
-    self.apiEngine = [[YiNetworkEngine alloc] initWithDefaultSet];
-    
+}
+
+
+- (BaseNavigationController *)initlizerNavigationControllerWithRootViewController:(UIViewController *)rootViewController {
+    return [[BaseNavigationController alloc] initWithRootViewController:rootViewController];
+}
+
+- (void)setupUM:(NSDictionary *)launchOptions{
     [MobClick startWithAppkey:@"551ff351fd98c56f12000013"];
     
     [MobClick checkUpdate];
@@ -145,12 +156,12 @@
     } else {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-
+        
         [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge |
          UIRemoteNotificationTypeSound |
          UIRemoteNotificationTypeAlert];
 #pragma clang diagnostic pop
-
+        
     }
     [UMessage setLogEnabled:NO];
     
@@ -160,9 +171,9 @@
     
     [[UMFeedback sharedInstance] setFeedbackViewController:nil shouldPush:NO];
     //    上面的代码是友盟推送 需要证书
-    
-    return YES;
+
 }
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [UMessage registerDeviceToken:deviceToken];
     NSLog(@"umeng message alias is: %@", [UMFeedback uuid]);

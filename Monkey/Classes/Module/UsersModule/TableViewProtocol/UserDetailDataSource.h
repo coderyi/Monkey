@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface UserDetailDataSource : NSObject<UITableViewDataSource>
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject3;
-@property(nonatomic,assign) int currentIndex;
+
+@property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;//repo datasource
+@property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;//following datasource
+@property(nonatomic,strong)DataSourceModel *DsOfPageListObject3;//follower datasource
+@property(nonatomic,assign) int currentIndex;//current index in UserDetailViewController
 
 @end

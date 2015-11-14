@@ -12,5 +12,15 @@
 @property UILabel *titleLabel;
 @property UIImageView *logoImageView;
 @property UILabel *descriptionLabel;
+
+/**
+ *  calulate tableView row height
+ *
+ *  @param title   showcases cell title
+ *  @param descrip showcases cell description
+ *
+ *  @return tableView row height
+ */
 -(CGFloat)calulateHeightWithtTitle:(NSString*)title desrip:(NSString*)descrip;
+
 @end
