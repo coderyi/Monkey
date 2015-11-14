@@ -32,6 +32,13 @@ repositories ranking is based on the repositories of stars by high to low rankin
 
 These data are provided from the GitHub interface,url is https://developer.github.com/v3/
 
+I created a google group，this group is for general discussion NetworkEye
+,welcome to join,[https://groups.google.com/d/forum/monkeyforgithub](https://groups.google.com/d/forum/monkeyforgithub)
+
+
+welcome to new pull request,that fix bug,add new features,add support other platform.and welcome to [new issues](https://github.com/coderyi/Monkey/issues).
+
+
 ##GitHub Top Users Repositories
 **[Objective-C top 50 GitHub developers](https://github.com/coderyi/Monkey/blob/master/github_top_users_repositories/github_top_users_objective-c_world.md)**
 
