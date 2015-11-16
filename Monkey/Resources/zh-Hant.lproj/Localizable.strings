@@ -1,0 +1,49 @@
+/* 
+  Localizable.strings
+  Monkey
+
+  Created by coderyi on 15/7/21.
+  Copyright (c) 2015年 www.coderyi.com. All rights reserved.
+*/
+
+//中国的城市
+"beijing"="北京";
+"shanghai"="上海";
+"shenzhen"="深圳";
+"hangzhou"="杭州";
+"guangzhou"="廣州";
+"chengdu"="成都";
+"nanjing"="南京";
+"wuhan"="武漢";
+"suzhou"="蘇州";
+"xiamen"="廈門";
+"tianjin"="天津";
+"chongqing"="重慶";
+"changsha"="長沙";
+
+
+"all languages"="所有語言";
+"city"="城市";
+"language"="語言";
+"Language"="語言";
+
+"Discovery"="發現";
+
+"login"="登錄";
+"about"="關於";
+"feedback"="反饋";
+"search"="搜索";
+"logout"="退出登錄";
+"Author"="作者";
+"Version"="版本";
+"cancel"="取消";
+//yirefresh
+"loading"="正在載入";
+"pull down"="下拉可刷新";
+"release"="鬆開以刷新";
+
+"News"="動態";
+"More"="更多";
+"Select City"="選擇城市";
+"Select Country"="選擇國家";
+
