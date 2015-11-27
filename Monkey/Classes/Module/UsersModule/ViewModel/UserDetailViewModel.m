@@ -12,9 +12,10 @@
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject3;
-
 @end
+
 @implementation UserDetailViewModel
+
 - (id)init
 {
     self = [super init];
@@ -26,6 +27,7 @@
     }
     return self;
 }
+
 - (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst  currentIndex:(int)currentIndex firstTableData:(UserDetailDataSourceModelResponseBlock)firstCompletionBlock secondTableData:(UserDetailDataSourceModelResponseBlock)secondCompletionBlock thirdTableData:(UserDetailDataSourceModelResponseBlock)thirdCompletionBlock
 {
     
@@ -111,6 +113,5 @@
     return YES;
     
 }
-
 
 @end

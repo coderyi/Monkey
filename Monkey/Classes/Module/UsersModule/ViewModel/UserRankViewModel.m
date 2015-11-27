@@ -19,9 +19,10 @@
 @property(nonatomic,strong)NSString *tableView3Language;
 
 @end
-@implementation UserRankViewModel
 
+@implementation UserRankViewModel
 @synthesize tableView1Language,tableView2Language,tableView3Language;
+
 - (id)init
 {
     self = [super init];
@@ -33,6 +34,7 @@
     }
     return self;
 }
+
 - (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst  currentIndex:(int)currentIndex firstTableData:(UserRankDataSourceModelResponseBlock)firstCompletionBlock secondTableData:(UserRankDataSourceModelResponseBlock)secondCompletionBlock thirdTableData:(UserRankDataSourceModelResponseBlock)thirdCompletionBlock
 {
     

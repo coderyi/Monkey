@@ -17,7 +17,6 @@
     }
     
     ShowcasesModel *model = [[ShowcasesModel alloc]init];
-    
     model.name = [dict objectForKey:@"name"] ;
     model.slug = [dict objectForKey:@"slug"] ;
     model.showcasesDescription = [dict objectForKey:@"description"] ;

@@ -9,6 +9,7 @@
 #import "UserReceivedEventModel.h"
 
 @implementation UserReceivedEventModel
+
 + (UserReceivedEventModel *)modelWithDict:(NSDictionary *)dict
 {
     if (!dict) {
@@ -33,4 +34,5 @@
    
     return model;
 }
+
 @end

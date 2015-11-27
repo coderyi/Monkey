@@ -11,29 +11,22 @@
 @implementation RepositoryDetailDataSource
 @synthesize currentIndex;
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     if (currentIndex==1) {
         return self.DsOfPageListObject1.dsArray.count;
-        
     }else if (currentIndex==2){
-        
         return self.DsOfPageListObject2.dsArray.count;
-        
     }else if (currentIndex==3){
-        
         return self.DsOfPageListObject3.dsArray.count;
-        
     }
-    
     return 1;
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if (currentIndex==1) {
-        
         RankTableViewCell *cell;
-        
         NSString *cellId=@"CellId";
         cell=[tableView dequeueReusableCellWithIdentifier:cellId];
         if (cell==nil) {
@@ -47,7 +40,6 @@
         [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url]];
         return cell;
     }else if (currentIndex==2){
-        
         RankTableViewCell *cell;
         NSString *cellId=@"CellId1";
         cell=[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -61,8 +53,8 @@
         cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
         [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar_url]];
         return cell;
-    }else if (currentIndex==3){ RankTableViewCell *cell;
-        
+    }else if (currentIndex==3){
+        RankTableViewCell *cell;
         NSString *cellId=@"CellId2";
         cell=[tableView dequeueReusableCellWithIdentifier:cellId];
         if (cell==nil) {

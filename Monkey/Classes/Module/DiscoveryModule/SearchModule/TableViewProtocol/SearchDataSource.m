@@ -11,22 +11,18 @@
 
 @implementation SearchDataSource
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     if (tableView.tag==11) {
-        
         return self.DsOfPageListObject1.dsArray.count;
-        
     }else if (tableView.tag==12){
-        
         return self.DsOfPageListObject2.dsArray.count;
     }
-    
     return self.DsOfPageListObject1.dsArray.count;
-    
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UITableViewCell *cell;
     if (tableView.tag==11) {
         NSString *cellId=@"CellId1";
@@ -56,11 +52,9 @@
         cell.detailTextLabel.text=[NSString stringWithFormat:@"%@  %@",model.language,model.repositoryDescription];
         cell.detailTextLabel.textColor=YiTextGray;
         return cell;
-        
     }
     return cell;
   
 }
-
 
 @end

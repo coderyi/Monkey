@@ -10,6 +10,7 @@
 
 @implementation ShowcasesTableViewCell
 @synthesize titleLabel,descriptionLabel,logoImageView;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -49,7 +50,6 @@
     return self;
 }
 
-
 -(CGFloat)calulateHeightWithtTitle:(NSString*)title desrip:(NSString*)descrip
 {
     //这里非常重要
@@ -63,20 +63,6 @@
     CGSize size = [self.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     //加1是关键
     return size.height+1.0f;
-}
-
--(void)layoutSubviews{
-    [super layoutSubviews];
-}
-
-- (void)awakeFromNib {
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

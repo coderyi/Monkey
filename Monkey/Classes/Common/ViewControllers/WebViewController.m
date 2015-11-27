@@ -8,15 +8,13 @@
 
 #import "WebViewController.h"
 
-@interface WebViewController ()<UIWebViewDelegate>{
-    
+@interface WebViewController ()<UIWebViewDelegate> {
     UILabel *titleText;
     UIActivityIndicatorView *activityIndicator;
     UIWebView *webView;
     UIButton *backBt;
     UIButton *closeBt;
 }
-
 
 @end
 
@@ -30,17 +28,19 @@
     self.tabBarController.tabBar.hidden = YES;
     
 }
-- (void)viewWillDisappear:(BOOL)animated{
+
+- (void)viewWillDisappear:(BOOL)animated
+{
     self.tabBarController.tabBar.hidden = NO;
     [activityIndicator removeFromSuperview];
-    
 }
-- (void)viewDidLoad {
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-        
     }
     
     titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
@@ -76,7 +76,9 @@
 
     self.navigationItem.leftBarButtonItems=@[[[UIBarButtonItem alloc] initWithCustomView:backBt]];
 }
-- (void)backBtAction{
+
+- (void)backBtAction
+{
     if (webView.canGoBack)
     {
         [webView goBack];
@@ -86,33 +88,36 @@
     }
 }
 
-- (void)closeBtAction{
+- (void)closeBtAction
+{
     [self.navigationController popViewControllerAnimated:YES];
-
 }
-- (void)didReceiveMemoryWarning {
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UIWebViewDelegate
 
-- (void)webViewDidStartLoad:(UIWebView *)webView{
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
     [activityIndicator startAnimating];
-    
 }
-- (void)webViewDidFinishLoad:(UIWebView *)webView{
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
     [activityIndicator stopAnimating];
 }
+
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     [activityIndicator stopAnimating];
 
 }
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-   
     return YES;
 }
-
-
 
 @end

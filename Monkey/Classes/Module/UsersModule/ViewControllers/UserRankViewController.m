@@ -52,8 +52,8 @@
 @end
 
 @implementation UserRankViewController
-#pragma mark - Lifecycle
 
+#pragma mark - Lifecycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -65,7 +65,9 @@
     }
     return self;
 }
-- (void)viewWillAppear:(BOOL)animated{
+
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = NO;
 
@@ -126,8 +128,8 @@
 
 }
 
-
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if (iOS7GE) {
@@ -187,28 +189,31 @@
     self.navigationItem.rightBarButtonItem=right;
    
 }
+
 #pragma mark - Actions
-
-- (void)leftAction{
-
+- (void)leftAction
+{
     CountryViewController *viewController=[[CountryViewController alloc] init];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
-- (void)rightAction{
+- (void)rightAction
+{
     LanguageViewController *viewController=[[LanguageViewController alloc] init];
     viewController.languageEntranceType=UserLanguageEntranceType;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Private
 
-- (void)initScroll{
+- (void)initScroll
+{
     
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, titleHeight, ScreenWidth, bgViewHeight)];
     scrollView.alwaysBounceHorizontal=YES;
@@ -231,7 +236,8 @@
     }
 }
 
-- (void)initTable{
+- (void)initTable
+{
     
     tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
     [scrollView addSubview:tableView1];
@@ -400,7 +406,8 @@
     }
 }
 
-- (void)loadDataFromApiWithIsFirst:(BOOL)isFirst{
+- (void)loadDataFromApiWithIsFirst:(BOOL)isFirst
+{
     if (currentIndex==1) {
         tableView1Language=language;
         
@@ -453,7 +460,7 @@
 
 #pragma mark - UIScrollViewDelegate
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView1
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)tempScrollView
 {
     if (segmentControl.buttonCount==2) {
     
@@ -494,7 +501,8 @@
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UserDetailViewController *detail=[[UserDetailViewController alloc] init];
     if (currentIndex==1) {
         UserModel  *model = [(userRankDataSource.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
@@ -508,6 +516,5 @@
     }
     [self.navigationController pushViewController:detail animated:YES];
 }
-
 
 @end

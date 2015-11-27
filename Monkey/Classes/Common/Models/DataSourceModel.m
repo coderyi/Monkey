@@ -16,7 +16,6 @@
     if (self) {
         self.dsArray = [[NSMutableArray alloc]initWithCapacity:32];
         self.page = 0;
-      
     }
     return self;
 }
@@ -26,11 +25,5 @@
     self.page=0;
     [self.dsArray removeAllObjects];
 }
-
-
-
-
-
-
 
 @end

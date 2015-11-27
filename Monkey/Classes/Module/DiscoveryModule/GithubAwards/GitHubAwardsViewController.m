@@ -9,7 +9,7 @@
 
 #import "GitHubAwardsViewController.h"
 #import "WebViewController.h"
-@interface GitHubAwardsViewController ()<UITableViewDataSource,UITableViewDelegate>{
+@interface GitHubAwardsViewController ()<UITableViewDataSource,UITableViewDelegate> {
     UITableView *tableView1;
     NSArray *rankCategorys;
 }
@@ -17,6 +17,7 @@
 @end
 
 @implementation GitHubAwardsViewController
+
 #pragma mark - Lifecycle
 
 - (void)viewWillAppear:(BOOL)animated
@@ -25,11 +26,14 @@
     self.tabBarController.tabBar.hidden = YES;
     
 }
-- (void)viewWillDisappear:(BOOL)animated{
+
+- (void)viewWillDisappear:(BOOL)animated
+{
     self.tabBarController.tabBar.hidden = NO;
     
 }
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
@@ -61,14 +65,17 @@
     [footerButton addTarget:self action:@selector(footerButtonAction) forControlEvents:UIControlEventTouchUpInside];
     
 }
-- (void)didReceiveMemoryWarning {
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Actions
 
-- (void)footerButtonAction{
+- (void)footerButtonAction
+{
     WebViewController *viewController=[[WebViewController alloc] init];
     viewController.urlString=@"http://github-awards.com/";
     [self.navigationController pushViewController:viewController animated:YES];
@@ -76,19 +83,21 @@
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     
     return rankCategorys.count;
     
 }
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     
     return 1;
     
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UITableViewCell *cell;
     NSString *cellId=@"CellId1";
     cell=[tableView dequeueReusableCellWithIdentifier:cellId];
@@ -99,14 +108,14 @@
     return cell;
   
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     WebViewController *viewController=[[WebViewController alloc] init];
     NSArray *webViewRankCategorys=@[@"world",@"country",@"city"];
     viewController.urlString=[NSString stringWithFormat:@"http://github-awards.com/users?type=%@",webViewRankCategorys[indexPath.section]];
     [self.navigationController pushViewController:viewController animated:YES];
     
 }
-
 
 @end

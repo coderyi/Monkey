@@ -14,7 +14,7 @@
 #import "LoginWebViewController.h"
 #import "AESCrypt.h"
 #import "NEHTTPEyeViewController.h"
-@interface MoreViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>{
+@interface MoreViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate> {
     
     UITableView *tableView;
     UILabel *titleText;
@@ -26,8 +26,10 @@
 @end
 
 @implementation MoreViewController
+
 #pragma mark - Lifecycle
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     [self getUserInfoAction];
 
@@ -35,7 +37,9 @@
     currentAvatarUrl=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentAvatarUrl"];
     [tableView reloadData];
 }
-- (void)viewDidLoad {
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor=[UIColor whiteColor];
@@ -49,7 +53,6 @@
     
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-        
     }
     
     self.view.backgroundColor=[UIColor whiteColor];
@@ -60,31 +63,19 @@
     tableView.delegate=self;
     tableView.dataSource=self;
 }
-- (void)didReceiveMemoryWarning {
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 #pragma mark - loginmodule
 
 /**
  *  https://developer.github.com/v3/oauth/#redirect-users-to-request-github-access
  */
-- (void)loginAction{
 
-//    LoginViewController *login=[[LoginViewController alloc] init];
-//    login.callback=^(NSString *response){
-//        if ([response isEqualToString:@"yes"]) {
-//            currentLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
-//            currentAvatarUrl=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentAvatarUrl"];
-//            [tableView reloadData];
-//        }
-//        
-//    };
-//    [self.navigationController pushViewController:login animated:YES];
-    [self oauth2LoginAction];
-}
 - (void)oauth2LoginAction{
 
     //    cookie清除
@@ -100,37 +91,14 @@
     LoginWebViewController *webViewController=[[LoginWebViewController alloc] init];
     webViewController.urlString=[NSString stringWithFormat:@"https://github.com/login/oauth/authorize/?client_id=%@&state=1995&redirect_uri=https://github.com/coderyi/monkey&scope=user,public_repo",[[AESCrypt decrypt:CoderyiClientID password:@"xxxsd-sdsd*sd672323q___---_w.."] substringFromIndex:1] ];
     webViewController.callback=^(NSString *code){
-        
-//        [self loginTokenAction:code];
-        
         [self getUserInfoAction];
-        
     };
     [self presentViewController:webViewController animated:YES completion:nil];
+    
 }
 
-//- (void)loginTokenAction:(NSString *)code{
-//    YiNetworkEngine *apiEngine=[[YiNetworkEngine alloc] initWithHostName:@"github.com"];
-//    [apiEngine loginWithCode:code completoinHandler:^(NSString *response){
-//
-//        
-//        for (int i=0; i<response.length-13; i++) {
-//            if ([[response substringWithRange:NSMakeRange(i, 13)] isEqualToString:@"access_token="]) {
-//                NSString *token=[response substringWithRange:NSMakeRange(i+13, 40)];
-//                [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"access_token"];
-//                
-//                [self getUserInfoAction:token];
-//                
-//            }
-//        }
-//        
-//        
-//    } errorHandel:^(NSError* error){
-//        
-//    }];
-//}
-//
-- (void)getUserInfoAction{
+- (void)getUserInfoAction
+{
     NSString *token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
     if (token.length<1 || !token) {
         return;
@@ -139,20 +107,18 @@
         if (model) {
             currentLogin=model.login;
             currentAvatarUrl=model.avatar_url;
-            
             [[NSUserDefaults standardUserDefaults] setObject:currentLogin forKey:@"currentLogin"];
             [[NSUserDefaults standardUserDefaults] setObject:currentAvatarUrl forKey:@"currentAvatarUrl"];
             [tableView reloadData];
         }
-        
     } errorHandel:^(NSError* error){
-        
     }];
 }
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
 #if defined(DEBUG)||defined(_DEBUG)
     if (currentLogin) {
         return 5;
@@ -164,21 +130,16 @@
     }
     return 3;
 #endif
-    
-
 }
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-   
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return 1;
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-
-- (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-
+- (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UITableViewCell *cell;
-        
     NSString *cellId=@"CellId";
     cell=[tableView1 dequeueReusableCellWithIdentifier:cellId];
     if (cell==nil) {
@@ -186,7 +147,6 @@
         cell.selectionStyle=UITableViewCellSelectionStyleNone;
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     }
-    
 #if defined(DEBUG)||defined(_DEBUG)
     if (indexPath.section==0) {
         if (currentLogin) {
@@ -196,17 +156,15 @@
             cell.textLabel.text=NSLocalizedString(@"login", @"");
         }
         
-    }else if (indexPath.section==1){
-        
+    }else if (indexPath.section==1) {
         cell.textLabel.text=NSLocalizedString(@"about", @"");
-        
-    }else if (indexPath.section==2){
+    }else if (indexPath.section==2) {
         cell.textLabel.text=NSLocalizedString(@"feedback", @"");
-    }else if (indexPath.section==3){
+    }else if (indexPath.section==3) {
             cell.textLabel.text=@"Network Debug";
     }
     if (currentLogin) {
-        if (indexPath.section==4){
+        if (indexPath.section==4) {
             cell.textLabel.text=NSLocalizedString(@"logout", @"");
         }
     }
@@ -219,124 +177,94 @@
             cell.textLabel.text=NSLocalizedString(@"login", @"");
         }
         
-    }else if (indexPath.section==1){
+    }else if (indexPath.section==1) {
         
         cell.textLabel.text=NSLocalizedString(@"about", @"");
         
-    }else if (indexPath.section==2){
+    }else if (indexPath.section==2) {
         cell.textLabel.text=NSLocalizedString(@"feedback", @"");
     }
-    //    else if (indexPath.section==3){
-    //        cell.textLabel.text=@"Network Debug";
-    //    }
     if (currentLogin) {
-        if (indexPath.section==3){
+        if (indexPath.section==3) {
             cell.textLabel.text=NSLocalizedString(@"logout", @"");
         }
     }
 #endif
-    
-    
-    
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
 #if defined(DEBUG)||defined(_DEBUG)
     if (indexPath.section==0) {
         if (currentLogin) {
             UserDetailViewController *detail=[[UserDetailViewController alloc] init];
-            
             UserModel *model=[[UserModel alloc] init];
             model.login=currentLogin;
             detail.userModel=model;
-            
             [self.navigationController pushViewController:detail animated:YES];
         }else{
-            [self loginAction];
+            [self oauth2LoginAction];
         }
-        
-    }else if (indexPath.section==1){
+    }else if (indexPath.section==1) {
         AboutViewController *about=[[AboutViewController alloc] init];
-        
         [self.navigationController pushViewController:about animated:YES];
-        
-    }else if (indexPath.section==2){
+    }else if (indexPath.section==2) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        
         [self presentModalViewController:[UMFeedback feedbackModalViewController]
                                 animated:YES];
 #pragma clang diagnostic pop
         
-    }else if (indexPath.section==3){
+    }else if (indexPath.section==3) {
     #if defined(DEBUG)||defined(_DEBUG)
             NEHTTPEyeViewController *vc=[[NEHTTPEyeViewController alloc] init];
             [self presentViewController:vc animated:YES completion:nil];
     #endif
-    
     }
-    
     if (currentLogin) {
-        if (indexPath.section==4){
+        if (indexPath.section==4) {
             UIAlertView *logoutAlertView=[[UIAlertView alloc] initWithTitle:@"提示" message:@"确定退出登录？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
             [logoutAlertView show];
-            
         }
     }
-
 #else
     if (indexPath.section==0) {
         if (currentLogin) {
             UserDetailViewController *detail=[[UserDetailViewController alloc] init];
-            
             UserModel *model=[[UserModel alloc] init];
             model.login=currentLogin;
             detail.userModel=model;
-            
             [self.navigationController pushViewController:detail animated:YES];
         }else{
-            [self loginAction];
+            [self oauth2LoginAction];
         }
-        
-    }else if (indexPath.section==1){
+    }else if (indexPath.section==1) {
         AboutViewController *about=[[AboutViewController alloc] init];
-        
         [self.navigationController pushViewController:about animated:YES];
-        
-    }else if (indexPath.section==2){
+    }else if (indexPath.section==2) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        
         [self presentModalViewController:[UMFeedback feedbackModalViewController]
                                 animated:YES];
 #pragma clang diagnostic pop
         
     }
     
-    //    else if (indexPath.section==3){
-    //#if defined(DEBUG)||defined(_DEBUG)
-    ////        NEHTTPEyeViewController *vc=[[NEHTTPEyeViewController alloc] init];
-    ////        [self presentViewController:vc animated:YES completion:nil];
-    //#endif
-    //
-    //    }
-    
     if (currentLogin) {
-        if (indexPath.section==3){
+        if (indexPath.section==3) {
             UIAlertView *logoutAlertView=[[UIAlertView alloc] initWithTitle:@"提示" message:@"确定退出登录？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
             [logoutAlertView show];
-            
         }
     }
-
 #endif
     
 }
 
 #pragma mark - UIAlertViewDelegate
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
 
     if (buttonIndex==0) {
         currentLogin=nil;
@@ -348,6 +276,5 @@
         [tableView reloadData];
     }
 }
-
 
 @end

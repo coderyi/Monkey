@@ -8,15 +8,14 @@
 
 #import "SearchSegmentControl.h"
 
-@implementation SearchSegmentControl
-int currentTag;
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+@interface SearchSegmentControl () {
+    int currentTag;
 }
-*/
+@end
+
+@implementation SearchSegmentControl
+
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -48,7 +47,6 @@ int currentTag;
         _button2.tag=102;
         [_button2 addTarget:self action:@selector(btAction:) forControlEvents:UIControlEventTouchUpInside];
         
-        
         //        #F1A042
         label1=[[UILabel alloc] initWithFrame:CGRectMake(0+(w/2-50)/2, 28, 50, 2)];
         [self addSubview:label1];
@@ -68,7 +66,9 @@ int currentTag;
     }
     return self;
 }
--(void)btAction:(UIButton *)button{
+
+-(void)btAction:(UIButton *)button
+{
     UIColor *black=[UIColor blackColor];
     switch (button.tag) {
         case 101:

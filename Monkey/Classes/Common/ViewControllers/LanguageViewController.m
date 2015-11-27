@@ -8,7 +8,7 @@
 
 #import "LanguageViewController.h"
 
-@interface LanguageViewController ()<UITableViewDataSource,UITableViewDelegate>{
+@interface LanguageViewController ()<UITableViewDataSource,UITableViewDelegate> {
     UITableView *tableView1;
     NSArray *languages;
 }
@@ -16,25 +16,28 @@
 @end
 
 @implementation LanguageViewController
-#pragma mark - Lifecycle
 
+#pragma mark - Lifecycle
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
     
 }
-- (void)viewWillDisappear:(BOOL)animated{
+
+- (void)viewWillDisappear:(BOOL)animated
+{
     self.tabBarController.tabBar.hidden = NO;
     
 }
-- (void)viewDidLoad {
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title=NSLocalizedString(@"Language", nil);
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-        
     }
     self.automaticallyAdjustsScrollViewInsets=NO;
     self.view.backgroundColor=[UIColor whiteColor];
@@ -46,27 +49,27 @@
     if (_languageEntranceType==RepLanguageEntranceType) {
         languages=@[@"JavaScript",@"Java",@"PHP",@"Ruby",@"Python",@"CSS",@"C",@"Objective-C",@"Swift",@"Shell",@"R",@"Perl",@"Lua",@"HTML",@"Scala",@"Go"];
     }else if (_languageEntranceType==UserLanguageEntranceType  ) {
-    languages=@[NSLocalizedString(@"all languages", @""),@"JavaScript",@"Java",@"PHP",@"Ruby",@"Python",@"CSS",@"C",@"Objective-C",@"Swift",@"Shell",@"R",@"Perl",@"Lua",@"HTML",@"Scala",@"Go"];
-    
+        languages=@[NSLocalizedString(@"all languages", @""),@"JavaScript",@"Java",@"PHP",@"Ruby",@"Python",@"CSS",@"C",@"Objective-C",@"Swift",@"Shell",@"R",@"Perl",@"Lua",@"HTML",@"Scala",@"Go"];
     }else if (_languageEntranceType==TrendingLanguageEntranceType ) {
         languages=@[NSLocalizedString(@"all languages", @""),@"javascript",@"java",@"php",@"ruby",@"python",@"css",@"c",@"objective-c",@"swift",@"shell",@"r",@"perl",@"lua",@"html",@"scala",@"go"];
     }
-    
 }
-- (void)didReceiveMemoryWarning {
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return languages.count;
-   
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UITableViewCell *cell;
     
     NSString *cellId=@"CellId1";
@@ -76,26 +79,23 @@
     }
     cell.textLabel.text=(languages)[indexPath.row];
     return cell;
-   
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if (_languageEntranceType==RepLanguageEntranceType) {
         [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"languageAppear1"];
         [[NSUserDefaults standardUserDefaults] setObject:languages[indexPath.row] forKey:@"language1"];
         [self.navigationController popViewControllerAnimated:YES];
     }else if (_languageEntranceType==UserLanguageEntranceType) {
-    
         [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"languageAppear"];
         [[NSUserDefaults standardUserDefaults] setObject:languages[indexPath.row] forKey:@"language"];
         [self.navigationController popViewControllerAnimated:YES];
     }else if (_languageEntranceType==TrendingLanguageEntranceType) {
-        
         [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"trendingLanguageAppear"];
         [[NSUserDefaults standardUserDefaults] setObject:languages[indexPath.row] forKey:@"language2"];
         [self.navigationController popViewControllerAnimated:YES];
     }
- 
 }
-
 
 @end

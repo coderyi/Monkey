@@ -63,7 +63,8 @@
     return YES;
 }
 
-- (void)setupTabBar{
+- (void)setupTabBar
+{
 
     UserRankViewController *languageRank=[[UserRankViewController alloc] init];
     BaseNavigationController *navLanguageRank=[self initlizerNavigationControllerWithRootViewController:languageRank];
@@ -115,11 +116,13 @@
 }
 
 
-- (BaseNavigationController *)initlizerNavigationControllerWithRootViewController:(UIViewController *)rootViewController {
+- (BaseNavigationController *)initlizerNavigationControllerWithRootViewController:(UIViewController *)rootViewController
+{
     return [[BaseNavigationController alloc] initWithRootViewController:rootViewController];
 }
 
-- (void)setupUM:(NSDictionary *)launchOptions{
+- (void)setupUM:(NSDictionary *)launchOptions
+{
     [MobClick startWithAppkey:@"551ff351fd98c56f12000013"];
     
     [MobClick checkUpdate];
@@ -151,7 +154,6 @@
         
         UIUserNotificationSettings *userSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert
                                                                                      categories:[NSSet setWithObject:categorys]];
-        
         [UMessage registerRemoteNotificationAndUserNotificationSettings:userSettings];
     } else {
 #pragma clang diagnostic push
@@ -174,7 +176,8 @@
 
 }
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
     [UMessage registerDeviceToken:deviceToken];
     NSLog(@"umeng message alias is: %@", [UMFeedback uuid]);
     [UMessage addAlias:[UMFeedback uuid] type:[UMFeedback messageType] response:^(id responseObject, NSError *error) {
@@ -185,16 +188,16 @@
     }];
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
     [UMFeedback didReceiveRemoteNotification:userInfo];
 }
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
     // For handling a callback URL like my-app://oauth
     NSLog(@"%@",URL.host);
- 
-    return YES;
-
+     return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

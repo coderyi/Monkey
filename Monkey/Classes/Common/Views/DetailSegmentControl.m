@@ -8,10 +8,16 @@
 
 #import "DetailSegmentControl.h"
 
+@interface DetailSegmentControl () {
+    int currentTag;
+}
+@end
+
 @implementation DetailSegmentControl
-int currentTag;
+
 
 @synthesize label1,label2,label3,bt1Label,bt2Label,bt3Label,bt1Label1,bt2Label1,bt3Label1;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -51,7 +57,6 @@ int currentTag;
         _button2.tag=102;
         [_button2 addTarget:self action:@selector(btAction:) forControlEvents:UIControlEventTouchUpInside];
         
-        
         _button3=[UIButton buttonWithType:UIButtonTypeCustom];
         [self addSubview:_button3];
         _button3.frame=CGRectMake(w/3+w/3, 0, w/3, 58);
@@ -59,7 +64,6 @@ int currentTag;
         [_button3 setTitleColor:black forState:UIControlStateNormal];
         _button3.tag=103;
         [_button3 addTarget:self action:@selector(btAction:) forControlEvents:UIControlEventTouchUpInside];
-        
         
         bt2Label=[[UILabel alloc] initWithFrame:CGRectMake(0, 5, w/3, 23)];
         [_button2 addSubview:bt2Label];
@@ -87,7 +91,6 @@ int currentTag;
         bt3Label1.text=@"Follower";
         bt3Label1.textAlignment=NSTextAlignmentCenter;
         
-        
         //        #F1A042
         label1=[[UILabel alloc] initWithFrame:CGRectMake(0+(w/3-50)/2, 58, 50, 2)];
         [self addSubview:label1];
@@ -112,7 +115,9 @@ int currentTag;
     }
     return self;
 }
--(void)swipeAction:(NSInteger)tag{
+
+-(void)swipeAction:(NSInteger)tag
+{
     UIColor *black=[UIColor blackColor];
     switch (tag) {
         case 101:
@@ -164,20 +169,17 @@ int currentTag;
             bt2Label1.textColor=black;
             bt3Label1.textColor=YiBlue;
             break;
-        
         default:
             break;
     }
     if (_ButtonActionBlock) {
         _ButtonActionBlock(currentTag);
     }
-    
 }
--(void)btAction:(UIButton *)button{
+
+-(void)btAction:(UIButton *)button
+{
     [self swipeAction:button.tag];
-
 }
-
-
 
 @end

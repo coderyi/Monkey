@@ -12,7 +12,9 @@
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
 @property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
 @end
+
 @implementation SearchViewModel
+
 - (id)init
 {
     self = [super init];
@@ -24,7 +26,8 @@
     return self;
 }
 
-- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst currentIndex:(int)currentIndex searchBarText:(NSString *)text  firstTableData:(SearchDataSourceModelResponseBlock)firstCompletionBlock secondTableData:(SearchDataSourceModelResponseBlock)secondCompletionBlock{
+- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst currentIndex:(int)currentIndex searchBarText:(NSString *)text  firstTableData:(SearchDataSourceModelResponseBlock)firstCompletionBlock secondTableData:(SearchDataSourceModelResponseBlock)secondCompletionBlock
+{
     
     if (text!=nil) {
         
@@ -36,7 +39,6 @@
                 page = 1;
                 
             }else{
-                
                 page = self.DsOfPageListObject1.page+1;
             }
             [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:text sort:@"followers" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
@@ -62,7 +64,6 @@
             
             if (isFirst) {
                 page = 1;
-                
             }else{
                 page = self.DsOfPageListObject2.page+1;
             }
@@ -88,9 +89,5 @@
     return YES;
     
 }
-
-
-
-
 
 @end

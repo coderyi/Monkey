@@ -8,7 +8,7 @@
 
 #import "CountryViewController.h"
 #import "CityViewController.h"
-@interface CountryViewController ()<UITableViewDataSource,UITableViewDelegate>{
+@interface CountryViewController ()<UITableViewDataSource,UITableViewDelegate> {
     UITableView *tableView1;
     NSArray *countrys;
 }
@@ -16,19 +16,23 @@
 @end
 
 @implementation CountryViewController
-#pragma mark - Lifecycle
 
+#pragma mark - Lifecycle
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
     
 }
-- (void)viewWillDisappear:(BOOL)animated{
+
+- (void)viewWillDisappear:(BOOL)animated
+{
     self.tabBarController.tabBar.hidden = NO;
     
 }
-- (void)viewDidLoad {
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title=NSLocalizedString(@"Select Country", nil);
@@ -46,7 +50,9 @@
     
     countrys=@[@"USA",@"UK",@"Germany",@"China",@"Canada",@"India",@"France",@"Australia",@"Other"];
 }
-- (void)didReceiveMemoryWarning {
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -59,10 +65,8 @@
     
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UITableViewCell *cell;
     
     NSString *cellId=@"CellId1";
@@ -74,7 +78,9 @@
     return cell;
     
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
 
     if (indexPath.row!=countrys.count-1) {
         [[NSUserDefaults standardUserDefaults] setObject:countrys[indexPath.row] forKey:@"country"];

@@ -17,7 +17,6 @@
 @property(nonatomic,strong)NSString *repositoryDescription;
 @property(nonatomic,assign)BOOL isFork;
 //@property(nonatomic,strong)NSString *url;
-
 //@property(nonatomic,strong)NSString *forks_url;
 //@property(nonatomic,strong)NSString *keys_url;
 //@property(nonatomic,strong)NSString *collaborators_url;
@@ -36,7 +35,6 @@
 //@property int watchers;
 @property(nonatomic,strong) UserModel *user;
 @property(nonatomic,strong)NSString *mirror_url;
-
 
 //detail
 @property(nonatomic,strong) NSString *parentOwnerName;

@@ -12,6 +12,7 @@ typedef NS_ENUM(NSInteger, LanguageEntranceType) {
     RepLanguageEntranceType,
     TrendingLanguageEntranceType,
 };
+
 @interface LanguageViewController : UIViewController
 @property(nonatomic,assign) LanguageEntranceType languageEntranceType;
 @end

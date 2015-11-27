@@ -14,7 +14,7 @@
 #import "RepositoryDetailViewController.h"
 #import "SearchViewModel.h"
 #import "SearchDataSource.h"
-@interface SearchViewController ()<UITableViewDelegate,UISearchBarDelegate>{
+@interface SearchViewController ()<UITableViewDelegate,UISearchBarDelegate> {
     int currentIndex;
     YiRefreshHeader *refreshHeader1;
     YiRefreshFooter *refreshFooter1;
@@ -37,6 +37,7 @@
 
 @implementation SearchViewController
 @synthesize tableView1,tableView2;
+
 #pragma mark - Lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -56,13 +57,15 @@
     self.tabBarController.tabBar.hidden = YES;
     [self.navigationController.navigationBar addSubview:mySearchBar];
 }
-- (void)viewWillDisappear:(BOOL)animated{
+
+- (void)viewWillDisappear:(BOOL)animated
+{
     self.tabBarController.tabBar.hidden = NO;
     [mySearchBar removeFromSuperview];
 }
 
-
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     searchViewModel=[[SearchViewModel alloc] init];
@@ -70,7 +73,6 @@
 
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-        
     }
     
     titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
@@ -96,58 +98,50 @@
     tableView1.tag=11;
     @weakify(self);
     __weak SearchDataSource * weakSearchDataSourcel = searchDataSourcel;
-
-
     searchSegment.ButtonActionBlock=^(int buttonTag){
         currentIndex=buttonTag-100;
         @strongify(self);
         __strong SearchDataSource * strongSearchDataSourcel = weakSearchDataSourcel;
-
         if (currentIndex==1) {
-
             self.tableView1.hidden=NO;
             self.tableView2.hidden=YES;
         }else if (currentIndex==2){
             if (tableView2==nil) {
                 tableView2=[[UITableView alloc] initWithFrame:CGRectMake(0, 30, ScreenWidth, ScreenHeight-64-30) style:UITableViewStylePlain];
                 [self.view addSubview:self.tableView2];
-                
                 self.tableView2.tag=12;
                 self.tableView2.dataSource=strongSearchDataSourcel;
                 self.tableView2.delegate=self;
                 [self addHeader:2];
                 [self addFooter:2];
-                
             }
             self.tableView1.hidden=YES;
             self.tableView2.hidden=NO;
         }
-        
      };
     self.navigationItem.hidesBackButton =YES;
-    
     mySearchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(10, 2, ScreenWidth-60, 40)];
     [self.navigationController.navigationBar addSubview:mySearchBar];
     mySearchBar.delegate=self;
     mySearchBar.tintColor=YiBlue;
     [mySearchBar becomeFirstResponder];
-    
     UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"cancel", @"") style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
     self.navigationItem.rightBarButtonItem=right;
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 #pragma mark - Actions
 
-- (void)rightAction{
+- (void)rightAction
+{
     [mySearchBar removeFromSuperview];
     [self.navigationController popViewControllerAnimated:YES];
-    
 }
-    
 
 #pragma mark - Private
 
@@ -163,10 +157,6 @@
             STRONGSELF
             [strongSelf loadDataFromApiWithIsFirst:YES];
         };
-        
-        //    是否在进入该界面的时候就开始进入刷新状态
-        
-        //        [refreshHeader1 beginRefreshing];
     }else if (type==2){
         //    YiRefreshHeader  头部刷新按钮的使用
         refreshHeader2=[[YiRefreshHeader alloc] init];
@@ -176,103 +166,78 @@
         refreshHeader2.beginRefreshingBlock=^(){
             STRONGSELF
             [strongSelf loadDataFromApiWithIsFirst:YES];
-
         };
-        
-        //    是否在进入该界面的时候就开始进入刷新状态
-        
-        //        [refreshHeader2 beginRefreshing];
-        
     }
 }
 
 - (void)addFooter:(int)type
 {
-
     WEAKSELF
-
     if (type==1) {
-        
         //    YiRefreshFooter  底部刷新按钮的使用
         refreshFooter1=[[YiRefreshFooter alloc] init];
         refreshFooter1.scrollView=tableView1;
         [refreshFooter1 footer];
         refreshFooter1.beginRefreshingBlock=^(){
-
             STRONGSELF
             [strongSelf loadDataFromApiWithIsFirst:NO];
         };}else if (type==2){
-        
             //    YiRefreshFooter  底部刷新按钮的使用
             refreshFooter2=[[YiRefreshFooter alloc] init];
             refreshFooter2.scrollView=tableView2;
             [refreshFooter2 footer];
             refreshFooter2.beginRefreshingBlock=^(){
-
                 STRONGSELF
                 [strongSelf loadDataFromApiWithIsFirst:NO];
-
             };
     }
 }
 
-- (void)loadDataFromApiWithIsFirst:(BOOL)isFirst{
+- (void)loadDataFromApiWithIsFirst:(BOOL)isFirst
+{
   
     [searchViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex searchBarText:mySearchBar.text firstTableData:^(DataSourceModel* DsOfPageListObject){
         searchDataSourcel.DsOfPageListObject1=DsOfPageListObject;
                         [tableView1 reloadData];
-        
                         if (!isFirst) {
                             [refreshFooter1 endRefreshing];
-                        }else
-                        {
+                        }else {
                             [refreshHeader1 endRefreshing];
                         }
     } secondTableData:^(DataSourceModel* DsOfPageListObject){
         searchDataSourcel.DsOfPageListObject2=DsOfPageListObject;
         [tableView2 reloadData];
-        
         if (!isFirst) {
-            
             [refreshFooter2 endRefreshing];
-            
-        }else
-        {
+        }else {
             [refreshHeader2 endRefreshing];
         }
-        
     } ];
-    
 }
 
-
-
 #pragma mark - UISearchBarDelegate
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
     [self loadDataFromApiWithIsFirst:YES];
     [mySearchBar endEditing:YES];
 }
+
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if (tableView.tag==11) {
         UserDetailViewController *detail=[[UserDetailViewController alloc] init];
-
         UserModel  *model = [(searchDataSourcel.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
-        
         detail.userModel=model;
         [self.navigationController pushViewController:detail animated:YES];
-
     }else  if (tableView.tag==12) {
         RepositoryDetailViewController *detail=[[RepositoryDetailViewController alloc] init];
-
         RepositoryModel  *model = [(searchDataSourcel.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
-        
         detail.model=model;
         [self.navigationController pushViewController:detail animated:YES];
-
     }
 }
-
-
 
 @end

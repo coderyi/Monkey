@@ -9,7 +9,9 @@
 #import "NSObject+HUD.h"
 UIAlertView *alertView;
 @implementation NSObject (HUD)
-- (void)showYiProgressHUD:(NSString *)title  afterDelay:(NSTimeInterval)delay{
+
+- (void)showYiProgressHUD:(NSString *)title  afterDelay:(NSTimeInterval)delay
+{
     [self showYiProgressHUD:title];
     
     [NSTimer scheduledTimerWithTimeInterval:delay
@@ -19,7 +21,9 @@ UIAlertView *alertView;
                                     repeats:NO];
     
 }
-- (void)showYiProgressHUD:(NSString *)title{
+
+- (void)showYiProgressHUD:(NSString *)title
+{
     alertView = [[UIAlertView alloc] initWithTitle:@""
                                            message:title
                                           delegate:nil
@@ -27,11 +31,15 @@ UIAlertView *alertView;
     
     [alertView show];
 }
-- (void)hideYiProgressHUD{
+
+- (void)hideYiProgressHUD
+{
     [self hideYiProgressHUD:nil];
     
 }
-- (void)hideYiProgressHUD:(NSTimer*)timer {
+
+- (void)hideYiProgressHUD:(NSTimer*)timer
+{
     
     [alertView dismissWithClickedButtonIndex:0 animated:YES];
 }

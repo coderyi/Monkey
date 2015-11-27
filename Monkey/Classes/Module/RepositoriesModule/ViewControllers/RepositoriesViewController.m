@@ -13,7 +13,8 @@
 #import "RepositoriesTableViewCell.h"
 #import "LanguageViewController.h"
 #import "RepositoryDetailViewController.h"
-@interface RepositoriesViewController ()<UITableViewDataSource,UITableViewDelegate>{
+
+@interface RepositoriesViewController ()<UITableViewDataSource,UITableViewDelegate> {
     UITableView *tableView;
     YiRefreshHeader *refreshHeader;
     YiRefreshFooter *refreshFooter;
@@ -39,7 +40,8 @@
     return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated
+{
    
     NSString *languageAppear=[[NSUserDefaults standardUserDefaults] objectForKey:@"languageAppear1"];
     if ([languageAppear isEqualToString:@"2"]) {
@@ -48,17 +50,14 @@
         language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language1"];
         if (language==nil || language.length<1) {
             language=@"JavaScript";
-            
         }
-    
         [refreshHeader beginRefreshing];
-        
         titleText.text=language;
     }
-  
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if (iOS7GE) {
@@ -93,17 +92,18 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-#pragma mark - Actions
 
-- (void)rightAction{
+#pragma mark - Actions
+- (void)rightAction
+{
     LanguageViewController *viewController=[[LanguageViewController alloc] init];
     viewController.languageEntranceType=RepLanguageEntranceType;
     [self.navigationController pushViewController:viewController animated:YES];
-    
 }
 
 #pragma mark - Private
@@ -118,7 +118,6 @@
     refreshHeader.beginRefreshingBlock=^(){
         STRONGSELF
         [strongSelf loadDataFromApiWithIsFirst:YES];
-
     };
 
     //    是否在进入该界面的时候就开始进入刷新状态
@@ -136,11 +135,8 @@
     refreshFooter.beginRefreshingBlock=^(){
         STRONGSELF
         [strongSelf loadDataFromApiWithIsFirst:NO];
-
     };
-    
 }
-
 
 - (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
 {
@@ -149,26 +145,19 @@
     
     if (isFirst) {
         page = 1;
-        
     }else{
-        
         page = self.DsOfPageListObject.page+1;
     }
     
     [ApplicationDelegate.apiEngine searchRepositoriesWithPage:page  q:[NSString stringWithFormat:@"language:%@",language] sort:@"stars" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-        
         if (page<=1) {
             [self.DsOfPageListObject.dsArray removeAllObjects];
         }
-        
         [self.DsOfPageListObject.dsArray addObjectsFromArray:modelArray];
         self.DsOfPageListObject.page=page;
         [tableView reloadData];
-        
         if (page>1) {
-            
             [refreshFooter endRefreshing];
-            
         }else
         {
             [refreshHeader endRefreshing];
@@ -176,29 +165,27 @@
     }
                                            errorHandel:^(NSError* error){
                                                if (isFirst) {
-                                                   
                                                    [refreshHeader endRefreshing];
-                                                   
                                                }else{
                                                    [refreshFooter endRefreshing];
-                                                   
                                                }
-                                               
                                            }];
-    
     
     return YES;
     
 }
+
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return self.DsOfPageListObject.dsArray.count;
 }
 
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     NSString *cellId=@"CellId";
     RepositoriesTableViewCell *cell=[tableView1 dequeueReusableCellWithIdentifier:cellId];
     if (cell==nil) {
@@ -216,14 +203,13 @@
     cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
     return cell;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     RepositoryDetailViewController *detail=[[RepositoryDetailViewController alloc] init];
     RepositoryModel  *model = [(self.DsOfPageListObject.dsArray) objectAtIndex:indexPath.row];
     detail.model=model;
     [self.navigationController pushViewController:detail animated:YES];
-   
 }
-
-
 
 @end

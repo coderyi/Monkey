@@ -9,7 +9,7 @@
 #import "NewsViewController.h"
 #import "RepositoryDetailViewController.h"
 #import "UserReceivedEventModel.h"
-@interface NewsViewController ()<UITableViewDataSource,UITableViewDelegate>{
+@interface NewsViewController ()<UITableViewDataSource,UITableViewDelegate> {
     UITableView *tableView;
     YiRefreshHeader *refreshHeader;
     YiRefreshFooter *refreshFooter;
@@ -30,17 +30,19 @@
     }
     return self;
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
-    
 }
+
 - (void)viewWillDisappear:(BOOL)animated{
     self.tabBarController.tabBar.hidden = NO;
-    
 }
-- (void)viewDidLoad {
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if (iOS7GE) {
@@ -71,9 +73,7 @@
         STRONGSELF
         [strongSelf loadDataFromApiWithIsFirst:YES];
     };
-    
     //    是否在进入该界面的时候就开始进入刷新状态
-    
     [refreshHeader beginRefreshing];
 }
 
@@ -91,13 +91,11 @@
     };
 }
 
-
 - (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
 {
     NSInteger page = 0;
     if (isFirst) {
         page = 1;
-        
     }else{
         page = self.DsOfPageListObject.page+1;
     }
@@ -113,9 +111,7 @@
         [tableView reloadData];
 
         if (page>1) {
-            
             [refreshFooter endRefreshing];
-            
         }else
         {
             [refreshHeader endRefreshing];
@@ -124,35 +120,30 @@
     }
                                                     errorHandel:^(NSError* error){
                                                         if (isFirst) {
-                                                            
                                                             [refreshHeader endRefreshing];
-                                                            
                                                         }else{
                                                             [refreshFooter endRefreshing];
-                                                            
                                                         }
-                                                        
                                                     }];
     
     return YES;
     
 }
 
-
-
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return self.DsOfPageListObject.dsArray.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
     NSString *CellId = @"autoCell";
     UITableViewCell *cell = [tableView1 dequeueReusableCellWithIdentifier:CellId];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellId];
-        
     }
     UserReceivedEventModel *model=((UserReceivedEventModel *)([self.DsOfPageListObject.dsArray objectAtIndex:indexPath.row]));
     cell.textLabel.text=model.actor.login;
@@ -170,7 +161,9 @@
     return cell;
     
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UserReceivedEventModel *model=((UserReceivedEventModel *)([self.DsOfPageListObject.dsArray objectAtIndex:indexPath.row]));
     
     RepositoryDetailViewController *viewController=[[RepositoryDetailViewController alloc] init];
@@ -185,7 +178,5 @@
     [self.navigationController pushViewController:viewController animated:YES];
     
 }
-
-
 
 @end

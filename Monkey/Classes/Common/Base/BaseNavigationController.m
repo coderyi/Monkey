@@ -10,7 +10,8 @@
 
 @implementation BaseNavigationController
 
-- (instancetype)initWithRootViewController:(UIViewController *)rootViewController {
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController
+{
     self = [super initWithRootViewController:rootViewController];
     if (self) {
         self.statusBarStyle = UIStatusBarStyleLightContent;
@@ -18,7 +19,8 @@
     return self;
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
     return self.statusBarStyle;
 }
 

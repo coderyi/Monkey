@@ -15,7 +15,7 @@
 #import "UserDetailViewController.h"
 #import "RepositoryDetailDataSource.h"
 #import "RepositoryDetailViewModel.h"
-@interface RepositoryDetailViewController ()<UITableViewDelegate>{
+@interface RepositoryDetailViewController ()<UITableViewDelegate> {
     
     UITableView *tableView;
     YiRefreshHeader *refreshHeader;
@@ -47,8 +47,8 @@
 
 @implementation RepositoryDetailViewController
 @synthesize currentIndex;
-#pragma mark - Lifecycle
 
+#pragma mark - Lifecycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -59,17 +59,21 @@
         self.DsOfPageListObject3 = [[DataSourceModel alloc]init];    }
     return self;
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
     
 }
+
 - (void)viewWillDisappear:(BOOL)animated{
     self.tabBarController.tabBar.hidden = NO;
 
 }
-- (void)viewDidLoad {
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.title = _model.name;
 
@@ -172,22 +176,19 @@
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
 
     segmentControl.ButtonActionBlock=^(int buttonTag){
-        
         currentIndex=buttonTag-100;
         repositoryDetailDataSource.currentIndex=buttonTag-100;
-
         if (currentIndex==1) {
             if (self.DsOfPageListObject1.dsArray.count<1) {
                 [refreshHeader beginRefreshing];
             }
         }else if (currentIndex==2){
             if (self.DsOfPageListObject2.dsArray.count<1) {
-                [refreshHeader beginRefreshing];}
-            
+                [refreshHeader beginRefreshing];
+            }
         }else if (currentIndex==3){
             if (self.DsOfPageListObject3.dsArray.count<1) {
                 [refreshHeader beginRefreshing];}
-            
         }
         [tableView reloadData];
     };
@@ -198,13 +199,15 @@
 
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Actions
-- (void)nameBtAction{
+- (void)nameBtAction
+{
     if (_model.html_url.length>0  ) {
         WebViewController *web=[[WebViewController alloc] init];
         web.urlString=_model.html_url;
@@ -214,24 +217,19 @@
 }
 
 
-- (void)ownerBtAction{
+- (void)ownerBtAction
+{
     if (_model.user.html_url.length>0  ) {
         WebViewController *web=[[WebViewController alloc] init];
         web.urlString=_model.user.html_url;
         [self.navigationController pushViewController:web animated:YES];
-        
     }
 }
 
-
-- (void)starAction{
-    
-
-    
+- (void)starAction
+{
     if (isStaring) {
         [self showYiProgressHUD:@"unstaring……"];
-
-        
         [ApplicationDelegate.apiEngine unStarRepoWithOwner:_model.user.login repo:_model.name completoinHandler:^(BOOL isSuccess){
             if (isSuccess) {
                 [self hideYiProgressHUD];
@@ -239,7 +237,6 @@
                 self.navigationItem.rightBarButtonItem=nil;
                 UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"star" style:UIBarButtonItemStylePlain target:self action:@selector(starAction)];
                 self.navigationItem.rightBarButtonItem=right;
-                
             }else{
                 [self hideYiProgressHUD];
             }
@@ -249,8 +246,6 @@
         
     }else{
         [self showYiProgressHUD:@"staring……"];
-
-        
         [ApplicationDelegate.apiEngine starRepoWithOwner:_model.user.login repo:_model.name completoinHandler:^(BOOL isSuccess){
             if (isSuccess) {
                 [self hideYiProgressHUD];
@@ -258,7 +253,6 @@
                 self.navigationItem.rightBarButtonItem=nil;
                 UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"unstar" style:UIBarButtonItemStylePlain target:self action:@selector(starAction)];
                 self.navigationItem.rightBarButtonItem=right;
-
             }else{
               [self hideYiProgressHUD];
             }
@@ -267,7 +261,9 @@
         }];
     }
 }
-- (void)checkStarStatusAction{
+
+- (void)checkStarStatusAction
+{
  
     NSString *savedLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
     NSString *savedToken=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
@@ -289,37 +285,29 @@
         self.navigationItem.rightBarButtonItem=nil;
         UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:rightTitle style:UIBarButtonItemStylePlain target:self action:@selector(starAction)];
         self.navigationItem.rightBarButtonItem=right;
-    
     } errorHandel:^(NSError *error){
-    
     }];
-  
 }
 
-- (void)homePageAction{
+- (void)homePageAction
+{
     if (_model.homepage.length>0  ) {
         WebViewController *web=[[WebViewController alloc] init];
         web.urlString=_model.homepage;
         [self.navigationController pushViewController:web animated:YES];
-        
     }
 }
 
-
 #pragma mark - Private
 
-- (void)refreshTitleView{
-
+- (void)refreshTitleView
+{
     float orginX=10;
-    
     segmentControl.bt2Label.text=[NSString stringWithFormat:@"%d",_model.forks_count];
-    
     segmentControl.bt3Label.text=[NSString stringWithFormat:@"%d",_model.stargazers_count];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-
     float nameWidth=[_model.name sizeWithFont:[UIFont boldSystemFontOfSize:19] constrainedToSize:CGSizeMake((ScreenWidth-2*10)/2, 40) lineBreakMode:NSLineBreakByWordWrapping].width;
-
     nameBt.frame=CGRectMake(10, 0, nameWidth, 40);
     lineLabel.frame=CGRectMake(orginX+nameWidth, 0, 10, 40);
     ownerBt.frame=CGRectMake(orginX+nameWidth+10, 0, (ScreenWidth-2*orginX)/2-40, 40);
@@ -333,17 +321,13 @@
         parentheight=-30;
     }else{
         forkLabel.hidden=NO;
-
     }
     createLabel.frame=CGRectMake(orginX, 70+parentheight, 100, 30);
     createLabel.text=[_model.created_at substringWithRange:NSMakeRange(0, 10)];
     [homePageBt setTitle:_model.homepage forState:UIControlStateNormal];
     homePageBt.frame=CGRectMake(orginX+100, 70+parentheight, (ScreenWidth-2*orginX)-100, 30);
-
-
     float descHeight=[_model.repositoryDescription sizeWithFont:[UIFont systemFontOfSize:12] constrainedToSize:CGSizeMake((ScreenWidth-2*orginX), 700) lineBreakMode:NSLineBreakByWordWrapping].height+5;
 #pragma clang diagnostic pop
-
     descLabel.text=_model.repositoryDescription;
     descLabel.frame=CGRectMake(orginX, 130+parentheight-30, (ScreenWidth-2*orginX), descHeight);
     segmentControl.frame=CGRectMake(0, 130+descHeight+5+parentheight-30, ScreenWidth, 60);
@@ -351,7 +335,6 @@
     line1.frame=CGRectMake(0, 130+descHeight+5+60+parentheight-30-0.5, ScreenWidth,0.5 );
     tableView.tableHeaderView=titleView;
     [tableView reloadData];
-    
 }
 
 - (void)addHeader
@@ -370,14 +353,10 @@
             STRONGSELF
             [strongSelf refreshTitleView];
             [strongSelf loadDataFromApiWithIsFirst:YES];
-            
-            
         } errorHandel:^(NSError* error){
             STRONGSELF
             [strongSelf loadDataFromApiWithIsFirst:YES];
-
         }];
-       
     };
 #pragma clang diagnostic pop
 
@@ -398,8 +377,8 @@
     };
 }
 
-
-- (void)loadDataFromApiWithIsFirst:(BOOL)isFirst{
+- (void)loadDataFromApiWithIsFirst:(BOOL)isFirst
+{
     
     [repositoryDetailViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex firstTableData:^(DataSourceModel* DsOfPageListObject){
         repositoryDetailDataSource.DsOfPageListObject1=DsOfPageListObject;
@@ -438,7 +417,8 @@
   
 }
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if (currentIndex==1) {
         return RankTableViewCellHeight;
     }else if (currentIndex==2){
@@ -449,7 +429,9 @@
     return 1;
     
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
 
     if (currentIndex==1) {
         UserModel  *model = [(repositoryDetailDataSource.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
@@ -469,7 +451,5 @@
         [self.navigationController pushViewController:detail animated:YES];
     }
 }
-
-
 
 @end

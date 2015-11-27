@@ -8,12 +8,17 @@
 
 #import "HeaderSegmentControl.h"
 
+@interface HeaderSegmentControl () {
+    int currentTag;
+    UIColor *black;
+    UIColor *light;
+    UIFont *normalFont;
+    UIFont *lightFont;
+}
+@end
+
 @implementation HeaderSegmentControl
-int currentTag;
-UIColor *black;
-UIColor *light;
-UIFont *normalFont;
-UIFont *lightFont;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -85,8 +90,9 @@ UIFont *lightFont;
     }
     return self;
 }
--(void)swipeAction:(NSInteger)tag{
-    UIColor *black=[UIColor blackColor];
+
+-(void)swipeAction:(NSInteger)tag
+{
     switch (tag) {
         case 101:
             currentTag=101;
@@ -145,7 +151,9 @@ UIFont *lightFont;
     }
     
 }
--(void)btAction:(UIButton *)button{
+
+-(void)btAction:(UIButton *)button
+{
     [self swipeAction:button.tag];
 }
 

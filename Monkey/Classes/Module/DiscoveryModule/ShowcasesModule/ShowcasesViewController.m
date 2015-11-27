@@ -10,7 +10,7 @@
 #import "ShowcasesViewController.h"
 #import "ShowcasesModel.h"
 #import "ShowcasesDetailViewController.h"
-@interface ShowcasesViewController ()<UITableViewDataSource,UITableViewDelegate>{
+@interface ShowcasesViewController ()<UITableViewDataSource,UITableViewDelegate> {
     UITableView *tableView;
     YiRefreshHeader *refreshHeader;
     YiRefreshFooter *refreshFooter;
@@ -20,6 +20,7 @@
 @end
 
 @implementation ShowcasesViewController
+
 #pragma mark - Lifecycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,22 +31,23 @@
     }
     return self;
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
-    
 }
+
 - (void)viewWillDisappear:(BOOL)animated{
     self.tabBarController.tabBar.hidden = NO;
-    
 }
-- (void)viewDidLoad {
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-        
     }
     self.title=@"Showcases";
     self.automaticallyAdjustsScrollViewInsets=NO;
@@ -58,11 +60,11 @@
   
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 #pragma mark - Private
 - (void)addHeader
@@ -93,7 +95,6 @@
     };
 }
 
-
 - (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
 {
     YiNetworkEngine *networkEngine=[[YiNetworkEngine  alloc] initWithHostName:@"trending.codehub-app.com" customHeaderFields:nil];
@@ -102,27 +103,23 @@
     
     if (isFirst) {
         page = 1;
-        
     }else{
-        
         page = self.DsOfPageListObject.page+1;
     }
+    
     [networkEngine showcasesWithCompletoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-        
         if (page<=1) {
             [self.DsOfPageListObject.dsArray removeAllObjects];
         }
         [self.DsOfPageListObject.dsArray addObjectsFromArray:modelArray];
         self.DsOfPageListObject.page=page;
         [tableView reloadData];
-        
         if (!isFirst) {
             [refreshFooter endRefreshing];
         }else
         {
             [refreshHeader endRefreshing];
         }
-        
     }
                                       errorHandel:^(NSError* error){
                                           if (isFirst) {
@@ -130,7 +127,6 @@
                                           }else{
                                               [refreshFooter endRefreshing];
                                           }
-    
                                       }];
     
     return YES;
@@ -139,27 +135,23 @@
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
-
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ShowcasesTableViewCell *cell  = [[ShowcasesTableViewCell alloc] init];
-    
     ShowcasesModel *model=((ShowcasesModel *)([self.DsOfPageListObject.dsArray objectAtIndex:indexPath.row]));
     //calculate
     CGFloat height = [cell calulateHeightWithtTitle:model.name desrip:model.showcasesDescription];
-    
     return height;
     
 }
 
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return self.DsOfPageListObject.dsArray.count;
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     NSString *CellId = @"autoCell";
     ShowcasesTableViewCell *cell = [tableView1 dequeueReusableCellWithIdentifier:CellId];
     if (cell == nil) {
@@ -177,16 +169,16 @@
     [cell.descriptionLabel setText:nil];
     [cell.logoImageView sd_setImageWithURL:[NSURL URLWithString:model.image_url]];
     [cell.descriptionLabel setText:model.showcasesDescription];
-    
     return cell;
  
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     ShowcasesDetailViewController *detail=[[ShowcasesDetailViewController alloc] init];
     ShowcasesModel  *model = [(self.DsOfPageListObject.dsArray) objectAtIndex:indexPath.row];
     detail.model=model;
     [self.navigationController pushViewController:detail animated:YES];
-  
 }
 
 @end

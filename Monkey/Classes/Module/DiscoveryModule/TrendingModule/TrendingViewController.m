@@ -17,7 +17,8 @@
 #import "TrendingDataSource.h"
 #import "TrendingViewModel.h"
 #import "RepositoryDetailViewController.h"
-@interface TrendingViewController ()<UITableViewDelegate>{
+
+@interface TrendingViewController ()<UITableViewDelegate> {
     UIScrollView *scrollView;
     int currentIndex;
     UITableView *tableView1;
@@ -37,7 +38,7 @@
     YiRefreshFooter *refreshFooter3;
     
     NSString *language;
-    
+
     NSString *tableView1Language;
     NSString *tableView2Language;
     NSString *tableView3Language;
@@ -52,8 +53,8 @@
 @end
 
 @implementation TrendingViewController
-#pragma mark - Lifecycle
 
+#pragma mark - Lifecycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -65,11 +66,14 @@
     }
     return self;
 }
-- (void)viewWillDisappear:(BOOL)animated{
+
+- (void)viewWillDisappear:(BOOL)animated
+{
     self.tabBarController.tabBar.hidden = NO;
-    
 }
-- (void)viewWillAppear:(BOOL)animated{
+
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
 
@@ -80,26 +84,21 @@
         if (language==nil || language.length<1) {
             language=NSLocalizedString(@"all languages", @"");
         }
-        
         if (currentIndex==1) {
             [refreshHeader1 beginRefreshing];
-            
         }else if (currentIndex==2){
             [refreshHeader2 beginRefreshing];
-            
         }else if (currentIndex==3){
             [refreshHeader3 beginRefreshing];
-            
         }
-        
         titleText.text=language;
     }
-        [scrollView setContentSize:CGSizeMake(ScreenWidth * (3), bgViewHeight)];
+    [scrollView setContentSize:CGSizeMake(ScreenWidth * (3), bgViewHeight)];
     
 }
 
-
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if (iOS7GE) {
@@ -117,7 +116,6 @@
     language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language2"];
     if (language==nil || language.length<1) {
         language=NSLocalizedString(@"all languages", @"");
-        
     }
     tableView1Language=language;
     tableView2Language=language;
@@ -149,15 +147,16 @@
    
 }
 
-
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Actions
 
-- (void)rightAction{
+- (void)rightAction
+{
     LanguageViewController *viewController=[[LanguageViewController alloc] init];
     viewController.languageEntranceType=TrendingLanguageEntranceType;
     [self.navigationController pushViewController:viewController animated:YES];
@@ -165,7 +164,8 @@
 
 #pragma mark - Private
 
-- (void)initScroll{
+- (void)initScroll
+{
     
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, titleHeight, ScreenWidth, bgViewHeight)];
     scrollView.alwaysBounceHorizontal=YES;
@@ -184,7 +184,8 @@
  
 }
 
-- (void)initTable{
+- (void)initTable
+{
     
     tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
     [scrollView addSubview:tableView1];
@@ -217,7 +218,6 @@
                 tableView2.separatorStyle=UITableViewCellSeparatorStyleNone;
                 tableView2.rowHeight=RepositoriesTableViewCellheight;
                 [self addHeader:2];
-                
             }
             if (![titleText.text isEqualToString:tableView2Language]) {
                 [refreshHeader2 beginRefreshing];
@@ -234,14 +234,10 @@
                 tableView3.separatorStyle=UITableViewCellSeparatorStyleNone;
                 tableView3.rowHeight=RepositoriesTableViewCellheight;
                 [self addHeader:3];
-                
             }
             if (![titleText.text isEqualToString:tableView3Language]) {
                 [refreshHeader3 beginRefreshing];
             }
-    
-        }else if (currentIndex==4){
-            
         }
     };
 #pragma clang diagnostic pop
@@ -267,7 +263,7 @@
         //    是否在进入该界面的时候就开始进入刷新状态
         
         [refreshHeader1 beginRefreshing];
-    }else if (type==2){
+    }else if (type==2) {
         //    YiRefreshHeader  头部刷新按钮的使用
         refreshHeader2=[[YiRefreshHeader alloc] init];
         refreshHeader2.scrollView=tableView2;
@@ -282,7 +278,7 @@
         
         [refreshHeader2 beginRefreshing];
         
-    }else if (type==3){
+    }else if (type==3) {
         //    YiRefreshHeader  头部刷新按钮的使用
         refreshHeader3=[[YiRefreshHeader alloc] init];
         refreshHeader3.scrollView=tableView3;
@@ -299,22 +295,19 @@
         
     }
 }
-- (void)loadDataFromApiWithIsFirst:(BOOL)isFirst{
+
+- (void)loadDataFromApiWithIsFirst:(BOOL)isFirst
+{
     if (currentIndex==1) {
         tableView1Language=language;
-
     }else if (currentIndex==2) {
         tableView2Language=language;
-        
     }else if (currentIndex==3) {
         tableView3Language=language;
-        
     }
     [trendingViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex firstTableData:^(DataSourceModel* DsOfPageListObject){
         trendingDataSource.DsOfPageListObject1=DsOfPageListObject;
-        
         [tableView1 reloadData];
-        
         if (!isFirst) {
             [refreshFooter1 endRefreshing];
         }else
@@ -324,7 +317,6 @@
     } secondTableData:^(DataSourceModel* DsOfPageListObject){
         trendingDataSource.DsOfPageListObject2=DsOfPageListObject;
         [tableView2 reloadData];
-        
         if (!isFirst) {
             [refreshFooter2 endRefreshing];
         }else
@@ -333,9 +325,7 @@
         }
     } thirdTableData:^(DataSourceModel* DsOfPageListObject){
         trendingDataSource.DsOfPageListObject3=DsOfPageListObject;
-        
         [tableView3 reloadData];
-        
         if (!isFirst) {
             [refreshFooter3 endRefreshing];
         }else
@@ -348,7 +338,7 @@
 
 #pragma mark - UIScrollViewDelegate
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView1
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)tempScrollView
 {
     if (segmentControl.buttonCount==2) {
         
@@ -392,7 +382,8 @@
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     RepositoryDetailViewController *detail=[[RepositoryDetailViewController alloc] init];
     if (currentIndex==1) {
         RepositoryModel  *model = [(trendingDataSource.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
@@ -405,7 +396,6 @@
         detail.model=model;
     }
     [self.navigationController pushViewController:detail animated:YES];
-    
 }
 
 @end

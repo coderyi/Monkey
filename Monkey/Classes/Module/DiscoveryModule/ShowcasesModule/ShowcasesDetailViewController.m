@@ -13,7 +13,7 @@
 #import "RepositoriesTableViewCell.h"
 #import "LanguageViewController.h"
 #import "RepositoryDetailViewController.h"
-@interface ShowcasesDetailViewController ()<UITableViewDataSource,UITableViewDelegate>{
+@interface ShowcasesDetailViewController ()<UITableViewDataSource,UITableViewDelegate> {
     UITableView *tableView;
     YiRefreshHeader *refreshHeader;
     YiRefreshFooter *refreshFooter;
@@ -26,6 +26,7 @@
 @end
 
 @implementation ShowcasesDetailViewController
+
 #pragma mark - Lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -37,18 +38,19 @@
     }
     return self;
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
 }
+
 - (void)viewWillDisappear:(BOOL)animated{
     self.tabBarController.tabBar.hidden = NO;
-    
 }
 
-
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if (iOS7GE) {
@@ -69,11 +71,11 @@
   
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 #pragma mark - Private
 
@@ -105,7 +107,6 @@
     };
 }
 
-
 - (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
 {
     
@@ -114,50 +115,45 @@
     
     if (isFirst) {
         page = 1;
-        
     }else{
-        
         page = self.DsOfPageListObject.page+1;
     }
     [networkEngine showcasesDetailListWithShowcase:_model.slug completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-        
         if (page<=1) {
             [self.DsOfPageListObject.dsArray removeAllObjects];
         }
-        
         [self.DsOfPageListObject.dsArray addObjectsFromArray:modelArray];
         self.DsOfPageListObject.page=page;
         [tableView reloadData];
-        
         if (!isFirst) {
             [refreshFooter endRefreshing];
         }else
         {
             [refreshHeader endRefreshing];
         }
-        
     }
                                        errorHandel:^(NSError* error){
                                            if (isFirst) {
                                                [refreshHeader endRefreshing];
                                            }else{
                                                [refreshFooter endRefreshing];
-                                               
                                            }
-                                           
                                        }];
     
     return YES;
     
 }
+
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return self.DsOfPageListObject.dsArray.count;
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     NSString *cellId=@"CellId";
     RepositoriesTableViewCell *cell=[tableView1 dequeueReusableCellWithIdentifier:cellId];
     if (cell==nil) {
@@ -174,14 +170,14 @@
     cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
     cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
     return cell;
-    
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     RepositoryDetailViewController *detail=[[RepositoryDetailViewController alloc] init];
     RepositoryModel  *model = [(self.DsOfPageListObject.dsArray) objectAtIndex:indexPath.row];
     detail.model=model;
     [self.navigationController pushViewController:detail animated:YES];
-   
 }
 
 @end

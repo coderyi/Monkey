@@ -10,31 +10,33 @@
 #import "UserDetailViewController.h"
 #import "RepositoryDetailViewController.h"
 #import "WebViewController.h"
-@interface AboutViewController (){
+@interface AboutViewController () {
     UILabel *titleText;
 }
 
 @end
 
 @implementation AboutViewController
+
 #pragma mark - Lifecycle
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
-    
 }
-- (void)viewWillDisappear:(BOOL)animated{
+
+- (void)viewWillDisappear:(BOOL)animated
+{
     [super viewWillDisappear:animated];
     self.tabBarController.tabBar.hidden = NO;
-    
 }
-- (void)viewDidLoad {
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-        
     }
     
     titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
@@ -69,7 +71,6 @@
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     edition.text=[NSString stringWithFormat:@"%@：Monkey%@",NSLocalizedString(@"Version", @""),version];
     edition.font=[UIFont systemFontOfSize:14];
-    
    
     UILabel *label=[[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth-300)/2, 160, 300, 30)];
     [self.view addSubview:label];
@@ -86,7 +87,6 @@
     [button2 setTitle:@"https://github.com/coderyi/Monkey" forState:UIControlStateNormal];
     [button2 addTarget:self action:@selector(bt2Action) forControlEvents:UIControlEventTouchUpInside];
     button2.titleLabel.font=[UIFont systemFontOfSize:14];
-    
     
     UIButton *buttonLicense=[UIButton buttonWithType:UIButtonTypeCustom];
     [self.view addSubview:buttonLicense];
@@ -105,22 +105,24 @@
    
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 #pragma mark - Actions
-- (void)bt1Action{
+- (void)bt1Action
+{
     UserDetailViewController *detail=[[UserDetailViewController alloc] init];
-  
     UserModel  *model = [[UserModel alloc] init];
-        
     model.login=@"coderyi";
     detail.userModel=model;
     [self.navigationController pushViewController:detail animated:YES];
 }
 
-- (void)bt2Action{
+- (void)bt2Action
+{
     RepositoryDetailViewController *detail=[[RepositoryDetailViewController alloc] init];
     
     RepositoryModel  *model = [[RepositoryModel alloc] init];
@@ -130,9 +132,11 @@
     model.name=@"Monkey";
     detail.model=model;
     [self.navigationController pushViewController:detail animated:YES];
+    
 }
 
-- (void)buttonLicenseAction{
+- (void)buttonLicenseAction
+{
     WebViewController *web=[[WebViewController alloc] init];
     web.urlString=@"https://github.com/coderyi/Monkey/blob/master/Documents/Monkey_opensource_components.md";
     [self.navigationController pushViewController:web animated:YES];

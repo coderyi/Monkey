@@ -19,10 +19,10 @@
 #import "RepositoryDetailViewController.h"
 #import "UserDetailViewModel.h"
 #import "UserDetailDataSource.h"
-//#import "LoginViewController.h"
 #import "LoginWebViewController.h"
 #import "AESCrypt.h"
-@interface UserDetailViewController ()<UITableViewDelegate,UIAlertViewDelegate>{
+
+@interface UserDetailViewController ()<UITableViewDelegate,UIAlertViewDelegate> {
     UITableView *tableView;
     YiRefreshHeader *refreshHeader;
     YiRefreshFooter *refreshFooter;
@@ -49,8 +49,8 @@
 @end
 
 @implementation UserDetailViewController
-#pragma mark - Lifecycle
 
+#pragma mark - Lifecycle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -68,11 +68,15 @@
     self.tabBarController.tabBar.hidden = YES;
     
 }
--(void)viewWillDisappear:(BOOL)animated{
+
+-(void)viewWillDisappear:(BOOL)animated
+{
     self.tabBarController.tabBar.hidden = NO;
     
 }
-- (void)viewDidLoad {
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = _userModel.login;
@@ -203,13 +207,15 @@
     [self checkFollowStatusAction];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Actions
-- (void)loginButtonAction{
+- (void)loginButtonAction
+{
 
     if (_userModel.html_url.length>0  ) {
         WebViewController *web=[[WebViewController alloc] init];
@@ -217,15 +223,15 @@
         [self.navigationController pushViewController:web animated:YES];
     }
 }
-- (void)followAction{
+
+- (void)followAction
+{
 
     NSString *access_token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
     if (access_token.length<1 || !access_token) {
         
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"login message" message:@"please login" delegate:self cancelButtonTitle:@"sure" otherButtonTitles:@"cancel", nil];
         [alert show];
-        
-        
         return;
     }
     if (isFollowing) {
@@ -239,13 +245,10 @@
                 self.navigationItem.rightBarButtonItem=right;
             }else{
                 [self hideYiProgressHUD];
-                
             }
             
         } errorHandel:^(NSError *error){
             [self hideYiProgressHUD];
-            
-            
         }];
 
     }else{
@@ -259,17 +262,16 @@
                 self.navigationItem.rightBarButtonItem=right;
             }else{
                 [self hideYiProgressHUD];
-               
             }
 
         } errorHandel:^(NSError *error){
             [self hideYiProgressHUD];
-           
-
         }];
     }
 }
-- (void)checkFollowStatusAction{
+
+- (void)checkFollowStatusAction
+{
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"] isEqualToString:_userModel.login]) {
         return;
     }
@@ -303,11 +305,8 @@
                 UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"login message" message:@"please login" delegate:self cancelButtonTitle:@"sure" otherButtonTitles:@"cancel", nil];
                 [alert show];
             });
-            
         }
-    
     }];
-    
 }
 
 //详细见mj的code4app
@@ -333,22 +332,18 @@
     [browser show];
 }
 
-
-- (void)blogAction{
+- (void)blogAction
+{
     if (_userModel.blog.length>0  ) {
         WebViewController *web=[[WebViewController alloc] init];
         web.urlString=_userModel.blog;
         [self.navigationController pushViewController:web animated:YES];
     }
 }
-- (void)loginAction{
-//    LoginViewController *login=[[LoginViewController alloc] init];
-//    login.callback=^(NSString *response){
-//        if ([response isEqualToString:@"yes"]) {
-//            [self checkFollowStatusAction];
-//        }
-//    };
-//    [self.navigationController pushViewController:login animated:YES];
+
+- (void)loginAction
+{
+    
     NSHTTPCookie *cookie;
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     for (cookie in [storage cookies])
@@ -361,43 +356,32 @@
     LoginWebViewController *webViewController=[[LoginWebViewController alloc] init];
     webViewController.urlString=[NSString stringWithFormat:@"https://github.com/login/oauth/authorize/?client_id=%@&state=1995&redirect_uri=https://github.com/coderyi/monkey&scope=user,public_repo",[[AESCrypt decrypt:CoderyiClientID password:@"xxxsd-sdsd*sd672323q___---_w.."] substringFromIndex:1] ];
     webViewController.callback=^(NSString *code){
-        
-        //        [self loginTokenAction:code];
-        
         [self getUserInfoAction];
-        
-        
     };
     [self presentViewController:webViewController animated:YES completion:nil];
-    
 
 }
 
-- (void)getUserInfoAction{
+- (void)getUserInfoAction
+{
     NSString *token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
     if (token.length<1 || !token) {
         return;
     }
     [ApplicationDelegate.apiEngine getUserInfoWithToken:nil completoinHandler:^(UserModel *model){
         if (model) {
-//            currentLogin=model.login;
-            //            currentAvatarUrl=model.avatar_url;
-            
             [[NSUserDefaults standardUserDefaults] setObject:model.login forKey:@"currentLogin"];
             [[NSUserDefaults standardUserDefaults] setObject:model.avatar_url forKey:@"currentAvatarUrl"];
             [tableView reloadData];
         }
-        
     } errorHandel:^(NSError* error){
-        
     }];
 }
 
-
-
 #pragma mark - Private
 
-- (void)refreshTitleView{
+- (void)refreshTitleView
+{
     [titleImageView sd_setImageWithURL:[NSURL URLWithString:_userModel.avatar_url]];
 
     [loginButton setTitle:_userModel.login forState:UIControlStateNormal];
@@ -415,7 +399,6 @@
     segmentControl.bt3Label.text=[NSString stringWithFormat:@"%d",_userModel.followers];
     
 }
-
 
 - (void)addHeader
 {  //    YiRefreshHeader  头部刷新按钮的使用
@@ -495,13 +478,13 @@
         {
             [refreshHeader endRefreshing];
         }
-        
     }];
-    
 
 }
+
 #pragma mark - UIAlertDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
     if (buttonIndex==0) {
         [self loginAction];
     }
@@ -509,7 +492,8 @@
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if (currentIndex==1) {
         return RepositoriesTableViewCellheight;
     }else if (currentIndex==2){
@@ -520,7 +504,8 @@
     return 1;
     
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if (currentIndex==1) {
         RepositoryModel  *model = [(userDetailDataSource.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
         RepositoryDetailViewController *viewController=[[RepositoryDetailViewController alloc] init];

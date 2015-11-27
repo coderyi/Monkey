@@ -8,29 +8,25 @@
 
 #import "TrendingDataSource.h"
 #import "RepositoriesTableViewCell.h"
+
 @implementation TrendingDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     if (tableView.tag==11) {
-    
         return self.DsOfPageListObject1.dsArray.count;
-        
     }else if (tableView.tag==12){
-        
         return self.DsOfPageListObject2.dsArray.count;
     }else if (tableView.tag==13){
-        
         return self.DsOfPageListObject3.dsArray.count;
     }
-    
     return self.DsOfPageListObject1.dsArray.count;
-    
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     RepositoriesTableViewCell *cell;
     if (tableView.tag==11) {
-        
         NSString *cellId=@"CellId1";
         cell=[tableView dequeueReusableCellWithIdentifier:cellId];
         if (cell==nil) {
@@ -47,9 +43,7 @@
         cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
         cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
         return cell;
-        
     }else if (tableView.tag==12){
-        
         NSString *cellId=@"CellId2";
         cell=[tableView dequeueReusableCellWithIdentifier:cellId];
         if (cell==nil) {
@@ -68,7 +62,6 @@
         return cell;
         
     }else if (tableView.tag==13){
-        
         NSString *cellId=@"CellId3";
         cell=[tableView dequeueReusableCellWithIdentifier:cellId];
         if (cell==nil) {
@@ -85,10 +78,8 @@
         cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
         cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
         return cell;
-        
     }
     return cell;
-    
 }
 
 @end

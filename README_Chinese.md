@@ -42,7 +42,7 @@ Monkey主要是用来展示GitHub上的开发者的排名，以及仓库的排�
 这个列表是我做[Monkey for GitHub](https://github.com/coderyi/Monkey)这个开源的GitHub第三方客户端的衍生品，欢迎交流意见。
 ##关于开源
 ####运行
-支持iOS8.0+，支持iPhone的各个尺寸，支持竖屏；目前我使用的是Xcode7.0
+支持iOS7.0+，支持iPhone的各个尺寸，支持竖屏；目前我使用的是Xcode7.0
 
 ####Monkey API
 我整理Monkey for GitHub的所有API，并做了一些说明和示例，希望能够帮助到您。

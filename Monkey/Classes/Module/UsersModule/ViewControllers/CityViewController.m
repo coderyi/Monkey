@@ -18,19 +18,23 @@
 
 @implementation CityViewController
 @synthesize pinyinCitys;
-#pragma mark - Lifecycle
 
+#pragma mark - Lifecycle
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
 
 }
-- (void)viewWillDisappear:(BOOL)animated{
+
+- (void)viewWillDisappear:(BOOL)animated
+{
     self.tabBarController.tabBar.hidden = NO;
 
 }
-- (void)viewDidLoad {
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title=NSLocalizedString(@"Select City", nil);
@@ -63,19 +67,22 @@
     }
 
 }
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
 }
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
    
         return citys.count;
 
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
         UITableViewCell *cell;
     
         NSString *cellId=@"CellId1";
@@ -87,7 +94,9 @@
         return cell;
     
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"cityAppear"];
     [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"countryAppear"];
     [[NSUserDefaults standardUserDefaults] setObject:pinyinCitys[indexPath.row] forKey:@"pinyinCity"];
@@ -95,6 +104,5 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
     
 }
-
 
 @end
