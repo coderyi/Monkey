@@ -13,13 +13,11 @@ UIAlertView *alertView;
 - (void)showYiProgressHUD:(NSString *)title  afterDelay:(NSTimeInterval)delay
 {
     [self showYiProgressHUD:title];
-    
     [NSTimer scheduledTimerWithTimeInterval:delay
                                      target:self
                                    selector:@selector(hideYiProgressHUD:)
                                    userInfo:nil
                                     repeats:NO];
-    
 }
 
 - (void)showYiProgressHUD:(NSString *)title
@@ -28,19 +26,17 @@ UIAlertView *alertView;
                                            message:title
                                           delegate:nil
                                  cancelButtonTitle:nil otherButtonTitles:nil, nil];
-    
     [alertView show];
 }
 
 - (void)hideYiProgressHUD
 {
     [self hideYiProgressHUD:nil];
-    
 }
 
 - (void)hideYiProgressHUD:(NSTimer*)timer
 {
-    
     [alertView dismissWithClickedButtonIndex:0 animated:YES];
 }
+
 @end
