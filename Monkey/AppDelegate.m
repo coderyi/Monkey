@@ -55,7 +55,7 @@
 {
     // Override point for customization after application launch.
 #if defined(DEBUG)||defined(_DEBUG)
-    [NEHTTPEye setEnabled:YES];// open a network debug library
+    [NEHTTPEye setEnabled:NO];// open a network debug library
 #endif
     [self setupTabBar];//setup tabbar
     self.apiEngine = [[YiNetworkEngine alloc] initWithDefaultSet];//set a app network engine
