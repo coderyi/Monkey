@@ -118,7 +118,11 @@
                 [refreshHeader3 beginRefreshing];
             }
         }
-        titleText.text=language;
+        if ([language isEqualToString:@"CPP"]) {
+            titleText.text=@"C++";
+        }else{
+            titleText.text=language;
+        }
     }
     if ([language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
         [scrollView setContentSize:CGSizeMake(ScreenWidth * (2), bgViewHeight)];
@@ -151,7 +155,11 @@
     tableView1Language=language;
     tableView2Language=language;
     tableView3Language=language;
-    titleText.text=language;
+    if ([language isEqualToString:@"CPP"]) {
+        titleText.text=@"C++";
+    }else{
+        titleText.text=language;
+    }
     self.view.backgroundColor=[UIColor whiteColor];
     titleHeight=35;
     bgViewHeight=ScreenHeight-64-titleHeight-49;

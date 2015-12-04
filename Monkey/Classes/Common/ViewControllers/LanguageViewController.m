@@ -47,11 +47,11 @@
     tableView1.delegate=self;
   
     if (_languageEntranceType==RepLanguageEntranceType) {
-        languages=@[@"JavaScript",@"Java",@"PHP",@"Ruby",@"Python",@"CSS",@"C",@"Objective-C",@"Swift",@"Shell",@"R",@"Perl",@"Lua",@"HTML",@"Scala",@"Go"];
+        languages=@[@"JavaScript",@"Java",@"PHP",@"Ruby",@"Python",@"CSS",@"CPP",@"C",@"Objective-C",@"Swift",@"Shell",@"R",@"Perl",@"Lua",@"HTML",@"Scala",@"Go"];
     }else if (_languageEntranceType==UserLanguageEntranceType  ) {
-        languages=@[NSLocalizedString(@"all languages", @""),@"JavaScript",@"Java",@"PHP",@"Ruby",@"Python",@"CSS",@"C",@"Objective-C",@"Swift",@"Shell",@"R",@"Perl",@"Lua",@"HTML",@"Scala",@"Go"];
+        languages=@[NSLocalizedString(@"all languages", @""),@"JavaScript",@"Java",@"PHP",@"Ruby",@"Python",@"CSS",@"CPP",@"C",@"Objective-C",@"Swift",@"Shell",@"R",@"Perl",@"Lua",@"HTML",@"Scala",@"Go"];
     }else if (_languageEntranceType==TrendingLanguageEntranceType ) {
-        languages=@[NSLocalizedString(@"all languages", @""),@"javascript",@"java",@"php",@"ruby",@"python",@"css",@"c",@"objective-c",@"swift",@"shell",@"r",@"perl",@"lua",@"html",@"scala",@"go"];
+        languages=@[NSLocalizedString(@"all languages", @""),@"javascript",@"java",@"php",@"ruby",@"python",@"css",@"cpp",@"c",@"objective-c",@"swift",@"shell",@"r",@"perl",@"lua",@"html",@"scala",@"go"];
     }
 }
 
@@ -77,7 +77,13 @@
     if (cell==nil) {
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
-    cell.textLabel.text=(languages)[indexPath.row];
+    NSString *languageName=(languages)[indexPath.row];
+    if ([languageName isEqualToString:@"cpp"]) {
+        languageName=@"c++";
+    }else if ([languageName isEqualToString:@"CPP"]){
+        languageName=@"C++";
+    }
+    cell.textLabel.text=languageName;
     return cell;
 }
 

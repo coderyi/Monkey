@@ -52,7 +52,11 @@
             language=@"JavaScript";
         }
         [refreshHeader beginRefreshing];
-        titleText.text=language;
+        if ([language isEqualToString:@"CPP"]) {
+            titleText.text=@"C++";
+        }else{
+            titleText.text=language;
+        }
     }
 }
 
@@ -74,7 +78,11 @@
         language=@"JavaScript";
         
     }
-    titleText.text=language;
+    if ([language isEqualToString:@"CPP"]) {
+        titleText.text=@"C++";
+    }else{
+        titleText.text=language;
+    }
     
     self.view.backgroundColor=[UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets=NO;

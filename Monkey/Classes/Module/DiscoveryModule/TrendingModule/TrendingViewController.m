@@ -91,7 +91,11 @@
         }else if (currentIndex==3){
             [refreshHeader3 beginRefreshing];
         }
-        titleText.text=language;
+        if ([language isEqualToString:@"cpp"]) {
+            titleText.text=@"c++";
+        }else{
+            titleText.text=language;
+        }
     }
     [scrollView setContentSize:CGSizeMake(ScreenWidth * (3), bgViewHeight)];
     
@@ -121,7 +125,11 @@
     tableView2Language=language;
     tableView3Language=language;
     
-    titleText.text=language;
+    if ([language isEqualToString:@"cpp"]) {
+        titleText.text=@"c++";
+    }else{
+        titleText.text=language;
+    }
     self.view.backgroundColor=[UIColor whiteColor];
     titleHeight=35;
     bgViewHeight=ScreenHeight-64-titleHeight;
