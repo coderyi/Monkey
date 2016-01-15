@@ -115,6 +115,7 @@
     ownerBt.frame=CGRectMake(orginX+(ScreenWidth-2*orginX)/2, 0, (ScreenWidth-2*orginX)/2, 40);
     [ownerBt setTitleColor:YiBlue forState:UIControlStateNormal];
     ownerBt.titleLabel.font=[UIFont boldSystemFontOfSize:17];
+    ownerBt.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     [titleView addSubview:ownerBt];
     ownerBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [ownerBt addTarget:self action:@selector(ownerBtAction) forControlEvents:UIControlEventTouchUpInside];
