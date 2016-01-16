@@ -48,13 +48,13 @@
 		0ACEA3481B51467A009F6B6D /* UserRankViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA33C1B51467A009F6B6D /* UserRankViewController.m */; };
 		0ACEA34C1B51467A009F6B6D /* UserDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3441B51467A009F6B6D /* UserDetailViewController.m */; };
 		0ACEA3521B516030009F6B6D /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACEA3501B516030009F6B6D /* AboutViewController.m */; };
-		0ADBC9B01BE1BB1000FF75B2 /* LoginWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC9AF1BE1BB1000FF75B2 /* LoginWebViewController.m */; settings = {ASSET_TAGS = (); }; };
-		0AFC7E0A1BDE0BF7008B9A5D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC7DFF1BDE0BF7008B9A5D /* .gitignore */; settings = {ASSET_TAGS = (); }; };
-		0AFC7E0B1BDE0BF7008B9A5D /* AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC7E011BDE0BF7008B9A5D /* AESCrypt.m */; settings = {ASSET_TAGS = (); }; };
-		0AFC7E0C1BDE0BF7008B9A5D /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC7E021BDE0BF7008B9A5D /* LICENSE */; settings = {ASSET_TAGS = (); }; };
-		0AFC7E0D1BDE0BF7008B9A5D /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC7E041BDE0BF7008B9A5D /* NSData+Base64.m */; settings = {ASSET_TAGS = (); }; };
-		0AFC7E0E1BDE0BF7008B9A5D /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC7E061BDE0BF7008B9A5D /* NSData+CommonCrypto.m */; settings = {ASSET_TAGS = (); }; };
-		0AFC7E0F1BDE0BF7008B9A5D /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC7E081BDE0BF7008B9A5D /* NSString+Base64.m */; settings = {ASSET_TAGS = (); }; };
+		0ADBC9B01BE1BB1000FF75B2 /* LoginWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ADBC9AF1BE1BB1000FF75B2 /* LoginWebViewController.m */; };
+		0AFC7E0A1BDE0BF7008B9A5D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC7DFF1BDE0BF7008B9A5D /* .gitignore */; };
+		0AFC7E0B1BDE0BF7008B9A5D /* AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC7E011BDE0BF7008B9A5D /* AESCrypt.m */; };
+		0AFC7E0C1BDE0BF7008B9A5D /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC7E021BDE0BF7008B9A5D /* LICENSE */; };
+		0AFC7E0D1BDE0BF7008B9A5D /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC7E041BDE0BF7008B9A5D /* NSData+Base64.m */; };
+		0AFC7E0E1BDE0BF7008B9A5D /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC7E061BDE0BF7008B9A5D /* NSData+CommonCrypto.m */; };
+		0AFC7E0F1BDE0BF7008B9A5D /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFC7E081BDE0BF7008B9A5D /* NSString+Base64.m */; };
 		0AFCEBBE1B62CE3A00051D9A /* TrendingDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFCEBBD1B62CE3A00051D9A /* TrendingDataSource.m */; };
 		0AFCEBC41B62D17D00051D9A /* TrendingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFCEBC31B62D17D00051D9A /* TrendingViewModel.m */; };
 		0AFCEBC91B63347C00051D9A /* UserRankDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFCEBC81B63347C00051D9A /* UserRankDataSource.m */; };
@@ -1658,6 +1658,7 @@
 					"$(PROJECT_DIR)/Monkey/Vendor/UM/UMengFeedback_SDK_2.1.1/UMOpus",
 					"$(PROJECT_DIR)/Monkey/Vendor/UM/UMessage_Sdk_1.1.0",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = david.com.cn.Monkey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1686,6 +1687,7 @@
 					"$(PROJECT_DIR)/Monkey/Vendor/UM/UMengFeedback_SDK_2.1.1/UMOpus",
 					"$(PROJECT_DIR)/Monkey/Vendor/UM/UMessage_Sdk_1.1.0",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = david.com.cn.Monkey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

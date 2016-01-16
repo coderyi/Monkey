@@ -53,6 +53,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //延长启动页面的显示时间
+    [NSThread sleepForTimeInterval:2];
     // Override point for customization after application launch.
 #if defined(DEBUG)||defined(_DEBUG)
     [NEHTTPEye setEnabled:NO];// open a network debug library
