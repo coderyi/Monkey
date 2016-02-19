@@ -33,6 +33,7 @@
     UILabel *createLabel;
     UILabel *company;
     UILabel *locationLabel;
+    UIButton *shareBt;
     UIButton *emailBt;
     UIButton *blogBt;
     DetailSegmentControl *segmentControl;
@@ -142,8 +143,14 @@
     company=[[UILabel alloc] initWithFrame:CGRectMake(orginX+widthSpace+sufTitleImageViewSpace+titleImageViewWidth, orginY+heightSpace*2+30*2, loginButtonWidth, 30)];
     [titleBg1 addSubview:company];
     
-    locationLabel=[[UILabel alloc] initWithFrame:CGRectMake(orginX+sufTitleImageViewSpace+titleImageViewWidth+loginButtonWidth, orginY+heightSpace*2+30*2, emailButtonWidth, 30)];
+    locationLabel=[[UILabel alloc] initWithFrame:CGRectMake(orginX+sufTitleImageViewSpace+titleImageViewWidth+loginButtonWidth, orginY+heightSpace*2+30*2, emailButtonWidth - 25, 30)];
     [titleBg1 addSubview:locationLabel];
+    
+    shareBt=[UIButton buttonWithType:UIButtonTypeCustom];
+    [titleBg1 addSubview:shareBt];
+    shareBt.frame = CGRectMake(orginX+sufTitleImageViewSpace+titleImageViewWidth+loginButtonWidth + emailButtonWidth - 25, orginY+heightSpace*2+30*2, 30, 30);
+    [shareBt addTarget:self action:@selector(shareBtAction) forControlEvents:UIControlEventTouchUpInside];
+
     
     emailBt=[UIButton buttonWithType:UIButtonTypeCustom];
     [titleBg1 addSubview:emailBt];
@@ -378,6 +385,19 @@
     }];
 }
 
+- (void)shareBtAction
+{
+    if (_userModel.login.length>0 ) {
+        NSString *shareURL = [@"https://github.com/" stringByAppendingString:_userModel.login];
+        NSArray *objectToShare = [[NSArray alloc] initWithObjects:shareURL, nil];
+        UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectToShare applicationActivities:nil];
+        [self presentViewController:activityVC animated:NO completion:^{
+        }];
+    } else {
+        shareBt.hidden = true;
+    }
+}
+
 #pragma mark - Private
 
 - (void)refreshTitleView
@@ -390,6 +410,8 @@
     createLabel.text=[_userModel.created_at substringWithRange:NSMakeRange(0, 10)];
     company.text=_userModel.company;
     locationLabel.text=_userModel.location;
+    UIImage *shareBtnImage = [UIImage imageNamed:@"share"];
+    [shareBt setImage:shareBtnImage forState:UIControlStateNormal];
     [emailBt setTitle:_userModel.email forState:UIControlStateNormal];
     [blogBt setTitle:_userModel.blog forState:UIControlStateNormal];
     segmentControl.bt1Label.text=[NSString stringWithFormat:@"%d",_userModel.public_repos];
