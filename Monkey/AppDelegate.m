@@ -65,7 +65,6 @@
 
 - (void)setupTabBar
 {
-
     UserRankViewController *languageRank=[[UserRankViewController alloc] init];
     BaseNavigationController *navLanguageRank=[self initlizerNavigationControllerWithRootViewController:languageRank];
     navLanguageRank.navigationBar.barTintColor=YiBlue;
@@ -173,7 +172,6 @@
     
     [[UMFeedback sharedInstance] setFeedbackViewController:nil shouldPush:NO];
     //    上面的代码是友盟推送 需要证书
-
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
@@ -197,7 +195,7 @@
 {
     // For handling a callback URL like my-app://oauth
     NSLog(@"%@",URL.host);
-     return YES;
+    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
