@@ -15,12 +15,10 @@
 #import "AESCrypt.h"
 #import "NEHTTPEyeViewController.h"
 @interface MoreViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate> {
-    
     UITableView *tableView;
     UILabel *titleText;
     NSString *currentLogin;
     NSString *currentAvatarUrl;
-
 }
 
 @end
@@ -43,6 +41,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor=[UIColor whiteColor];
+    if (iOS7GE) {
+        self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+    }
+    self.automaticallyAdjustsScrollViewInsets=NO;
+    
     titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
@@ -50,13 +53,6 @@
     titleText.textAlignment=NSTextAlignmentCenter;
     self.navigationItem.titleView=titleText;
     titleText.text=NSLocalizedString(@"More", nil);
-    
-    if (iOS7GE) {
-        self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-    }
-    
-    self.view.backgroundColor=[UIColor whiteColor];
-    self.automaticallyAdjustsScrollViewInsets=NO;
    
     tableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64-49) style:UITableViewStyleGrouped ];
     [self.view addSubview:tableView];
@@ -94,7 +90,6 @@
         [self getUserInfoAction];
     };
     [self presentViewController:webViewController animated:YES completion:nil];
-    
 }
 
 - (void)getUserInfoAction
@@ -265,14 +260,12 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-
     if (buttonIndex==0) {
         currentLogin=nil;
         currentAvatarUrl=nil;
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"currentLogin"];
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"currentAvatarUrl"];
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"access_token"];
-
         [tableView reloadData];
     }
 }
