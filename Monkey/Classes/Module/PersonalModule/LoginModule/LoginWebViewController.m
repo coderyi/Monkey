@@ -17,37 +17,24 @@
 @implementation LoginWebViewController
 
 #pragma mark - Lifecycle
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = YES;
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    self.tabBarController.tabBar.hidden = NO;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor=[UIColor whiteColor];
+    self.automaticallyAdjustsScrollViewInsets=NO;
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
     }
+    self.hidesBottomBarWhenPushed = YES;
     
     titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
     [titleText setFont:[UIFont systemFontOfSize:19.0]];
-    
     titleText.textAlignment=NSTextAlignmentCenter;
     self.navigationItem.titleView=titleText;
     titleText.text=_urlString;
-    
-    self.view.backgroundColor=[UIColor whiteColor];
-    self.automaticallyAdjustsScrollViewInsets=NO;
     
     UINavigationBar *bar=[[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 64)];
     [self.view addSubview:bar];
@@ -64,7 +51,6 @@
     [self.view addSubview:webView];
     webView.delegate=self;
     [webView loadRequest:[[NSURLRequest alloc]initWithURL:[NSURL URLWithString:_urlString]] ];
-    
 }
 
 - (void)backBtAction
