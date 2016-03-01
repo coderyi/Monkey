@@ -147,6 +147,8 @@ thanks!
 
 [xavier](https://github.com/WoodTable)
 
+[Joe Shen](https://github.com/Jonwei)
+
 special thanks to [RongchangLei](https://github.com/RongchangLei)'s design.
 
 [Knockin' On Heaven's Door-Guns N' Roses-Netease cloud music](http://music.163.com/#/song?id=18095057)
