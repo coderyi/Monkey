@@ -8,10 +8,8 @@
 
 #import "LoginWebViewController.h"
 
-@interface LoginWebViewController ()<UIWebViewDelegate> {
-    UILabel *titleText;
-    UIButton *backBt;
-}
+@interface LoginWebViewController ()<UIWebViewDelegate>
+
 @end
 
 @implementation LoginWebViewController
@@ -28,35 +26,34 @@
     }
     self.hidesBottomBarWhenPushed = YES;
     
-    titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
-    titleText.backgroundColor = [UIColor clearColor];
-    titleText.textColor=[UIColor whiteColor];
-    [titleText setFont:[UIFont systemFontOfSize:19.0]];
-    titleText.textAlignment=NSTextAlignmentCenter;
-    self.navigationItem.titleView=titleText;
-    titleText.text=_urlString;
+    /*
+     before iOS7, use tintColor, since iOS7, use barTintBar.
+     */
+    self.navigationController.navigationBar.tintColor = YiBlue;
+    self.navigationController.navigationBar.barTintColor = YiBlue;
+    self.navigationItem.title = NSLocalizedString(@"login", nil);
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     
-    UINavigationBar *bar=[[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 64)];
-    [self.view addSubview:bar];
-    bar.barTintColor=YiBlue;
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(backBtAction)];
+    backButton.tintColor = [UIColor whiteColor];
+    self.navigationItem.leftBarButtonItem = backButton;
     
-    backBt=[UIButton buttonWithType:UIButtonTypeCustom];
-    backBt.frame=CGRectMake(10, 27, 30, 30);
-    [backBt setImage:[UIImage imageNamed:@"ic_arrow_back_white_48pt"] forState:UIControlStateNormal];
-    [backBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [backBt addTarget:self action:@selector(backBtAction) forControlEvents:UIControlEventTouchUpInside];
-    [bar addSubview:backBt];
-    backBt.hidden=YES;
-    UIWebView *webView=[[UIWebView alloc] initWithFrame:CGRectMake(0, 64, ScreenWidth, ScreenHeight-64)];
+    CGFloat originalY = CGRectGetMaxY(self.navigationController.navigationBar.frame);
+    UIWebView *webView=[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-originalY)];
     [self.view addSubview:webView];
     webView.delegate=self;
-    [webView loadRequest:[[NSURLRequest alloc]initWithURL:[NSURL URLWithString:_urlString]] ];
+    [webView loadRequest:[[NSURLRequest alloc]initWithURL:[NSURL URLWithString:_urlString]]];
 }
 
 - (void)backBtAction
 {
-    _callback(@"error");
-    [self dismissViewControllerAnimated:YES completion:nil];
+    WEAKSELF;
+    [self dismissViewControllerAnimated:YES completion:^{
+        STRONGSELF;
+        if (strongSelf.callback) {
+            strongSelf.callback(@"error");
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,57 +63,85 @@
 }
 
 #pragma mark - UIWebViewDelegate
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    return YES;
+}
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     [self showYiProgressHUD:@"Login Loading..."];
 }
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     NSString *requestUrl = webView.request.URL.absoluteString;
     [self hideYiProgressHUD];
-
-    for (int i=0; i<requestUrl.length-5; i++) {
-        if ([[requestUrl substringWithRange:NSMakeRange(i, 5)] isEqualToString:@"code="]) {
-            backBt.hidden=YES;
-            [self loginTokenAction:[requestUrl substringWithRange:NSMakeRange(i+5, 20)]];
-            return;
+    
+    NSString *toCheckString = @"code=";
+    NSRange range = [requestUrl rangeOfString:toCheckString];
+    if (range.location != NSNotFound) {
+        NSString *code = nil;
+        
+        NSArray *stringsArray = [self arrayFromResponseString:requestUrl];
+        for (NSString *string in stringsArray) {
+            range = [string rangeOfString:toCheckString];
+            if (range.location != NSNotFound) {
+                code = [string substringFromIndex:range.location+range.length];
+                break;
+            }
+        }
+        
+        if (code.length > 0) {
+            [self loginTokenAction:code];
         }
     }
-    backBt.hidden=NO;
-
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     [self hideYiProgressHUD];
-    backBt.hidden=NO;
-}
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    return YES;
 }
 
 - (void)loginTokenAction:(NSString *)code
 {
     [self showYiProgressHUD:@"Login..."];
     YiNetworkEngine *apiEngine=[[YiNetworkEngine alloc] initWithHostName:@"github.com"];
+    
+    WEAKSELF;
     [apiEngine loginWithCode:code completoinHandler:^(NSString *response){
-        [self hideYiProgressHUD];
-        for (int i=0; i<response.length-13; i++) {
-            if ([[response substringWithRange:NSMakeRange(i, 13)] isEqualToString:@"access_token="]) {
-                NSString *token=[response substringWithRange:NSMakeRange(i+13, 40)];
-                [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"access_token"];
-                _callback(@"success");
-                [self dismissViewControllerAnimated:YES completion:nil];
-                return ;
+        STRONGSELF;
+        [strongSelf hideYiProgressHUD];
+        
+        NSString *token = nil;
+        
+        NSArray *stringsArray = [self arrayFromResponseString:response];
+        for (NSString *string in stringsArray) {
+            NSRange range = [response rangeOfString:@"access_token="];
+            if (range.location != NSNotFound) {
+                token = [string substringWithRange:NSMakeRange(range.location+range.length, string.length -range.location-range.length)];
+                break;
             }
         }
-        backBt.hidden=NO;
+        
+        if (token.length > 0) {
+            [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"access_token"];
+            
+            __weak typeof(strongSelf) weakRef = strongSelf;
+            [strongSelf dismissViewControllerAnimated:YES completion:^{
+                typeof(weakRef) strongRef = weakRef;
+                if (strongRef.callback) {
+                    strongRef.callback(@"success");
+                }
+            }];
+        }
     } errorHandel:^(NSError* error){
-        backBt.hidden=NO;
-        [self hideYiProgressHUD];
+        STRONGSELF;
+        [strongSelf hideYiProgressHUD];
     }];
+}
+
+- (NSArray *)arrayFromResponseString:(NSString *)responseString {
+    return [responseString componentsSeparatedByString:@"&"];
 }
 
 @end
