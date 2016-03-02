@@ -21,6 +21,10 @@ Monkey Mac open source:[https://github.com/coderyi/MonkeyForMac](https://github.
 
 Besides, you can get Android version [GitHot](https://github.com/andyiac/githot) by [andyiac](https://github.com/andyiac) from [this link](http://fir.im/githot) .
 
+In order to better use GitHub; better find GitHub project; looking into open source small partner.
+
+I have a wechat group,welcome to join.
+
 ##Monkey for GitHub
 
 Monkey is a GitHub third party client,Monkey is a program ape.
