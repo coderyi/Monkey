@@ -23,9 +23,9 @@ Besides, you can get Android version [GitHot](https://github.com/andyiac/githot)
 
 In order to better use GitHub; better find GitHub project; looking into open source small partner.
 
-I have a wechat group,welcome to join.
+I have a wechat group,and you can add my wechat,welcome to join.
 
-<img  src="https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/wechat_group.png" width="177" height="236">
+<img  src="https://raw.githubusercontent.com/coderyi/Monkey/master/https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/wechat.jpg" width="177" height="236">
 
 ##Monkey for GitHub
 
