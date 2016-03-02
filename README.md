@@ -25,6 +25,8 @@ In order to better use GitHub; better find GitHub project; looking into open sou
 
 I have a wechat group,welcome to join.
 
+<img  src="https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/wechat_group.png" width="177" height="236">
+
 ##Monkey for GitHub
 
 Monkey is a GitHub third party client,Monkey is a program ape.
