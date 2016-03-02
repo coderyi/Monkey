@@ -73,23 +73,26 @@
  */
 
 - (void)oauth2LoginAction{
-
     //    cookie清除
-    NSHTTPCookie *cookie;
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (cookie in [storage cookies])
+    for (NSHTTPCookie *cookie in [storage cookies])
     {
         [storage deleteCookie:cookie];
     }
     
     //    缓存  清除
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    
     LoginWebViewController *webViewController=[[LoginWebViewController alloc] init];
     webViewController.urlString=[NSString stringWithFormat:@"https://github.com/login/oauth/authorize/?client_id=%@&state=1995&redirect_uri=https://github.com/coderyi/monkey&scope=user,public_repo",[[AESCrypt decrypt:CoderyiClientID password:@"xxxsd-sdsd*sd672323q___---_w.."] substringFromIndex:1] ];
+    WEAKSELF;
     webViewController.callback=^(NSString *code){
-        [self getUserInfoAction];
+        STRONGSELF;
+        [strongSelf getUserInfoAction];
     };
-    [self presentViewController:webViewController animated:YES completion:nil];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:webViewController];
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 - (void)getUserInfoAction
