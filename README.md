@@ -21,11 +21,7 @@ Monkey Mac open source:[https://github.com/coderyi/MonkeyForMac](https://github.
 
 Besides, you can get Android version [GitHot](https://github.com/andyiac/githot) by [andyiac](https://github.com/andyiac) from [this link](http://fir.im/githot) .
 
-In order to better use GitHub; better find GitHub project; looking into open source small partner.
 
-I have a wechat group,and you can add my wechat,welcome to join.
-
-<img  src="https://raw.githubusercontent.com/coderyi/Monkey/master/https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/wechat.jpg" width="177" height="236">
 
 ##Monkey for GitHub
 
