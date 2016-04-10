@@ -136,7 +136,7 @@
     loginButton.contentHorizontalAlignment=UIControlContentHorizontalAlignmentLeft;
     name=[[UILabel alloc] initWithFrame:CGRectMake(orginX+sufTitleImageViewSpace+titleImageViewWidth, orginY+heightSpace+30, loginButtonWidth, 30)];
     [titleBg1 addSubview:name];
-    createLabel=[[UILabel alloc] initWithFrame:CGRectMake(orginX, orginY+titleImageViewWidth+5, titleImageViewWidth, 30)];
+    createLabel=[[UILabel alloc] initWithFrame:CGRectMake(orginX, orginY+titleImageViewWidth+5, titleImageViewWidth+3, 30)];
     [titleBg1 addSubview:createLabel];
     
     company=[[UILabel alloc] initWithFrame:CGRectMake(orginX+widthSpace+sufTitleImageViewSpace+titleImageViewWidth, orginY+heightSpace*2+30*2, loginButtonWidth, 30)];
