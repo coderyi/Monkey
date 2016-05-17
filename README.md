@@ -39,7 +39,7 @@ repositories ranking is based on the repositories of stars by high to low rankin
 
 These data are provided from the GitHub interface,url is https://developer.github.com/v3/
 
-I created a google group，this group is for general discussion NetworkEye
+I created a google group，this group is for general discussion Monkey
 ,welcome to join,[https://groups.google.com/d/forum/monkeyforgithub](https://groups.google.com/d/forum/monkeyforgithub)
 
 welcome to [new issues](https://github.com/coderyi/Monkey/issues).
