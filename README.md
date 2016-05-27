@@ -6,7 +6,6 @@
 [![](https://img.shields.io/github/stars/coderyi/Monkey.svg)](https://github.com/coderyi/Monkey/stargazers) 
 [![](https://img.shields.io/github/forks/coderyi/Monkey.svg)](https://github.com/coderyi/Monkey/network) 
 [![Twitter](https://img.shields.io/badge/twitter-@coderyi9-green.svg?style=flat)](http://twitter.com/coderyi9)
-[![gitter.im](https://badges.gitter.im/coderyi/Monkey.svg)](https://gitter.im/coderyi/Monkey)
 
 ![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_liantuerweima.png?imageMogr2/thumbnail/!60p) 
 
