@@ -1,4 +1,6 @@
 # Monkey for GitHub
+
+[![Join the chat at https://gitter.im/coderyi/Monkey](https://badges.gitter.im/coderyi/Monkey.svg)](https://gitter.im/coderyi/Monkey?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/coderyi/Monkey/blob/master/LICENSE.txt) 
 [![](https://img.shields.io/github/release/coderyi/Monkey.svg)](https://github.com/coderyi/Monkey/releases)
 [![](https://img.shields.io/github/stars/coderyi/Monkey.svg)](https://github.com/coderyi/Monkey/stargazers) 
