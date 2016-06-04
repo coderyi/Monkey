@@ -3,6 +3,7 @@ PODS:
   - FMDB/SQLCipher (2.5):
     - FMDB/common
     - SQLCipher
+  - JPFPSStatus (0.0.2)
   - NetworkEye (1.0.1):
     - FMDB/SQLCipher (~> 2.5)
   - SQLCipher (3.1.0):
@@ -12,11 +13,15 @@ PODS:
     - SQLCipher/common
 
 DEPENDENCIES:
+  - JPFPSStatus (~> 0.0.2)
   - NetworkEye (~> 1.0.1)
 
 SPEC CHECKSUMS:
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
+  JPFPSStatus: 11de6027b4cbebfeee0c939dfe08f5ec124a0965
   NetworkEye: e9345b8a9c369543ab86f9b9f8a88b206d1fd94c
   SQLCipher: 4684434d5791db86512cd7e02172aefba575849e
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 8a6191373951982bb645b2e0ef6a80c58d6a4890
+
+COCOAPODS: 1.0.0

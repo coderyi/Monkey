@@ -153,6 +153,9 @@ thanks!
 
 [Joe Shen](https://github.com/Jonwei)
 
+[Cokile Ceoi](https://github.com/Cokile)
+
+
 special thanks to [RongchangLei](https://github.com/RongchangLei)'s design.
 
 [Knockin' On Heaven's Door-Guns N' Roses-Netease cloud music](http://music.163.com/#/song?id=18095057)
