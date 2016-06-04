@@ -59,6 +59,13 @@ NetworkEye,a iOS network debug library,It can monitor all HTTP requests within t
 
 a simple way to use pull-to-refresh.
 
+
+[JPFPSStatus](https://github.com/joggerplus/JPFPSStatus)
+
+Show FPS Status on StatusBar
+
+
+
 [MKNetworkKit](https://github.com/MugunthKumar/MKNetworkKit)
 
 ARC ready Networking Framework with built in authentication and HTTP 1.1 caching standards support for iOS 5+ devices
