@@ -46,7 +46,7 @@
 #import "UMOpus.h"
 #import "UMessage.h"
 #import "NEHTTPEye.h"
-
+#import "JPFPSStatus.h"
 #import "BaseNavigationController.h"
 @implementation AppDelegate
 
@@ -58,6 +58,10 @@
     [NEHTTPEye setEnabled:NO];// open a network debug library
 #endif
     [self setupTabBar];//setup tabbar
+#if defined(DEBUG)||defined(_DEBUG)
+    [[JPFPSStatus sharedInstance] open];//Show FPS Status on StatusBar
+#endif
+
     self.apiEngine = [[YiNetworkEngine alloc] initWithDefaultSet];//set a app network engine
     [self setupUM:launchOptions];//setup UM
     return YES;
