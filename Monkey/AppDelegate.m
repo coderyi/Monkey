@@ -59,7 +59,9 @@
 #endif
     [self setupTabBar];//setup tabbar
 #if defined(DEBUG)||defined(_DEBUG)
-    [[JPFPSStatus sharedInstance] open];//Show FPS Status on StatusBar
+    [[JPFPSStatus sharedInstance] openWithHandler:^(NSInteger fpsValue) {
+        NSLog(@"fps value %@",@(fpsValue));
+    }];//Show FPS Status on StatusBar
 #endif
 
     self.apiEngine = [[YiNetworkEngine alloc] initWithDefaultSet];//set a app network engine
