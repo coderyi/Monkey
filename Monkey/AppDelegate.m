@@ -48,6 +48,11 @@
 #import "NEHTTPEye.h"
 #import "JPFPSStatus.h"
 #import "BaseNavigationController.h"
+#import <CoreSpotlight/CoreSpotlight.h>
+#import "RepositoryModel.h"
+#import "UserModel.h"
+#import "RepositoryDetailViewController.h"
+
 @implementation AppDelegate
 
 
@@ -195,6 +200,26 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     [UMFeedback didReceiveRemoteNotification:userInfo];
+}
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void(^)(NSArray * __nullable restorableObjects))restorationHandler {
+    if([userActivity.activityType isEqualToString:CSSearchableItemActionType]) {
+        NSString *uniqueIdentifier = userActivity.userInfo[CSSearchableItemActivityIdentifier];
+        //这里根据这个uniqueIdentifier可以跳转到详细信息页面
+        NSArray *array=[uniqueIdentifier componentsSeparatedByString:@"."];
+        if (array.count>1) {
+            RepositoryModel *repoModel=[[RepositoryModel alloc] init];
+            UserModel *userModel=[[UserModel alloc] init];
+            userModel.login=array[0];
+            repoModel.user=userModel;
+            repoModel.name=array[1];
+            RepositoryDetailViewController *repoViewController=[[RepositoryDetailViewController alloc] init];
+            repoViewController.model=repoModel;
+            [((UITabBarController *)(self.window.rootViewController)).selectedViewController pushViewController:repoViewController animated:YES];
+        }
+        return YES;
+    }
+    return YES;
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)URL sourceApplication:(NSString *)sourceApplication annotation:(id)annotation

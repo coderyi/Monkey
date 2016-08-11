@@ -7,7 +7,6 @@
 //
 
 #import "CoreSpotlightManager.h"
-#import <MobileCoreServices/MobileCoreServices.h>
 #import <CoreSpotlight/CoreSpotlight.h>
 #import "RepositoryModel.h"
 
@@ -57,7 +56,7 @@
 {
     NSString *episodeTitle = model.name;//title
     
-    CSSearchableItemAttributeSet *attributes = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:(NSString *)kUTTypeAudio];
+    CSSearchableItemAttributeSet *attributes = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:@"monkey"];
     attributes.title = episodeTitle;
     attributes.contentDescription = model.repositoryDescription;//content
     UIImageView *tempImageView=[[UIImageView alloc] init];
@@ -67,8 +66,8 @@
     attributes.thumbnailData = UIImagePNGRepresentation(tempImageView.image);
     
     
-    NSString *identifier = [NSString stringWithFormat:@"com.coderyi.%@",model.user.login];
-    NSString *domain = [NSString stringWithFormat:@"com.coderyi.%@",model.user.login];
+    NSString *identifier = [NSString stringWithFormat:@"%@.%@",model.user.login,model.name];
+    NSString *domain = [NSString stringWithFormat:@"%@.%@",model.user.login,model.name];
     
     CSSearchableItem *item = [[CSSearchableItem alloc] initWithUniqueIdentifier:identifier
                                                                domainIdentifier:domain
