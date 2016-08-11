@@ -135,6 +135,7 @@
 		A1FC33E51B25D96000FCBCE7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC33E41B25D96000FCBCE7 /* libsqlite3.dylib */; };
 		A1FC33E71B25D96700FCBCE7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC33E61B25D96700FCBCE7 /* AVFoundation.framework */; };
 		A1FC33E91B25D97000FCBCE7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FC33E81B25D97000FCBCE7 /* libz.dylib */; };
+		EE1AB1BF1D5CC29D003F6C71 /* CoreSpotlightManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1AB1BE1D5CC29D003F6C71 /* CoreSpotlightManager.m */; };
 		EFEAB4F1AF7B23897166A883 /* libPods-Monkey.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00712E6333A6DD1ED48C0DD5 /* libPods-Monkey.a */; };
 /* End PBXBuildFile section */
 
@@ -429,6 +430,8 @@
 		A1FC33E41B25D96000FCBCE7 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		A1FC33E61B25D96700FCBCE7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A1FC33E81B25D97000FCBCE7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		EE1AB1BD1D5CC29D003F6C71 /* CoreSpotlightManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreSpotlightManager.h; sourceTree = "<group>"; };
+		EE1AB1BE1D5CC29D003F6C71 /* CoreSpotlightManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreSpotlightManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -647,8 +650,8 @@
 			isa = PBXGroup;
 			children = (
 				0ACEA31D1B5142F6009F6B6D /* README.md */,
+				EE1AB1BC1D5CC297003F6C71 /* Global */,
 				0ACEA2C01B513BD2009F6B6D /* Base */,
-				0ACEA2DE1B513C36009F6B6D /* Global */,
 				0ACEA30D1B51406D009F6B6D /* AppGenernal */,
 				0ACEA3101B5140E9009F6B6D /* ViewControllers */,
 				0ACEA2C41B513C17009F6B6D /* Models */,
@@ -696,13 +699,6 @@
 				0ACEA2D51B513C17009F6B6D /* SearchSegmentControl.m */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		0ACEA2DE1B513C36009F6B6D /* Global */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Global;
 			sourceTree = "<group>";
 		};
 		0ACEA2DF1B513CB5009F6B6D /* Module */ = {
@@ -1205,6 +1201,15 @@
 			path = UMessage_Sdk_1.1.0;
 			sourceTree = "<group>";
 		};
+		EE1AB1BC1D5CC297003F6C71 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				EE1AB1BD1D5CC29D003F6C71 /* CoreSpotlightManager.h */,
+				EE1AB1BE1D5CC29D003F6C71 /* CoreSpotlightManager.m */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1416,6 +1421,7 @@
 				0A857C4F1B4CE4FF00516D23 /* YiRefreshHeader.m in Sources */,
 				A1FC33B01B25D92200FCBCE7 /* SDImageCache.m in Sources */,
 				A1FC33AE1B25D92200FCBCE7 /* MKAnnotationView+WebCache.m in Sources */,
+				EE1AB1BF1D5CC29D003F6C71 /* CoreSpotlightManager.m in Sources */,
 				0ACEA2D91B513C17009F6B6D /* DetailSegmentControl.m in Sources */,
 				0AFCEBC41B62D17D00051D9A /* TrendingViewModel.m in Sources */,
 				A1FC33B41B25D92200FCBCE7 /* SDWebImageDownloaderOperation.m in Sources */,

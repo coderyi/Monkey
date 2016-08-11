@@ -13,7 +13,7 @@
 #import "RepositoriesTableViewCell.h"
 #import "LanguageViewController.h"
 #import "RepositoryDetailViewController.h"
-
+#import "CoreSpotlightManager.h"
 @interface RepositoriesViewController ()<UITableViewDataSource,UITableViewDelegate> {
     UITableView *tableView;
     YiRefreshHeader *refreshHeader;
@@ -160,6 +160,9 @@
     [ApplicationDelegate.apiEngine searchRepositoriesWithPage:page  q:[NSString stringWithFormat:@"language:%@",language] sort:@"stars" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
         if (page<=1) {
             [self.DsOfPageListObject.dsArray removeAllObjects];
+            if([CoreSpotlightManager sharedInstance].data.count<1) {
+                [[CoreSpotlightManager sharedInstance] resetIndexWithData:modelArray];
+            }
         }
         [self.DsOfPageListObject.dsArray addObjectsFromArray:modelArray];
         self.DsOfPageListObject.page=page;
