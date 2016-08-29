@@ -272,8 +272,8 @@
             if (![titleText.text isEqualToString:tableView1Language]) {
                 [refreshHeader1 beginRefreshing];
             }
-            if (self.DsOfPageListObject1.totalCount>0) {
-              [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)self.DsOfPageListObject1.totalCount] forState:UIControlStateNormal];
+            if (userRankDataSource.DsOfPageListObject1.totalCount>0) {
+              [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)userRankDataSource.DsOfPageListObject1.totalCount] forState:UIControlStateNormal];
             }
         }else if (currentIndex==2){
             if (tableView2==nil) {
@@ -292,8 +292,8 @@
                 [refreshHeader2 beginRefreshing];
             }
             
-            if (self.DsOfPageListObject2.totalCount>0) {
-                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)self.DsOfPageListObject2.totalCount] forState:UIControlStateNormal];
+            if (userRankDataSource.DsOfPageListObject2.totalCount>0) {
+                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)userRankDataSource.DsOfPageListObject2.totalCount] forState:UIControlStateNormal];
             }
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"countryAppear"] isEqualToString:@"2"]) {
                 [refreshHeader2 beginRefreshing];
@@ -318,8 +318,8 @@
             if (![titleText.text isEqualToString:tableView3Language]) {
                 [refreshHeader3 beginRefreshing];
             }
-            if (self.DsOfPageListObject3.totalCount>0) {
-                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)(self.DsOfPageListObject3.totalCount)] forState:UIControlStateNormal];
+            if (userRankDataSource.DsOfPageListObject3.totalCount>0) {
+                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)(userRankDataSource.DsOfPageListObject3.totalCount)] forState:UIControlStateNormal];
             }
         }else if (currentIndex==4){
             

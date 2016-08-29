@@ -60,7 +60,7 @@
     [self setupTabBar];//setup tabbar
 #if defined(DEBUG)||defined(_DEBUG)
     [[JPFPSStatus sharedInstance] openWithHandler:^(NSInteger fpsValue) {
-        NSLog(@"fps value %@",@(fpsValue));
+//        NSLog(@"fps value %@",@(fpsValue));
     }];//Show FPS Status on StatusBar
 #endif
 
