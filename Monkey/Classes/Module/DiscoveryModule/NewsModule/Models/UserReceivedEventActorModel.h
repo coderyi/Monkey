@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface UserReceivedEventActorModel : NSObject
-@property(nonatomic,strong)NSString *actorID;
-@property(nonatomic,strong)NSString *login;
-@property(nonatomic,strong)NSString *gravatar_id;
-@property(nonatomic,strong)NSString *url;
-@property(nonatomic,strong)NSString *avatar_url;
+@property(nonatomic,copy) NSString *actorID;
+@property(nonatomic,copy) NSString *login;
+@property(nonatomic,copy) NSString *gravatar_id;
+@property(nonatomic,copy) NSString *url;
+@property(nonatomic,copy) NSString *avatar_url;
 + (UserReceivedEventActorModel *)modelWithDict:(NSDictionary *)dict;
 @end

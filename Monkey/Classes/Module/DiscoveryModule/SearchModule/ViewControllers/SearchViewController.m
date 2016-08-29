@@ -27,11 +27,11 @@
     SearchViewModel *searchViewModel;
     SearchDataSource *searchDataSourcel;
 }
-@property (strong, nonatomic) MKNetworkOperation *apiOperation;
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
-@property(nonatomic,strong)UITableView *tableView1;
-@property(nonatomic,strong)UITableView *tableView2;
+@property(nonatomic,strong) MKNetworkOperation *apiOperation;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject1;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject2;
+@property(nonatomic,strong) UITableView *tableView1;
+@property(nonatomic,strong) UITableView *tableView2;
 
 @end
 
@@ -60,6 +60,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     self.tabBarController.tabBar.hidden = NO;
     [mySearchBar removeFromSuperview];
 }

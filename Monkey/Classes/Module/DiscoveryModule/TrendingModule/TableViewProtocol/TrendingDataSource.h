@@ -10,8 +10,8 @@
 
 @interface TrendingDataSource : NSObject<UITableViewDataSource>
 
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;//the daily datasource
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;//the weekly datasource
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject3;//the monthly datasource
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject1;//the daily datasource
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject2;//the weekly datasource
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject3;//the monthly datasource
 
 @end

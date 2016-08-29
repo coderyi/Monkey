@@ -24,6 +24,10 @@ typedef void (^UserDetailDataSourceModelResponseBlock)(DataSourceModel* DsOfPage
  *
  *  @return success or fail
  */
-- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst  currentIndex:(int)currentIndex firstTableData:(UserDetailDataSourceModelResponseBlock)firstCompletionBlock secondTableData:(UserDetailDataSourceModelResponseBlock)secondCompletionBlock thirdTableData:(UserDetailDataSourceModelResponseBlock)thirdCompletionBlock;
+- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
+                      currentIndex:(int)currentIndex
+                    firstTableData:(UserDetailDataSourceModelResponseBlock)firstCompletionBlock
+                   secondTableData:(UserDetailDataSourceModelResponseBlock)secondCompletionBlock
+                    thirdTableData:(UserDetailDataSourceModelResponseBlock)thirdCompletionBlock;
 
 @end

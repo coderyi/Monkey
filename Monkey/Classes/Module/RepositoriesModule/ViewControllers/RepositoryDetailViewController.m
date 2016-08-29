@@ -38,10 +38,10 @@
     UILabel *line1;
 }
 
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject3;
-@property (strong, nonatomic) MKNetworkOperation *apiOperation;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject1;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject2;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject3;
+@property(nonatomic,strong) MKNetworkOperation *apiOperation;
 @property(nonatomic,assign) int currentIndex;
 @end
 
@@ -64,12 +64,11 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     self.tabBarController.tabBar.hidden = NO;
-
 }
 
 - (void)viewDidLoad
@@ -213,10 +212,8 @@
         WebViewController *web=[[WebViewController alloc] init];
         web.urlString=_model.html_url;
         [self.navigationController pushViewController:web animated:YES];
-        
     }
 }
-
 
 - (void)ownerBtAction
 {
@@ -281,7 +278,6 @@
             rightTitle=@"unstar";
         }else{
             rightTitle=@"star";
-            
         }
         self.navigationItem.rightBarButtonItem=nil;
         UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:rightTitle style:UIBarButtonItemStylePlain target:self action:@selector(starAction)];
@@ -348,7 +344,6 @@
     WEAKSELF
 
     refreshHeader.beginRefreshingBlock=^(){
-        
         [ApplicationDelegate.apiEngine repositoryDetailWithUserName:_model.user.login repositoryName:_model.name completoinHandler:^(RepositoryModel *model){
             _model=model;
             STRONGSELF
@@ -392,7 +387,6 @@
             [refreshHeader endRefreshing];
         }
         
-        
     } secondTableData:^(DataSourceModel* DsOfPageListObject){
         repositoryDetailDataSource.DsOfPageListObject2=DsOfPageListObject;
         [tableView reloadData];
@@ -428,12 +422,10 @@
         return RankTableViewCellHeight;
     }
     return 1;
-    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     if (currentIndex==1) {
         UserModel  *model = [(repositoryDetailDataSource.DsOfPageListObject1.dsArray) objectAtIndex:indexPath.row];
         UserDetailViewController *detail=[[UserDetailViewController alloc] init];

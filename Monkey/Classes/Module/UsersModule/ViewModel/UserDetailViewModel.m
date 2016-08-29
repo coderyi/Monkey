@@ -41,7 +41,6 @@
         
         if (isFirst) {
             page = 1;
-            
         }else{
             page = self.DsOfPageListObject1.page+1;
         }
@@ -54,10 +53,8 @@
             [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject1.page=page;
             firstCompletionBlock(self.DsOfPageListObject1);
-
         } errorHandel:^(NSError* error){
             firstCompletionBlock(self.DsOfPageListObject1);
-
         }];
         
         return YES;
@@ -66,7 +63,6 @@
         
         if (isFirst) {
             page = 1;
-            
         }else{
             page = self.DsOfPageListObject2.page+1;
         }
@@ -79,10 +75,8 @@
             [self.DsOfPageListObject2.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject2.page=page;
             secondCompletionBlock(self.DsOfPageListObject2);
-
         } errorHandel:^(NSError* error){
             secondCompletionBlock(self.DsOfPageListObject2);
-
         }];
     
         return YES;
@@ -91,9 +85,7 @@
         
         if (isFirst) {
             page = 1;
-            
         }else{
-            
             page = self.DsOfPageListObject3.page+1;
         }
         [ApplicationDelegate.apiEngine userFollowersWithPage:page userName:_userModel.login completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
@@ -105,17 +97,12 @@
             [self.DsOfPageListObject3.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject3.page=page;
             thirdCompletionBlock(self.DsOfPageListObject3);
-
         } errorHandel:^(NSError* error){
             thirdCompletionBlock(self.DsOfPageListObject3);
-
         }];
-      
         return YES;
     }
-    
     return YES;
-    
 }
 
 @end

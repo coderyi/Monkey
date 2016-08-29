@@ -23,24 +23,39 @@ typedef void (^StringResponseBlock)(NSString* response);
 @interface YiNetworkEngine : MKNetworkEngine
 
 #pragma mark - login module
+
+//GitHub redirects back to your site
+//https://developer.github.com/v3/oauth/#github-redirects-back-to-your-site
+//POST https://github.com/login/oauth/access_token
 - (MKNetworkOperation *)loginWithCode:(NSString *)code
                     completoinHandler:(StringResponseBlock)completionBlock
                           errorHandel:(MKNKErrorBlock)errorBlock;
+
+//https://developer.github.com/v3/oauth/#use-the-access-token-to-access-the-api
 - (MKNetworkOperation *)getUserInfoWithToken:(NSString *)token
                            completoinHandler:(UserModelResponseBlock)completionBlock
                                  errorHandel:(MKNKErrorBlock)errorBlock;
+
 #pragma mark - event 、news
-- (MKNetworkOperation *)repositoriesTrendingWithPage:(NSInteger)page login:(NSString *)login
+
+- (MKNetworkOperation *)repositoriesTrendingWithPage:(NSInteger)page
+                                               login:(NSString *)login
                                    completoinHandler:(PageListInfoResponseBlock)completionBlock
                                          errorHandel:(MKNKErrorBlock)errorBlock;
+
 #pragma mark - trending
-- (MKNetworkOperation *)showcasesDetailListWithShowcase:(NSString *)showcase completoinHandler:(PageListInfoResponseBlock)completionBlock
+
+- (MKNetworkOperation *)showcasesDetailListWithShowcase:(NSString *)showcase
+                                      completoinHandler:(PageListInfoResponseBlock)completionBlock
                                             errorHandel:(MKNKErrorBlock)errorBlock;
+
 - (MKNetworkOperation *)repositoriesTrendingWithType:(NSString *)type language:(NSString *)language
                                    completoinHandler:(PageListInfoResponseBlock)completionBlock
                                          errorHandel:(MKNKErrorBlock)errorBlock;
+
 - (MKNetworkOperation *)showcasesWithCompletoinHandler:(PageListInfoResponseBlock)completionBlock
                                            errorHandel:(MKNKErrorBlock)errorBlock;
+
 #pragma mark - followmodule
 
 //Check if one user follows another
@@ -54,12 +69,14 @@ typedef void (^StringResponseBlock)(NSString* response);
                                    target_user:(NSString *)target_user
                              completoinHandler:(void (^)(BOOL isSuccess))completionBlock
                                    errorHandel:(MKNKErrorBlock)errorBlock;
+
 - (MKNetworkOperation *)unfollowUserWithUsername:(NSString *)username
                                      target_user:(NSString *)target_user
                                completoinHandler:(void (^)(BOOL isSuccess))completionBlock
                                      errorHandel:(MKNKErrorBlock)errorBlock;
 
 #pragma mark - starmodule
+
 - (MKNetworkOperation *)checkStarStatusWithOwner:(NSString *)owner
                                         repo:(NSString *)repo
                                   completoinHandler:(void (^)(BOOL isStarring))completionBlock
@@ -79,55 +96,70 @@ typedef void (^StringResponseBlock)(NSString* response);
 
 #pragma mark - users module
 
-
 //https://developer.github.com/v3/search/#search-users
 //Search users
-- (MKNetworkOperation *)searchUsersWithPage:(NSInteger)page q:(NSString *)q sort:(NSString *)sort categoryLocation:(NSString *)categoryLocation categoryLanguage:(NSString *)categoryLanguage completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)searchUsersWithPage:(NSInteger)page
+                                          q:(NSString *)q
+                                       sort:(NSString *)sort
+                           categoryLocation:(NSString *)categoryLocation
+                           categoryLanguage:(NSString *)categoryLanguage
+                          completoinHandler:(PageListInfoResponseBlock)completionBlock
                                 errorHandel:(MKNKErrorBlock)errorBlock;
 
 //https://developer.github.com/v3/search/#search-users
 //Search users
-- (MKNetworkOperation *)searchUsersWithPage:(NSInteger)page q:(NSString *)q sort:(NSString *)sort completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)searchUsersWithPage:(NSInteger)page
+                                          q:(NSString *)q
+                                       sort:(NSString *)sort
+                          completoinHandler:(PageListInfoResponseBlock)completionBlock
                                 errorHandel:(MKNKErrorBlock)errorBlock;
-
 
 //https://developer.github.com/v3/users/#get-a-single-user
 //Get a single user ,GET /users/:username
 - (MKNetworkOperation *)userDetailWithUserName:(NSString *)userName
-                             completoinHandler:
-(UserModelResponseBlock)completionBlock
+                             completoinHandler:(UserModelResponseBlock)completionBlock
                                    errorHandel:(MKNKErrorBlock)errorBlock;
 
 //https://developer.github.com/v3/repos/#list-user-repositories
 //List user repositories
 //GET /users/:username/repos
-- (MKNetworkOperation *)userRepositoriesWithPage:(NSInteger)page userName:(NSString *)userName completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)userRepositoriesWithPage:(NSInteger)page
+                                        userName:(NSString *)userName
+                               completoinHandler:(PageListInfoResponseBlock)completionBlock
                                      errorHandel:(MKNKErrorBlock)errorBlock;
 
 //List users followed by another user
 //https://developer.github.com/v3/users/followers/#list-users-followed-by-another-user
 //GET /users/:username/following
-- (MKNetworkOperation *)userFollowingWithPage:(NSInteger)page userName:(NSString *)userName completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)userFollowingWithPage:(NSInteger)page
+                                     userName:(NSString *)userName
+                            completoinHandler:(PageListInfoResponseBlock)completionBlock
                                   errorHandel:(MKNKErrorBlock)errorBlock;
+
 //List followers of a user
 //https://developer.github.com/v3/users/followers/#list-followers-of-a-user
 //GET /users/:username/followers
-- (MKNetworkOperation *)userFollowersWithPage:(NSInteger)page userName:(NSString *)userName completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)userFollowersWithPage:(NSInteger)page
+                                     userName:(NSString *)userName
+                            completoinHandler:(PageListInfoResponseBlock)completionBlock
                                   errorHandel:(MKNKErrorBlock)errorBlock;
 
 #pragma mark - repositories module
 
 //https://developer.github.com/v3/search/#search-repositories
 //Search repositories
-- (MKNetworkOperation *)searchRepositoriesWithPage:(NSInteger)page q:(NSString *)q sort:(NSString *)sort completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)searchRepositoriesWithPage:(NSInteger)page
+                                                 q:(NSString *)q
+                                              sort:(NSString *)sort
+                                 completoinHandler:(PageListInfoResponseBlock)completionBlock
                                        errorHandel:(MKNKErrorBlock)errorBlock;
 
 //https://developer.github.com/v3/repos/#get
 //Get
 //GET /repos/:owner/:repo
-- (MKNetworkOperation *)repositoryDetailWithUserName:(NSString *)userName repositoryName:(NSString *)repositoryName
-                                   completoinHandler:
-(RepositoryModelResponseBlock)completionBlock
+- (MKNetworkOperation *)repositoryDetailWithUserName:(NSString *)userName
+                                      repositoryName:(NSString *)repositoryName
+                                   completoinHandler:(RepositoryModelResponseBlock)completionBlock
                                          errorHandel:(MKNKErrorBlock)errorBlock;
 
 //https://developer.github.com/v3/repos/#list-contributors
@@ -138,7 +170,11 @@ typedef void (^StringResponseBlock)(NSString* response);
 
 //https://developer.github.com/v3/activity/starring/#list-stargazers
 //List Stargazers ,GET /repos/:owner/:repo/stargazers
-- (MKNetworkOperation *)reposDetailCategoryWithPage:(NSInteger)page userName:(NSString *)userName repositoryName:(NSString *)repositoryName category:(NSString *)category completoinHandler:(PageListInfoResponseBlock)completionBlock
+- (MKNetworkOperation *)reposDetailCategoryWithPage:(NSInteger)page
+                                           userName:(NSString *)userName
+                                     repositoryName:(NSString *)repositoryName
+                                           category:(NSString *)category
+                                  completoinHandler:(PageListInfoResponseBlock)completionBlock
                                         errorHandel:(MKNKErrorBlock)errorBlock;
 
 @end

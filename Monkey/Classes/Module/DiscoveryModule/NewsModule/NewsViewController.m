@@ -14,8 +14,8 @@
     YiRefreshHeader *refreshHeader;
     YiRefreshFooter *refreshFooter;
 }
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject;
-@property (strong, nonatomic) MKNetworkOperation *apiOperation;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject;
+@property(nonatomic,strong) MKNetworkOperation *apiOperation;
 @end
 
 @implementation NewsViewController
@@ -38,6 +38,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     self.tabBarController.tabBar.hidden = NO;
 }
 
@@ -47,7 +48,6 @@
     // Do any additional setup after loading the view.
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-        
     }
     self.automaticallyAdjustsScrollViewInsets=NO;
     self.title=NSLocalizedString(@"News", @"");

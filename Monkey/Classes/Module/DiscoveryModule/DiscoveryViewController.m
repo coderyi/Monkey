@@ -21,7 +21,6 @@
     UITableView *tableView;
     NSString *currentLogin;
 }
-
 @end
 
 @implementation DiscoveryViewController
@@ -112,7 +111,6 @@
 {
     return 1;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

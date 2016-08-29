@@ -26,6 +26,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     self.tabBarController.tabBar.hidden = NO;
 }
 
@@ -36,7 +37,6 @@
     
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-        
     }
     self.title=@"githubranking";
     self.automaticallyAdjustsScrollViewInsets=NO;
@@ -103,7 +103,6 @@
     }
     cell.textLabel.text=(rankCategorys)[indexPath.section];
     return cell;
-
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -10,7 +10,7 @@
 
 @interface LoginWebViewController : UIViewController
 
-@property(nonatomic,strong) NSString *urlString;//LoginWebViewController 's url
+@property(nonatomic,copy) NSString *urlString;//LoginWebViewController 's url
 @property(nonatomic,copy) void (^callback) (NSString* code);// login callback
 
 @end

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CityViewController : UIViewController
-@property(nonatomic,strong) NSArray *pinyinCitys;//city list use English or pinyin(Chinese)
+@property(nonatomic,copy) NSArray *pinyinCitys;//city list use English or pinyin(Chinese)
 @end

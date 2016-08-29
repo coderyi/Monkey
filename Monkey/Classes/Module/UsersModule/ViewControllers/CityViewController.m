@@ -11,7 +11,6 @@
 @interface CityViewController ()<UITableViewDataSource,UITableViewDelegate>{
     UITableView *tableView1;
     NSArray *citys;
-    
 }
 
 @end
@@ -24,13 +23,12 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     self.tabBarController.tabBar.hidden = NO;
-
 }
 
 - (void)viewDidLoad
@@ -41,7 +39,6 @@
 
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-        
     }
     self.automaticallyAdjustsScrollViewInsets=NO;
     self.view.backgroundColor=[UIColor whiteColor];
@@ -76,9 +73,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-   
     return citys.count;
-
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -10,7 +10,7 @@
 
 @interface CoreSpotlightManager : NSObject
 @property(nonatomic,copy) NSArray *data;
-
 + (CoreSpotlightManager *)sharedInstance;
 - (void)resetIndexWithData:(NSArray *)data;
+
 @end

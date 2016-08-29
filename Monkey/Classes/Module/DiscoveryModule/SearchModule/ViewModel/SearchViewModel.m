@@ -26,7 +26,11 @@
     return self;
 }
 
-- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst currentIndex:(int)currentIndex searchBarText:(NSString *)text  firstTableData:(SearchDataSourceModelResponseBlock)firstCompletionBlock secondTableData:(SearchDataSourceModelResponseBlock)secondCompletionBlock
+- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
+                      currentIndex:(int)currentIndex
+                     searchBarText:(NSString *)text
+                    firstTableData:(SearchDataSourceModelResponseBlock)firstCompletionBlock
+                   secondTableData:(SearchDataSourceModelResponseBlock)secondCompletionBlock
 {
     
     if (text!=nil) {
@@ -37,7 +41,6 @@
             
             if (isFirst) {
                 page = 1;
-                
             }else{
                 page = self.DsOfPageListObject1.page+1;
             }

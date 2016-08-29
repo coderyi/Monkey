@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface ShowcasesModel : NSObject
-@property(nonatomic,strong)NSString *name;
-@property(nonatomic,strong)NSString *slug;
-@property(nonatomic,strong)NSString *showcasesDescription;
-@property(nonatomic,strong)NSString *image_url;
+@property(nonatomic,copy) NSString *name;
+@property(nonatomic,copy) NSString *slug;
+@property(nonatomic,copy) NSString *showcasesDescription;
+@property(nonatomic,copy) NSString *image_url;
 + (ShowcasesModel *)modelWithDict:(NSDictionary *)dict;
 @end

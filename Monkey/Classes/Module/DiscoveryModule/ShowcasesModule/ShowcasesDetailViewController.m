@@ -20,8 +20,8 @@
     NSString *language;
     
 }
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject;
-@property (strong, nonatomic) MKNetworkOperation *apiOperation;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject;
+@property(nonatomic,strong) MKNetworkOperation *apiOperation;
 
 @end
 
@@ -46,6 +46,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     self.tabBarController.tabBar.hidden = NO;
 }
 
@@ -55,7 +56,6 @@
     // Do any additional setup after loading the view.
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
-        
     }
     self.title=_model.name;
     self.view.backgroundColor=[UIColor whiteColor];
@@ -68,7 +68,6 @@
     tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     [self addHeader];
     [self addFooter];
-  
 }
 
 - (void)didReceiveMemoryWarning

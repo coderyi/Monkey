@@ -45,10 +45,10 @@
     UserRankDataSource *userRankDataSource;
     UserRankViewModel *userRankViewModel;
 }
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject3;
-@property (strong, nonatomic) MKNetworkOperation *apiOperation;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject1;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject2;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject3;
+@property(nonatomic,strong) MKNetworkOperation *apiOperation;
 @end
 
 @implementation UserRankViewController
@@ -95,7 +95,6 @@
         language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
         if (language==nil || language.length<1) {
             language=NSLocalizedString(@"all languages", @"");
-            
         }
         if ([language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
             segmentControl.buttonCount=2;
@@ -222,7 +221,6 @@
 
 - (void)initScroll
 {
-    
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, titleHeight, ScreenWidth, bgViewHeight)];
     scrollView.alwaysBounceHorizontal=YES;
     scrollView.backgroundColor=[UIColor whiteColor];
@@ -418,13 +416,10 @@
 {
     if (currentIndex==1) {
         tableView1Language=language;
-        
     }else if (currentIndex==2) {
         tableView2Language=language;
-        
     }else if (currentIndex==3) {
         tableView3Language=language;
-        
     }
     
     [userRankViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex firstTableData:^(DataSourceModel* DsOfPageListObject){
@@ -457,7 +452,6 @@
         [tableView3 reloadData];
         if (!isFirst) {
             [refreshFooter3 endRefreshing];
-            
         }else
         {
             [refreshHeader3 endRefreshing];
@@ -476,7 +470,6 @@
         int currentPage = floor((scrollView.contentOffset.x - pagewidth/ (2)) / pagewidth) + 1;
     
         if (currentPage==0){
-        
             [scrollView scrollRectToVisible:CGRectMake(0,0,ScreenWidth,bgViewHeight) animated:NO];
             [scrollView setContentOffset:CGPointMake(0,0)];
         }else if (currentPage>=(1)){
@@ -493,7 +486,6 @@
         int currentPage = floor((scrollView.contentOffset.x - pagewidth/ (3)) / pagewidth) + 1;
         
         if (currentPage==0){
-            
             [scrollView scrollRectToVisible:CGRectMake(0,0,ScreenWidth,bgViewHeight) animated:NO];
             [scrollView setContentOffset:CGPointMake(0,0)];
         }else if (currentPage>=(2)){

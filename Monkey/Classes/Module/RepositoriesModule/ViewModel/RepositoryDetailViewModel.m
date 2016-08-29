@@ -9,9 +9,9 @@
 
 #import "RepositoryDetailViewModel.h"
 @interface RepositoryDetailViewModel()
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject3;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject1;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject2;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject3;
 
 @end
 
@@ -29,7 +29,11 @@
     return self;
 }
 
-- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst  currentIndex:(int)currentIndex firstTableData:(RepositoryDetailDataSourceModelResponseBlock)firstCompletionBlock secondTableData:(RepositoryDetailDataSourceModelResponseBlock)secondCompletionBlock thirdTableData:(RepositoryDetailDataSourceModelResponseBlock)thirdCompletionBlock
+- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
+                      currentIndex:(int)currentIndex
+                    firstTableData:(RepositoryDetailDataSourceModelResponseBlock)firstCompletionBlock
+                   secondTableData:(RepositoryDetailDataSourceModelResponseBlock)secondCompletionBlock
+                    thirdTableData:(RepositoryDetailDataSourceModelResponseBlock)thirdCompletionBlock
 {
     
     if (currentIndex==1) {
@@ -38,9 +42,7 @@
         
         if (isFirst) {
             page = 1;
-            
         }else{
-            
             page = self.DsOfPageListObject1.page+1;
         }
         [ApplicationDelegate.apiEngine reposDetailCategoryWithPage:page userName:_model.user.login repositoryName:_model.name category:@"contributors" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
@@ -63,7 +65,6 @@
         NSInteger page = 0;
         if (isFirst) {
             page = 1;
-            
         }else{
             page = self.DsOfPageListObject2.page+1;
         }

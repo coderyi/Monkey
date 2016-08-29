@@ -15,8 +15,8 @@
     YiRefreshHeader *refreshHeader;
     YiRefreshFooter *refreshFooter;
 }
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject;
-@property (strong, nonatomic) MKNetworkOperation *apiOperation;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject;
+@property(nonatomic,strong) MKNetworkOperation *apiOperation;
 @end
 
 @implementation ShowcasesViewController
@@ -39,6 +39,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     self.tabBarController.tabBar.hidden = NO;
 }
 
@@ -141,7 +142,6 @@
     //calculate
     CGFloat height = [cell calulateHeightWithtTitle:model.name desrip:model.showcasesDescription];
     return height;
-    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -169,7 +169,6 @@
     [cell.logoImageView sd_setImageWithURL:[NSURL URLWithString:model.image_url]];
     [cell.descriptionLabel setText:model.showcasesDescription];
     return cell;
- 
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

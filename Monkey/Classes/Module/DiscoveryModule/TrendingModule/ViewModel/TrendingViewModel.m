@@ -11,12 +11,12 @@
 @interface TrendingViewModel() {
     NSString *language;
 }
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject3;
-@property(nonatomic,strong)NSString *tableView1Language;
-@property(nonatomic,strong)NSString *tableView2Language;
-@property(nonatomic,strong)NSString *tableView3Language;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject1;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject2;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject3;
+@property(nonatomic,copy) NSString *tableView1Language;
+@property(nonatomic,copy) NSString *tableView2Language;
+@property(nonatomic,copy) NSString *tableView3Language;
 
 @end
 
@@ -35,7 +35,11 @@
     return self;
 }
 
-- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst currentIndex:(int)currentIndex firstTableData:(DataSourceModelResponseBlock)firstCompletionBlock secondTableData:(DataSourceModelResponseBlock)secondCompletionBlock thirdTableData:(DataSourceModelResponseBlock)thirdCompletionBlock
+- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
+                      currentIndex:(int)currentIndex
+                    firstTableData:(DataSourceModelResponseBlock)firstCompletionBlock
+                   secondTableData:(DataSourceModelResponseBlock)secondCompletionBlock
+                    thirdTableData:(DataSourceModelResponseBlock)thirdCompletionBlock
 {
     YiNetworkEngine *networkEngine=[[YiNetworkEngine  alloc] initWithHostName:@"trending.codehub-app.com" customHeaderFields:nil];
     if (currentIndex==1){

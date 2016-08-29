@@ -10,14 +10,14 @@
 #import "RepositoryModel.h"
 @interface UserReceivedEventPayloadModel : NSObject
 //started
-@property(nonatomic,strong)NSString *action;
+@property(nonatomic,copy) NSString *action;
 
 //create
-@property(nonatomic,strong)NSString *ref;
-@property(nonatomic,strong)NSString *ref_type;
-@property(nonatomic,strong)NSString *master_branch;
-@property(nonatomic,strong)NSString *payloadDescription;
-@property(nonatomic,strong)NSString *pusher_type;
+@property(nonatomic,copy) NSString *ref;
+@property(nonatomic,copy) NSString *ref_type;
+@property(nonatomic,copy) NSString *master_branch;
+@property(nonatomic,copy) NSString *payloadDescription;
+@property(nonatomic,copy) NSString *pusher_type;
 
 //fork
 @property(nonatomic,strong)RepositoryModel *forkee;

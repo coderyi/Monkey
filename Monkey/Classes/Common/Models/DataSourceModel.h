@@ -12,9 +12,9 @@
 
 @interface DataSourceModel : NSObject
 
-@property(nonatomic,strong)NSMutableArray *dsArray;
-@property(nonatomic,assign)NSInteger page;
-@property(nonatomic,assign)NSInteger totalCount;
+@property(nonatomic,strong) NSMutableArray *dsArray;
+@property(nonatomic,assign) NSInteger page;
+@property(nonatomic,assign) NSInteger totalCount;
 
 - (void)reset;
 

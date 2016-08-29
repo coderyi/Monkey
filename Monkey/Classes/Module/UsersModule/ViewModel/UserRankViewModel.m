@@ -9,14 +9,13 @@
 #import "UserRankViewModel.h"
 @interface UserRankViewModel(){
     NSString *language;
-    
 }
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject3;
-@property(nonatomic,strong)NSString *tableView1Language;
-@property(nonatomic,strong)NSString *tableView2Language;
-@property(nonatomic,strong)NSString *tableView3Language;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject1;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject2;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject3;
+@property(nonatomic,copy) NSString *tableView1Language;
+@property(nonatomic,copy) NSString *tableView2Language;
+@property(nonatomic,copy) NSString *tableView3Language;
 
 @end
 
@@ -35,7 +34,11 @@
     return self;
 }
 
-- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst  currentIndex:(int)currentIndex firstTableData:(UserRankDataSourceModelResponseBlock)firstCompletionBlock secondTableData:(UserRankDataSourceModelResponseBlock)secondCompletionBlock thirdTableData:(UserRankDataSourceModelResponseBlock)thirdCompletionBlock
+- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
+                      currentIndex:(int)currentIndex
+                    firstTableData:(UserRankDataSourceModelResponseBlock)firstCompletionBlock
+                   secondTableData:(UserRankDataSourceModelResponseBlock)secondCompletionBlock
+                    thirdTableData:(UserRankDataSourceModelResponseBlock)thirdCompletionBlock
 {
     
     if (currentIndex==1){
@@ -44,9 +47,7 @@
         
         if (isFirst) {
             page = 1;
-            
         }else{
-            
             page = self.DsOfPageListObject1.page+1;
         }
         NSString *city=[[NSUserDefaults standardUserDefaults] objectForKey:@"pinyinCity"];
@@ -59,7 +60,6 @@
         
         if (language==nil || language.length<1) {
             language=NSLocalizedString(@"all languages", @"");
-            
         }
         tableView1Language=language;
         
@@ -68,21 +68,15 @@
         }
         
         [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:q sort:@"followers" categoryLocation:city categoryLanguage:language completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
-            
             self.DsOfPageListObject1.totalCount=totalCount;
-            
             if (page<=1) {
                 [self.DsOfPageListObject1.dsArray removeAllObjects];
             }
-
             [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject1.page=page;
             firstCompletionBlock(self.DsOfPageListObject1);
-
-            
         } errorHandel:^(NSError* error){
             firstCompletionBlock(self.DsOfPageListObject1);
-                                                   
         }];
         
         return YES;
@@ -93,9 +87,7 @@
         
         if (isFirst) {
             page = 1;
-            
         }else{
-            
             page = self.DsOfPageListObject2.page+1;
         }
         language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
@@ -107,7 +99,6 @@
         
         if (language==nil || language.length<1) {
             language=NSLocalizedString(@"all languages", @"");
-            
         }
         tableView2Language=language;
         
@@ -125,12 +116,9 @@
             [self.DsOfPageListObject2.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject2.page=page;
             secondCompletionBlock(self.DsOfPageListObject2);
-            
         } errorHandel:^(NSError* error){
             secondCompletionBlock(self.DsOfPageListObject2);
-
         }];
-     
         return YES;
     }else if (currentIndex==3){
         
@@ -138,15 +126,12 @@
         
         if (isFirst) {
             page = 1;
-            
         }else{
-            
             page = self.DsOfPageListObject3.page+1;
         }
         language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
         if (language==nil || language.length<1) {
             language=NSLocalizedString(@"all languages", @"");
-            
         }
         tableView3Language=language;
         [ApplicationDelegate.apiEngine searchUsersWithPage:page  q:[NSString stringWithFormat:@"language:%@",language] sort:@"followers" completoinHandler:^(NSArray* modelArray,NSInteger page,NSInteger totalCount){
@@ -160,18 +145,12 @@
             [self.DsOfPageListObject3.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject3.page=page;
             thirdCompletionBlock(self.DsOfPageListObject3);
-
-            
         } errorHandel:^(NSError* error){
             thirdCompletionBlock(self.DsOfPageListObject3);
-   
         }];
-
         return YES;
-        
     }
     return YES;
-    
 }
 
 @end

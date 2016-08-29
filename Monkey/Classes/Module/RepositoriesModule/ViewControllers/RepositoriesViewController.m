@@ -22,8 +22,8 @@
     UILabel *titleText;
 
 }
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject;
-@property (strong, nonatomic) MKNetworkOperation *apiOperation;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject;
+@property(nonatomic,strong) MKNetworkOperation *apiOperation;
 
 @end
 
@@ -191,8 +191,6 @@
 {
     return self.DsOfPageListObject.dsArray.count;
 }
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView1 cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

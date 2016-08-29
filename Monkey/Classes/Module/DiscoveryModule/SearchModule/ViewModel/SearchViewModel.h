@@ -22,6 +22,10 @@ typedef void (^SearchDataSourceModelResponseBlock)(DataSourceModel* DsOfPageList
  *
  *  @return success or fail
  */
-- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst currentIndex:(int)currentIndex searchBarText:(NSString *)text  firstTableData:(SearchDataSourceModelResponseBlock)firstCompletionBlock secondTableData:(SearchDataSourceModelResponseBlock)secondCompletionBlock;
+- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
+                      currentIndex:(int)currentIndex
+                     searchBarText:(NSString *)text
+                    firstTableData:(SearchDataSourceModelResponseBlock)firstCompletionBlock
+                   secondTableData:(SearchDataSourceModelResponseBlock)secondCompletionBlock;
 
 @end

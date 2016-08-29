@@ -41,10 +41,10 @@
     UserDetailViewModel *userDetailViewModel;
 
 }
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject3;
-@property (strong, nonatomic) MKNetworkOperation *apiOperation;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject1;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject2;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject3;
+@property(nonatomic,strong) MKNetworkOperation *apiOperation;
 
 @end
 
@@ -66,13 +66,12 @@
 {
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
-    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     self.tabBarController.tabBar.hidden = NO;
-    
 }
 
 - (void)viewDidLoad
@@ -196,12 +195,13 @@
             }
         }else if (currentIndex==2){
             if (self.DsOfPageListObject2.dsArray.count<1) {
-                [strongRefreshHeader beginRefreshing];}
-
+                [strongRefreshHeader beginRefreshing];
+            }
         }else if (currentIndex==3){
             if (self.DsOfPageListObject3.dsArray.count<1) {
-                [strongRefreshHeader beginRefreshing];}
+                [strongRefreshHeader beginRefreshing];
             }
+        }
         [strongTableView reloadData];
     };
     [self checkFollowStatusAction];
@@ -217,7 +217,7 @@
 - (void)loginButtonAction
 {
 
-    if (_userModel.html_url.length>0  ) {
+    if (_userModel.html_url.length>0) {
         WebViewController *web=[[WebViewController alloc] init];
         web.urlString=_userModel.html_url;
         [self.navigationController pushViewController:web animated:YES];
@@ -292,7 +292,6 @@
             rightTitle=@"unfollow";
         }else{
             rightTitle=@"follow";
-            
         }
         
         self.navigationItem.rightBarButtonItem=nil;
@@ -393,9 +392,7 @@
     [emailBt setTitle:_userModel.email forState:UIControlStateNormal];
     [blogBt setTitle:_userModel.blog forState:UIControlStateNormal];
     segmentControl.bt1Label.text=[NSString stringWithFormat:@"%d",_userModel.public_repos];
-    
     segmentControl.bt2Label.text=[NSString stringWithFormat:@"%d",_userModel.following];
-
     segmentControl.bt3Label.text=[NSString stringWithFormat:@"%d",_userModel.followers];
     
 }
@@ -412,11 +409,8 @@
             _userModel=model;
             [self refreshTitleView];
             [self loadDataFromApiWithIsFirst:YES];
-            
         } errorHandel:^(NSError* error){
-            
             [self loadDataFromApiWithIsFirst:YES];
-            
         }];
       
     };
@@ -459,7 +453,6 @@
         [tableView reloadData];
         
         if (!isFirst) {
-            
             [refreshFooter endRefreshing];
             
         }else
@@ -511,7 +504,6 @@
         RepositoryDetailViewController *viewController=[[RepositoryDetailViewController alloc] init];
         viewController.model=model;
         [self.navigationController pushViewController:viewController animated:YES];
-
     }else if (currentIndex==2){
         UserModel  *model = [(userDetailDataSource.DsOfPageListObject2.dsArray) objectAtIndex:indexPath.row];
         UserDetailViewController *detail=[[UserDetailViewController alloc] init];
