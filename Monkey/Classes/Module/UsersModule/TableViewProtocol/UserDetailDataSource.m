@@ -16,24 +16,16 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (currentIndex==1) {
         return self.DsOfPageListObject1.dsArray.count;
-        
     }else if (currentIndex==2){
-        
         return self.DsOfPageListObject2.dsArray.count;
-        
     }else if (currentIndex==3){
-        
         return self.DsOfPageListObject3.dsArray.count;
-   
     }
-    
     return 1;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (currentIndex==1) {
-  
         NSString *cellId=@"CellId";
         RepositoriesTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellId];
         if (cell==nil) {
@@ -49,18 +41,13 @@
         }else{
             cell.userLabel.text=[NSString stringWithFormat:@"owner %@",model.language];
         }
-       
         cell.descriptionLabel.text=[NSString stringWithFormat:@"%@",model.repositoryDescription];
-        
         [cell.homePageBt setTitle:model.homepage forState:UIControlStateNormal];
-
         cell.starLabel.text=[NSString stringWithFormat:@"Star:%d",model.stargazers_count];
         cell.forkLabel.text=[NSString stringWithFormat:@"Fork:%d",model.forks_count];
         return cell;
     }else if (currentIndex==2){
-        
         RankTableViewCell *cell;
-        
         NSString *cellId=@"CellId1";
         cell=[tableView dequeueReusableCellWithIdentifier:cellId];
         if (cell==nil) {
@@ -73,8 +60,8 @@
         cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
         [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url]];
         return cell;
-    }else if (currentIndex==3){ RankTableViewCell *cell;
-        
+    }else if (currentIndex==3){
+        RankTableViewCell *cell;
         NSString *cellId=@"CellId2";
         cell=[tableView dequeueReusableCellWithIdentifier:cellId];
         if (cell==nil) {
@@ -89,9 +76,6 @@
         return cell;
     }
     return nil;
-    
 }
-
-
 
 @end

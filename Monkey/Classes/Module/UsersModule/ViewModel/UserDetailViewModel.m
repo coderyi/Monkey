@@ -28,7 +28,11 @@
     return self;
 }
 
-- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst  currentIndex:(int)currentIndex firstTableData:(UserDetailDataSourceModelResponseBlock)firstCompletionBlock secondTableData:(UserDetailDataSourceModelResponseBlock)secondCompletionBlock thirdTableData:(UserDetailDataSourceModelResponseBlock)thirdCompletionBlock
+- (BOOL)loadDataFromApiWithIsFirst:(BOOL)isFirst
+                      currentIndex:(int)currentIndex
+                    firstTableData:(UserDetailDataSourceModelResponseBlock)firstCompletionBlock
+                   secondTableData:(UserDetailDataSourceModelResponseBlock)secondCompletionBlock
+                    thirdTableData:(UserDetailDataSourceModelResponseBlock)thirdCompletionBlock
 {
     
     if (currentIndex==1) {

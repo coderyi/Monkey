@@ -181,15 +181,16 @@
         refreshFooter1.beginRefreshingBlock=^(){
             STRONGSELF
             [strongSelf loadDataFromApiWithIsFirst:NO];
-        };}else if (type==2){
-            //    YiRefreshFooter  底部刷新按钮的使用
-            refreshFooter2=[[YiRefreshFooter alloc] init];
-            refreshFooter2.scrollView=tableView2;
-            [refreshFooter2 footer];
-            refreshFooter2.beginRefreshingBlock=^(){
-                STRONGSELF
-                [strongSelf loadDataFromApiWithIsFirst:NO];
-            };
+        };
+    }else if (type==2){
+        //    YiRefreshFooter  底部刷新按钮的使用
+        refreshFooter2=[[YiRefreshFooter alloc] init];
+        refreshFooter2.scrollView=tableView2;
+        [refreshFooter2 footer];
+        refreshFooter2.beginRefreshingBlock=^(){
+            STRONGSELF
+            [strongSelf loadDataFromApiWithIsFirst:NO];
+        };
     }
 }
 
@@ -198,12 +199,12 @@
   
     [searchViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex searchBarText:mySearchBar.text firstTableData:^(DataSourceModel* DsOfPageListObject){
         searchDataSourcel.DsOfPageListObject1=DsOfPageListObject;
-                        [tableView1 reloadData];
-                        if (!isFirst) {
-                            [refreshFooter1 endRefreshing];
-                        }else {
-                            [refreshHeader1 endRefreshing];
-                        }
+        [tableView1 reloadData];
+        if (!isFirst) {
+            [refreshFooter1 endRefreshing];
+        }else {
+            [refreshHeader1 endRefreshing];
+        }
     } secondTableData:^(DataSourceModel* DsOfPageListObject){
         searchDataSourcel.DsOfPageListObject2=DsOfPageListObject;
         [tableView2 reloadData];

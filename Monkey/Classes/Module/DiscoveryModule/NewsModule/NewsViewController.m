@@ -117,14 +117,13 @@
             [refreshHeader endRefreshing];
         }
         
-    }
-                                                    errorHandel:^(NSError* error){
-                                                        if (isFirst) {
-                                                            [refreshHeader endRefreshing];
-                                                        }else{
-                                                            [refreshFooter endRefreshing];
-                                                        }
-                                                    }];
+    } errorHandel:^(NSError* error){
+        if (isFirst) {
+            [refreshHeader endRefreshing];
+        }else{
+            [refreshFooter endRefreshing];
+        }
+    }];
     
     return YES;
     

@@ -11,24 +11,16 @@
 #import "RankTableViewCell.h"
 @implementation UserRankDataSource
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView.tag==11) {
-
         return self.DsOfPageListObject1.dsArray.count;
-        
     }else if (tableView.tag==12){
-
         return self.DsOfPageListObject2.dsArray.count;
     }else if (tableView.tag==13){
-
         return self.DsOfPageListObject3.dsArray.count;
     }
-    
     return self.DsOfPageListObject1.dsArray.count;
-    
 }
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     RankTableViewCell *cell;
@@ -45,9 +37,7 @@
         cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
         [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url]];
         return cell;
-        
     }else if (tableView.tag==12){
-        
         NSString *cellId=@"CellId2";
         cell=[tableView dequeueReusableCellWithIdentifier:cellId];
         if (cell==nil) {
@@ -60,9 +50,7 @@
         cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
         [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url]];
         return cell;
-        
     }else if (tableView.tag==13){
-        
         NSString *cellId=@"CellId3";
         cell=[tableView dequeueReusableCellWithIdentifier:cellId];
         if (cell==nil) {
@@ -75,10 +63,7 @@
         cell.detailLabel.text=[NSString stringWithFormat:@"id:%d",model.userId];
         [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar_url]];
         return cell;
-        
     }
     return cell;
-    
-    
 }
 @end

@@ -58,10 +58,9 @@
             [self.DsOfPageListObject1.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject1.page=page;
             firstCompletionBlock(self.DsOfPageListObject1);
-        }
-                                        errorHandel:^(NSError* error){
-                                            firstCompletionBlock(self.DsOfPageListObject1);
-                                        }];
+        } errorHandel:^(NSError* error){
+            firstCompletionBlock(self.DsOfPageListObject1);
+        }];
         return YES;
         
     }else if (currentIndex==2) {
@@ -84,10 +83,9 @@
             [self.DsOfPageListObject2.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject2.page=page;
             secondCompletionBlock(self.DsOfPageListObject2);
-        }
-                                        errorHandel:^(NSError* error){
-                                            secondCompletionBlock(self.DsOfPageListObject2);
-                                        }];
+        } errorHandel:^(NSError* error){
+            secondCompletionBlock(self.DsOfPageListObject2);
+        }];
         return YES;
     }else if (currentIndex==3){
         NSInteger page = 0;
@@ -109,10 +107,9 @@
             [self.DsOfPageListObject3.dsArray addObjectsFromArray:modelArray];
             self.DsOfPageListObject3.page=page;
             thirdCompletionBlock(self.DsOfPageListObject3);
-        }
-                                        errorHandel:^(NSError* error){
-                                            thirdCompletionBlock(self.DsOfPageListObject3);
-                                        }];
+        } errorHandel:^(NSError* error){
+            thirdCompletionBlock(self.DsOfPageListObject3);
+        }];
         return YES;
     }
     return YES;

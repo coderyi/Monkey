@@ -80,11 +80,10 @@
             firstCompletionBlock(self.DsOfPageListObject1);
 
             
-        }
-                                               errorHandel:^(NSError* error){
-                                                   firstCompletionBlock(self.DsOfPageListObject1);
+        } errorHandel:^(NSError* error){
+            firstCompletionBlock(self.DsOfPageListObject1);
                                                    
-                                               }];
+        }];
         
         return YES;
         
@@ -127,11 +126,10 @@
             self.DsOfPageListObject2.page=page;
             secondCompletionBlock(self.DsOfPageListObject2);
             
-        }
-                                               errorHandel:^(NSError* error){
-                                                   secondCompletionBlock(self.DsOfPageListObject2);
+        } errorHandel:^(NSError* error){
+            secondCompletionBlock(self.DsOfPageListObject2);
 
-                                               }];
+        }];
      
         return YES;
     }else if (currentIndex==3){
@@ -164,11 +162,10 @@
             thirdCompletionBlock(self.DsOfPageListObject3);
 
             
-        }
-                                               errorHandel:^(NSError* error){
-                                                   thirdCompletionBlock(self.DsOfPageListObject3);
+        } errorHandel:^(NSError* error){
+            thirdCompletionBlock(self.DsOfPageListObject3);
    
-                                               }];
+        }];
 
         return YES;
         
