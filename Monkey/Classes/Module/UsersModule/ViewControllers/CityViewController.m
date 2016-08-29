@@ -77,21 +77,21 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
    
-        return citys.count;
+    return citys.count;
 
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        UITableViewCell *cell;
+    UITableViewCell *cell;
     
-        NSString *cellId=@"CellId1";
-        cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-        if (cell==nil) {
-            cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-        }
-        cell.textLabel.text=(citys)[indexPath.row];
-        return cell;
+    NSString *cellId=@"CellId1";
+    cell=[tableView dequeueReusableCellWithIdentifier:cellId];
+    if (cell==nil) {
+        cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+    }
+    cell.textLabel.text=(citys)[indexPath.row];
+    return cell;
     
 }
 

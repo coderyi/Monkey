@@ -258,7 +258,7 @@
               [self hideYiProgressHUD];
             }
         } errorHandel:^(NSError *error){
-          [self hideYiProgressHUD];
+            [self hideYiProgressHUD];
         }];
     }
 }
@@ -383,15 +383,15 @@
     
     [repositoryDetailViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex firstTableData:^(DataSourceModel* DsOfPageListObject){
         repositoryDetailDataSource.DsOfPageListObject1=DsOfPageListObject;
+        [tableView reloadData];
         
-                    [tableView reloadData];
+        if (!isFirst) {
+            [refreshFooter endRefreshing];
+        }else
+        {
+            [refreshHeader endRefreshing];
+        }
         
-                    if (!isFirst) {
-                        [refreshFooter endRefreshing];
-                    }else
-                    {
-                        [refreshHeader endRefreshing];
-                    }
         
     } secondTableData:^(DataSourceModel* DsOfPageListObject){
         repositoryDetailDataSource.DsOfPageListObject2=DsOfPageListObject;

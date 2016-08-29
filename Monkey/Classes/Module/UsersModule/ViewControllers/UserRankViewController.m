@@ -393,24 +393,24 @@
             [self loadDataFromApiWithIsFirst:NO];
         };
     }else if (type==2){
-            @strongify(self);
-            //    YiRefreshFooter  底部刷新按钮的使用
-            refreshFooter2=[[YiRefreshFooter alloc] init];
-            refreshFooter2.scrollView=tableView2;
-            [refreshFooter2 footer];
-            refreshFooter2.beginRefreshingBlock=^(){
-                [self loadDataFromApiWithIsFirst:NO];
-            };
-            
+        @strongify(self);
+        //    YiRefreshFooter  底部刷新按钮的使用
+        refreshFooter2=[[YiRefreshFooter alloc] init];
+        refreshFooter2.scrollView=tableView2;
+        [refreshFooter2 footer];
+        refreshFooter2.beginRefreshingBlock=^(){
+            [self loadDataFromApiWithIsFirst:NO];
+        };
+        
     }else if (type==3){
-            @strongify(self);
-            //    YiRefreshFooter  底部刷新按钮的使用
-            refreshFooter3=[[YiRefreshFooter alloc] init];
-            refreshFooter3.scrollView=tableView3;
-            [refreshFooter3 footer];
-            refreshFooter3.beginRefreshingBlock=^(){
-                [self loadDataFromApiWithIsFirst:NO];
-            };
+        @strongify(self);
+        //    YiRefreshFooter  底部刷新按钮的使用
+        refreshFooter3=[[YiRefreshFooter alloc] init];
+        refreshFooter3.scrollView=tableView3;
+        [refreshFooter3 footer];
+        refreshFooter3.beginRefreshingBlock=^(){
+            [self loadDataFromApiWithIsFirst:NO];
+        };
     }
 }
 
@@ -429,40 +429,40 @@
     
     [userRankViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex firstTableData:^(DataSourceModel* DsOfPageListObject){
         userRankDataSource.DsOfPageListObject1=DsOfPageListObject;
+        [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)DsOfPageListObject.totalCount] forState:UIControlStateNormal];
+        [tableView1 reloadData];
         
-                    [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)DsOfPageListObject.totalCount] forState:UIControlStateNormal];
-                    [tableView1 reloadData];
+        if (!isFirst) {
+            [refreshFooter1 endRefreshing];
+        }else
+        {
+            [refreshHeader1 endRefreshing];
+        }
         
-                    if (!isFirst) {
-                        [refreshFooter1 endRefreshing];
-                    }else
-                    {
-                        [refreshHeader1 endRefreshing];
-                    }
     } secondTableData:^(DataSourceModel* DsOfPageListObject){
         userRankDataSource.DsOfPageListObject2=DsOfPageListObject;
-
-                    [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)DsOfPageListObject.totalCount] forState:UIControlStateNormal];
-                    [tableView2 reloadData];
+        [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)DsOfPageListObject.totalCount] forState:UIControlStateNormal];
+        [tableView2 reloadData];
         
-                    if (!isFirst) {
-                        [refreshFooter2 endRefreshing];
-                    }else
-                    {
-                        [refreshHeader2 endRefreshing];
-                    }
+        if (!isFirst) {
+            [refreshFooter2 endRefreshing];
+        }else
+        {
+            [refreshHeader2 endRefreshing];
+        }
+        
     } thirdTableData:^(DataSourceModel* DsOfPageListObject){
         userRankDataSource.DsOfPageListObject3=DsOfPageListObject;
-
-                    [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)DsOfPageListObject.totalCount] forState:UIControlStateNormal];
-                    [tableView3 reloadData];
-                    if (!isFirst) {
-                        [refreshFooter3 endRefreshing];
+        [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)DsOfPageListObject.totalCount] forState:UIControlStateNormal];
+        [tableView3 reloadData];
+        if (!isFirst) {
+            [refreshFooter3 endRefreshing];
+            
+        }else
+        {
+            [refreshHeader3 endRefreshing];
+        }
         
-                    }else
-                    {
-                        [refreshHeader3 endRefreshing];
-                    }
     }];
 }
 
@@ -489,22 +489,22 @@
         [segmentControl swipeAction:(100+currentPage+1)];
     }else if (segmentControl.buttonCount==3){
             
+        CGFloat pagewidth = scrollView.frame.size.width;
+        int currentPage = floor((scrollView.contentOffset.x - pagewidth/ (3)) / pagewidth) + 1;
+        
+        if (currentPage==0){
             
-            CGFloat pagewidth = scrollView.frame.size.width;
-            int currentPage = floor((scrollView.contentOffset.x - pagewidth/ (3)) / pagewidth) + 1;
-            
-            if (currentPage==0){
-                
-                [scrollView scrollRectToVisible:CGRectMake(0,0,ScreenWidth,bgViewHeight) animated:NO];
-                [scrollView setContentOffset:CGPointMake(0,0)];
-            }else if (currentPage>=(2)){
-                currentPage=2;
-                [scrollView scrollRectToVisible:CGRectMake(ScreenWidth * 2,0,ScreenWidth,bgViewHeight) animated:NO];
-                [scrollView setContentOffset:CGPointMake(ScreenWidth* 2,0)];
-            }
-            currentIndex=currentPage+1;
-            [segmentControl swipeAction:(100+currentPage+1)];
+            [scrollView scrollRectToVisible:CGRectMake(0,0,ScreenWidth,bgViewHeight) animated:NO];
+            [scrollView setContentOffset:CGPointMake(0,0)];
+        }else if (currentPage>=(2)){
+            currentPage=2;
+            [scrollView scrollRectToVisible:CGRectMake(ScreenWidth * 2,0,ScreenWidth,bgViewHeight) animated:NO];
+            [scrollView setContentOffset:CGPointMake(ScreenWidth* 2,0)];
         }
+        currentIndex=currentPage+1;
+        [segmentControl swipeAction:(100+currentPage+1)];
+        
+    }
 }
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
