@@ -495,7 +495,6 @@
         }
         currentIndex=currentPage+1;
         [segmentControl swipeAction:(100+currentPage+1)];
-        
     }
 }
 

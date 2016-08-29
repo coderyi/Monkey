@@ -9,9 +9,9 @@
 
 #import "UserDetailViewModel.h"
 @interface UserDetailViewModel()
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject3;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject1;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject2;
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject3;
 @end
 
 @implementation UserDetailViewModel

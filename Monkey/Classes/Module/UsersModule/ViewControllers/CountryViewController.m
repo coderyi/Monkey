@@ -58,9 +58,7 @@
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
     return countrys.count;
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -74,7 +72,6 @@
     }
     cell.textLabel.text=(countrys)[indexPath.row];
     return cell;
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -85,7 +82,6 @@
 
     }else{
         [[NSUserDefaults standardUserDefaults] setObject:@"China" forKey:@"country"];
-
     }
 
     NSArray *cityArray;

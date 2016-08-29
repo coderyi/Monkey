@@ -87,7 +87,6 @@
     }
     cell.textLabel.text=(citys)[indexPath.row];
     return cell;
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -97,7 +96,6 @@
     [[NSUserDefaults standardUserDefaults] setObject:pinyinCitys[indexPath.row] forKey:@"pinyinCity"];
     [[NSUserDefaults standardUserDefaults] setObject:citys[indexPath.row] forKey:@"city"];
     [self.navigationController popToRootViewControllerAnimated:YES];
-    
 }
 
 @end

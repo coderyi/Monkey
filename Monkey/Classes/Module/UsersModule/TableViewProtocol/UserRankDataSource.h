@@ -10,8 +10,8 @@
 
 @interface UserRankDataSource : NSObject<UITableViewDataSource>
 
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject1;//city datasource
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject2;//country datasource
-@property(nonatomic,strong)DataSourceModel *DsOfPageListObject3;//world datasource
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject1;//city datasource
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject2;//country datasource
+@property(nonatomic,strong) DataSourceModel *DsOfPageListObject3;//world datasource
 
 @end
