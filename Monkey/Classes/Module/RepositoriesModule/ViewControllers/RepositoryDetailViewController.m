@@ -174,29 +174,38 @@
     tableView.tableHeaderView=titleView;
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
-
+    __weak typeof(self) weakSelf = self;
     segmentControl.ButtonActionBlock=^(int buttonTag){
-        currentIndex=buttonTag-100;
-        repositoryDetailDataSource.currentIndex=buttonTag-100;
-        if (currentIndex==1) {
-            if (self.DsOfPageListObject1.dsArray.count<1) {
-                [refreshHeader beginRefreshing];
+        __strong typeof(self) strongSelf = weakSelf;
+        strongSelf->currentIndex=buttonTag-100;
+        strongSelf->repositoryDetailDataSource.currentIndex=buttonTag-100;
+        if (strongSelf->currentIndex==1) {
+            if (strongSelf.DsOfPageListObject1.dsArray.count<1) {
+                [strongSelf->refreshHeader beginRefreshing];
             }
-        }else if (currentIndex==2){
-            if (self.DsOfPageListObject2.dsArray.count<1) {
-                [refreshHeader beginRefreshing];
+        }else if (strongSelf->currentIndex==2){
+            if (strongSelf.DsOfPageListObject2.dsArray.count<1) {
+                [strongSelf->refreshHeader beginRefreshing];
             }
-        }else if (currentIndex==3){
-            if (self.DsOfPageListObject3.dsArray.count<1) {
-                [refreshHeader beginRefreshing];}
+        }else if (strongSelf->currentIndex==3){
+            if (strongSelf.DsOfPageListObject3.dsArray.count<1) {
+                [strongSelf->refreshHeader beginRefreshing];
+            }
         }
-        [tableView reloadData];
+        [strongSelf->tableView reloadData];
     };
 #pragma clang diagnostic pop
 
     [self refreshTitleView];
     [self checkStarStatusAction];
 
+}
+
+- (void)dealloc
+{
+#if defined(DEBUG)||defined(_DEBUG)
+    NSLog(@"%s:%d", __FUNCTION__, __LINE__);
+#endif
 }
 
 - (void)didReceiveMemoryWarning
@@ -344,13 +353,12 @@
     WEAKSELF
 
     refreshHeader.beginRefreshingBlock=^(){
-        [ApplicationDelegate.apiEngine repositoryDetailWithUserName:_model.user.login repositoryName:_model.name completoinHandler:^(RepositoryModel *model){
-            _model=model;
-            STRONGSELF
+        STRONGSELF
+        [ApplicationDelegate.apiEngine repositoryDetailWithUserName:strongSelf.model.user.login repositoryName:strongSelf.model.name completoinHandler:^(RepositoryModel *model){
+            strongSelf.model=model;
             [strongSelf refreshTitleView];
             [strongSelf loadDataFromApiWithIsFirst:YES];
         } errorHandel:^(NSError* error){
-            STRONGSELF
             [strongSelf loadDataFromApiWithIsFirst:YES];
         }];
     };
@@ -375,38 +383,41 @@
 
 - (void)loadDataFromApiWithIsFirst:(BOOL)isFirst
 {
-    
+    __weak typeof(self) weakSelf = self;
     [repositoryDetailViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex firstTableData:^(DataSourceModel* DsOfPageListObject){
-        repositoryDetailDataSource.DsOfPageListObject1=DsOfPageListObject;
-        [tableView reloadData];
+        __strong typeof(self) strongSelf = weakSelf;
+        strongSelf->repositoryDetailDataSource.DsOfPageListObject1=DsOfPageListObject;
+        [strongSelf->tableView reloadData];
         
         if (!isFirst) {
-            [refreshFooter endRefreshing];
+            [strongSelf->refreshFooter endRefreshing];
         }else
         {
-            [refreshHeader endRefreshing];
+            [strongSelf->refreshHeader endRefreshing];
         }
         
     } secondTableData:^(DataSourceModel* DsOfPageListObject){
-        repositoryDetailDataSource.DsOfPageListObject2=DsOfPageListObject;
-        [tableView reloadData];
+        __strong typeof(self) strongSelf = weakSelf;
+        strongSelf->repositoryDetailDataSource.DsOfPageListObject2=DsOfPageListObject;
+        [strongSelf->tableView reloadData];
         
         if (!isFirst) {
-            [refreshFooter endRefreshing];
+            [strongSelf->refreshFooter endRefreshing];
         }else
         {
-            [refreshHeader endRefreshing];
+            [strongSelf->refreshHeader endRefreshing];
         }
 
     } thirdTableData:^(DataSourceModel* DsOfPageListObject){
-        repositoryDetailDataSource.DsOfPageListObject3=DsOfPageListObject;
-        [tableView reloadData];
+        __strong typeof(self) strongSelf = weakSelf;
+        strongSelf->repositoryDetailDataSource.DsOfPageListObject3=DsOfPageListObject;
+        [strongSelf->tableView reloadData];
         
         if (!isFirst) {
-            [refreshFooter endRefreshing];
+            [strongSelf->refreshFooter endRefreshing];
         }else
         {
-            [refreshHeader endRefreshing];
+            [strongSelf->refreshHeader endRefreshing];
         }
     }];
   

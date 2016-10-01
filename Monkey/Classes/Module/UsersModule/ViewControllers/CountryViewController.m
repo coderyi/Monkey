@@ -49,6 +49,13 @@
     countrys=@[@"USA",@"UK",@"Germany",@"China",@"Canada",@"India",@"France",@"Australia",@"Other"];
 }
 
+- (void)dealloc
+{
+#if defined(DEBUG)||defined(_DEBUG)
+    NSLog(@"%s:%d", __FUNCTION__, __LINE__);
+#endif
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -83,7 +90,7 @@
     }else{
         [[NSUserDefaults standardUserDefaults] setObject:@"China" forKey:@"country"];
     }
-
+    [[NSUserDefaults standardUserDefaults] synchronize];
     NSArray *cityArray;
     if (indexPath.row==0) {
         //美国

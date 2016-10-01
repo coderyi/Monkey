@@ -81,6 +81,7 @@
     NSString *languageAppear=[[NSUserDefaults standardUserDefaults] objectForKey:@"trendingLanguageAppear"];
     if ([languageAppear isEqualToString:@"2"]) {
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"trendingLanguageAppear"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language2"];
         if (language==nil || language.length<1) {
             language=NSLocalizedString(@"all languages", @"");
@@ -155,6 +156,13 @@
    
 }
 
+- (void)dealloc
+{
+#if defined(DEBUG)||defined(_DEBUG)
+    NSLog(@"%s:%d", __FUNCTION__, __LINE__);
+#endif
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -170,6 +178,48 @@
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
+- (void)segmentAction:(int)buttonTag
+{
+    currentIndex=buttonTag-100;
+    [scrollView scrollRectToVisible:CGRectMake(ScreenWidth * (currentIndex-1),0,ScreenWidth,bgViewHeight) animated:NO];
+    [scrollView setContentOffset:CGPointMake(ScreenWidth* (currentIndex-1),0)];
+    if (currentIndex==1) {
+        if (![titleText.text isEqualToString:tableView1Language]) {
+            [refreshHeader1 beginRefreshing];
+        }
+    }else if (currentIndex==2){
+        if (tableView2==nil) {
+            tableView2=[[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
+            [scrollView addSubview:tableView2];
+            tableView2.showsVerticalScrollIndicator = NO;
+            tableView2.tag=12;
+            tableView2.dataSource=trendingDataSource;
+            tableView2.delegate=self;
+            tableView2.separatorStyle=UITableViewCellSeparatorStyleNone;
+            tableView2.rowHeight=RepositoriesTableViewCellheight;
+            [self addHeader:2];
+        }
+        if (![titleText.text isEqualToString:tableView2Language]) {
+            [refreshHeader2 beginRefreshing];
+        }
+        
+    }else if (currentIndex==3){
+        if (tableView3==nil) {
+            tableView3=[[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth*2, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
+            [scrollView addSubview:tableView3];
+            tableView3.showsVerticalScrollIndicator = NO;
+            tableView3.tag=13;
+            tableView3.dataSource=trendingDataSource;
+            tableView3.delegate=self;
+            tableView3.separatorStyle=UITableViewCellSeparatorStyleNone;
+            tableView3.rowHeight=RepositoriesTableViewCellheight;
+            [self addHeader:3];
+        }
+        if (![titleText.text isEqualToString:tableView3Language]) {
+            [refreshHeader3 beginRefreshing];
+        }
+    }
+}
 #pragma mark - Private
 
 - (void)initScroll
@@ -206,47 +256,10 @@
     [self addHeader:1];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
-
+    @weakify(self)
     segmentControl.ButtonActionBlock=^(int buttonTag){
-        currentIndex=buttonTag-100;
-        [scrollView scrollRectToVisible:CGRectMake(ScreenWidth * (currentIndex-1),0,ScreenWidth,bgViewHeight) animated:NO];
-        [scrollView setContentOffset:CGPointMake(ScreenWidth* (currentIndex-1),0)];
-        if (currentIndex==1) {
-            if (![titleText.text isEqualToString:tableView1Language]) {
-                [refreshHeader1 beginRefreshing];
-            }
-        }else if (currentIndex==2){
-            if (tableView2==nil) {
-                tableView2=[[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
-                [scrollView addSubview:tableView2];
-                tableView2.showsVerticalScrollIndicator = NO;
-                tableView2.tag=12;
-                tableView2.dataSource=trendingDataSource;
-                tableView2.delegate=self;
-                tableView2.separatorStyle=UITableViewCellSeparatorStyleNone;
-                tableView2.rowHeight=RepositoriesTableViewCellheight;
-                [self addHeader:2];
-            }
-            if (![titleText.text isEqualToString:tableView2Language]) {
-                [refreshHeader2 beginRefreshing];
-            }
-            
-        }else if (currentIndex==3){
-            if (tableView3==nil) {
-                tableView3=[[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth*2, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
-                [scrollView addSubview:tableView3];
-                tableView3.showsVerticalScrollIndicator = NO;
-                tableView3.tag=13;
-                tableView3.dataSource=trendingDataSource;
-                tableView3.delegate=self;
-                tableView3.separatorStyle=UITableViewCellSeparatorStyleNone;
-                tableView3.rowHeight=RepositoriesTableViewCellheight;
-                [self addHeader:3];
-            }
-            if (![titleText.text isEqualToString:tableView3Language]) {
-                [refreshHeader3 beginRefreshing];
-            }
-        }
+        @strongify(self)
+        [self segmentAction:buttonTag];
     };
 #pragma clang diagnostic pop
 
@@ -264,7 +277,8 @@
         [refreshHeader1 header];
         __weak typeof(self) weakSelf = self;
         refreshHeader1.beginRefreshingBlock=^(){
-            [weakSelf loadDataFromApiWithIsFirst:YES];
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf loadDataFromApiWithIsFirst:YES];
             
         };
         
@@ -278,7 +292,8 @@
         [refreshHeader2 header];
         __weak typeof(self) weakSelf = self;
         refreshHeader2.beginRefreshingBlock=^(){
-            [weakSelf loadDataFromApiWithIsFirst:YES];
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf loadDataFromApiWithIsFirst:YES];
             
         };
         
@@ -293,7 +308,8 @@
         [refreshHeader3 header];
         __weak typeof(self) weakSelf = self;
         refreshHeader3.beginRefreshingBlock=^(){
-            [weakSelf loadDataFromApiWithIsFirst:YES];
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf loadDataFromApiWithIsFirst:YES];
             
         };
         
@@ -313,32 +329,36 @@
     }else if (currentIndex==3) {
         tableView3Language=language;
     }
+    __weak typeof(self) weakSelf = self;
     [trendingViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex firstTableData:^(DataSourceModel* DsOfPageListObject){
-        trendingDataSource.DsOfPageListObject1=DsOfPageListObject;
-        [tableView1 reloadData];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf->trendingDataSource.DsOfPageListObject1=DsOfPageListObject;
+        [strongSelf->tableView1 reloadData];
         if (!isFirst) {
-            [refreshFooter1 endRefreshing];
+            [strongSelf->refreshFooter1 endRefreshing];
         }else
         {
-            [refreshHeader1 endRefreshing];
+            [strongSelf->refreshHeader1 endRefreshing];
         }
     } secondTableData:^(DataSourceModel* DsOfPageListObject){
-        trendingDataSource.DsOfPageListObject2=DsOfPageListObject;
-        [tableView2 reloadData];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf->trendingDataSource.DsOfPageListObject2=DsOfPageListObject;
+        [strongSelf->tableView2 reloadData];
         if (!isFirst) {
-            [refreshFooter2 endRefreshing];
+            [strongSelf->refreshFooter2 endRefreshing];
         }else
         {
-            [refreshHeader2 endRefreshing];
+            [strongSelf->refreshHeader2 endRefreshing];
         }
     } thirdTableData:^(DataSourceModel* DsOfPageListObject){
-        trendingDataSource.DsOfPageListObject3=DsOfPageListObject;
-        [tableView3 reloadData];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf->trendingDataSource.DsOfPageListObject3=DsOfPageListObject;
+        [strongSelf->tableView3 reloadData];
         if (!isFirst) {
-            [refreshFooter3 endRefreshing];
+            [strongSelf->refreshFooter3 endRefreshing];
         }else
         {
-            [refreshHeader3 endRefreshing];
+            [strongSelf->refreshHeader3 endRefreshing];
         }
     }];
 

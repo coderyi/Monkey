@@ -47,6 +47,7 @@
     if ([languageAppear isEqualToString:@"2"]) {
         
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"languageAppear1"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language1"];
         if (language==nil || language.length<1) {
             language=@"JavaScript";

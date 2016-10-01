@@ -95,6 +95,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"countryAppear"];
     [[NSUserDefaults standardUserDefaults] setObject:pinyinCitys[indexPath.row] forKey:@"pinyinCity"];
     [[NSUserDefaults standardUserDefaults] setObject:citys[indexPath.row] forKey:@"city"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

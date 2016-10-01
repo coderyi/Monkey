@@ -92,6 +92,7 @@
             
             [[NSUserDefaults standardUserDefaults] setObject:currentLogin forKey:@"currentLogin"];
             [[NSUserDefaults standardUserDefaults] setObject:model.avatar_url forKey:@"currentAvatarUrl"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             [tableView reloadData];
         }
         

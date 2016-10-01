@@ -55,7 +55,9 @@
 
 - (void)backBtAction
 {
-    _callback(@"error");
+    if (_callback) {
+        _callback(@"error");
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -107,7 +109,10 @@
             if ([[response substringWithRange:NSMakeRange(i, 13)] isEqualToString:@"access_token="]) {
                 NSString *token=[response substringWithRange:NSMakeRange(i+13, 40)];
                 [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"access_token"];
-                _callback(@"success");
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                if (_callback) {
+                    _callback(@"success");
+                }
                 [self dismissViewControllerAnimated:YES completion:nil];
                 return ;
             }

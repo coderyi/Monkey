@@ -104,6 +104,7 @@
             currentAvatarUrl=model.avatar_url;
             [[NSUserDefaults standardUserDefaults] setObject:currentLogin forKey:@"currentLogin"];
             [[NSUserDefaults standardUserDefaults] setObject:currentAvatarUrl forKey:@"currentAvatarUrl"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             [tableView reloadData];
         }
     } errorHandel:^(NSError* error){
@@ -266,6 +267,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"currentLogin"];
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"currentAvatarUrl"];
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"access_token"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [tableView reloadData];
     }
 }

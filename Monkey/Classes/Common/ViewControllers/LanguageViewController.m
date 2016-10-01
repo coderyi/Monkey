@@ -91,14 +91,17 @@
     if (_languageEntranceType==RepLanguageEntranceType) {
         [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"languageAppear1"];
         [[NSUserDefaults standardUserDefaults] setObject:languages[indexPath.row] forKey:@"language1"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [self.navigationController popViewControllerAnimated:YES];
     }else if (_languageEntranceType==UserLanguageEntranceType) {
         [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"languageAppear"];
         [[NSUserDefaults standardUserDefaults] setObject:languages[indexPath.row] forKey:@"language"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [self.navigationController popViewControllerAnimated:YES];
     }else if (_languageEntranceType==TrendingLanguageEntranceType) {
         [[NSUserDefaults standardUserDefaults] setObject:@"2" forKey:@"trendingLanguageAppear"];
         [[NSUserDefaults standardUserDefaults] setObject:languages[indexPath.row] forKey:@"language2"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

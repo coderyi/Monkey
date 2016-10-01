@@ -76,6 +76,7 @@
         currentIndex=1;
         [segmentControl swipeAction:101];
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"cityAppear"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [refreshHeader1 beginRefreshing];
         NSString *city=[[NSUserDefaults standardUserDefaults] objectForKey:@"city"];
         if (city==nil || city.length<1) {
@@ -92,6 +93,7 @@
     if ([languageAppear isEqualToString:@"2"]) {
        
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"languageAppear"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         language=[[NSUserDefaults standardUserDefaults] objectForKey:@"language"];
         if (language==nil || language.length<1) {
             language=NSLocalizedString(@"all languages", @"");
@@ -211,6 +213,72 @@
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
+- (void)segmentAction:(int)buttonTag
+{
+    
+    currentIndex=buttonTag-100;
+    [scrollView scrollRectToVisible:CGRectMake(ScreenWidth * (currentIndex-1),0,ScreenWidth,bgViewHeight) animated:NO];
+    [scrollView setContentOffset:CGPointMake(ScreenWidth* (currentIndex-1),0)];
+    
+    if (currentIndex==1) {
+        if (![titleText.text isEqualToString:tableView1Language]) {
+            [refreshHeader1 beginRefreshing];
+        }
+        if (userRankDataSource.DsOfPageListObject1.totalCount>0) {
+            [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)userRankDataSource.DsOfPageListObject1.totalCount] forState:UIControlStateNormal];
+        }
+    }else if (currentIndex==2){
+        if (tableView2==nil) {
+            tableView2=[[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
+            [scrollView addSubview:tableView2];
+            tableView2.showsVerticalScrollIndicator = NO;
+            tableView2.tag=12;
+            tableView2.dataSource=userRankDataSource;
+            tableView2.delegate=self;
+            tableView2.separatorStyle=UITableViewCellSeparatorStyleNone;
+            tableView2.rowHeight=RankTableViewCellHeight;
+            [self addHeader:2];
+            [self addFooter:2];
+        }
+        if (![titleText.text isEqualToString:tableView2Language]) {
+            [refreshHeader2 beginRefreshing];
+        }
+        
+        if (userRankDataSource.DsOfPageListObject2.totalCount>0) {
+            [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)userRankDataSource.DsOfPageListObject2.totalCount] forState:UIControlStateNormal];
+        }
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"countryAppear"] isEqualToString:@"2"]) {
+            [refreshHeader2 beginRefreshing];
+            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"countryAppear"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        
+    }else if (currentIndex==3){
+        if (tableView3==nil) {
+            tableView3=[[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth*2, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
+            [scrollView addSubview:tableView3];
+            tableView3.showsVerticalScrollIndicator = NO;
+            
+            tableView3.tag=13;
+            tableView3.dataSource=userRankDataSource;
+            tableView3.delegate=self;
+            tableView3.separatorStyle=UITableViewCellSeparatorStyleNone;
+            tableView3.rowHeight=RankTableViewCellHeight;
+            [self addHeader:3];
+            [self addFooter:3];
+            
+        }
+        if (![titleText.text isEqualToString:tableView3Language]) {
+            [refreshHeader3 beginRefreshing];
+        }
+        if (userRankDataSource.DsOfPageListObject3.totalCount>0) {
+            [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)(userRankDataSource.DsOfPageListObject3.totalCount)] forState:UIControlStateNormal];
+        }
+    }else if (currentIndex==4){
+        
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -258,70 +326,10 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
 
-    __weak UIScrollView * weakScrollView=scrollView;
+    __weak typeof(self) weakSelf = self;
     segmentControl.ButtonActionBlock=^(int buttonTag){
-        __strong UIScrollView * strongScrollView=weakScrollView;
-
-        currentIndex=buttonTag-100;
-        [strongScrollView scrollRectToVisible:CGRectMake(ScreenWidth * (currentIndex-1),0,ScreenWidth,bgViewHeight) animated:NO];
-        [strongScrollView setContentOffset:CGPointMake(ScreenWidth* (currentIndex-1),0)];
-        
-        if (currentIndex==1) {
-            if (![titleText.text isEqualToString:tableView1Language]) {
-                [refreshHeader1 beginRefreshing];
-            }
-            if (userRankDataSource.DsOfPageListObject1.totalCount>0) {
-              [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)userRankDataSource.DsOfPageListObject1.totalCount] forState:UIControlStateNormal];
-            }
-        }else if (currentIndex==2){
-            if (tableView2==nil) {
-                tableView2=[[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
-                [scrollView addSubview:tableView2];
-                tableView2.showsVerticalScrollIndicator = NO;
-                tableView2.tag=12;
-                tableView2.dataSource=userRankDataSource;
-                tableView2.delegate=self;
-                tableView2.separatorStyle=UITableViewCellSeparatorStyleNone;
-                tableView2.rowHeight=RankTableViewCellHeight;
-                [self addHeader:2];
-                [self addFooter:2];
-            }
-            if (![titleText.text isEqualToString:tableView2Language]) {
-                [refreshHeader2 beginRefreshing];
-            }
-            
-            if (userRankDataSource.DsOfPageListObject2.totalCount>0) {
-                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)userRankDataSource.DsOfPageListObject2.totalCount] forState:UIControlStateNormal];
-            }
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"countryAppear"] isEqualToString:@"2"]) {
-                [refreshHeader2 beginRefreshing];
-                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"countryAppear"];
-            }
-          
-        }else if (currentIndex==3){
-            if (tableView3==nil) {
-                tableView3=[[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth*2, 0, ScreenWidth, bgViewHeight) style:UITableViewStylePlain];
-                [scrollView addSubview:tableView3];
-                tableView3.showsVerticalScrollIndicator = NO;
-                
-                tableView3.tag=13;
-                tableView3.dataSource=userRankDataSource;
-                tableView3.delegate=self;
-                tableView3.separatorStyle=UITableViewCellSeparatorStyleNone;
-                tableView3.rowHeight=RankTableViewCellHeight;
-                [self addHeader:3];
-                [self addFooter:3];
-
-            }
-            if (![titleText.text isEqualToString:tableView3Language]) {
-                [refreshHeader3 beginRefreshing];
-            }
-            if (userRankDataSource.DsOfPageListObject3.totalCount>0) {
-                [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)(userRankDataSource.DsOfPageListObject3.totalCount)] forState:UIControlStateNormal];
-            }
-        }else if (currentIndex==4){
-            
-        }
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf segmentAction:buttonTag];
     };
 #pragma clang diagnostic pop
 
@@ -382,31 +390,31 @@
 {
     @weakify(self);
     if (type==1) {
-        @strongify(self);
         //    YiRefreshFooter  底部刷新按钮的使用
         refreshFooter1=[[YiRefreshFooter alloc] init];
         refreshFooter1.scrollView=tableView1;
         [refreshFooter1 footer];
         refreshFooter1.beginRefreshingBlock=^(){
+            @strongify(self);
             [self loadDataFromApiWithIsFirst:NO];
         };
     }else if (type==2){
-        @strongify(self);
         //    YiRefreshFooter  底部刷新按钮的使用
         refreshFooter2=[[YiRefreshFooter alloc] init];
         refreshFooter2.scrollView=tableView2;
         [refreshFooter2 footer];
         refreshFooter2.beginRefreshingBlock=^(){
+            @strongify(self);
             [self loadDataFromApiWithIsFirst:NO];
         };
         
     }else if (type==3){
-        @strongify(self);
         //    YiRefreshFooter  底部刷新按钮的使用
         refreshFooter3=[[YiRefreshFooter alloc] init];
         refreshFooter3.scrollView=tableView3;
         [refreshFooter3 footer];
         refreshFooter3.beginRefreshingBlock=^(){
+            @strongify(self);
             [self loadDataFromApiWithIsFirst:NO];
         };
     }
@@ -421,40 +429,43 @@
     }else if (currentIndex==3) {
         tableView3Language=language;
     }
-    
+    __weak typeof(self) weakSelf = self;
     [userRankViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex firstTableData:^(DataSourceModel* DsOfPageListObject){
-        userRankDataSource.DsOfPageListObject1=DsOfPageListObject;
-        [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)DsOfPageListObject.totalCount] forState:UIControlStateNormal];
-        [tableView1 reloadData];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf->userRankDataSource.DsOfPageListObject1=DsOfPageListObject;
+        [strongSelf->segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)DsOfPageListObject.totalCount] forState:UIControlStateNormal];
+        [strongSelf->tableView1 reloadData];
         
         if (!isFirst) {
-            [refreshFooter1 endRefreshing];
+            [strongSelf->refreshFooter1 endRefreshing];
         }else
         {
-            [refreshHeader1 endRefreshing];
+            [strongSelf->refreshHeader1 endRefreshing];
         }
         
     } secondTableData:^(DataSourceModel* DsOfPageListObject){
-        userRankDataSource.DsOfPageListObject2=DsOfPageListObject;
-        [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)DsOfPageListObject.totalCount] forState:UIControlStateNormal];
-        [tableView2 reloadData];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf->userRankDataSource.DsOfPageListObject2=DsOfPageListObject;
+        [strongSelf->segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)DsOfPageListObject.totalCount] forState:UIControlStateNormal];
+        [strongSelf->tableView2 reloadData];
         
         if (!isFirst) {
-            [refreshFooter2 endRefreshing];
+            [strongSelf->refreshFooter2 endRefreshing];
         }else
         {
-            [refreshHeader2 endRefreshing];
+            [strongSelf->refreshHeader2 endRefreshing];
         }
         
     } thirdTableData:^(DataSourceModel* DsOfPageListObject){
-        userRankDataSource.DsOfPageListObject3=DsOfPageListObject;
-        [segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)DsOfPageListObject.totalCount] forState:UIControlStateNormal];
-        [tableView3 reloadData];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf->userRankDataSource.DsOfPageListObject3=DsOfPageListObject;
+        [strongSelf->segmentControl.button4 setTitle:[NSString stringWithFormat:@"total:%ld",(long)DsOfPageListObject.totalCount] forState:UIControlStateNormal];
+        [strongSelf->tableView3 reloadData];
         if (!isFirst) {
-            [refreshFooter3 endRefreshing];
+            [strongSelf->refreshFooter3 endRefreshing];
         }else
         {
-            [refreshHeader3 endRefreshing];
+            [strongSelf->refreshHeader3 endRefreshing];
         }
         
     }];

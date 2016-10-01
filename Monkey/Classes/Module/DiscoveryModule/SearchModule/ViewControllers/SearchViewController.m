@@ -98,28 +98,10 @@
     [self addFooter:1];
     tableView1.tag=11;
     @weakify(self);
-    __weak SearchDataSource * weakSearchDataSourcel = searchDataSourcel;
     searchSegment.ButtonActionBlock=^(int buttonTag){
-        currentIndex=buttonTag-100;
         @strongify(self);
-        __strong SearchDataSource * strongSearchDataSourcel = weakSearchDataSourcel;
-        if (currentIndex==1) {
-            self.tableView1.hidden=NO;
-            self.tableView2.hidden=YES;
-        }else if (currentIndex==2){
-            if (tableView2==nil) {
-                tableView2=[[UITableView alloc] initWithFrame:CGRectMake(0, 30, ScreenWidth, ScreenHeight-64-30) style:UITableViewStylePlain];
-                [self.view addSubview:self.tableView2];
-                self.tableView2.tag=12;
-                self.tableView2.dataSource=strongSearchDataSourcel;
-                self.tableView2.delegate=self;
-                [self addHeader:2];
-                [self addFooter:2];
-            }
-            self.tableView1.hidden=YES;
-            self.tableView2.hidden=NO;
-        }
-     };
+        [self segmentAction:buttonTag];
+    };
     self.navigationItem.hidesBackButton =YES;
     mySearchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(10, 2, ScreenWidth-80, 40)];
     [self.navigationController.navigationBar addSubview:mySearchBar];
@@ -142,6 +124,27 @@
 {
     [mySearchBar removeFromSuperview];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)segmentAction:(int)buttonTag
+{
+    currentIndex=buttonTag-100;
+    if (currentIndex==1) {
+        self.tableView1.hidden=NO;
+        self.tableView2.hidden=YES;
+    }else if (currentIndex==2){
+        if (tableView2==nil) {
+            tableView2=[[UITableView alloc] initWithFrame:CGRectMake(0, 30, ScreenWidth, ScreenHeight-64-30) style:UITableViewStylePlain];
+            [self.view addSubview:self.tableView2];
+            self.tableView2.tag=12;
+            self.tableView2.dataSource=searchDataSourcel;
+            self.tableView2.delegate=self;
+            [self addHeader:2];
+            [self addFooter:2];
+        }
+        self.tableView1.hidden=YES;
+        self.tableView2.hidden=NO;
+    }
 }
 
 #pragma mark - Private

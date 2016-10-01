@@ -13,7 +13,6 @@
 @property(nonatomic,strong) UILabel *label2;
 @property(nonatomic,strong) UILabel *label3;
 
-
 @property(nonatomic,strong) UIButton *button1;
 @property(nonatomic,strong) UIButton *button2;
 @property(nonatomic,strong) UIButton *button3;

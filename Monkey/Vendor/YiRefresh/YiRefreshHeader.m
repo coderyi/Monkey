@@ -162,7 +162,9 @@
         }];
         
         // block回调
-        _beginRefreshingBlock();
+        if (_beginRefreshingBlock) {
+            _beginRefreshingBlock();
+        }
     }
 
 }

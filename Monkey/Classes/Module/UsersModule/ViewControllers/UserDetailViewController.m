@@ -58,7 +58,8 @@
         // Custom initialization
         self.DsOfPageListObject1 = [[DataSourceModel alloc]init];
         self.DsOfPageListObject2 = [[DataSourceModel alloc]init];
-        self.DsOfPageListObject3 = [[DataSourceModel alloc]init];    }
+        self.DsOfPageListObject3 = [[DataSourceModel alloc]init];
+    }
     return self;
 }
 
@@ -176,35 +177,37 @@
     segmentControl=[[DetailSegmentControl alloc] initWithFrame:CGRectMake(0, 150+34-35-40, ScreenWidth, 60)];
     [titleView addSubview:segmentControl];
     tableView.tableHeaderView=titleView;
-    __weak UserDetailDataSource * weakUserDetailDataSource=userDetailDataSource;
-    __weak YiRefreshHeader * weakRefreshHeader=refreshHeader;
-    __weak UITableView * weakTableView=tableView;
+    __weak typeof(self) weakSelf = self;
 
     segmentControl.ButtonActionBlock=^(int buttonTag){
-        
-        currentIndex=buttonTag-100;
-        __strong UserDetailDataSource * strongUserDetailDataSource=weakUserDetailDataSource;
-        __strong YiRefreshHeader * strongRefreshHeader=weakRefreshHeader;
-        __strong UITableView * strongTableView=weakTableView;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf->currentIndex=buttonTag-100;
 
-        strongUserDetailDataSource.currentIndex=buttonTag-100;
+        strongSelf->userDetailDataSource.currentIndex=buttonTag-100;
 
-        if (currentIndex==1) {
-            if (self.DsOfPageListObject1.dsArray.count<1) {
-                [strongRefreshHeader beginRefreshing];
+        if (strongSelf->currentIndex==1) {
+            if (strongSelf.DsOfPageListObject1.dsArray.count<1) {
+                [strongSelf->refreshHeader beginRefreshing];
             }
-        }else if (currentIndex==2){
-            if (self.DsOfPageListObject2.dsArray.count<1) {
-                [strongRefreshHeader beginRefreshing];
+        }else if (strongSelf->currentIndex==2){
+            if (strongSelf.DsOfPageListObject2.dsArray.count<1) {
+                [strongSelf->refreshHeader beginRefreshing];
             }
-        }else if (currentIndex==3){
-            if (self.DsOfPageListObject3.dsArray.count<1) {
-                [strongRefreshHeader beginRefreshing];
+        }else if (strongSelf->currentIndex==3){
+            if (strongSelf.DsOfPageListObject3.dsArray.count<1) {
+                [strongSelf->refreshHeader beginRefreshing];
             }
         }
-        [strongTableView reloadData];
+        [strongSelf->tableView reloadData];
     };
     [self checkFollowStatusAction];
+}
+
+- (void)dealloc
+{
+#if defined(DEBUG)||defined(_DEBUG)
+    NSLog(@"%s:%d", __FUNCTION__, __LINE__);
+#endif
 }
 
 - (void)didReceiveMemoryWarning
@@ -371,6 +374,7 @@
         if (model) {
             [[NSUserDefaults standardUserDefaults] setObject:model.login forKey:@"currentLogin"];
             [[NSUserDefaults standardUserDefaults] setObject:model.avatar_url forKey:@"currentAvatarUrl"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             [tableView reloadData];
         }
     } errorHandel:^(NSError* error){
@@ -404,9 +408,11 @@
     [refreshHeader header];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
+    @weakify(self)
     refreshHeader.beginRefreshingBlock=^(){
-        [ApplicationDelegate.apiEngine userDetailWithUserName:_userModel.login completoinHandler:^(UserModel *model){
-            _userModel=model;
+        @strongify(self)
+        [ApplicationDelegate.apiEngine userDetailWithUserName:self.userModel.login completoinHandler:^(UserModel *model){
+            self.userModel=model;
             [self refreshTitleView];
             [self loadDataFromApiWithIsFirst:YES];
         } errorHandel:^(NSError* error){
@@ -435,41 +441,45 @@
 
 - (void)loadDataFromApiWithIsFirst:(BOOL)isFirst
 {
+    __weak typeof(self) weakSelf = self;
     [userDetailViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex firstTableData:^(DataSourceModel* DsOfPageListObject){
-        userDetailDataSource.DsOfPageListObject1=DsOfPageListObject;
+        __strong typeof(self) strongSelf = weakSelf;
+        strongSelf->userDetailDataSource.DsOfPageListObject1=DsOfPageListObject;
         
-        [tableView reloadData];
+        [strongSelf->tableView reloadData];
         
         if (!isFirst) {
-            [refreshFooter endRefreshing];
+            [strongSelf->refreshFooter endRefreshing];
         }else
         {
-            [refreshHeader endRefreshing];
+            [strongSelf->refreshHeader endRefreshing];
         }
         
     } secondTableData:^(DataSourceModel* DsOfPageListObject){
-        userDetailDataSource.DsOfPageListObject2=DsOfPageListObject;
+        __strong typeof(self) strongSelf = weakSelf;
+        strongSelf->userDetailDataSource.DsOfPageListObject2=DsOfPageListObject;
        
-        [tableView reloadData];
+        [strongSelf->tableView reloadData];
         
         if (!isFirst) {
-            [refreshFooter endRefreshing];
+            [strongSelf->refreshFooter endRefreshing];
             
         }else
         {
-            [refreshHeader endRefreshing];
+            [strongSelf->refreshHeader endRefreshing];
         }
         
     } thirdTableData:^(DataSourceModel* DsOfPageListObject){
-        userDetailDataSource.DsOfPageListObject3=DsOfPageListObject;
+        __strong typeof(self) strongSelf = weakSelf;
+        strongSelf->userDetailDataSource.DsOfPageListObject3=DsOfPageListObject;
         
-        [tableView reloadData];
+        [strongSelf->tableView reloadData];
         
         if (!isFirst) {
-            [refreshFooter endRefreshing];
+            [strongSelf->refreshFooter endRefreshing];
         }else
         {
-            [refreshHeader endRefreshing];
+            [strongSelf->refreshHeader endRefreshing];
         }
     }];
 
