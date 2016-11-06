@@ -444,6 +444,7 @@
     __weak typeof(self) weakSelf = self;
     [userDetailViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex firstTableData:^(DataSourceModel* DsOfPageListObject){
         __strong typeof(self) strongSelf = weakSelf;
+        if (!strongSelf) return;
         strongSelf->userDetailDataSource.DsOfPageListObject1=DsOfPageListObject;
         
         [strongSelf->tableView reloadData];
@@ -457,6 +458,7 @@
         
     } secondTableData:^(DataSourceModel* DsOfPageListObject){
         __strong typeof(self) strongSelf = weakSelf;
+        if (!strongSelf) return;
         strongSelf->userDetailDataSource.DsOfPageListObject2=DsOfPageListObject;
        
         [strongSelf->tableView reloadData];
@@ -471,6 +473,7 @@
         
     } thirdTableData:^(DataSourceModel* DsOfPageListObject){
         __strong typeof(self) strongSelf = weakSelf;
+        if (!strongSelf) return;
         strongSelf->userDetailDataSource.DsOfPageListObject3=DsOfPageListObject;
         
         [strongSelf->tableView reloadData];

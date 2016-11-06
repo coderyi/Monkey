@@ -386,6 +386,7 @@
     __weak typeof(self) weakSelf = self;
     [repositoryDetailViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex firstTableData:^(DataSourceModel* DsOfPageListObject){
         __strong typeof(self) strongSelf = weakSelf;
+        if (!strongSelf) return;
         strongSelf->repositoryDetailDataSource.DsOfPageListObject1=DsOfPageListObject;
         [strongSelf->tableView reloadData];
         
@@ -398,6 +399,7 @@
         
     } secondTableData:^(DataSourceModel* DsOfPageListObject){
         __strong typeof(self) strongSelf = weakSelf;
+        if (!strongSelf) return;
         strongSelf->repositoryDetailDataSource.DsOfPageListObject2=DsOfPageListObject;
         [strongSelf->tableView reloadData];
         
@@ -410,6 +412,7 @@
 
     } thirdTableData:^(DataSourceModel* DsOfPageListObject){
         __strong typeof(self) strongSelf = weakSelf;
+        if (!strongSelf) return;
         strongSelf->repositoryDetailDataSource.DsOfPageListObject3=DsOfPageListObject;
         [strongSelf->tableView reloadData];
         

@@ -332,6 +332,7 @@
     __weak typeof(self) weakSelf = self;
     [trendingViewModel loadDataFromApiWithIsFirst:isFirst currentIndex:currentIndex firstTableData:^(DataSourceModel* DsOfPageListObject){
         __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) return;
         strongSelf->trendingDataSource.DsOfPageListObject1=DsOfPageListObject;
         [strongSelf->tableView1 reloadData];
         if (!isFirst) {
@@ -342,6 +343,7 @@
         }
     } secondTableData:^(DataSourceModel* DsOfPageListObject){
         __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) return;
         strongSelf->trendingDataSource.DsOfPageListObject2=DsOfPageListObject;
         [strongSelf->tableView2 reloadData];
         if (!isFirst) {
@@ -352,6 +354,7 @@
         }
     } thirdTableData:^(DataSourceModel* DsOfPageListObject){
         __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) return;
         strongSelf->trendingDataSource.DsOfPageListObject3=DsOfPageListObject;
         [strongSelf->tableView3 reloadData];
         if (!isFirst) {
