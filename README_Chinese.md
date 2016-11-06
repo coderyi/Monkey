@@ -1,6 +1,14 @@
 # Monkey for GitHub(已上架)
 
+[![Join the chat at https://gitter.im/coderyi/Monkey](https://badges.gitter.im/coderyi/Monkey.svg)](https://gitter.im/coderyi/Monkey?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/coderyi/Monkey/blob/master/LICENSE.txt) 
+[![](https://img.shields.io/github/release/coderyi/Monkey.svg)](https://github.com/coderyi/Monkey/releases)
+[![](https://img.shields.io/github/stars/coderyi/Monkey.svg)](https://github.com/coderyi/Monkey/stargazers) 
+[![](https://img.shields.io/github/forks/coderyi/Monkey.svg)](https://github.com/coderyi/Monkey/network) 
+[![Twitter](https://img.shields.io/badge/twitter-@coderyi9-green.svg?style=flat)](http://twitter.com/coderyi9)
+
 ![monkey](http://7u2k5i.com1.z0.glb.clouddn.com/monkey_liantuerweima.png?imageMogr2/thumbnail/!60p) 
+[![Slack](https://antbr.herokuapp.com/badge.svg)](https://antbr.herokuapp.com/)
 
 Monkey是一个GitHub第三方客户端，Monkey取名就是表示我们程序猿的意思。Monkey for GitHub是我的第一个上线App，开源项目，希望多多指教。欢迎使用上面的二维码扫描下载。
 
@@ -17,19 +25,26 @@ Monkey Mac地址:[https://github.com/coderyi/MonkeyForMac](https://github.com/co
 ##Monkey for GitHub
 
 
-Monkey是一个GitHub第三方客户端，Monkey取名就是表示我们程序猿的意思。
+Monkey是一个GitHub第三方客户端，Monkey取名就是表示我们程序猿的意思。它包括下面这些功能
 
-Monkey主要是用来展示GitHub上的开发者的排名，以及仓库的排名。
+- [x] Monkey可以展示GitHub上的开发者的排名，开发者的排名是根据开发者的followers由高到低进行排名，有区分不同的语言和城市。
+- [x] Monkey可以展示GitHub上的仓库的排名，仓库的排名是根据仓库的stars由高到低进行排名的，有区分不同的语言。
+- [x] 登录GitHub功能，随手follow开发者和star仓库，支持查看我的GitHub动态。
+- [x] 发现模块，包括GitHub仓库的trending；GitHub动态；showcases；搜索；以及其他排名数据
 
-登录GitHub功能，随手follow开发者和star仓库，支持查看我的GitHub动态。
-
-发现模块，包括GitHub仓库的trending；GitHub动态；showcases；搜索；以及其他排名数据
-
-开发者的排名是根据开发者的followers由高到低进行排名，有区分不同的语言和城市。
-
-仓库的排名是根据仓库的stars由高到低进行排名的，有区分不同的语言。
 
 这些数据是从GitHub提供的接口来的，地址是https://developer.github.com/v3/
+
+我创建了一个google group，欢迎进来讨论Monkey相关的东西，,[https://groups.google.com/d/forum/monkeyforgithub](https://groups.google.com/d/forum/monkeyforgithub)
+
+build的话使用如下命令
+<pre>
+$ git clone https://github.com/coderyi/Monkey.git
+$ pod install
+</pre>
+##Monkey架构
+
+![点击放大](https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/Monkey_architecture_img1.png)
 
 
 ##GitHub Top Users Repositories
@@ -42,7 +57,7 @@ Monkey主要是用来展示GitHub上的开发者的排名，以及仓库的排�
 这个列表是我做[Monkey for GitHub](https://github.com/coderyi/Monkey)这个开源的GitHub第三方客户端的衍生品，欢迎交流意见。
 ##关于开源
 ####运行
-支持iOS7.0+，支持iPhone的各个尺寸，支持竖屏；目前我使用的是Xcode7.0
+支持iOS7.0+，支持iPhone的各个尺寸，支持竖屏；可以使用的是Xcode7.0+
 
 ####Monkey API
 我整理Monkey for GitHub的所有API，并做了一些说明和示例，希望能够帮助到您。
