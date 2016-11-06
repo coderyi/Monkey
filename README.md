@@ -29,15 +29,10 @@ Besides, you can get Android version [GitHot](https://github.com/andyiac/githot)
 
 Monkey is a GitHub third party client,Monkey is a program ape.
 
-Monkey show the rank of coders and repositories.
-
-Login GitHub function,Follow developer and star repository,Support for viewing my GitHub dynamics.
-
-The discovery module, including GitHub's repositories trending; GitHub dynamics; showcases; search; and other ranking data.
-
-The developer's ranking is based on the developer's followers from high to low ranking, there is a distinction between different languages and cities.
-
-repositories ranking is based on the repositories of stars by high to low ranking, there is a distinction between different languages.
+- [x] The rank of coders , the developer's ranking is based on the developer's followers from high to low ranking, there is a distinction between different languages and cities.
+- [x] The rank of repositoriesrepositories , ranking is based on the repositories of stars by high to low ranking, there is a distinction between different languages.
+- [x] Login GitHub function,Follow developer and star repository,Support for viewing my GitHub dynamics.
+- [x] The discovery module, including GitHub's repositories trending; GitHub dynamics; showcases; search; and other ranking data.
 
 These data are provided from the GitHub interface,url is https://developer.github.com/v3/
 
