@@ -103,7 +103,7 @@
         [self segmentAction:buttonTag];
     };
     self.navigationItem.hidesBackButton =YES;
-    mySearchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(10, 2, ScreenWidth-80, 40)];
+    mySearchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(10, 2, ScreenWidth-90, 40)];
     [self.navigationController.navigationBar addSubview:mySearchBar];
     mySearchBar.delegate=self;
     mySearchBar.tintColor=YiBlue;
@@ -229,6 +229,13 @@
 }
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView.tag==11) {
+        return RankTableViewCellHeight;
+    }
+    return RepositoriesTableViewCellheight;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
