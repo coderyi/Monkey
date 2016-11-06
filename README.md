@@ -27,7 +27,8 @@ Besides, you can get Android version [GitHot](https://github.com/andyiac/githot)
 
 ##Monkey for GitHub
 
-Monkey is a GitHub third party client,Monkey is a program ape.
+Monkey is a GitHub third party client,Monkey is a program ape.It includes the following functions
+
 
 - [x] The rank of coders , the developer's ranking is based on the developer's followers from high to low ranking, there is a distinction between different languages and cities.
 - [x] The rank of repositoriesrepositories , ranking is based on the repositories of stars by high to low ranking, there is a distinction between different languages.
@@ -66,7 +67,7 @@ Data comes from API GitHub and its related content.
 ##About Open Source
 
 ####Requirements
-iOS7.0+,iPhone,Xcode7.0
+iOS7.0+,Xcode7.0+
 
 ####Monkey API
 
@@ -112,7 +113,7 @@ copyright (c) 2015 coderyi.all rights reserved.
 ##Contact
 
 
-blog:[https://github.com/coderyi/blog](https://github.com/coderyi/blog)
+blog:[http://coderyi.com/](http://coderyi.com/)
 
 GitHub:[https://github.com/coderyi](https://github.com/coderyi)
 
