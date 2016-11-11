@@ -74,7 +74,7 @@
         photo.save = YES;
         _saveImageBtn.enabled = NO;
 //        [MBProgressHUD showSuccess:@"成功保存到相册" toView:nil];
-        [self showYiProgressHUD:@"saved" afterDelay:9];
+        [self showYiProgressHUD:@"saved" afterDelay:1];
     }
 }
 
