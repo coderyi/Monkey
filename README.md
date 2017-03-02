@@ -21,8 +21,8 @@ App Store:[https://itunes.apple.com/cn/app/monkey-for-github/id1003765407](https
 
 Monkey Mac open source:[https://github.com/coderyi/MonkeyForMac](https://github.com/coderyi/MonkeyForMac)
 
-Besides, you can get Android version [GitHot](https://github.com/andyiac/githot) by [andyiac](https://github.com/andyiac) from [this link](http://fir.im/githot) .
-
+Besides, you can get Android version [GitHot](https://github.com/andyiac/githot) by [andyiac](https://github.com/andyiac) from [this link](http://fir.im/githot) .  
+another android version [monkey-android](https://github.com/yeungeek/monkey-android) by [yeungeek](https://github.com/yeungeek)
 
 
 ##Monkey for GitHub
