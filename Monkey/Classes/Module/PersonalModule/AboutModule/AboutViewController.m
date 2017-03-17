@@ -9,7 +9,6 @@
 #import "AboutViewController.h"
 #import "UserDetailViewController.h"
 #import "RepositoryDetailViewController.h"
-#import "WebViewController.h"
 @interface AboutViewController () <SFSafariViewControllerDelegate> {
     UILabel *titleText;
 }

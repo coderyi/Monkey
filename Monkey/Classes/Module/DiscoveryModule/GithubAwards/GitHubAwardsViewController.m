@@ -8,8 +8,8 @@
 //
 
 #import "GitHubAwardsViewController.h"
-#import "WebViewController.h"
-@interface GitHubAwardsViewController ()<UITableViewDataSource,UITableViewDelegate> {
+
+@interface GitHubAwardsViewController ()<UITableViewDataSource,UITableViewDelegate, SFSafariViewControllerDelegate> {
     UITableView *tableView1;
     NSArray *rankCategorys;
 }
@@ -74,10 +74,14 @@
 #pragma mark - Actions
 
 - (void)footerButtonAction
-{
-    WebViewController *viewController=[[WebViewController alloc] init];
-    viewController.urlString=@"http://github-awards.com/";
-    [self.navigationController pushViewController:viewController animated:YES];
+{    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://github-awards.com/"]];
+    if ([[UIDevice currentDevice].systemVersion hasPrefix:@"9"]) {
+        SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
+        [self presentViewController:sfvc animated:YES completion:nil];
+    } else {
+        [[UIApplication sharedApplication] openURL:URL];
+    }
 }
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
@@ -106,11 +110,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    WebViewController *viewController=[[WebViewController alloc] init];
     NSArray *webViewRankCategorys=@[@"world",@"country",@"city"];
-    viewController.urlString=[NSString stringWithFormat:@"http://github-awards.com/users?type=%@",webViewRankCategorys[indexPath.section]];
-    [self.navigationController pushViewController:viewController animated:YES];
     
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://github-awards.com/users?type=%@",webViewRankCategorys[indexPath.section]]];
+    if ([[UIDevice currentDevice].systemVersion hasPrefix:@"9"]) {
+        SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
+        [self presentViewController:sfvc animated:YES completion:nil];
+    } else {
+        [[UIApplication sharedApplication] openURL:URL];
+    }
+    
+    
+}
+
+- (void)safariViewControllerDidFinish:(nonnull SFSafariViewController *)controller {
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
