@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@import SafariServices;
+
 @interface AboutViewController : UIViewController
 
 @end
