@@ -15,7 +15,7 @@
 #import "UserDetailViewController.h"
 #import "RepositoryDetailDataSource.h"
 #import "RepositoryDetailViewModel.h"
-@interface RepositoryDetailViewController ()<UITableViewDelegate> {
+@interface RepositoryDetailViewController ()<UITableViewDelegate, SFSafariViewControllerDelegate> {
     
     UITableView *tableView;
     YiRefreshHeader *refreshHeader;
@@ -221,6 +221,16 @@
         WebViewController *web=[[WebViewController alloc] init];
         web.urlString=_model.html_url;
         [self.navigationController pushViewController:web animated:YES];
+        
+    }
+    
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://google.com"]];
+    if ([[UIDevice currentDevice].systemVersion hasPrefix:@"9"]) {
+        SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
+        [self presentViewController:sfvc animated:YES completion:nil];
+    } else {
+        [[UIApplication sharedApplication] openURL:URL];
     }
 }
 
