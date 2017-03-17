@@ -7,8 +7,8 @@
 //
 
 #import "GitHubRankingViewController.h"
-#import "WebViewController.h"
-@interface GitHubRankingViewController ()<UITableViewDataSource,UITableViewDelegate> {
+
+@interface GitHubRankingViewController ()<UITableViewDataSource,UITableViewDelegate, SFSafariViewControllerDelegate> {
     UITableView *tableView1;
     NSArray *rankCategorys;
 }
@@ -75,9 +75,13 @@
 
 - (void)footerButtonAction
 {
-    WebViewController *viewController=[[WebViewController alloc] init];
-    viewController.urlString=@"http://githubranking.com/";
-    [self.navigationController pushViewController:viewController animated:YES];
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://githubranking.com/"]];
+    if ([[UIDevice currentDevice].systemVersion hasPrefix:@"9"]) {
+        SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
+        [self presentViewController:sfvc animated:YES completion:nil];
+    } else {
+        [[UIApplication sharedApplication] openURL:URL];
+    }
 }
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
@@ -107,10 +111,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    WebViewController *viewController=[[WebViewController alloc] init];
     NSArray *webViewRankCategorys=@[@"repositories",@"users",@"organizations"];
-    viewController.urlString=[NSString stringWithFormat:@"http://githubranking.com/%@",webViewRankCategorys[indexPath.section]];
-    [self.navigationController pushViewController:viewController animated:YES];
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://githubranking.com/%@",webViewRankCategorys[indexPath.section]]];
+    if ([[UIDevice currentDevice].systemVersion hasPrefix:@"9"]) {
+        SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
+        [self presentViewController:sfvc animated:YES completion:nil];
+    } else {
+        [[UIApplication sharedApplication] openURL:URL];
+    }
+}
+
+- (void)safariViewControllerDidFinish:(nonnull SFSafariViewController *)controller {
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
