@@ -218,28 +218,26 @@
 - (void)nameBtAction
 {
     if (_model.html_url.length>0  ) {
-        WebViewController *web=[[WebViewController alloc] init];
-        web.urlString=_model.html_url;
-        [self.navigationController pushViewController:web animated:YES];
-        
-    }
-    
-    
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://google.com"]];
-    if ([[UIDevice currentDevice].systemVersion hasPrefix:@"9"]) {
-        SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
-        [self presentViewController:sfvc animated:YES completion:nil];
-    } else {
-        [[UIApplication sharedApplication] openURL:URL];
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@", _model.html_url]];
+        if ([[UIDevice currentDevice].systemVersion hasPrefix:@"9"]) {
+            SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
+            [self presentViewController:sfvc animated:YES completion:nil];
+        } else {
+            [[UIApplication sharedApplication] openURL:URL];
+        }
     }
 }
 
 - (void)ownerBtAction
 {
     if (_model.user.html_url.length>0  ) {
-        WebViewController *web=[[WebViewController alloc] init];
-        web.urlString=_model.user.html_url;
-        [self.navigationController pushViewController:web animated:YES];
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@", _model.user.html_url]];
+        if ([[UIDevice currentDevice].systemVersion hasPrefix:@"9"]) {
+            SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
+            [self presentViewController:sfvc animated:YES completion:nil];
+        } else {
+            [[UIApplication sharedApplication] openURL:URL];
+        }
     }
 }
 
@@ -308,9 +306,13 @@
 - (void)homePageAction
 {
     if (_model.homepage.length>0  ) {
-        WebViewController *web=[[WebViewController alloc] init];
-        web.urlString=_model.homepage;
-        [self.navigationController pushViewController:web animated:YES];
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@", _model.homepage]];
+        if ([[UIDevice currentDevice].systemVersion hasPrefix:@"9"]) {
+            SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
+            [self presentViewController:sfvc animated:YES completion:nil];
+        } else {
+            [[UIApplication sharedApplication] openURL:URL];
+        }
     }
 }
 
