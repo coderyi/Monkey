@@ -110,9 +110,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *webViewRankCategorys=@[@"world",@"country",@"city"];
+    NSArray *safariWebViewRankCategorys=@[@"world",@"country",@"city"];
     
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://github-awards.com/users?type=%@",webViewRankCategorys[indexPath.section]]];
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://github-awards.com/users?type=%@",safariWebViewRankCategorys[indexPath.section]]];
     if ([[UIDevice currentDevice].systemVersion hasPrefix:@"9"]) {
         SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
         [self presentViewController:sfvc animated:YES completion:nil];

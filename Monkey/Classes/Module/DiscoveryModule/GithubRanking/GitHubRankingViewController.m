@@ -111,8 +111,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *webViewRankCategorys=@[@"repositories",@"users",@"organizations"];
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://githubranking.com/%@",webViewRankCategorys[indexPath.section]]];
+    NSArray *safariWebViewRankCategorys=@[@"repositories",@"users",@"organizations"];
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://githubranking.com/%@",safariWebViewRankCategorys[indexPath.section]]];
     if ([[UIDevice currentDevice].systemVersion hasPrefix:@"9"]) {
         SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
         [self presentViewController:sfvc animated:YES completion:nil];
