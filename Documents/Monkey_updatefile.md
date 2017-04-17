@@ -1,5 +1,5 @@
-#更新日志
-######2015.10.29
+# 更新日志
+###### 2015.10.29
 1.去除octokit，follow和star操作都采用token来做，修改相关VC，并且network增加相应的请求
 
 2.采用oauth2登录，去除LoginViewController的octokit登录，增加LoginWebViewController的oauth2登录
@@ -51,7 +51,7 @@ UserModel修改一下就好
 //    model.location =  [dict objectForKey:@"location"];
 </pre>
 
-######2015.9.21
+###### 2015.9.21
 
 主要最低支持版本iOS7.0提高至iOS8.0
 
