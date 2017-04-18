@@ -23,7 +23,7 @@ Monkey Mac地址:[https://github.com/coderyi/MonkeyForMac](https://github.com/co
 另外, 你能够获取Android版本[andyiac](https://github.com/andyiac) 写的 [GitHot](https://github.com/andyiac/githot) ，下载链接 [ fir.im/githot](http://fir.im/githot) .    
 另外一个Android版本，[monkey-android](https://github.com/yeungeek/monkey-android), 来自[yeungeek](https://github.com/yeungeek)
 
-##Monkey for GitHub
+## Monkey for GitHub
 
 
 Monkey是一个GitHub第三方客户端，Monkey取名就是表示我们程序猿的意思。它包括下面这些功能
@@ -43,12 +43,12 @@ build的话使用如下命令
 $ git clone https://github.com/coderyi/Monkey.git
 $ pod install
 </pre>
-##Monkey架构
+## Monkey架构
 
 ![点击放大](https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/Monkey_architecture_img1.png)
 
 
-##GitHub Top Users Repositories
+## GitHub Top Users Repositories
 **[GitHub排名前50的Objective-C开发者(Objective-C top 50 GitHub developers)](https://github.com/coderyi/Monkey/blob/master/github_top_users_repositories/github_top_users_objective-c_world.md)**
 
 这是GitHub在世界范围内排名前50的Objective-C程序员，并且列出相关信息，从而可以走近他们的程序世界。
@@ -56,17 +56,17 @@ $ pod install
 数据来自GitHub的API以及自己整理的相关内容。
 
 这个列表是我做[Monkey for GitHub](https://github.com/coderyi/Monkey)这个开源的GitHub第三方客户端的衍生品，欢迎交流意见。
-##关于开源
-####运行
+## 关于开源
+#### 运行
 支持iOS7.0+，支持iPhone的各个尺寸，支持竖屏；可以使用的是Xcode7.0+
 
-####Monkey API
+#### Monkey API
 我整理Monkey for GitHub的所有API，并做了一些说明和示例，希望能够帮助到您。
 
 地址是：https://github.com/coderyi/Monkey/blob/master/Monkey_API.md
 
 
-####项目中使用的开源组件
+#### 项目中使用的开源组件
 [NetworkEye](https://github.com/coderyi/NetworkEye)
 
 NetworkEye,a iOS network debug library,It can monitor all HTTP requests within the App and displays all information related to the request.
@@ -100,7 +100,7 @@ Asynchronous image downloader with cache support with an UIImageView category
 另外项目中使用了友盟的相关服务。
 
 
-##LICENSE
+## LICENSE
 此开源项目可以用来做任何事情除了原封不动的分发到App Store。
 
 copyright (c) 2015 coderyi.all rights reserved.
@@ -111,7 +111,7 @@ copyright (c) 2015 coderyi.all rights reserved.
 
 
 
-##联系我
+## 联系我
 对于Monkey，你可以随意提交；如果想加入更多的开发，欢迎联系我！
 
 blog:[http://www.coderyi.com/](http://www.coderyi.com/)
@@ -121,7 +121,7 @@ GitHub:[https://github.com/coderyi](https://github.com/coderyi)
 email:coderyi@foxmail.com
 
 
-##App预览
+## App预览
 
 
 
