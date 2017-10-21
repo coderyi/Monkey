@@ -9,7 +9,7 @@
 #import "CityViewController.h"
 
 @interface CityViewController ()<UITableViewDataSource,UITableViewDelegate>{
-    UITableView *tableView1;
+    UITableView *cityTableView;
     NSArray *citys;
 }
 
@@ -19,6 +19,7 @@
 @synthesize pinyinCitys;
 
 #pragma mark - Lifecycle
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -35,38 +36,40 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title=NSLocalizedString(@"Select City", nil);
+    
+    self.title = NSLocalizedString(@"Select City", nil);
 
     if (iOS7GE) {
         self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
     }
-    self.automaticallyAdjustsScrollViewInsets=NO;
-    self.view.backgroundColor=[UIColor whiteColor];
-    tableView1=[[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain];
-    [self.view addSubview:tableView1];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    tableView1.dataSource=self;
-    tableView1.delegate=self;
+    cityTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64) style:UITableViewStylePlain];
+    [self.view addSubview:cityTableView];
     
-    if (pinyinCitys.count>0) {
+    cityTableView.dataSource = self;
+    cityTableView.delegate = self;
     
+    if (pinyinCitys.count > 0) {
         if (![pinyinCitys[0] isEqualToString:@"beijing"]) {
-            
-            citys=pinyinCitys;
+            citys = pinyinCitys;
         }else{
-
-            citys=@[NSLocalizedString(@"beijing", @""),NSLocalizedString(@"shanghai", @""),NSLocalizedString(@"shenzhen", @""),
-                NSLocalizedString(@"hangzhou", @""),NSLocalizedString(@"guangzhou", @""),NSLocalizedString(@"chengdu", @""),
-                NSLocalizedString(@"nanjing", @""),NSLocalizedString(@"wuhan", @""),NSLocalizedString(@"suzhou", @""),
-                NSLocalizedString(@"xiamen", @""),NSLocalizedString(@"tianjin", @""),NSLocalizedString(@"chongqing", @""),
-                NSLocalizedString(@"changsha", @"")];
+            citys = @[NSLocalizedString(@"beijing", @""),
+                      NSLocalizedString(@"shanghai", @""),
+                      NSLocalizedString(@"shenzhen", @""),
+                      NSLocalizedString(@"hangzhou", @""),
+                      NSLocalizedString(@"guangzhou", @""),
+                      NSLocalizedString(@"chengdu", @""),
+                      NSLocalizedString(@"nanjing", @""),
+                      NSLocalizedString(@"wuhan", @""),
+                      NSLocalizedString(@"suzhou", @""),
+                      NSLocalizedString(@"xiamen", @""),
+                      NSLocalizedString(@"tianjin", @""),
+                      NSLocalizedString(@"chongqing", @""),
+                      NSLocalizedString(@"changsha", @"")];
         }
     }
-
-}
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
@@ -80,12 +83,12 @@
 {
     UITableViewCell *cell;
     
-    NSString *cellId=@"CellId1";
-    cell=[tableView dequeueReusableCellWithIdentifier:cellId];
-    if (cell==nil) {
-        cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+    NSString *cellId = @"CellId1";
+    cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
-    cell.textLabel.text=(citys)[indexPath.row];
+    cell.textLabel.text = (citys)[indexPath.row];
     return cell;
 }
 
