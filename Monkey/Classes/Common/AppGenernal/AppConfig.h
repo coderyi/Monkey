@@ -17,7 +17,7 @@
 #define ScreenWidth [[UIScreen mainScreen] bounds].size.width
 #define iOS7GE [[[UIDevice currentDevice]systemVersion] floatValue] >= 7.0
 #define ApplicationDelegate ((AppDelegate *)[UIApplication sharedApplication].delegate)
-
+#define IsiPhoneX ((ScreenWidth == 375.f && ScreenHeight == 812.f) || (ScreenHeight == 375.f && ScreenWidth == 812.f))
 //我喜欢的蓝色
 #define YiBlue [UIColor colorWithRed:0.24f green:0.51f blue:0.78f alpha:1.00f]
 //灰色
