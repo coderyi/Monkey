@@ -21,7 +21,7 @@
                     completoinHandler:(StringResponseBlock)completionBlock
                           errorHandel:(MKNKErrorBlock)errorBlock
 {
-    NSString *getString = [NSString stringWithFormat:@"/login/oauth/access_token/"];
+    NSString *pathString = [NSString stringWithFormat:@"/login/oauth/access_token/"];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setValue:[[AESCrypt decrypt:CoderyiClientID password:@"xxxsd-sdsd*sd672323q___---_w.."] substringFromIndex:1] forKey:@"client_id"];
     [dic setValue:[[AESCrypt decrypt:CoderyiClientSecret password:@"xx3xc45sqvzupb4xsd-sdsd*sd672323q___---_w.."] substringFromIndex:1] forKey:@"client_secret"];
@@ -29,7 +29,7 @@
     [dic setValue:@"1995" forKey:@"state"];
     [dic setValue:@"https://github.com/coderyi/monkey" forKey:@"redirect_uri"];
     MKNetworkOperation *op =
-    [self operationWithPath:getString params:dic httpMethod:@"POST" ssl:YES];
+    [self operationWithPath:pathString params:dic httpMethod:@"POST" ssl:YES];
     NSLog(@"%@", op.url);
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         completionBlock([completedOperation responseString]);
@@ -51,7 +51,7 @@
     NSString *getString = [NSString stringWithFormat:@"/user?access_token=%@",token];
     MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
-        NSLog(@"%@", op.url);
+    NSLog(@"%@", op.url);
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         if ([[completedOperation responseJSON]
              isKindOfClass:[NSDictionary class]]) {
@@ -81,14 +81,13 @@
             NSArray *list = [completedOperation responseJSON];
             if ([list isKindOfClass:[NSArray class]]) {
                 if (list.count > 0) {
-                    NSMutableArray *listNew =
-                    [[NSMutableArray alloc] initWithCapacity:32];
+                    NSMutableArray *listNew = [[NSMutableArray alloc] initWithCapacity:32];
                     for (NSInteger i = 0; i < list.count; i++) {
                         NSDictionary *dict = [list objectAtIndex:i];
                         UserReceivedEventModel *model = [UserReceivedEventModel modelWithDict:dict];
                         [listNew addObject:model];
                     }
-                    completionBlock(listNew, page,1);
+                    completionBlock(listNew, page, 1);
                 }
             }
         }
@@ -123,7 +122,7 @@
                         RepositoryModel *model = [RepositoryModel modelWithDict:dict];
                         [listNew addObject:model];
                     }
-                    completionBlock(listNew, 1,1);
+                    completionBlock(listNew, 1, 1);
                 }
             }
         }
@@ -160,7 +159,7 @@
                         RepositoryModel *model = [RepositoryModel modelWithDict:dict];
                         [listNew addObject:model];
                     }
-                    completionBlock(listNew, 0,1);
+                    completionBlock(listNew, 0, 1);
                 }
             }
         }
@@ -190,7 +189,7 @@
                         ShowcasesModel *model = [ShowcasesModel modelWithDict:dict];
                         [listNew addObject:model];
                     }
-                    completionBlock(listNew, 0,1);
+                    completionBlock(listNew, 0, 1);
                 }
             }
         }
@@ -238,9 +237,9 @@
                                    errorHandel:(MKNKErrorBlock)errorBlock
 {
     NSString *access_token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
-    NSString *getString = [NSString stringWithFormat:@"/user/starred/%@/%@?access_token=%@",owner,repo,access_token];
+    NSString *path = [NSString stringWithFormat:@"/user/starred/%@/%@?access_token=%@",owner,repo,access_token];
     MKNetworkOperation *op =
-    [self operationWithPath:getString params:nil httpMethod:@"PUT" ssl:YES];
+    [self operationWithPath:path params:nil httpMethod:@"PUT" ssl:YES];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         if (completedOperation.HTTPStatusCode==204) {
             completionBlock(YES);
@@ -266,9 +265,9 @@
                               errorHandel:(MKNKErrorBlock)errorBlock
 {
     NSString *access_token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
-    NSString *getString = [NSString stringWithFormat:@"/user/starred/%@/%@?access_token=%@",owner,repo,access_token];
+    NSString *path = [NSString stringWithFormat:@"/user/starred/%@/%@?access_token=%@",owner,repo,access_token];
     MKNetworkOperation *op =
-    [self operationWithPath:getString params:nil httpMethod:@"DELETE" ssl:YES];
+    [self operationWithPath:path params:nil httpMethod:@"DELETE" ssl:YES];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         if (completedOperation.HTTPStatusCode==204) {
             completionBlock(YES);
@@ -330,9 +329,9 @@
         username=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
     }
     NSString *access_token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
-    NSString *getString = [NSString stringWithFormat:@"/user/following/%@?access_token=%@",target_user,access_token];
+    NSString *path = [NSString stringWithFormat:@"/user/following/%@?access_token=%@",target_user,access_token];
     MKNetworkOperation *op =
-    [self operationWithPath:getString params:nil httpMethod:@"PUT" ssl:YES];
+    [self operationWithPath:path params:nil httpMethod:@"PUT" ssl:YES];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         if (completedOperation.HTTPStatusCode==204) {
             completionBlock(YES);
@@ -361,9 +360,9 @@
         username=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
     }
     NSString *access_token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
-    NSString *getString = [NSString stringWithFormat:@"/user/following/%@?access_token=%@",target_user,access_token];
+    NSString *path = [NSString stringWithFormat:@"/user/following/%@?access_token=%@",target_user,access_token];
     MKNetworkOperation *op =
-    [self operationWithPath:getString params:nil httpMethod:@"DELETE" ssl:YES];
+    [self operationWithPath:path params:nil httpMethod:@"DELETE" ssl:YES];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         if (completedOperation.HTTPStatusCode==204) {
             completionBlock(YES);
@@ -416,7 +415,7 @@
                         model.myID=[[NSDate date] timeIntervalSince1970];
                         [listNew addObject:model];
                     }
-                    completionBlock(listNew, page,totalCount);
+                    completionBlock(listNew, page, totalCount);
                 }
             }
         }

@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
-
 @interface DataSourceModel : NSObject
 
 @property(nonatomic,strong) NSMutableArray *dsArray;
@@ -17,6 +15,5 @@
 @property(nonatomic,assign) NSInteger totalCount;
 
 - (void)reset;
-
 
 @end

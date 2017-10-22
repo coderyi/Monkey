@@ -21,7 +21,6 @@
     int currentIndex;
     UITableView *tableView1;
     UITableView *tableView2;
-  
     UITableView *tableView3;
     
     float titleHeight;
