@@ -28,35 +28,24 @@
     }
     self.hidesBottomBarWhenPushed = YES;
     
-    titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 0, 120, 44)];
+    UIView *bar=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 64+(IsiPhoneX ? 24 : 0))];
+    [self.view addSubview:bar];
+    bar.backgroundColor=YiBlue;
+
+    titleText = [[UILabel alloc] initWithFrame: CGRectMake((ScreenWidth-120)/2, 20+(IsiPhoneX ? 24 : 0), 120, 44)];
     titleText.backgroundColor = [UIColor clearColor];
     titleText.textColor=[UIColor whiteColor];
     [titleText setFont:[UIFont systemFontOfSize:19.0]];
     titleText.textAlignment=NSTextAlignmentCenter;
-    self.navigationItem.titleView=titleText;
     titleText.text=_urlString;
-    
-    UINavigationBar *bar=[[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 64)];
-    UIView *iPhoneXAdaptView;
-    if (IsiPhoneX) {
-        iPhoneXAdaptView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 88)];
-        [self.view addSubview:iPhoneXAdaptView];
-        iPhoneXAdaptView.backgroundColor = YiBlue;
-    } else {
-        [self.view addSubview:bar];
-        bar.barTintColor=YiBlue;
-    }
+    [bar addSubview:titleText];
     
     backBt=[UIButton buttonWithType:UIButtonTypeCustom];
     backBt.frame=CGRectMake(10, 27 + (IsiPhoneX ? 24 : 0), 30, 30);
     [backBt setImage:[UIImage imageNamed:@"ic_arrow_back_white_48pt"] forState:UIControlStateNormal];
     [backBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [backBt addTarget:self action:@selector(backBtAction) forControlEvents:UIControlEventTouchUpInside];
-    if (IsiPhoneX) {
-        [iPhoneXAdaptView addSubview:backBt];
-    } else {
-        [bar addSubview:backBt];
-    }
+    [bar addSubview:backBt];
     backBt.hidden=YES;
     
     UIWebView *webView=[[UIWebView alloc] initWithFrame:CGRectMake(0, 64 + (IsiPhoneX ? 24 : 0), ScreenWidth, ScreenHeight-64-(IsiPhoneX ? 24 : 0))];
