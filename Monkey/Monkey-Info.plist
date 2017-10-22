@@ -33,6 +33,8 @@
 	<string>Can we use your microphone?</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires access to the photo library.</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>This app requires access to the photo library.</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
