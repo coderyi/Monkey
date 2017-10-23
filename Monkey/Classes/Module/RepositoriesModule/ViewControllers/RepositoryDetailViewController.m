@@ -30,6 +30,7 @@
     UILabel *createLabel;
     UIButton *homePageBt;
     UIImageView *ownerIV;
+    UIButton *shareBt;
     UILabel *descLabel;
     UIView *titleView;
     BOOL isStaring;
@@ -118,7 +119,7 @@
     [titleView addSubview:ownerBt];
     ownerBt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [ownerBt addTarget:self action:@selector(ownerBtAction) forControlEvents:UIControlEventTouchUpInside];
-
+    
     lineLabel=[[UILabel alloc] init];
     [titleView addSubview:lineLabel];
     lineLabel.font=[UIFont systemFontOfSize:20];
@@ -161,6 +162,13 @@
     descLabel.font=[UIFont systemFontOfSize:12];
     descLabel.numberOfLines=0;
     descLabel.lineBreakMode=NSLineBreakByWordWrapping;
+    
+    shareBt = [UIButton buttonWithType:UIButtonTypeCustom];
+    [titleView addSubview:shareBt];
+    shareBt.frame=CGRectMake(ScreenWidth-45,40,30,30);
+    shareBt.layer.masksToBounds=YES;
+    shareBt.layer.cornerRadius = 4;
+    [shareBt addTarget:self action:@selector(shareBtAction) forControlEvents:UIControlEventTouchUpInside];
     
     line1=[[UILabel alloc] init];
     [titleView addSubview:line1];
@@ -230,6 +238,16 @@
         WebViewController *web=[[WebViewController alloc] init];
         web.urlString=_model.user.html_url;
         [self.navigationController pushViewController:web animated:YES];
+    }
+}
+
+- (void)shareBtAction
+{
+    if (_model.html_url.length>0 ) {
+        NSArray *objectToShare = [[NSArray alloc] initWithObjects:_model.html_url, nil];
+        UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:objectToShare applicationActivities:nil];
+        [self presentViewController:activityVC animated:NO completion:^{
+        }];
     }
 }
 
@@ -318,6 +336,8 @@
     lineLabel.frame=CGRectMake(orginX+nameWidth, 0, 10, 40);
     ownerBt.frame=CGRectMake(orginX+nameWidth+10, 0, (ScreenWidth-2*orginX)/2-40, 40);
     [ownerIV sd_setImageWithURL:[NSURL URLWithString:_model.user.avatar_url]];
+    UIImage *shareBtnImage = [UIImage imageNamed:@"share"];
+    [shareBt setImage:shareBtnImage forState:UIControlStateNormal];
     [nameBt setTitle:_model.name forState:UIControlStateNormal];
     [ownerBt setTitle:_model.user.login forState:UIControlStateNormal];
     [parentBt setTitle:_model.parentOwnerName forState:UIControlStateNormal];
