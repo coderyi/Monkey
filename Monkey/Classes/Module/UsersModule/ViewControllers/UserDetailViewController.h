@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "UserModel.h"
+@import SafariServices;
+
 @interface UserDetailViewController : UIViewController
 @property(nonatomic,strong) UserModel *userModel;
 @end

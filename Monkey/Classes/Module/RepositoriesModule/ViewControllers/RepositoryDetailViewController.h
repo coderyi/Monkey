@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "RepositoryModel.h"
+
+@import SafariServices;
+
 @interface RepositoryDetailViewController : UIViewController
 @property(nonatomic,strong) RepositoryModel *model;
 @end

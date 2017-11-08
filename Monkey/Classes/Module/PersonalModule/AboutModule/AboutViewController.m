@@ -9,8 +9,7 @@
 #import "AboutViewController.h"
 #import "UserDetailViewController.h"
 #import "RepositoryDetailViewController.h"
-#import "WebViewController.h"
-@interface AboutViewController () {
+@interface AboutViewController () <SFSafariViewControllerDelegate> {
     UILabel *titleText;
 }
 
@@ -137,9 +136,13 @@
 
 - (void)buttonLicenseAction
 {
-    WebViewController *web=[[WebViewController alloc] init];
-    web.urlString=@"https://github.com/coderyi/Monkey/blob/master/Documents/Monkey_opensource_components.md";
-    [self.navigationController pushViewController:web animated:YES];
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"https://github.com/coderyi/Monkey/blob/master/Documents/Monkey_opensource_components.md"]];
+    if ([[UIDevice currentDevice].systemVersion hasPrefix:@"9"]) {
+        SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
+        [self presentViewController:sfvc animated:YES completion:nil];
+    } else {
+        [[UIApplication sharedApplication] openURL:URL];
+    }
 
 }
 

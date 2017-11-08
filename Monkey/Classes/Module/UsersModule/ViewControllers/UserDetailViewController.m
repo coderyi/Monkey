@@ -22,7 +22,7 @@
 #import "LoginWebViewController.h"
 #import "AESCrypt.h"
 
-@interface UserDetailViewController ()<UITableViewDelegate,UIAlertViewDelegate> {
+@interface UserDetailViewController ()<UITableViewDelegate,UIAlertViewDelegate, SFSafariViewControllerDelegate> {
     UITableView *tableView;
     YiRefreshHeader *refreshHeader;
     YiRefreshFooter *refreshFooter;
@@ -219,11 +219,14 @@
 #pragma mark - Actions
 - (void)loginButtonAction
 {
-
     if (_userModel.html_url.length>0) {
-        WebViewController *web=[[WebViewController alloc] init];
-        web.urlString=_userModel.html_url;
-        [self.navigationController pushViewController:web animated:YES];
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@", _userModel.html_url]];
+        if ([[UIDevice currentDevice].systemVersion hasPrefix:@"9"]) {
+            SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
+            [self presentViewController:sfvc animated:YES completion:nil];
+        } else {
+            [[UIApplication sharedApplication] openURL:URL];
+        }
     }
 }
 
@@ -337,9 +340,13 @@
 - (void)blogAction
 {
     if (_userModel.blog.length>0  ) {
-        WebViewController *web=[[WebViewController alloc] init];
-        web.urlString=_userModel.blog;
-        [self.navigationController pushViewController:web animated:YES];
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@", _userModel.blog]];
+        if ([[UIDevice currentDevice].systemVersion hasPrefix:@"9"]) {
+            SFSafariViewController *sfvc = [[SFSafariViewController alloc] initWithURL:URL];
+            [self presentViewController:sfvc animated:YES completion:nil];
+        } else {
+            [[UIApplication sharedApplication] openURL:URL];
+        }
     }
 }
 
@@ -529,6 +536,10 @@
         [self.navigationController pushViewController:detail animated:YES];
     }
 
+}
+
+- (void)safariViewControllerDidFinish:(nonnull SFSafariViewController *)controller {
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
