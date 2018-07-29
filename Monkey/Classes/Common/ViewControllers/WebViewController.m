@@ -12,8 +12,8 @@
     UILabel *titleText;
     UIActivityIndicatorView *activityIndicator;
     UIWebView *webView;
-    UIButton *backBt;
-    UIButton *closeBt;
+    UIView *backBt;
+    UIView *closeBt;
 }
 
 @end
@@ -62,18 +62,22 @@
     [self.navigationController.navigationBar addSubview:activityIndicator];
     activityIndicator.activityIndicatorViewStyle=UIActivityIndicatorViewStyleWhite;
     
-    backBt=[UIButton buttonWithType:UIButtonTypeCustom];
-    backBt.frame=CGRectMake(0, 0, 30, 30);
-    [backBt setImage:[UIImage imageNamed:@"ic_arrow_back_white_48pt"] forState:UIControlStateNormal];
-    [backBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [backBt addTarget:self action:@selector(backBtAction) forControlEvents:UIControlEventTouchUpInside];
-    closeBt=[UIButton buttonWithType:UIButtonTypeCustom];
-    closeBt.frame=CGRectMake(0, 0, 30, 30);
-    closeBt.titleLabel.font=[UIFont systemFontOfSize:12];
-    [closeBt setImage:[UIImage imageNamed:@"ic_cancel_white_48pt"] forState:UIControlStateNormal];
-    [closeBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [closeBt addTarget:self action:@selector(closeBtAction) forControlEvents:UIControlEventTouchUpInside];
+    backBt=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    UIButton *backButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    backButton.frame=CGRectMake(0, 0, 30, 30);
+    [backButton setImage:[UIImage imageNamed:@"ic_arrow_back_white_48pt"] forState:UIControlStateNormal];
+    [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(backBtAction) forControlEvents:UIControlEventTouchUpInside];
+    [backBt addSubview:backButton];
 
+    closeBt=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    UIButton *closeButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    closeButton.frame=CGRectMake(0, 0, 30, 30);
+    closeButton.titleLabel.font=[UIFont systemFontOfSize:12];
+    [closeButton setImage:[UIImage imageNamed:@"ic_cancel_white_48pt"] forState:UIControlStateNormal];
+    [closeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [closeButton addTarget:self action:@selector(closeBtAction) forControlEvents:UIControlEventTouchUpInside];
+    [closeBt addSubview:closeButton];
     self.navigationItem.leftBarButtonItems=@[[[UIBarButtonItem alloc] initWithCustomView:backBt]];
 }
 
