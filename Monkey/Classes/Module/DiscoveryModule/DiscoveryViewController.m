@@ -105,7 +105,8 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 6;
+//    return 6;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -134,8 +135,8 @@
     }else if (indexPath.section==3) {
         cell.textLabel.text=NSLocalizedString(@"search", @"");
     }else if (indexPath.section==4) {
-        cell.textLabel.text=@"githubranking";
-    }else if (indexPath.section==5) {
+//        cell.textLabel.text=@"githubranking";
+//    }else if (indexPath.section==5) {
         cell.textLabel.text=@"github-awards";
     }
     return cell;
@@ -162,9 +163,9 @@
         SearchViewController *viewController=[[SearchViewController alloc] init];
         [self.navigationController pushViewController:viewController animated:YES];
     }else if (indexPath.section==4) {
-        GitHubRankingViewController *viewController=[[GitHubRankingViewController alloc] init];
-        [self.navigationController pushViewController:viewController animated:YES];
-    }else if (indexPath.section==5) {
+//        GitHubRankingViewController *viewController=[[GitHubRankingViewController alloc] init];
+//        [self.navigationController pushViewController:viewController animated:YES];
+//    }else if (indexPath.section==5) {
         GitHubAwardsViewController *viewController=[[GitHubAwardsViewController alloc] init];
         [self.navigationController pushViewController:viewController animated:YES];
     }
