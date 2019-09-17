@@ -72,6 +72,7 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+    [self hideYiProgressHUD];
     [self showYiProgressHUD:@"Login Loading..."];
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
@@ -102,6 +103,7 @@
 
 - (void)loginTokenAction:(NSString *)code
 {
+    [self hideYiProgressHUD];
     [self showYiProgressHUD:@"Login..."];
     YiNetworkEngine *apiEngine=[[YiNetworkEngine alloc] initWithHostName:@"github.com"];
     [apiEngine loginWithCode:code completoinHandler:^(NSString *response){
