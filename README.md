@@ -11,7 +11,7 @@
 
 [中文README](https://github.com/coderyi/Monkey/blob/master/README_Chinese.md)
 
-Monkey is a GitHub third party client,Monkey is a program ape. Monkey for GitHub is my first on-line App,open source project.Welcome to download through two-dimensional code.
+Monkey is a unofficial GitHub client. Monkey for GitHub is my first App,open source project.Welcome to download.
 
 
 
@@ -21,28 +21,28 @@ App Store:[https://itunes.apple.com/cn/app/monkey-for-github/id1003765407](https
 
 Monkey Mac open source:[https://github.com/coderyi/MonkeyForMac](https://github.com/coderyi/MonkeyForMac)
 
-Besides, you can get Android version [GitHot](https://github.com/andyiac/githot) by [andyiac](https://github.com/andyiac) from [this link](http://fir.im/githot) .  
+you can get Android version [GitHot](https://github.com/andyiac/githot) by [andyiac](https://github.com/andyiac) from [this link](http://fir.im/githot) .  
 another android version [monkey-android](https://github.com/yeungeek/monkey-android) by [yeungeek](https://github.com/yeungeek)
 
 
 ## Monkey for GitHub
 
-Monkey is a GitHub third party client,Monkey is a program ape.It includes the following functions
+Monkey is a unofficial GitHub client.It includes the following functions
 
 
-- [x] The rank of coders , the developer's ranking is based on the developer's followers from high to low ranking, there is a distinction between different languages and cities.
-- [x] The rank of repositoriesrepositories , ranking is based on the repositories of stars by high to low ranking, there is a distinction between different languages.
-- [x] Login GitHub function,Follow developer and star repository,Support for viewing my GitHub dynamics.
-- [x] The discovery module, including GitHub's repositories trending; GitHub dynamics; showcases; search; and other ranking data.
+- [x] The rank of coders , the developer's ranking is based on follower.
+- [x] The rank of repositoriesrepositories , ranking is based on star.
+- [x] Login GitHub function,Follow developer and star repository,Support for viewing my GitHub news.
+- [x] The discovery module, including GitHub's repositories trending; my GitHub news; showcases; search; and other ranking data.
 
-These data are provided from the GitHub interface,url is https://developer.github.com/v3/
+ GitHub url https://developer.github.com/v3/
 
-I created a google group，this group is for general discussion Monkey
+I created a google group
 ,welcome to join,[https://groups.google.com/d/forum/monkeyforgithub](https://groups.google.com/d/forum/monkeyforgithub)
 
 welcome to [new issues](https://github.com/coderyi/Monkey/issues).
 
-If you want to make some contributions to this project or just want to build the project, please using the following command:
+To run the project, please using the following command:
 <pre>
 $ git clone https://github.com/coderyi/Monkey.git
 </pre>
@@ -50,14 +50,11 @@ and when it is completed,using the following command:
 <pre>
 $ pod install
 </pre>
-Once finished, you can open the project through double-click the Monkey.xcworkspace file and build the Monkey target. Any pull request will be welcome.
 
 ## GitHub Top Users Repositories
 **[Objective-C top 50 GitHub developers](https://github.com/coderyi/Monkey/blob/master/github_top_users_repositories/github_top_users_objective-c_world.md)**
 
-This is the world's top 50 Objective-C programmers, and list the relevant information.
 
-Data comes from API GitHub and its related content.
 ## Monkey architecture
 
 ![点击放大](https://raw.githubusercontent.com/coderyi/Monkey/master/Documents/Monkey_architecture_img1.png)
