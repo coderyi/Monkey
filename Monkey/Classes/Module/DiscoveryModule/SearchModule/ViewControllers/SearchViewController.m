@@ -106,7 +106,7 @@
     mySearchBar=[[UISearchBar alloc] initWithFrame:CGRectMake(10, 2, ScreenWidth-90, 40)];
     [self.navigationController.navigationBar addSubview:mySearchBar];
     mySearchBar.delegate=self;
-    mySearchBar.tintColor=YiBlue;
+//    mySearchBar.tintColor=YiBlue;
     [mySearchBar becomeFirstResponder];
     UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"cancel", @"") style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
     self.navigationItem.rightBarButtonItem=right;

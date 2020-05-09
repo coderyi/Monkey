@@ -190,8 +190,8 @@ static NSOperationQueue *_sharedNetworkQueue;
     [[NSNotificationCenter defaultCenter] postNotificationName:kMKNetworkEngineOperationCountChanged
                                                         object:[NSNumber numberWithInteger:(NSInteger)[_sharedNetworkQueue operationCount]]];
 #if TARGET_OS_IPHONE
-    [UIApplication sharedApplication].networkActivityIndicatorVisible =
-    ([_sharedNetworkQueue.operations count] > 0);
+//    [UIApplication sharedApplication].networkActivityIndicatorVisible =
+//    ([_sharedNetworkQueue.operations count] > 0);
 #endif
   }
   else {
