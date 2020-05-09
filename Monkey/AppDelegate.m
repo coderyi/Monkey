@@ -133,49 +133,49 @@
 
 - (void)setupUM:(NSDictionary *)launchOptions
 {
-    [MobClick startWithAppkey:@"551ff351fd98c56f12000013"];
+    [MobClick startWithAppkey:@"test"];
     
     [MobClick checkUpdate];
-    [UMFeedback setAppkey:@"551ff351fd98c56f12000013"];
+    [UMFeedback setAppkey:@"test"];
     
     [UMOpus setAudioEnable:YES];
     
     //    下面的代码是友盟推送 需要证书
     
-    [UMessage startWithAppkey:@"551ff351fd98c56f12000013" launchOptions:launchOptions];
-    
-    if (IOS_8_OR_LATER) {
-        //register remoteNotification types
-        UIMutableUserNotificationAction *action1 = [[UIMutableUserNotificationAction alloc] init];
-        action1.identifier = @"action1_identifier";
-        action1.title=@"Accept";
-        action1.activationMode = UIUserNotificationActivationModeForeground;//当点击的时候启动程序
-        
-        UIMutableUserNotificationAction *action2 = [[UIMutableUserNotificationAction alloc] init];  //第二按钮
-        action2.identifier = @"action2_identifier";
-        action2.title=@"Reject";
-        action2.activationMode = UIUserNotificationActivationModeBackground;//当点击的时候不启动程序，在后台处理
-        action2.authenticationRequired = YES;//需要解锁才能处理，如果action.activationMode = UIUserNotificationActivationModeForeground;则这个属性被忽略；
-        action2.destructive = YES;
-        
-        UIMutableUserNotificationCategory *categorys = [[UIMutableUserNotificationCategory alloc] init];
-        categorys.identifier = @"category1";//这组动作的唯一标示
-        [categorys setActions:@[action1,action2] forContext:(UIUserNotificationActionContextDefault)];
-        
-        UIUserNotificationSettings *userSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert
-                                                                                     categories:[NSSet setWithObject:categorys]];
-        [UMessage registerRemoteNotificationAndUserNotificationSettings:userSettings];
-    } else {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        
-        [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge |
-         UIRemoteNotificationTypeSound |
-         UIRemoteNotificationTypeAlert];
-#pragma clang diagnostic pop
-        
-    }
-    [UMessage setLogEnabled:NO];
+//    [UMessage startWithAppkey:@"551ff351fd98c56f12000013" launchOptions:launchOptions];
+//    
+//    if (IOS_8_OR_LATER) {
+//        //register remoteNotification types
+//        UIMutableUserNotificationAction *action1 = [[UIMutableUserNotificationAction alloc] init];
+//        action1.identifier = @"action1_identifier";
+//        action1.title=@"Accept";
+//        action1.activationMode = UIUserNotificationActivationModeForeground;//当点击的时候启动程序
+//        
+//        UIMutableUserNotificationAction *action2 = [[UIMutableUserNotificationAction alloc] init];  //第二按钮
+//        action2.identifier = @"action2_identifier";
+//        action2.title=@"Reject";
+//        action2.activationMode = UIUserNotificationActivationModeBackground;//当点击的时候不启动程序，在后台处理
+//        action2.authenticationRequired = YES;//需要解锁才能处理，如果action.activationMode = UIUserNotificationActivationModeForeground;则这个属性被忽略；
+//        action2.destructive = YES;
+//        
+//        UIMutableUserNotificationCategory *categorys = [[UIMutableUserNotificationCategory alloc] init];
+//        categorys.identifier = @"category1";//这组动作的唯一标示
+//        [categorys setActions:@[action1,action2] forContext:(UIUserNotificationActionContextDefault)];
+//        
+//        UIUserNotificationSettings *userSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert
+//                                                                                     categories:[NSSet setWithObject:categorys]];
+//        [UMessage registerRemoteNotificationAndUserNotificationSettings:userSettings];
+//    } else {
+//#pragma clang diagnostic push
+//#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+//        
+//        [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge |
+//         UIRemoteNotificationTypeSound |
+//         UIRemoteNotificationTypeAlert];
+//#pragma clang diagnostic pop
+//        
+//    }
+//    [UMessage setLogEnabled:NO];
     
     //关闭状态时点击反馈消息进入反馈页
     NSDictionary *notificationDict = [launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey];

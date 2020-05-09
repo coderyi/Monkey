@@ -36,8 +36,8 @@
 /**
  *  this is not to be used by you, otherwise infringement
  */
-#define CoderyiClientID @"2Abvwo7M117qA6xHhHAg6th+/28YYY4lA7Z23SXxJG8="
-#define CoderyiClientSecret @"ZVQguKWUuj7votRcUIhThLhmfbrHytkGByT+OSeXxIPttGpbZd84jh1b/rNdl+ek"
+#define CoderyiClientID @"test"
+#define CoderyiClientSecret @"test"
 
 #define RepositoriesTableViewCellheight 95
 #define RankTableViewCellHeight 71
