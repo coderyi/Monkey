@@ -24,6 +24,7 @@ Monkey Mac open source:[https://github.com/coderyi/MonkeyForMac](https://github.
 you can get Android version [GitHot](https://github.com/andyiac/githot) by [andyiac](https://github.com/andyiac) from [this link](http://fir.im/githot) .  
 another android version [monkey-android](https://github.com/yeungeek/monkey-android) by [yeungeek](https://github.com/yeungeek)
 
+Web: http://coderyi.com/monkeyweb/
 
 ## Monkey for GitHub
 
