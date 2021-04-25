@@ -11,7 +11,7 @@
 
 [中文README](https://github.com/coderyi/Monkey/blob/master/README_Chinese.md)
 
-Monkey is a unofficial GitHub client. Monkey for GitHub is my first App,open source project.Welcome to download.
+Monkey is an unofficial GitHub client. Monkey for GitHub is my first App,open source project.Welcome to download.
 
 
 
